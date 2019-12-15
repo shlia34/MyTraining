@@ -2,13 +2,23 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+/**
+ * userのmodel
+ *
+ * @property bigint user_id   userId
+ * @property string name      名前
+ *
+ */
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
