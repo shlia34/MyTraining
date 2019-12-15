@@ -1148,7 +1148,7 @@ Docs & License: https://fullcalendar.io/
         DayGrid.prototype.renderMoreLink = function (row, col, hiddenSegs) {
             var _this = this;
             var _a = this, view = _a.view, dateEnv = _a.dateEnv;
-            var a = core.createElement('a', { className: 'fc-more' });
+            var a = core.createElement('control-event.js', { className: 'fc-more' });
             a.innerText = this.getMoreLinkText(hiddenSegs.length);
             a.addEventListener('click', function (ev) {
                 var clickOption = _this.opt('eventLimitClick');

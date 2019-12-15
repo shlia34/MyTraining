@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         selectHelper: true,
         firstDay : 1,
         eventDurationEditable : false,
+        height: 465,
+        selectLongPressDelay:0,
+        // スマホでタップしたとき即反応
+
 
         eventClick: function(info) {
 
@@ -24,7 +28,17 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         dateClick: function(info) {
+            $(".add-event-btn").off('click').on("click",function(){
+                var remodal = $(".remodal").remodal();
+                remodal.open();
 
+                $(document).on('confirmation', '.remodal', function () {
+                    addEvent(calendar,info)
+                });
+
+
+
+            });
 
         },
 

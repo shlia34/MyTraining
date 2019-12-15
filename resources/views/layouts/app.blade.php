@@ -21,6 +21,7 @@
 
     <script src="/js/test.js"></script>
     <script src="/js/fullcalendar.js"></script>
+    <script src="/js/event-control.js"></script>
 
 
 
@@ -30,9 +31,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href='/css/style.css' type="text/css" rel='stylesheet' />
+
 
     <link href='/css/fullcalendar/core/main.css' type="text/css" rel='stylesheet' />
     <link href='/css/fullcalendar/daygrid/main.css' type="text/css" rel='stylesheet' />
+
+    <!-- remodal -->
+    <link href='/css/remodal/remodal.css' type="text/css" rel='stylesheet' />
+    <link href='/css/remodal/remodal-default-theme.css' type="text/css" rel='stylesheet' />
+    <script src='/js/remodal/remodal.js'></script>
 
 </head>
 <body>
