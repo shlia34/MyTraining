@@ -9,8 +9,20 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+
+
+    <!-- Fullcalendar  -->
+    <script src='/js/fullcalendar/core/main.js'></script>
+    <script src='/js/fullcalendar/daygrid/main.js'></script>
+    <script src='/js/fullcalendar/interaction/main.js'></script>
+
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="/js/test.js"></script>
+    <script src="/js/fullcalendar.js"></script>
+
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +30,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href='/css/fullcalendar/core/main.css' type="text/css" rel='stylesheet' />
+    <link href='/css/fullcalendar/daygrid/main.css' type="text/css" rel='stylesheet' />
+
 </head>
 <body>
     <div id="app">
