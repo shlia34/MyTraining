@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', 'TopController@index');
+
+
+Route::post('/ajax/setEvents', 'AjaxEventController@setEvents');
+Route::post('/ajax/addEvent', 'AjaxEventController@addEvent');

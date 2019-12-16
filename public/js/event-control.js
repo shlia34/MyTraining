@@ -1,28 +1,43 @@
+function setEvents(calendar){
+    $.ajax({
+        url:'/ajax/setEvents',
+        type:'post',
+        dataType:'json',
+    }).done(function(result) {
+        $.each(result, function(index, value) {
+            calendar.addEvent({
+                id:value['event_id'],
+                title:value['part_name'],
+                start:value['date'],
+            });
+        });
+    });
+}
+
+
 function addEvent(calendar,info){
 
     var id = generateUuid();
-    // console.log(id);
-    // console.log(part_code);
-    // var title = $("#remodal-title").val();
-    var title = "test";
-    // var description = $("#remodal-description").val();
-
-    calendar.addEvent({
-        id:id,
-        title:title,
-        start: info.dateStr,
-    });
+    var part_code = $(".remodal-part_code").val();
+    var memo = $(".remodal-memo").val();
 
     $.ajax({
         url: '/ajax/addEvent',
         type: 'POST',
+        dataTape: 'json',
         data:{
             "id": id,
-            // "part_code":part_code,
-            // "memo":memo,
-            "start":info.dateStr
+            "part_code":part_code,
+            "memo":memo,
+            "date":info.dateStr
         }
-    })
+    }).done(function(result) {
+        calendar.addEvent({
+            id:id,
+            title:result,
+            start: info.dateStr,
+        });
+    });
 }
 
 function generateUuid(){
@@ -31,8 +46,4 @@ function generateUuid(){
     }
     var uuid = s4() + s4()  + s4() + s4()  + s4()  + s4() + s4() + s4();
     return uuid;
-}
-
-function getPartName(){
-    // codeを定数配列を利用して、文字にへんかん。それをタイトルに挿入する。
 }
