@@ -54,6 +54,36 @@ function editEventDate(info){
     })
 }
 
+function showEventsByDate(info){
+    var date = info.dateStr;
+
+    $.ajax({
+        url: '/ajax/showEventsByDate',
+        type: 'POST',
+        dataTape:'json',
+        data:{
+            date:date
+        }
+    }).done(function(result) {
+        appendEventHtml(result,date);
+    });
+}
+
+function appendEventHtml(result,date) {
+    $('.show-event ul').empty();
+    $('.show-event p').empty();
+    $('.show-event p').append(date);
+
+    $.each(result, function(index, value) {
+        $('.show-event ul').append("<li>" + value["part_name"] + "</li>");
+        $('.show-event ul').append( "<a href='/event/" + value["event_id"] + "'>詳細へ</a>" );
+
+    });
+}
+
+
+
+
 function generateUuid(){
     function s4() {
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);

@@ -18,8 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', 'TopController@index');
+Route::get('/event/{event_id}', 'EventController@show');
 
 
 Route::post('/ajax/setEvents', 'AjaxEventController@setEvents');
 Route::post('/ajax/addEvent', 'AjaxEventController@addEvent');
 Route::post('/ajax/editEventDate', 'AjaxEventController@editEventDate');
+Route::post('/ajax/showEventsByDate', 'AjaxEventController@showEventsByDate');
