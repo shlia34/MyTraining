@@ -6,6 +6,10 @@
         <div class = "sample">
             <button class = "add-event-btn" type="button">追加</button>
         </div>
+        <div class = "show-event">
+            <p></p>
+            <ul></ul>
+        </div>
     </div>
 
 

@@ -15,19 +15,23 @@ class AjaxEventController extends Controller
     }
 
     public function setEvents(){
-        $events = Event::select('event_id', 'part_code', 'date')->where('user_id',Auth::user()->user_id)->get();
-        $arr = $events->toArray();
+        $events = Event::select('event_id', 'part_code', 'date')->whereUserId()->get();
+        $newArr = $this->changeEloquentToAjaxArr($events);
+
+        return response()->json($newArr);
+    }
+
+    public function changeEloquentToAjaxArr($eloquent){
+        $arr = $eloquent->toArray();
 
         $newArr = [];
-
         foreach ($arr as $val){
             $newVal = array_merge($val,array('part_name'=>$this->revertPartName($val['part_code'])));
             unset($newVal['part_code']);
             $newArr[] = $newVal;
 
         }
-
-        return response()->json($newArr);
+        return $newArr;
     }
 
     public function addEvent(Request $request)
@@ -52,6 +56,19 @@ class AjaxEventController extends Controller
         $event->date = $data['newDate'];
         $event->save();
         return null;
+    }
+
+    public function showEventsByDate(Request $request){
+        $date = $request->all()['date'];
+        $events = Event::select('event_id', 'part_code')->whereUserId()->where('date',$date)->get();
+
+
+        if(!empty($events)){
+            $newArr = $this->changeEloquentToAjaxArr($events);
+            return response()->json($newArr);
+        } else {
+            return "non";
+        }
     }
 
     public function revertPartName($partCode){

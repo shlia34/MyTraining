@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         dateClick: function(info) {
+            showEventsByDate(info);
+
             $(".add-event-btn").off('click').on("click",function(){
                 var remodal = $(".remodal").remodal();
                 remodal.open();
