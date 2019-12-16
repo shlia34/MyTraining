@@ -32,17 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 var remodal = $(".remodal").remodal();
                 remodal.open();
 
-                $(document).on('confirmation', '.remodal', function () {
+                $(document).off('confirmation').on('confirmation', '.remodal', function () {
                     addEvent(calendar,info)
                 });
-
-
-
             });
 
         },
 
     });
 
+    setEvents(calendar);
     calendar.render();
 });
