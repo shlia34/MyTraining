@@ -40,10 +40,32 @@ function addEvent(calendar,info){
     });
 }
 
+function editEventDate(info){
+    var id = info.event.id;
+    var date = formatDate(info.event.start);
+
+    $.ajax({
+        url: '/ajax/editEventDate',
+        type: 'POST',
+        data:{
+            "id":id,
+            "newDate":date
+        }
+    })
+}
+
 function generateUuid(){
     function s4() {
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     }
     var uuid = s4() + s4()  + s4() + s4()  + s4()  + s4() + s4() + s4();
     return uuid;
+}
+
+function formatDate(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var newDate = year + '-' + month + '-' + day;
+    return newDate;
 }

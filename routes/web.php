@@ -22,3 +22,4 @@ Route::get('/', 'TopController@index');
 
 Route::post('/ajax/setEvents', 'AjaxEventController@setEvents');
 Route::post('/ajax/addEvent', 'AjaxEventController@addEvent');
+Route::post('/ajax/editEventDate', 'AjaxEventController@editEventDate');

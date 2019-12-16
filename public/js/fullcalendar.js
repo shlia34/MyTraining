@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         },
 
-        eventDrop: function(info) {
-
+        eventDrop: function(info){
+            editEventDate(info);
         },
 
         dateClick: function(info) {

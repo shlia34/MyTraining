@@ -10,6 +10,10 @@ use App\Defs\DefPart;
 class AjaxEventController extends Controller
 {
 
+    public function getEventFromId($id){
+        return  Event::find($id);
+    }
+
     public function setEvents(){
         $events = Event::select('event_id', 'part_code', 'date')->where('user_id',Auth::user()->user_id)->get();
         $arr = $events->toArray();
@@ -40,6 +44,14 @@ class AjaxEventController extends Controller
         $partName = $this->revertPartName($data['part_code']);
 
         return response()->json($partName);
+    }
+
+    public function editEventDate(Request $request){
+        $data = $request->all();
+        $event = $this->getEventFromId($data['id']);
+        $event->date = $data['newDate'];
+        $event->save();
+        return null;
     }
 
     public function revertPartName($partCode){
