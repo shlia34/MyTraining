@@ -54,8 +54,12 @@ function editEventDate(info){
     })
 }
 
-function showEventsByDate(info){
-    var date = info.dateStr;
+function showEventsByDate(date){
+    console.log(date);
+
+    if(typeof date === "object"){
+        date = formatDate(date);
+    }
 
     $.ajax({
         url: '/ajax/showEventsByDate',
