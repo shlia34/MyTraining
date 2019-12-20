@@ -16,19 +16,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         eventClick: function(info) {
-
+            showEventsByDate(info.event.start);
         },
 
         eventDragStart: function(info){
-
+            showEventsByDate(info.event.start);
         },
 
         eventDrop: function(info){
             editEventDate(info);
+            showEventsByDate(info.event.start);
         },
 
         dateClick: function(info) {
-            showEventsByDate(info);
+            showEventsByDate(info.dateStr);
 
             $(".add-event-btn").off('click').on("click",function(){
                 var remodal = $(".remodal").remodal();
