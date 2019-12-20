@@ -14,7 +14,7 @@ class CreateBodiesTable extends Migration
     public function up()
     {
         Schema::create('bodies', function (Blueprint $table) {
-            $table->bigIncrements('body_id');
+            $table->string('body_id', 34)->primary();
             $table->date('date');
             $table->float('weight', 4, 1);
             $table->timestamps();
