@@ -1,15 +1,17 @@
 <?php
 namespace App\Defs;
-final class DefPart {
-//筋トレの部位の定義ファイル
-//めんどいから定数は一個一個作んない
+
+//use App\Defs\DefPartInterface;
+
+class DefPart implements DefPartInterface {
+
     const PART_LIST = [
-        '01'=>'胸',
-        '02'=>'背中',
-        '03'=>'脚',
-        '04'=>'肩',
-        '05'=>'二頭筋',
-        '06'=>'三頭筋',
-        '07'=>'腹筋',
+        self::MUNE_PART_CODE   =>self::MUNE_PART_NAME,
+        self::SENAKA_PART_CODE =>self::SENAKA_PART_NAME,
+        self::ASHI_PART_CODE   =>self::ASHI_PART_NAME,
+        self::KATA_PART_CODE   =>self::KATA_PART_NAME,
+        self::NITOU_PART_CODE  =>self::NITOU_PART_NAME,
+        self::SANTOU_PART_CODE =>self::SANTOU_PART_NAME,
+        self::HARA_PART_CODE   =>self::HARA_PART_NAME,
     ];
 }
