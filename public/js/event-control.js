@@ -17,7 +17,6 @@ function setEvents(calendar){
 
 function addEvent(calendar,info){
 
-    var id = generateUuid();
     var part_code = $(".remodal-part_code").val();
     var memo = $(".remodal-memo").val();
 
@@ -26,15 +25,14 @@ function addEvent(calendar,info){
         type: 'POST',
         dataTape: 'json',
         data:{
-            "id": id,
             "part_code":part_code,
             "memo":memo,
             "date":info.dateStr
         }
     }).done(function(result) {
         calendar.addEvent({
-            id:id,
-            title:result,
+            id:result['event_id'],
+            title:result['part_name'],
             start: info.dateStr,
         });
     });
@@ -55,7 +53,6 @@ function editEventDate(info){
 }
 
 function showEventsByDate(date){
-    console.log(date);
 
     if(typeof date === "object"){
         date = formatDate(date);
@@ -83,17 +80,6 @@ function appendEventHtml(result,date) {
         $('.show-event ul').append( "<a href='/event/" + value["event_id"] + "'>詳細へ</a>" );
 
     });
-}
-
-
-
-
-function generateUuid(){
-    function s4() {
-        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    }
-    var uuid = s4() + s4()  + s4() + s4()  + s4()  + s4() + s4() + s4();
-    return uuid;
 }
 
 function formatDate(date) {

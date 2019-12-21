@@ -38,16 +38,19 @@ class AjaxEventController extends Controller
     {
         $data = $request->all();
         $event = new Event();
-        $event->event_id = $data['id'];
+        $event->event_id = $this->generateId('EV');
         $event->date = $data['date'];
         $event->part_code = $data['part_code'];
         $event->memo = $data['memo'] ?? "";
         $event->user_id = Auth::user()->user_id;
         $event->save();
 
-        $partName = $this->revertPartName($data['part_code']);
 
-        return response()->json($partName);
+        $partName = $this->revertPartName($data['part_code']);
+        $arr = array_merge([ 'part_name' => $partName ], ['event_id' => $event->event_id ]);
+
+
+        return response()->json($arr);
     }
 
     public function editEventDate(Request $request){
@@ -71,6 +74,7 @@ class AjaxEventController extends Controller
         }
     }
 
+    //TODO 文字コード変換のがbladeとここでかぶってるからまとめたい。場所もここじゃない。
     public function revertPartName($partCode){
         return DefPart::PART_LIST[$partCode];
     }
