@@ -1,8 +1,13 @@
 $(function(){
 
     createTraining();
+    frontValidation();
+    deleteTraining();
 
+});
 
+// todo    weightにバリデーションかけないとエラー起こる。4けた以上になっても透過。
+function frontValidation() {
     $(".form-weight").on('keyup', function(){
         var add_btn = $(".add-training-btn");
 
@@ -12,20 +17,16 @@ $(function(){
             add_btn.removeClass("_transparent");
         }
     });
-
-});
+}
 
 function createTraining(){
 
     $(".add-training-btn").on("click",function(){
-
         if( ($(".form-weight").val().match(/\S/g) )){
             transportDataToPhp();
         }
     })
-
 }
-
 
 function transportDataToPhp(){
 
@@ -45,14 +46,33 @@ function transportDataToPhp(){
             "rep":rep_val
         }
     }).done(function(result) {
-        $('.space').append(buildTrainingHtml(result,weight_val,rep_val));
+        $('.space ul').append(buildTrainingHtml(result,weight_val,rep_val));
     });
-
 
 }
 
-function buildTrainingHtml(part_name,weight,rep){
-    var html = "<ul>" + "<li>" + part_name + "</li>"+ "<li>" + weight+ "kg * " + rep + "rep" + "</li></ul>"
+function buildTrainingHtml(result,weight,rep){
+    console.log(result);
+    var html = `<li> ${result["stage_name"]} ${weight}kg * ${rep}rep `;
+    html += `<i id = ${result['training_id']} class='fas fa-times delete-training-btn'></i>`;
 
     return html;
+}
+
+function deleteTraining(){
+    $(document).on("click", ".delete-training-btn", function () {
+
+        var training_id = $(this).attr('id');
+        var remove_target =  $(this).parent();
+
+        $.ajax({
+            url: '/ajax/deleteTraining',
+            type: 'POST',
+            data:{
+                "training_id":training_id,
+            }
+        }).done(function() {
+            remove_target.remove();
+        });
+    })
 }
