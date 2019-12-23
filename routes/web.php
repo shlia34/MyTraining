@@ -26,5 +26,5 @@ Route::post('/ajax/addEvent', 'AjaxEventController@addEvent');
 Route::post('/ajax/editEventDate', 'AjaxEventController@editEventDate');
 Route::post('/ajax/showEventsByDate', 'AjaxEventController@showEventsByDate');
 
-
 Route::post('/ajax/storeTraining', 'AjaxTrainingController@storeTraining');
+Route::post('/ajax/deleteTraining', 'AjaxTrainingController@deleteTraining');

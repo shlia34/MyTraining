@@ -25,12 +25,15 @@
     <div class = "trainings-index">
         <h5>今日のトレーニング</h5>
         <div class = "space">
+            <ul>
             @foreach($trainings as $training)
-                <ul>
-                    <li>{{App\Defs\DefStage::STAGE_LIST[$event->part_code][$training->stage_code]}}</li>
-                    <li>{{$training->weight}}kg * {{$training->rep}}rep</li>
-                </ul>
+                    <li>
+                        {{App\Defs\DefStage::STAGE_LIST[$event->part_code][$training->stage_code]}}
+                        {{$training->weight}}kg * {{$training->rep}}rep
+                        <i id = {{$training->training_id}} class="fas fa-times delete-training-btn"></i>
+                    </li>
             @endforeach
+            </ul>
         </div>
     </div>
 </div>

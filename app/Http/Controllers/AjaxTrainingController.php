@@ -33,10 +33,20 @@ class AjaxTrainingController extends Controller
 
         $training->save();
 
-        $stageName = $this->revertStageName($data['stage_code']);
+        $returnData =  ['training_id'=>$training->training_id,
+                        'stage_name'=>$this->revertStageName($data['stage_code'])];
 
-        return response()->json($stageName);
+        return response()->json($returnData);
 
+    }
+
+    public function deleteTraining(Request $request){
+
+        $training_id = $request->all()["training_id"];
+        $training = $this->getTrainingFromId($training_id);
+        $training->delete();
+
+        return null;
     }
 
 
