@@ -1,19 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-
+    //
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: [ 'interaction', 'dayGrid' ],
         defaultView: 'dayGridMonth',
         editable: true,
-        slotEventOverlap: false,
         selectable: true,
-        selectHelper: true,
         firstDay : 1,
-        eventDurationEditable : false,
+        // eventDurationEditable : false,
         height: 465,
         selectLongPressDelay:0,
         // スマホでタップしたとき即反応
 
+        events: "/setEvents",
 
         eventClick: function(info) {
             showEventsByDate(info.event.start);
@@ -44,6 +43,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
-    setEvents(calendar);
     calendar.render();
 });

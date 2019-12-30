@@ -21,10 +21,11 @@ Route::get('/', 'TopController@index');
 Route::get('/event/{event_id}', 'EventController@show');
 
 
-Route::post('/ajax/setEvents', 'AjaxEventController@setEvents');
-Route::post('/ajax/addEvent', 'AjaxEventController@addEvent');
-Route::post('/ajax/editEventDate', 'AjaxEventController@editEventDate');
-Route::post('/ajax/showEventsByDate', 'AjaxEventController@showEventsByDate');
+Route::get('/setEvents', 'EventController@setEvents');
+Route::post('/ajax/addEvent', 'EventController@addEvent');
+Route::post('/ajax/editEventDate', 'EventController@editEventDate');
+Route::post('/ajax/showEventsByDate', 'EventController@showEventsByDate');
 
-Route::post('/ajax/storeTraining', 'AjaxTrainingController@storeTraining');
-Route::post('/ajax/deleteTraining', 'AjaxTrainingController@deleteTraining');
+Route::post('/ajax/storeTraining', 'TrainingController@storeTraining');
+Route::post('/ajax/deleteTraining', 'TrainingController@deleteTraining');
+Route::post('/ajax/recordMaxTraining', 'TrainingController@recordMaxTraining');
