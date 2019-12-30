@@ -1,20 +1,3 @@
-function setEvents(calendar){
-    $.ajax({
-        url:'/ajax/setEvents',
-        type:'post',
-        dataType:'json',
-    }).done(function(result) {
-        $.each(result, function(index, value) {
-            calendar.addEvent({
-                id:value['event_id'],
-                title:value['part_name'],
-                start:value['date'],
-            });
-        });
-    });
-}
-
-
 function addEvent(calendar,info){
 
     var part_code = $(".remodal-part_code").val();
