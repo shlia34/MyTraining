@@ -11,15 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/', 'TopController@index');
-Route::get('/event/{event_id}', 'EventController@show');
-
+Route::get('/event/{event_id}', 'TopController@show');
 
 Route::get('/setEvents', 'EventController@setEvents');
 Route::post('/ajax/addEvent', 'EventController@addEvent');
