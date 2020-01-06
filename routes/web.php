@@ -24,3 +24,5 @@ Route::post('/ajax/showEventsByDate', 'EventController@showEventsByDate');
 Route::post('/ajax/storeTraining', 'TrainingController@storeTraining');
 Route::post('/ajax/deleteTraining', 'TrainingController@deleteTraining');
 Route::post('/ajax/recordMaxTraining', 'TrainingController@recordMaxTraining');
+Route::post('/ajax/checkMaxTraining', 'TrainingController@checkMaxTraining');
+Route::post('/ajax/deleteMaxTraining', 'TrainingController@deleteMaxTraining');

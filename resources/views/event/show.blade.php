@@ -6,7 +6,7 @@
 
 <div class = "wrapper">
 
-    <div class = "event-show" id = {{$event->event_id}}>
+    <div class = "event-show" data-event_id = {{$event->event_id}}>
         <ul>
             <li>{{$event->date}}</li>
             <li>{{App\Defs\DefPart::PART_LIST[$event->part_code]}}</li>
@@ -25,12 +25,15 @@
     <div class = "trainings-index">
         <h5>今日のトレーニング</h5>
         <div class = "space">
-            <ul>
+            <ul class = "trainings">
             @foreach($trainings as $training)
-                    <li>
+                    @if($training->training_id == $event->max_training_id)
+                        <li data-training_id = {{$training->training_id}} class = "training _add-underline">
+                    @else
+                        <li data-training_id = {{$training->training_id}} class = "training">
+                    @endif
                         {{App\Defs\DefStage::STAGE_LIST[$event->part_code][$training->stage_code]}}
                         {{$training->weight}}kg * {{$training->rep}}rep
-                        <i id = {{$training->training_id}} class="fas fa-times delete-training-btn"></i>
                     </li>
             @endforeach
             </ul>
