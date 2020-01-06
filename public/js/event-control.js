@@ -59,8 +59,8 @@ function appendEventHtml(result,date) {
     $('.show-event p').append(date);
 
     $.each(result, function(index, value) {
-        $('.show-event ul').append("<li>" + value["part_name"] + "</li>");
-        $('.show-event ul').append( "<a href='/event/" + value["event_id"] + "'>詳細へ</a>" );
+        $('.show-event ul').append("<li>" + value["title"] + "</li>");
+        $('.show-event ul').append( "<a href='/event/" + value["id"] + "'>詳細へ</a>" );
 
     });
 }

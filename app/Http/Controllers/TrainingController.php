@@ -41,6 +41,31 @@ class TrainingController extends Controller
         return null;
     }
 
+    public function checkMaxTraining(Request $request){
+        $event_id = $request->all()["event_id"];
+        $training_id = $request->all()["training_id"];
+
+        $event = Event::find($event_id);
+
+        if( $event->max_training_id !== $training_id){
+            $message = "nomal";
+        } else{
+            $message = "max";
+        }
+
+        return response()->json($message);
+    }
+
+    public function deleteMaxTraining(Request $request){
+        $event_id = $request->all()["event_id"];
+        $event = Event::find($event_id);
+        $event->max_training_id = null;
+        $event->save();
+
+
+        return response()->json("ok");
+    }
+
     public function deleteTraining(Request $request){
 
         $training_id = $request->all()["training_id"];

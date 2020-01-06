@@ -12,3 +12,10 @@
     -moz-opacity: 0.5;
     opacity: 0.5;
 }
+
+._make-yellow {
+    color:yellow;
+}
+._add-underline {
+    text-decoration: underline;
+}
