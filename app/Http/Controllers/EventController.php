@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,6 +57,19 @@ class EventController extends Controller
         } else {
             return "non";
         }
+    }
+
+    public function delete($eventId){
+        $event = Event::find($eventId);
+        $trainings = Training::where('event_id', $eventId)->orderBY("created_at");
+
+        $event->max_training_id = null;
+        $event->save();
+        $trainings->delete();
+        $event->delete();
+
+        return redirect("/");
+
     }
 
     public function changeEloquentToAjaxArr($events)

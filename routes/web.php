@@ -16,6 +16,8 @@ Auth::routes();
 Route::get('/', 'TopController@index');
 Route::get('/event/{event_id}', 'TopController@show');
 
+Route::post('/event/delete/{event_id}', 'EventController@delete');
+
 Route::get('/setEvents', 'EventController@setEvents');
 Route::post('/ajax/addEvent', 'EventController@addEvent');
 Route::post('/ajax/editEventDate', 'EventController@editEventDate');
