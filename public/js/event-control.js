@@ -1,56 +1,39 @@
-function addEvent(calendar,info){
+function addEvent(calendar,info)
+{
+    var data = {
+        "part_code":$(".remodal-part_code").val(),
+        "memo":$(".remodal-memo").val(),
+        "date":info.dateStr
+    };
 
-    var part_code = $(".remodal-part_code").val();
-    var memo = $(".remodal-memo").val();
-
-    $.ajax({
-        url: '/ajax/addEvent',
-        type: 'POST',
-        dataTape: 'json',
-        data:{
-            "part_code":part_code,
-            "memo":memo,
-            "date":info.dateStr
-        }
-    }).done(function(result) {
+    ajaxAddEvent(data, function(result){
         calendar.addEvent({
             id:result['event_id'],
             title:result['part_name'],
             start: info.dateStr,
         });
-    });
-}
-
-function editEventDate(info){
-    var id = info.event.id;
-    var date = formatDate(info.event.start);
-
-    $.ajax({
-        url: '/ajax/editEventDate',
-        type: 'POST',
-        data:{
-            "id":id,
-            "newDate":date
-        }
     })
 }
 
-function showEventsByDate(date){
+function editEventDate(info)
+{
+    var data = {
+        "id":info.event.id,
+        "newDate":formatDate(info.event.start)
+    };
+    ajaxEditEventDate(data);
+}
 
+function showEventsByDate(date)
+{
     if(typeof date === "object"){
         date = formatDate(date);
     }
-
-    $.ajax({
-        url: '/ajax/showEventsByDate',
-        type: 'POST',
-        dataTape:'json',
-        data:{
-            date:date
-        }
-    }).done(function(result) {
+    var data = {date:date};
+    ajaxShowEventsByDate(data,function(result){
         appendEventHtml(result,date);
     });
+
 }
 
 function appendEventHtml(result,date) {
