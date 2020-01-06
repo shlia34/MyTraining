@@ -62,7 +62,6 @@ class TrainingController extends Controller
         $event->max_training_id = null;
         $event->save();
 
-
         return response()->json("ok");
     }
 
