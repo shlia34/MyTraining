@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-{{--    {{$event->event_id}}--}}
-
-
 
 <div class = "wrapper">
 
@@ -12,10 +9,6 @@
             <li>{{App\Defs\DefPart::PART_LIST[$event->part_code]}}</li>
             {{$event->memo}}
             <li>
-{{--                <form action="{{ action('EventController@delete', $event->event_id) }}" method="post">--}}
-{{--                    {{ csrf_field() }}--}}
-{{--                    <input type="submit" value="削除">--}}
-{{--                </form>--}}
                 {{Form::open(["url" => "event/delete/$event->event_id" ])}}
                     {{Form::submit('削除')}}
                 {{Form::close()}}

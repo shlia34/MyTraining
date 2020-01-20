@@ -10,14 +10,15 @@ final class DefStage implements DefPartInterface {
         'S0104'=>'ダンベルフライ',
         'S0105'=>'インクラインダンベルフライ',
         'S0106'=>'マシンフライ',
-        'S0107'=>'あの派手なやつ',
+        'S0107'=>'ケーブルクロスオーバー',
     ];
 
     const SENAKA_STAGE_LIST = [
         'S0201'=>'デッドリフト',
         'S0202'=>'懸垂',
         'S0203'=>'ラットプルダウン',
-        'S0204'=>'ローイング',
+        'S0204'=>'バックエクステンション',
+        'S0205'=>'ローイング',
     ];
 
     const ASHI_STAGE_LIST = [
@@ -25,12 +26,15 @@ final class DefStage implements DefPartInterface {
         'S0302'=>'マシンスクワット',
         'S0303'=>'腿前のマシン',
         'S0304'=>'腿後ろのマシン',
+        'S0305'=>'内転筋',
+        'S0306'=>'カーフ',
     ];
 
     const KATA_STAGE_LIST = [
-        'S0401'=>'肩前',
-        'S0402'=>'肩中',
-        'S0403'=>'肩後',
+        'S0401'=>'ダンベルショルダープレス',
+        'S0402'=>'マシンショルダープレス',
+        'S0403'=>'サイドレイズ',
+        'S0404'=>'アップライトロウ',
     ];
 
     const NITOU_STAGE_LIST = [
@@ -46,10 +50,10 @@ final class DefStage implements DefPartInterface {
     ];
 
     const HARA_STAGE_LIST = [
-        'S0701'=>'クランチ',
-        'S0702'=>'ドラゴンフライ',
+        'S0701'=>'ドラゴンフライ',
+        'S0702'=>'クランチ',
+        'S0703'=>'アブローラー',
     ];
-
 
     const STAGE_LIST = [
         self::MUNE_PART_CODE   => self::MUNE_STAGE_LIST,
@@ -60,4 +64,8 @@ final class DefStage implements DefPartInterface {
         self::SANTOU_PART_CODE => self::SANTOU_STAGE_LIST,
         self::HARA_PART_CODE   => self::HARA_STAGE_LIST,
     ];
+
+    const STAGE_SHORT_NAME_LIST = [];
+    //todo 主要のトレの略語をスマホ用に作る。ex)BP,DL,SQ,
+
 }
