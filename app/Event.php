@@ -23,6 +23,21 @@ class Event extends Model
         return DefPart::PART_COLOR[$this->part_code];
     }
 
+    public function getArrForAjax()
+    {
+        $newItem["id"] = $this->event_id;
+        if( !empty($this->weight && $this->rep) ){
+            $newItem["title"] = $this->getPartName()." ".$this->weight."*".$this->rep;
+        }else{
+            $newItem["title"] = $this->getPartName();
+        }
+        $newItem["part_code"] = $this->part_code;
+        $newItem["backgroundColor"] = $this->getPartColor();
+        $newItem["borderColor"] = $this->getPartColor();
+        $newItem["start"] = $this->date;
+        return $newItem;
+    }
+
     public function scopeWhereUserId($query){
         return $query->where('user_id',Auth::user()->user_id);
     }

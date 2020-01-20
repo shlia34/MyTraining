@@ -24,8 +24,6 @@ class EventController extends Controller
         echo json_encode($arr);
     }
 
-    //todo ここもchangeEloquentToAjaxArr($events)の関数使えるようにする
-
     /**
      * イベントをサーバー側で追加し、フロント用のjsonデータを送信
      * @param Request $request
@@ -41,7 +39,7 @@ class EventController extends Controller
         $event->memo = $data['memo'] ?? "";
         $event->user_id = Auth::user()->user_id;
         $event->save();
-        $arr = array_merge(['part_name' => $event->getPartName()], ['event_id' => $event->event_id]);
+        $arr = $event->getArrForAjax();
 
         return response()->json($arr);
     }
@@ -97,40 +95,23 @@ class EventController extends Controller
         return redirect("/");
     }
 
-    /**
-     * @param Object $events
-     * @return array
-     */
-    //todo この処理はmodelに移行したい
+    //todo この処理の場所は気になる
     public function changeEloquentToAjaxArr($events)
     {
-        $newArr = [];
+        $arr = [];
         foreach ($events as $event) {
-            $newItem["id"] = $event->event_id;
-            //todo ここのコードもっとうまいことできないかな。
-            if( !empty($event->weight && $event->rep) ){
-                $newItem["title"] = $event->getPartName()." ".$event->weight."*".$event->rep;
-            }else{
-                $newItem["title"] = $event->getPartName();
-            }
-            $newItem["part_code"] = $event->part_code;
-            //イベントの同日並び替えのために仕込む
-
-            $newItem["backgroundColor"] = $event->getPartColor();
-            $newItem["borderColor"] = $event->getPartColor();
-            //todo eventShowの方では必要ないので切り分けるかも。んでこの関数自体壊れるかも
-            $newItem["start"] = $event->date;
-            $newArr[] = $newItem;
+            $arr[] = $event->getArrForAjax();
         }
-        return $newArr;
+        return $arr;
     }
+
+
 
     /**
      * fullcalendarから受け取った日付を「2020-01-01」のように整形
      * @param $date
      * @return mixed
      */
-    //todo これもモデルか
     public function formatDate($date)
     {
         return str_replace('T00:00:00+09:00', '', $date);

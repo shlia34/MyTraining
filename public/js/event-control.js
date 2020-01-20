@@ -9,7 +9,10 @@ function addEvent(calendar,info)
     ajaxAddEvent(data, function(result){
         calendar.addEvent({
             id:result['event_id'],
-            title:result['part_name'],
+            title:result['title'],
+            part_code:result['part_code'],
+            backgroundColor:result['backgroundColor'],
+            borderColor:result['borderColor'],
             start: info.dateStr,
         });
     })
