@@ -7,10 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
         editable: true,
         selectable: true,
         firstDay : 1,
-        // eventDurationEditable : false,
         height: 465,
+        eventTextColor:"white",
         selectLongPressDelay:0,
         // スマホでタップしたとき即反応
+        eventOrder:"part_code",
+        // part_code順に並び替え
 
         events: "/setEvents",
 
