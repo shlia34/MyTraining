@@ -9,7 +9,6 @@ namespace App\Defs;
  */
 interface DefPartInterface
 {
-    //todo 色はちゃんとする。脚はなんか黒、背中は緑？黄色はなくす。
     //todo *_PART_SHORT_NAMEとかも作るかな
 
     /**
@@ -38,7 +37,7 @@ interface DefPartInterface
      */
     const KATA_PART_CODE = "04";
     const KATA_PART_NAME = "肩";
-    const KATA_PART_COLOR = "black";
+    const KATA_PART_COLOR = "#FF6666";
 
     /**
      * 二頭筋に関する定数

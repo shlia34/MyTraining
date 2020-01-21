@@ -41,6 +41,7 @@ class TrainingController extends Controller
         return null;
     }
 
+    //todo trueかfalseにしたい
     public function checkMaxTraining(Request $request){
         $event_id = $request->all()["event_id"];
         $training_id = $request->all()["training_id"];

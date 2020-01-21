@@ -39,7 +39,7 @@ class EventController extends Controller
         $event->memo = $data['memo'] ?? "";
         $event->user_id = Auth::user()->user_id;
         $event->save();
-        $arr = $event->getArrForAjax();
+        $arr = $event->getEventForAjax();
 
         return response()->json($arr);
     }
@@ -77,7 +77,6 @@ class EventController extends Controller
     }
 
     //todo ソフトデリートもやってみたい
-
     /**
      * イベント削除
      * @param $eventId
@@ -100,13 +99,14 @@ class EventController extends Controller
     {
         $arr = [];
         foreach ($events as $event) {
-            $arr[] = $event->getArrForAjax();
+            $arr[] = $event->getEventForAjax();
         }
         return $arr;
     }
 
 
 
+    //todo jsのformatDateと合体したい
     /**
      * fullcalendarから受け取った日付を「2020-01-01」のように整形
      * @param $date
