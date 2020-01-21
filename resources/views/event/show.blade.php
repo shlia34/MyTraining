@@ -28,16 +28,18 @@
         <h5>今日のトレーニング</h5>
         <div class = "space">
             <ul class = "trainings">
-            @foreach($trainings as $training)
-                    @if($training->training_id == $event->max_training_id)
-                        <li data-training_id = {{$training->training_id}} class = "training _add-underline">
-                    @else
-                        <li data-training_id = {{$training->training_id}} class = "training">
-                    @endif
-                        {{App\Defs\DefStage::STAGE_LIST[$event->part_code][$training->stage_code]}}
+                @foreach($trainings as $stage_code => $group)
+                    {{App\Defs\DefStage::STAGE_LIST[$event->part_code][$stage_code]}}
+                    @foreach($group as $training)
+                        @if($training->training_id == $event->max_training_id)
+                            <li data-training_id = {{$training->training_id}} class = "training _add-underline">
+                        @else
+                            <li data-training_id = {{$training->training_id}} class = "training">
+                        @endif
                         {{$training->weight}}kg * {{$training->rep}}rep
-                    </li>
-            @endforeach
+                        </li>
+                    @endforeach
+                @endforeach
             </ul>
         </div>
     </div>
