@@ -23,7 +23,7 @@ class Event extends Model
         return DefPart::PART_COLOR[$this->part_code];
     }
 
-    public function getArrForAjax()
+    public function getEventForAjax()
     {
         $newItem["id"] = $this->event_id;
         if( !empty($this->weight && $this->rep) ){

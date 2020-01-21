@@ -44,6 +44,8 @@ function appendEventHtml(result,date) {
     $('.show-event p').empty();
     $('.show-event p').append(date);
 
+
+    //todo 横並び、トレ名追加
     $.each(result, function(index, value) {
         $('.show-event ul').append("<li>" + value["title"] + "</li>");
         $('.show-event ul').append( "<a href='/event/" + value["id"] + "'>詳細へ</a>" );
@@ -51,6 +53,7 @@ function appendEventHtml(result,date) {
     });
 }
 
+//todo この処理をPHPと合体。jsは値を渡すだけで整形はPHP側でしたい。オブジェクトによって判別して最終的に[2020-01-01]に変える
 function formatDate(date) {
     var year = date.getFullYear();
     var month = date.getMonth() + 1;

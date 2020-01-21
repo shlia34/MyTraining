@@ -28,6 +28,7 @@ final class DefStage implements DefPartInterface {
         'S0304'=>'腿後ろのマシン',
         'S0305'=>'内転筋',
         'S0306'=>'カーフ',
+        'S0307'=>'ワイドスクワット',
     ];
 
     const KATA_STAGE_LIST = [
