@@ -35,16 +35,10 @@
                 selectLongPressDelay:0,
                 eventOrder:"part_code",
                 events: "/setEvents",
+                timeZone: 'UTC',
 
-                eventClick: function(info) {
-                    showEventsByDate(info.event.start);
-                },
-                eventDragStart: function(info){
-                    showEventsByDate(info.event.start);
-                },
                 eventDrop: function(info){
                     editEventDate(info);
-                    showEventsByDate(info.event.start);
                 },
                 dateClick: function(info) {
                     showEventsByDate(info.dateStr);
