@@ -17,11 +17,10 @@ class EventController extends Controller
      */
     public function setEvents(Request $request)
     {
-        $start = $this->formatDate($request->all()['start']);
-        $end = $this->formatDate($request->all()['end']);
-        $events = Event::joinMaxTraining()->whereBetween('date', [$start, $end])->whereUserId()->get();
-        $arr = $this->changeEloquentToAjaxArr($events);
-        return response()->json($arr);
+        $start = $this->formatIsoDate($request->all()['start']);
+        $end = $this->formatIsoDate($request->all()['end']);
+        $eventsJson = Event::joinMaxTraining()->whereBetween('date', [$start, $end])->whereUserId()->convertToArrForJson();
+        return response()->json($eventsJson);
     }
 
     /**
@@ -39,9 +38,8 @@ class EventController extends Controller
         $event->memo = $data['memo'] ?? "";
         $event->user_id = Auth::user()->user_id;
         $event->save();
-        $arr = $event->getEventForAjax();
-
-        return response()->json($arr);
+        $eventJson = $event->getDataForJson();
+        return response()->json($eventJson);
     }
 
     /**
@@ -53,7 +51,7 @@ class EventController extends Controller
     {
         $data = $request->all();
         $event = Event::find($data['id']);
-        $event->date = $data['newDate'];
+        $event->date = $this->formatIsoDate($data['newDate']);
         $event->save();
         return null;
     }
@@ -66,23 +64,18 @@ class EventController extends Controller
     public function showEventsByDate(Request $request)
     {
         $date = $request->all()['date'];
-        $events = Event::joinMaxTraining()->whereUserId()->where('date', $date)->orderByPartCode()->get();
-
-        if (!empty($events)) {
-            $arr = $this->changeEloquentToAjaxArr($events);
-            return response()->json($arr);
-        } else {
-            return "non";
-        }
+        $eventsJson = Event::joinMaxTraining()->whereUserId()->where('date', $date)->orderByPartCode()->convertToArrForJson();
+        return response()->json($eventsJson);
     }
 
     //todo ソフトデリートもやってみたい
     /**
-     * イベント削除
+     * イベントと、それに紐づくトレーニングを削除
      * @param $eventId
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function delete(string $eventId){
+    public function delete(string $eventId)
+    {
         $event = Event::find($eventId);
         $trainings = Training::where('event_id', $eventId)->orderBY("created_at");
 
@@ -94,26 +87,14 @@ class EventController extends Controller
         return redirect("/");
     }
 
-    //todo この処理の場所は気になる
-    public function changeEloquentToAjaxArr($events)
-    {
-        $arr = [];
-        foreach ($events as $event) {
-            $arr[] = $event->getEventForAjax();
-        }
-        return $arr;
-    }
-
-
-    //todo jsのformatDateと合体したい
     /**
-     * fullcalendarから受け取った日付を「2020-01-01」のように整形
+     * ISO形式の日付を「2020-01-01」のように整形
      * @param $date
      * @return mixed
      */
-    public function formatDate($date)
+    public function formatIsoDate($date)
     {
-        return str_replace('T00:00:00+09:00', '', $date);
+        return strstr($date,'T',true);
     }
 
 }
