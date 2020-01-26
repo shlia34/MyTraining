@@ -6,7 +6,7 @@
     <div class = "event-show" data-event_id = {{$event->event_id}}>
         <ul>
             <li>{{$event->date}}</li>
-            <li>{{App\Defs\DefPart::PART_LIST[$event->part_code]}}</li>
+            <li>{{App\Defs\DefPart::PART_NAME_LIST[$event->part_code]}}</li>
             {{$event->memo}}
             <li>
                 {{Form::open(["url" => "event/delete/$event->event_id" ])}}

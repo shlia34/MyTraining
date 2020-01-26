@@ -27,8 +27,8 @@ final class DefStage implements DefPartInterface {
     const ASHI_STAGE_LIST = [
         'S0301'=>'スクワット',
         'S0302'=>'スミスマシンスクワット',
-        'S0303'=>'腿前のマシン',
-        'S0304'=>'腿後ろのマシン',
+        'S0303'=>'レッグエクステンション',
+        'S0304'=>'ハムストリングス',
         'S0305'=>'ヒップアダクション',
         'S0306'=>'スタンディングカーフレイズ',
         'S0307'=>'スミスマシンワイドスクワット',
@@ -56,7 +56,7 @@ final class DefStage implements DefPartInterface {
     const SANTOU_STAGE_LIST = [
         'S0601'=>'プルダウン',
         'S0602'=>'ナロープレス',
-        'S0603'=>'スカルクラッシャー',
+        'S0603'=>'ライイングトライセプスエクステンション',
     ];
 
     const HARA_STAGE_LIST = [
@@ -75,7 +75,30 @@ final class DefStage implements DefPartInterface {
         self::HARA_PART_CODE   => self::HARA_STAGE_LIST,
     ];
 
-    const STAGE_SHORT_NAME_LIST = [];
-    //todo 主要のトレの略語をスマホ用に作る。ex)BP,DL,SQ,
+    const STAGE_INITIAL_NAME_LIST = [
+        //胸
+        'S0101'=>'BP',
+        //背中
+        'S0201'=>'DL',
+        'S0202'=>'CN',
+        //脚
+        'S0301'=>'SQ',
+        'S0302'=>'SMSQ',
+        //肩
+        'S0401'=>'DSP',
+        'S0402'=>'SMSP',
+        'S0405'=>'AP',
+        //二頭筋
+        'S0501'=>'BC',
+        'S0503'=>'KC',
+        'S0504'=>'IDC',
+        //三頭筋
+        'S0601'=>'PD',
+        'S0603'=>'LTE',
+        //腹筋
+        'S0701'=>'DF',
+        'S0703'=>'AR',
+    ];
+
 
 }

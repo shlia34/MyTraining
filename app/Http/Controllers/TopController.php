@@ -17,7 +17,11 @@ class TopController extends Controller
     //todo 404処理(そのページはもうないです的な)
     //todo 「カレンダーに戻る」ボタンつける
     public function show($eventId){
-        $event = Event::find($eventId);
+
+        if(($event = Event::find($eventId)) == null) {
+            abort('404');
+        }
+
         $trainings = Training::where('event_id', $eventId)->orderBY("created_at")->get()->groupBy('stage_code');
         return view('event.show')->with(['event' => $event,'trainings'=>$trainings]);
     }

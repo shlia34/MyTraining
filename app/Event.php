@@ -3,8 +3,10 @@
 namespace App;
 
 use App\Defs\DefPart;
+use App\Defs\DefStage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Jenssegers\Agent\Facades\Agent;
 
 class Event extends Model
 {
@@ -15,7 +17,7 @@ class Event extends Model
 
     public function getPartName()
     {
-        return DefPart::PART_LIST[$this->part_code];
+        return DefPart::PART_NAME_LIST[$this->part_code];
     }
 
     public function getPartColor()
@@ -23,11 +25,16 @@ class Event extends Model
         return DefPart::PART_COLOR[$this->part_code];
     }
 
+    public function getStageInitialName()
+    {
+        return DefStage::STAGE_INITIAL_NAME_LIST[$this->stage_code] ?? "";
+    }
+
     public function getDataForJson()
     {
         $newItem["id"] = $this->event_id;
-        if( !empty($this->weight && $this->rep) ){
-            $newItem["title"] = $this->getPartName()." ".$this->weight."*".$this->rep;
+        if( !empty($this->weight && $this->rep) and !Agent::isMobile() ){
+            $newItem["title"] = $this->getPartName()." ".$this->getStageInitialName()." ".$this->weight."kg".$this->rep."rep";
         }else{
             $newItem["title"] = $this->getPartName();
         }
@@ -38,6 +45,14 @@ class Event extends Model
         $newItem["start"] = $this->date;
         return $newItem;
     }
+
+//    public function getTitleForJson(){
+//        if(Agent::isMobile()){
+//
+//        }
+//
+//        return $title;
+//    }
 
     public function scopeConvertToArrForJson($query)
     {
