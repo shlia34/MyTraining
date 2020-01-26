@@ -12,7 +12,7 @@ class EventController extends Controller
     //todo アクション側でバリデーションをかける
     /**
      * fullcalendarへ向けてイベントを出力
-     * use fullcalendar.js
+     * fullcalendar.blade.php
      * @param Request $request
      */
     public function setEvents(Request $request)
@@ -21,7 +21,7 @@ class EventController extends Controller
         $end = $this->formatDate($request->all()['end']);
         $events = Event::joinMaxTraining()->whereBetween('date', [$start, $end])->whereUserId()->get();
         $arr = $this->changeEloquentToAjaxArr($events);
-        echo json_encode($arr);
+        return response()->json($arr);
     }
 
     /**
@@ -103,7 +103,6 @@ class EventController extends Controller
         }
         return $arr;
     }
-
 
 
     //todo jsのformatDateと合体したい
