@@ -100,5 +100,10 @@ final class DefStage implements DefPartInterface {
         'S0703'=>'AR',
     ];
 
+    //todo ここTrainig.phpと重複しちゃってる
+    public static function getStageName($stageCode){
+        return array_column(self::STAGE_LIST, $stageCode)[0];
+    }
+
 
 }
