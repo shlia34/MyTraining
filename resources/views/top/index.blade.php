@@ -27,15 +27,20 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 plugins: [ 'interaction', 'dayGrid' ],
                 defaultView: 'dayGridMonth',
+                locales:"ja",
                 editable: true,
-                selectable: true,
                 firstDay : 1,
-                height: 465,
+                height: 600,
                 eventTextColor:"white",
                 selectLongPressDelay:0,
                 eventOrder:"part_code",
                 events: "/setEvents",
                 timeZone: 'UTC',
+                header: {
+                    left: '',
+                    center: 'title',
+                    right: 'prev,next',
+                },
 
                 eventDrop: function(info){
                     editEventDate(info);

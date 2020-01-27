@@ -14,6 +14,7 @@ class Event extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    //todo Modelsってディレクトリ作ってその中に入れたい
 
     public function getPartName()
     {
@@ -45,14 +46,6 @@ class Event extends Model
         $newItem["start"] = $this->date;
         return $newItem;
     }
-
-//    public function getTitleForJson(){
-//        if(Agent::isMobile()){
-//
-//        }
-//
-//        return $title;
-//    }
 
     public function scopeConvertToArrForJson($query)
     {

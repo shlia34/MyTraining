@@ -1,6 +1,7 @@
 .wrapper {
-    margin-left: 10px;
-    margin-right: 10px;
+    /*margin-left: 10px;*/
+    /*margin-right: 10px;*/
+    font-size: 18px;
 }
 
 .form-weight {
@@ -18,4 +19,10 @@
 }
 ._add-underline {
     text-decoration: underline;
+}
+
+.event-title {
+    background-color: #B7B4B4;
+    font-size: 16px;
+    padding: 8px;
 }

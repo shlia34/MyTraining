@@ -14,16 +14,26 @@ class TopController extends Controller
         return view('top.index');
     }
 
-    //todo 404処理(そのページはもうないです的な)
-    //todo 「カレンダーに戻る」ボタンつける
+    //todo viewファイルをtopのディレクトリに移動
+    //todo viewのトレ部分はテンプレートにしたい
+    //todo topControllerという名前も検討
+    //todo lastEventが存在しない場合の処理
+    //todo 追加ボタンを上にする。日付はモーダルから。プラスだけにする。
+    //todo　上の隙間も解消
     public function show($eventId){
 
-        if(($event = Event::find($eventId)) == null) {
+        if(($thisEvent = Event::find($eventId)) == null) {
             abort('404');
         }
+        $thisTrainings = Training::getTrainingsArrFromEventId($eventId);
 
-        $trainings = Training::where('event_id', $eventId)->orderBY("created_at")->get()->groupBy('stage_code');
-        return view('event.show')->with(['event' => $event,'trainings'=>$trainings]);
+        $lastEvent = Event::where('part_code',$thisEvent->part_code)->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first();
+        $lastTrainings = Training::getTrainingsArrFromEventId($lastEvent->event_id);
+
+        return view('event.show')->with([ 'thisEvent' => $thisEvent,
+                                               'thisTrainings'=>$thisTrainings,
+                                               'lastEvent' => $lastEvent,
+                                               'lastTrainings' => $lastTrainings ]);
     }
     //todo chart.jsかなんかでグラフを使用
     //todo タイマーとかもあったら良い

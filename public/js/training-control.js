@@ -11,10 +11,10 @@ $(function(){
 
 function switchLink()
 {
-    $(document).on("click", ".training", function () {
+    $(document).on("click", ".this-training", function () {
 
         var data = {
-            "event_id"   : $(".event-show").data('event_id'),
+            "event_id"   : $(".this-event-show").data('event_id'),
             "training_id": $(this).data('training_id'),
         };
 
@@ -47,7 +47,7 @@ function recordMaxTraining()
 
         var training_box = $(this).parent().parent();
         var data = {
-            "event_id":$(".event-show").data('event_id'),
+            "event_id":$(".this-event-show").data('event_id'),
             "training_id":training_box.data('training_id'),
         };
 
@@ -66,7 +66,7 @@ function deleteMaxTraining()
 
         var training_box = $(this).parent().parent();
         var data = {
-            "event_id":$(".event-show").data('event_id'),
+            "event_id":$(".this-event-show").data('event_id'),
             "training_id":training_box.data('training_id'),
         };
 
@@ -135,8 +135,10 @@ function transportTrainingDataToPhp()
 
 }
 
+
+//todo トレの表示はここを変えればおけ
 function buildTrainingHtml(result,weight,rep)
 {
-    var html = `<li data-training_id = ${result['training_id']} class = "training"> ${result["stage_name"]} ${weight}kg * ${rep}rep `;
+    var html = `<li data-training_id = ${result['training_id']} class = "this-training"> ${result["stage_name"]} ${weight}kg * ${rep}rep `;
     return html;
 }
