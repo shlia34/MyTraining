@@ -1,9 +1,9 @@
-function addEvent(calendar,info)
+function addEvent(calendar)
 {
     var data = {
         "part_code":$(".remodal-part_code").val(),
         "memo":$(".remodal-memo").val(),
-        "date":info.dateStr
+        "date":$(".remodal-date").val(),
     };
 
     ajaxAddEvent(data, function(result){
@@ -14,12 +14,13 @@ function addEvent(calendar,info)
             url:result['url'],
             backgroundColor:result['backgroundColor'],
             borderColor:result['borderColor'],
-            start: info.dateStr,
+            start: result['start'],
         });
-        showEventsByDate(info.dateStr);
+        showEventsByDate(result['start']);
     })
 }
 
+//todo update
 function editEventDate(info)
 {
     var data = {
@@ -36,7 +37,6 @@ function showEventsByDate(date)
     ajaxShowEventsByDate(data,function(result){
         appendEventHtml(result,date);
     });
-
 }
 
 function appendEventHtml(result,date) {
@@ -46,8 +46,6 @@ function appendEventHtml(result,date) {
 
     //todo 横並び、トレ名追加
     $.each(result, function(index, value) {
-        $('.show-event ul').append("<li>" + value["title"] + "</li>");
-        $('.show-event ul').append( "<a href='/event/" + value["id"] + "'>詳細へ</a>" );
-
+        $('.show-event ul').append( "<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+"</li>" );
     });
 }
