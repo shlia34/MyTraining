@@ -3,17 +3,17 @@
     <div class = "wrapper">
         <div id="calendar"></div>
 
-        <div class = "sample">
-            <button class = "add-event-btn" type="button">追加</button>
-        </div>
         <div class = "show-event">
-            <p></p>
-            <ul></ul>
+            <div>
+                <p></p>
+                <ul></ul>
+            </div>
         </div>
     </div>
 
     <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
         <button data-remodal-action="close" class="remodal-close"></button>
+        {{Form::date('date', \Carbon\Carbon::now(), ['class'=>'remodal-date'])}}
         {{Form::select('part_code', App\Defs\DefPart::PART_NAME_LIST,null,['class' => 'remodal-part_code'])}}
         {{Form::input('text', 'memo',null,['class' => 'remodal-memo'])}}
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
@@ -28,34 +28,40 @@
                 plugins: [ 'interaction', 'dayGrid' ],
                 defaultView: 'dayGridMonth',
                 locales:"ja",
+                themeSystem: 'boostrap',
+                fixedWeekCount: false,
                 editable: true,
                 firstDay : 1,
-                height: 600,
+                height: 450,
                 eventTextColor:"white",
                 selectLongPressDelay:0,
                 eventOrder:"part_code",
                 events: "/setEvents",
                 timeZone: 'UTC',
-                header: {
-                    left: '',
-                    center: 'title',
-                    right: 'prev,next',
+                customButtons: {
+                    addEvent: {
+                        text: 'トレ',
+                        click: function() {
+                            var remodal = $(".remodal").remodal();
+                            remodal.open();
+                            $(document).off('confirmation').on('confirmation', '.remodal', function () {
+                                addEvent(calendar)
+                            });
+                        }
+                    }
                 },
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'prev,next,addEvent',
+                },
+                prev:"fa-plus",
 
                 eventDrop: function(info){
                     editEventDate(info);
                 },
                 dateClick: function(info) {
                     showEventsByDate(info.dateStr);
-
-                    $(".add-event-btn").off('click').on("click",function(){
-                        var remodal = $(".remodal").remodal();
-                        remodal.open();
-
-                        $(document).off('confirmation').on('confirmation', '.remodal', function () {
-                            addEvent(calendar,info)
-                        });
-                    });
                 },
             });
             calendar.render();

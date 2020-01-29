@@ -9,6 +9,8 @@ $(function(){
 
 });
 
+
+//todo ボタンじゃなくて、remodalで削除orお気に入りする
 function switchLink()
 {
     $(document).on("click", ".this-training", function () {
@@ -19,7 +21,7 @@ function switchLink()
         };
 
         ajaxCheckMaxTraining(data,function(result){
-            if ($('.non-max-training-btn').is(':visible') || $('.max-training-btn').is(':visible') ) {
+            if ($('.this-event-show .non-max-training-btn').is(':visible') || $('.this-event-show .max-training-btn').is(':visible') ) {
                     $(".non-max-training-btn").hide();
                     $(".max-training-btn").hide();
                     $(".delete-training-btn").hide();
@@ -52,7 +54,7 @@ function recordMaxTraining()
         };
 
         ajaxRecordMaxTraining(data,function(){
-            $('._add-underline').removeClass("_add-underline");
+            $('.this-trainings ._add-underline').removeClass("_add-underline");
             training_box.addClass("_add-underline");
         });
     })
@@ -62,7 +64,7 @@ function recordMaxTraining()
 function deleteMaxTraining()
 {
 
-    $(document).on("click", ".max-training-btn", function () {
+    $(document).on("click", ".this-event-show .max-training-btn", function () {
 
         var training_box = $(this).parent().parent();
         var data = {
@@ -71,7 +73,8 @@ function deleteMaxTraining()
         };
 
         ajaxDeleteMaxTraining(data,function(){
-            $('._add-underline').removeClass("_add-underline");
+            console.log($('.this-trainings ._add-underline'));
+            $('.this-trainings ._add-underline').removeClass("_add-underline");
         });
     })
 
@@ -117,7 +120,7 @@ function createTraining()
 
 function transportTrainingDataToPhp()
 {
-    var event_id = $(".event-show").data('event_id');
+    var event_id = $(".this-event-show").data('event_id');
     var stage_code_val = $(".form-stage_code").val();
     var weight_val = $(".form-weight").val();
     var rep_val = $(".form-rep").val();
