@@ -26,24 +26,46 @@ class Event extends Model
         return DefPart::PART_COLOR[$this->part_code];
     }
 
+    //todo ここ被ってるから、eventとtraining.phpの下に一個class挟む。
+    public function getStageName()
+    {
+        return DefStage::STAGE_NAME_LIST[$this->stage_code] ?? "";
+    }
+
+    public function getWeight(){
+        return $this->weight ? $this->weight."kg" : "";
+    }
+
+    public function getRep(){
+        return $this->rep ? $this->rep."rep" : "";
+
+
+    }
+
     public function getStageInitialName()
     {
         return DefStage::STAGE_INITIAL_NAME_LIST[$this->stage_code] ?? "";
     }
 
+
     public function getDataForJson()
     {
         $newItem["id"] = $this->event_id;
-        if( !empty($this->weight && $this->rep) and !Agent::isMobile() ){
-            $newItem["title"] = $this->getPartName()." ".$this->getStageInitialName()." ".$this->weight."kg".$this->rep."rep";
-        }else{
-            $newItem["title"] = $this->getPartName();
-        }
         $newItem["part_code"] = $this->part_code;
-        $newItem["url"] = "/event/".$this->event_id;
         $newItem["backgroundColor"] = $this->getPartColor();
         $newItem["borderColor"] = $this->getPartColor();
         $newItem["start"] = $this->date;
+
+        if(Agent::isMobile()){
+            $newItem["title"] = $this->getPartName();
+        }else{
+            $newItem["url"] = "/event/".$this->event_id;
+            $newItem["title"] = $this->getPartName()." ".$this->getStageInitialName()." ".$this->getWeight().$this->getRep();
+        }
+        $newItem["stage_name"] = $this->getStageName();
+        $newItem["weight"] = $this->getWeight();
+        $newItem["rep"] = $this->getRep();
+
         return $newItem;
     }
 

@@ -4,7 +4,7 @@
 <div class = "wrapper">
 
 
-    {{ Form::select('stage_code', App\Defs\DefStage::STAGE_LIST[$thisEvent->part_code],null ,['class' => 'form-stage_code']) }}
+    {{ Form::select('stage_code', App\Defs\DefStage::STAGE_NAME_LIST[$thisEvent->part_code],null ,['class' => 'form-stage_code']) }}
     <div>
         {{Form::input('number', 'weight',null,['class' => 'form-weight'])}}kg *
         {{ Form::selectRange('rep', 1, 35, null, ['class' => 'form-rep']) }}rep
