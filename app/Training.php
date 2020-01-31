@@ -14,7 +14,7 @@ class Training extends Model
 
     public function getStageName():string
     {
-        return array_column(DefStage::STAGE_LIST, $this->stage_code)[0];
+        return array_column(DefStage::STAGE_NAME_LIST, $this->stage_code)[0];
     }
 
     public function scopeGetTrainingsArrFromEventId($query, string $eventId):Collection

@@ -35,17 +35,23 @@ function showEventsByDate(date)
 {
     var data = {date:date};
     ajaxShowEventsByDate(data,function(result){
-        appendEventHtml(result,date);
+        appendEventHtml(result);
     });
 }
 
-function appendEventHtml(result,date) {
+function appendEventHtml(result) {
     $('.show-event ul').empty();
     $('.show-event p').empty();
-    $('.show-event p').append(date);
-
+    $('.show-event p').append(result["date"]);
     //todo 横並び、トレ名追加
-    $.each(result, function(index, value) {
-        $('.show-event ul').append( "<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+"</li>" );
+    $.each(result["events"], function(index, value) {
+        $('.show-event ul').append( buildEvenShowHtml(value) );
     });
+}
+
+
+//todo ここでhtmlを変える
+function buildEvenShowHtml(value) {
+    var html ="<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+ value["stage_name"] + "</li>";
+    return html;
 }

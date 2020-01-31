@@ -20,7 +20,6 @@ class TrainingController extends Controller
         $training->stage_code = $data['stage_code'];
         $training->weight = $data['weight'];
         $training->rep = $data['rep'];
-
         $training->save();
 
         $returnData =  ['training_id'=>$training->training_id,

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+    //todo N+1問題の確認
     //todo アクション側でバリデーションをかける
     /**
      * fullcalendarへ向けてイベントを出力
@@ -63,9 +64,10 @@ class EventController extends Controller
      */
     public function showEventsByDate(Request $request)
     {
-        $date = $request->all()['date'];
+        $date = $this->formatIsoDate($request->all()['date']);
         $eventsJson = Event::joinMaxTraining()->whereUserId()->where('date', $date)->orderByPartCode()->convertToArrForJson();
-        return response()->json($eventsJson);
+
+        return response()->json(["date"=>$date,"events"=>$eventsJson]);
     }
 
     //todo ソフトデリートもやってみたい
@@ -94,7 +96,11 @@ class EventController extends Controller
      */
     public function formatIsoDate($date)
     {
-        return strstr($date,'T',true);
+        if(strpos($date,'T') ) {
+            return strstr($date, 'T', true);
+        }else{
+            return $date;
+        }
     }
 
 }

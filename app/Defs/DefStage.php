@@ -65,7 +65,7 @@ final class DefStage implements DefPartInterface {
         'S0703'=>'アブローラー',
     ];
 
-    const STAGE_LIST = [
+    const STAGE_NAME_LIST = [
         self::MUNE_PART_CODE   => self::MUNE_STAGE_LIST,
         self::SENAKA_PART_CODE => self::SENAKA_STAGE_LIST,
         self::ASHI_PART_CODE   => self::ASHI_STAGE_LIST,
@@ -102,7 +102,7 @@ final class DefStage implements DefPartInterface {
 
     //todo ここTrainig.phpと重複しちゃってる
     public static function getStageName($stageCode){
-        return array_column(self::STAGE_LIST, $stageCode)[0];
+        return array_column(self::STAGE_NAME_LIST, $stageCode)[0];
     }
 
 

@@ -60,6 +60,9 @@
                 eventDrop: function(info){
                     editEventDate(info);
                 },
+                eventClick: function(info){
+                    showEventsByDate(info.event.start.toISOString());
+                },
                 dateClick: function(info) {
                     showEventsByDate(info.dateStr);
                 },
