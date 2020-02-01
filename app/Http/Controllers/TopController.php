@@ -14,10 +14,8 @@ class TopController extends Controller
         return view('top.index');
     }
 
-    //todo viewファイルをtopのディレクトリに移動
     //todo viewのトレ部分はテンプレートにしたい
     //todo topControllerという名前も検討
-    //todo lastEventが存在しない場合の処理
     //todo 追加ボタンを上にする。日付はモーダルから。プラスだけにする。
     //todo　上の隙間も解消
     public function show($eventId){
@@ -25,12 +23,16 @@ class TopController extends Controller
         if(($thisEvent = Event::find($eventId)) == null) {
             abort('404');
         }
-        $thisTrainings = Training::getTrainingsArrFromEventId($eventId);
+        $thisTrainings = Training::getTrainingsFromEventId($eventId);
 
-        $lastEvent = Event::where('part_code',$thisEvent->part_code)->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first();
-        $lastTrainings = Training::getTrainingsArrFromEventId($lastEvent->event_id);
+        if(        $lastEvent = Event::where('part_code',$thisEvent->part_code)->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first()){
+            $lastTrainings = Training::getTrainingsFromEventId($lastEvent->event_id);
+        }else{
+            $lastTrainings = [];
+        }
+        //三項演算子でもいい気がする
 
-        return view('event.show')->with([ 'thisEvent' => $thisEvent,
+        return view('top.show')->with([ 'thisEvent' => $thisEvent,
                                                'thisTrainings'=>$thisTrainings,
                                                'lastEvent' => $lastEvent,
                                                'lastTrainings' => $lastTrainings ]);
