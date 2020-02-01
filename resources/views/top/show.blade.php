@@ -16,26 +16,25 @@
         <div class = "today-trainings">
             <div class = "event-title">今回の{{App\Defs\DefPart::PART_NAME_LIST[$thisEvent->part_code]}}トレ {{$thisEvent->date}}</div>
             <div class="this-event-show" data-event_id= {{$thisEvent->event_id}}>
-{{--                    {{$thisEvent->memo}}--}}
+                {{$thisEvent->getMemo()}}
                 <div class = "space">
                     <ul class = "this-trainings">
-                        @foreach($thisTrainings as $stageCode => $group)
-                            {{ App\Defs\DefStage::getStageName($stageCode) }}
+                        @foreach($thisTrainings as $group)
                             @foreach($group as $training)
+                                @if ($loop->first)
+                                    {{ $training->getStageName() }}
+                                @endif
                                 @if($training->training_id == $thisEvent->max_training_id)
                                     <li data-training_id = {{$training->training_id}} class = "this-training _add-underline">
                                 @else
                                     <li data-training_id = {{$training->training_id}} class = "this-training">
                                 @endif
-                                {{$training->weight}}kg * {{$training->rep}}rep
-                                </li>
+                                <span>{{$training->getWeightAndRep() }}</span></li>
                             @endforeach
                         @endforeach
                     </ul>
                 </div>
             </div>
-
-
         </div>
 
         <li>
@@ -44,33 +43,32 @@
             {{Form::close()}}
         </li>
 
-        <div class = "last-trainings">
-            <div class = "event-title">前回の{{App\Defs\DefPart::PART_NAME_LIST[$lastEvent->part_code]}}トレ {{$lastEvent->date}}</div>
-            <div class = "last-event-show" data-event_id = {{$lastEvent->event_id}}>
-{{--                    {{$lastEvent->memo}}--}}
-                <ul class = "last-trainings">
-                    @foreach($lastTrainings as $stageCode => $group)
-                        {{ App\Defs\DefStage::getStageName($stageCode) }}
-                        @foreach($group as $training)
-                            @if($training->training_id == $lastEvent->max_training_id)
-                                <li data-training_id = {{$training->training_id}} class = "last-training _add-underline">
-                            @else
-                                <li data-training_id = {{$training->training_id}} class = "last-training">
-                            @endif
-                            {{$training->weight}}kg * {{$training->rep}}rep
-                            </li>
-                        @endforeach
-                    @endforeach
-                </ul>
-            </div>
+{{--        @isset($lastEvent)--}}
+{{--        <div class = "last-trainings">--}}
+{{--            <div class = "event-title">前回の{{App\Defs\DefPart::PART_NAME_LIST[$lastEvent->part_code]}}トレ {{$lastEvent->date}}</div>--}}
+{{--            <div class = "last-event-show" data-event_id = {{$lastEvent->event_id}}>--}}
+{{--                {{$lastEvent->memo}}--}}
+{{--                <ul class = "last-trainings">--}}
+{{--                    @foreach($lastTrainings as $stageCode => $group)--}}
+{{--                        {{ App\Defs\DefStage::getStageName($stageCode) }}--}}
+{{--                        @foreach($group as $training)--}}
+{{--                            @if($training->training_id == $lastEvent->max_training_id)--}}
+{{--                                <li data-training_id = {{$training->training_id}} class = "last-training _add-underline">--}}
+{{--                            @else--}}
+{{--                                <li data-training_id = {{$training->training_id}} class = "last-training">--}}
+{{--                            @endif--}}
+{{--                            {{ $training->getWeightAndRep() }}--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    @endforeach--}}
+{{--                </ul>--}}
+{{--            </div>--}}
+{{--        @endisset--}}
 
         </div>
 
     </div>
 </div>
-
-
-
 
 
 @endsection

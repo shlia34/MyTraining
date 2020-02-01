@@ -3,19 +3,16 @@
 namespace App;
 
 use App\Defs\DefPart;
-use App\Defs\DefStage;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Facades\Agent;
 
-class Event extends Model
+class Event extends GetTrainingData
 {
     protected $primaryKey = 'event_id';
     public $incrementing = false;
     protected $keyType = 'string';
 
     //todo Modelsってディレクトリ作ってその中に入れたい
-
     public function getPartName()
     {
         return DefPart::PART_NAME_LIST[$this->part_code];
@@ -26,27 +23,10 @@ class Event extends Model
         return DefPart::PART_COLOR[$this->part_code];
     }
 
-    //todo ここ被ってるから、eventとtraining.phpの下に一個class挟む。
-    public function getStageName()
+    public function getMemo()
     {
-        return DefStage::STAGE_NAME_LIST[$this->stage_code] ?? "";
+        return $this->memo ? "※".$this->memo : "";
     }
-
-    public function getWeight(){
-        return $this->weight ? $this->weight."kg" : "";
-    }
-
-    public function getRep(){
-        return $this->rep ? $this->rep."rep" : "";
-
-
-    }
-
-    public function getStageInitialName()
-    {
-        return DefStage::STAGE_INITIAL_NAME_LIST[$this->stage_code] ?? "";
-    }
-
 
     public function getDataForJson()
     {
@@ -60,7 +40,7 @@ class Event extends Model
             $newItem["title"] = $this->getPartName();
         }else{
             $newItem["url"] = "/event/".$this->event_id;
-            $newItem["title"] = $this->getPartName()." ".$this->getStageInitialName()." ".$this->getWeight().$this->getRep();
+            $newItem["title"] = $this->getPartName()." ".$this->getStageInitialName()." ".$this->getWeightAndRep();
         }
         $newItem["stage_name"] = $this->getStageName();
         $newItem["weight"] = $this->getWeight();

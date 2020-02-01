@@ -138,7 +138,7 @@ function transportTrainingDataToPhp()
 
 }
 
-
+//todo ajaxで通信しながら、viewにもう同じトレの箱があったらそこに入れる。なかったら新しく箱を作る。んでそこに入れる
 //todo トレの表示はここを変えればおけ
 function buildTrainingHtml(result,weight,rep)
 {
