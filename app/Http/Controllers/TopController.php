@@ -18,6 +18,7 @@ class TopController extends Controller
     //todo topControllerという名前も検討
     //todo 追加ボタンを上にする。日付はモーダルから。プラスだけにする。
     //todo　上の隙間も解消
+    //todo いいねと削除はmodel,後いろんなことの編集もできるように
     public function show($eventId){
 
         if(($thisEvent = Event::find($eventId)) == null) {
@@ -25,17 +26,16 @@ class TopController extends Controller
         }
         $thisTrainings = Training::getTrainingsFromEventId($eventId);
 
-        if(        $lastEvent = Event::where('part_code',$thisEvent->part_code)->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first()){
+        if($lastEvent = Event::where('part_code',$thisEvent->part_code)->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first()){
             $lastTrainings = Training::getTrainingsFromEventId($lastEvent->event_id);
         }else{
             $lastTrainings = [];
         }
-        //三項演算子でもいい気がする
+        //todo 三項演算子を検討
+        //todo bladeでisset書いたからここもっと楽にできるはず
 
-        return view('top.show')->with([ 'thisEvent' => $thisEvent,
-                                               'thisTrainings'=>$thisTrainings,
-                                               'lastEvent' => $lastEvent,
-                                               'lastTrainings' => $lastTrainings ]);
+        return view('top.show')->with(['thisEvent' => $thisEvent, 'thisTrainings'=>$thisTrainings,
+                                            'lastEvent' => $lastEvent, 'lastTrainings' => $lastTrainings ]);
     }
     //todo chart.jsかなんかでグラフを使用
     //todo タイマーとかもあったら良い

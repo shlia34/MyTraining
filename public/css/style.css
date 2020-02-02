@@ -68,9 +68,54 @@ body {
     padding: 8px;
 }
 
+.this-training {
+    width: 45%;
+    float: left;
+}
+
+.last-training {
+    width: 45%;
+    float: left;
+}
+
+ol {
+    counter-reset: my-counter;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+li {
+    line-height: 1.5;
+    padding-left: 30px;
+    position: relative;
+}
+li:before {
+    content: counter(my-counter);
+    counter-increment: my-counter;
+    background-color: #333;
+    border: 1px solid;
+    font-size: 16px;
+
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    width: 22px;
+    color: #ffffff;
+    font-size: 85%;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /*-- iPhone Vertical View--*/
 
 @media screen and (max-width: 480px) {
+
+
     .fc-event {
         font-size: 10px !important;/*--event title font size--*/
         /*margin-bottom: 4px;!*--　帯の隙間 event clearance--*!*/

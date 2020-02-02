@@ -73,7 +73,6 @@ function deleteMaxTraining()
         };
 
         ajaxDeleteMaxTraining(data,function(){
-            console.log($('.this-trainings ._add-underline'));
             $('.this-trainings ._add-underline').removeClass("_add-underline");
         });
     })
@@ -83,6 +82,7 @@ function deleteMaxTraining()
 
 
 // todo    weightにバリデーションかけないとエラー起こる。4けた以上になっても透過。999以上は透過してる
+// todo 透過と同じ条件でボタンの機能を殺す
 function frontValidation()
 {
     $(".form-weight").on('keyup', function(){
@@ -101,10 +101,16 @@ function deleteTraining()
     $(document).on("click", ".delete-training-btn", function () {
         var training_box = $(this).parent().parent();
         var training_id = training_box.data('training_id');
+        var stage_code = training_box.parent().data('stage_code');
         var data = {"training_id":training_id};
 
         ajaxDeleteTraining(data,function(){
             training_box.remove();
+            var stage_ol = $(`.this-trainings .card ol[data-stage_code=${stage_code}]`);
+            if(!stage_ol.find('li').is(':visible')){
+                stage_ol.parent().remove();
+            }
+
         });
     })
 }
@@ -133,15 +139,28 @@ function transportTrainingDataToPhp()
     };
 
     ajaxStoreTraining(data,function(result){
-        $('.space ul').append(buildTrainingHtml(result,weight_val,rep_val));
+        var stage_code = result['stage_code'];
+        var ol_stage_code = $(`.this-trainings .card ol[data-stage_code=${stage_code}]`)
+
+        if(!ol_stage_code.is(':visible')){
+            $(".this-trainings").append(buildStageCardHtml(result));
+        }
+
+        var stage_card = $(`.this-trainings .card ol[data-stage_code=${stage_code}]`);
+        stage_card.append(buildTrainingHtml(result,weight_val,rep_val));
+
     });
 
 }
 
-//todo ajaxで通信しながら、viewにもう同じトレの箱があったらそこに入れる。なかったら新しく箱を作る。んでそこに入れる
-//todo トレの表示はここを変えればおけ
 function buildTrainingHtml(result,weight,rep)
 {
-    var html = `<li data-training_id = ${result['training_id']} class = "this-training"> ${result["stage_name"]} ${weight}kg * ${rep}rep `;
+    var html = `<li data-training_id = ${result['training_id']} class = "this-training">${weight}kg * ${rep}rep`;
     return html;
+}
+
+function buildStageCardHtml(result) {
+    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2"><span class="card-title mb-0">${result["stage_name"]}</span><ol data-stage_code=${result["stage_code"]} class="mb-0"></div>`;
+    return html;
+
 }

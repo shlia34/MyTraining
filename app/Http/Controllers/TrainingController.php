@@ -23,6 +23,7 @@ class TrainingController extends Controller
         $training->save();
 
         $returnData =  ['training_id'=>$training->training_id,
+                        'stage_code'=>$training->stage_code,
                         'stage_name'=>$training->getStageName() ];
 
         return response()->json($returnData);
