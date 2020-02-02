@@ -160,7 +160,7 @@ function buildTrainingHtml(result,weight,rep)
 }
 
 function buildStageCardHtml(result) {
-    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2"><span class="card-title mb-0">${result["stage_name"]}</span><ol data-stage_code=${result["stage_code"]} class="mb-0"></div>`;
+    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2"><span class="card-title mb-0">${result["stage_name"]}</span><ol data-stage_code=${result["stage_code"]} class="ol-training mb-0"></div>`;
     return html;
 
 }
