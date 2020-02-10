@@ -1,11 +1,22 @@
 body {
     background-color:white;
+    padding-top: 56px;
 }
 
+/*ナビバー*/
+.navbar{
+    background-color: #F43E43!important;
+    color: #F43E43!important;
+
+}
+.navbar a{
+    color: white!important;
+}
+
+/*モーダル*/
 .remodal {
     font-size: 18px;
 }
-
 
 .fc-header-toolbar{
     margin-bottom: 0px!important;
@@ -19,21 +30,19 @@ body {
 
 .fc-button{
     padding: 2px!important;
-    /*margin-left: 0px!important;*/
 }
 
 .wrapper {
     font-size: 18px;
+    min-height: calc(100vh - 56px);
 }
 
 #calendar {
-    /*padding: 0 8px;*/
     font-size: 14px;
 }
 
 .fc-toolbar.fc-header-toolbar {
     margin-bottom: 0px;
-
 }
 
 .fc-right {
@@ -43,7 +52,6 @@ body {
 .fc-left {
     padding: 4px;
 }
-
 
 .form-weight {
     width:50px;
@@ -78,7 +86,6 @@ body {
     float: left;
 }
 
-
 .ol-training {
     counter-reset: my-counter;
     list-style: none;
@@ -90,7 +97,7 @@ body {
     padding-left: 30px;
     position: relative;
 }
-li:before {
+.this-training:before {
     content: counter(my-counter);
     counter-increment: my-counter;
     background-color: #333;
@@ -117,10 +124,10 @@ li:before {
 }
 
 .add-training-form-box{
-    background-color: #fafafa;
+    background-color: white;
     position: -webkit-sticky;
     position: sticky;
-    top: 0px;
+    top: 56px;
     z-index:11;
 }
 
@@ -138,18 +145,9 @@ li:before {
         /*margin-bottom: 4px;!*--　帯の隙間 event clearance--*!*/
     }
 
-    .navbar{
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0px;
-        z-index:9;
-        background-color:#e9e9e9;
-    }
-
     .fc-day-number{
         font-size: 12px;
     }
-
 
     /*-- ヘッダ　ツールバー --*/
     .fc-header-toolbar{
@@ -158,8 +156,6 @@ li:before {
         top: 54.22px;
         z-index:10;
         background-color:#e9e9e9;/*--背景色--*/
-
-
     }
     .fc-center h2{ /*-- 年月表示 --*/
         /*margin-top:10px;*/

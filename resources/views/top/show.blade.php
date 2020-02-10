@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class = "wrapper">
+<div class = "wrapper special-color-dark pb-2">
 
     <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
         {{ Form::select('stage_code', App\Defs\DefStage::STAGE_NAME_LIST[$thisEvent->part_code],null ,['class' => 'form-stage_code browser-default custom-select mb-2']) }}
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class = "trainings-index special-color-dark">
+    <div class = "trainings-index">
 
         <div class = "today-trainings">
             <div class = "event-title">{{$thisEvent->date}}の{{App\Defs\DefPart::PART_NAME_LIST[$thisEvent->part_code]}}トレ</div>
@@ -44,9 +44,7 @@
             </div>
         </div>
 
-            {{Form::open(["url" => "event/delete/$thisEvent->event_id" ])}}
-            {{Form::submit('削除')}}
-            {{Form::close()}}
+        <a href="/event/delete/{{$thisEvent->event_id}}">イベント削除</a>
 
         @isset($lastEvent)
 
