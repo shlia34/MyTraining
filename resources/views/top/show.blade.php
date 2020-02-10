@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class = "wrapper special-color-dark pb-2">
+<div class = "wrapper">
 
     <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
         {{ Form::select('stage_code', App\Defs\DefStage::STAGE_NAME_LIST[$thisEvent->part_code],null ,['class' => 'form-stage_code browser-default custom-select mb-2']) }}
@@ -15,14 +15,16 @@
                 <input type="number" id="form-rep" class="form-rep form-control">
                 <label for="form-rep">rep</label>
             </div>
-            <button class = "add-training-btn _transparent btn btn-dark waves-effect w-30 ml-4" type="button">追加</button>
+            <button class = "add-training-btn _transparent btn  waves-effect w-30 ml-4" type="button">追加</button>
         </div>
     </div>
 
-    <div class = "trainings-index">
+    <div class = "trainings-index  pb-4">
 
         <div class = "today-trainings">
-            <div class = "event-title">{{$thisEvent->date}}の{{App\Defs\DefPart::PART_NAME_LIST[$thisEvent->part_code]}}トレ</div>
+            <a href="/event/{{$thisEvent->event_id}}">
+                <div class = "event-title">{{$thisEvent->date}}の{{App\Defs\DefPart::PART_NAME_LIST[$thisEvent->part_code]}}トレ</div>
+            </a>
             <div class="this-event-show" data-event_id= {{$thisEvent->event_id}}>
                 {{$thisEvent->getMemo()}}
                 <div class = "this-trainings">
@@ -40,17 +42,21 @@
                             </ol>
                         </div>
                     @endforeach
+
                 </div>
             </div>
+            <a href="/event/delete/{{$thisEvent->event_id}}"><i class="fas fa-trash ml-2"></i></a>
         </div>
 
-        <a href="/event/delete/{{$thisEvent->event_id}}">イベント削除</a>
 
         @isset($lastEvent)
 
             <div class = "last-trainings">
-                <div class = "event-title">{{$lastEvent->date}}の{{App\Defs\DefPart::PART_NAME_LIST[$lastEvent->part_code]}}トレ</div>
-                <div class="this-event-show" data-event_id= {{$lastEvent->event_id}}>
+{{--                //todo リンクの青殺す--}}
+                <a href="/event/{{$lastEvent->event_id}}">
+                    <div class = "event-title">{{$lastEvent->date}}の{{App\Defs\DefPart::PART_NAME_LIST[$lastEvent->part_code]}}トレ</div>
+                </a>
+                <div class="last-event-show" data-event_id= {{$lastEvent->event_id}}>
                     {{$lastEvent->getMemo()}}
                     <div class = "last-trainings">
                         @foreach($lastTrainings as $group)
