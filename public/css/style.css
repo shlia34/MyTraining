@@ -34,7 +34,8 @@ body {
 
 .wrapper {
     font-size: 18px;
-    min-height: calc(100vh - 56px);
+    /*min-height: calc(100vh - 56px);*/
+
 }
 
 #calendar {
@@ -57,12 +58,6 @@ body {
     width:50px;
 }
 
-._transparent {
-    filter: alpha(opacity=50);
-    -moz-opacity: 0.5;
-    opacity: 0.5;
-}
-
 ._make-yellow {
     color:yellow;
 }
@@ -70,21 +65,42 @@ body {
     text-decoration: underline;
 }
 
+.trainings-index{
+    background-color: #c8c8c8;
+    min-height: calc(100vh - 296.5px);
+}
+
 .event-title {
-    background-color: #B7B4B4;
-    font-size: 10px;
-    padding: 8px;
+    background-color: #454545;
+    color: white;
+    font-weight: bold;
+    line-height: 40px;
+    height: 40px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+
+.card{
+    background-color: #454545!important;
+    color: white;
 }
 
 .this-training {
     width: 45%;
     float: left;
+    margin: 3px 3px 3px 6px;
 }
-
 .last-training {
     width: 45%;
     float: left;
+    margin: 3px 3px 3px 6px;
 }
+
+.fa-trash{
+    color: #454545;
+}
+
 
 .ol-training {
     counter-reset: my-counter;
@@ -92,19 +108,34 @@ body {
     padding: 0;
     margin: 0;
 }
+
 .ol-training li {
     line-height: 1.5;
     padding-left: 30px;
     position: relative;
 }
-.this-training:before {
+.this-training:before  {
     content: counter(my-counter);
     counter-increment: my-counter;
-    background-color: #333;
-    border: 1px solid;
     font-size: 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    width: 22px;
+    color: white;
+    font-size: 70%;
+    line-height: 1;
+    position: absolute;
+    top: 3.5px;
+    left: 0px;
+}
 
-    border-radius: 50%;
+.last-training:before  {
+    content: counter(my-counter);
+    counter-increment: my-counter;
+    font-size: 16px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -112,23 +143,29 @@ body {
     height: 22px;
     width: 22px;
     color: #ffffff;
-    font-size: 85%;
+    font-size: 70%;
     line-height: 1;
     position: absolute;
-    top: 3px;
+    top: 3.5px;
     left: 0px;
 }
 
 .add-training-btn{
+    color: white!important;
     margin-left: 20px;
+    background-color: #454545!important;
+}
+._transparent {
+    background-color: #c8c8c8!important;
 }
 
 .add-training-form-box{
-    background-color: white;
+    color: white;
     position: -webkit-sticky;
     position: sticky;
     top: 56px;
     z-index:11;
+    background-color: white;
 }
 
 .forms{
