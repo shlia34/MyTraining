@@ -79,19 +79,28 @@ function deleteMaxTraining()
 
 }
 
-
-
-// todo    weightにバリデーションかけないとエラー起こる。4けた以上になっても透過。999以上は透過してる
 // todo 透過と同じ条件でボタンの機能を殺す
 function frontValidation()
 {
-    $(".form-weight").on('keyup', function(){
+    $(".form-weight,.form-rep").on('keyup', function(){
         var add_btn = $(".add-training-btn");
 
-        if( !($(".form-weight").val().match(/\S/g) && !($(".form-weight").val() > 999 ))){
-            add_btn.addClass("_transparent");
+        var weight_val= $(".form-weight").val();
+        var weight_validation_error = weight_val == "" || /^0/.test(weight_val)　|| weight_val > 1000 || /[/.][0-9]{2,}/.test(weight_val);
+        // 整数部分は3桁以内、少数部分は1桁以内の数字を許可する
+        // ①空か②0から始まらないか③整数部分は3桁以内か④小数値が2個以上続かないか
+        var rep_val= $(".form-rep").val();
+
+        console.log(rep_val);
+
+        var rep_validation_error = rep_val == "" || /^0/.test(rep_val)　|| rep_val > 100 || /[/.]/.test(rep_val);
+        //  少数を許さない整数2桁以内
+        //todo val()ではピリオドが取得できない。「11.」を「11」として取得してしまうので困ってる。
+
+        if( weight_validation_error == true || rep_validation_error == true ){
+            add_btn.prop("disabled", true);
         } else {
-            add_btn.removeClass("_transparent");
+            add_btn.prop("disabled", false);
         }
     });
 }
