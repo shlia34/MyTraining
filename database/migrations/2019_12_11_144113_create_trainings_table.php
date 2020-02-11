@@ -13,6 +13,7 @@ class CreateTrainingsTable extends Migration
      */
     public function up()
     {
+        //todo weightとrepを数字に変えた方がよかったのではないか
         Schema::create('trainings', function (Blueprint $table) {
             $table->string('training_id', 34)->primary();
             $table->string('event_id',34);
