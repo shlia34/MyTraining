@@ -3,6 +3,8 @@ namespace App\Defs;
 
 final class DefStage implements DefPartInterface {
 
+    //todo そもそも定数ではなく、DBから値を持ってきたい。
+    //todo 並び替え機能なども付けてみたい。
     const MUNE_STAGE_LIST = [
         'S0101'=>'ベンチプレス',
         'S0102'=>'インクラインベンチプレス',
