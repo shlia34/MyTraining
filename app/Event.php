@@ -12,6 +12,21 @@ class Event extends GetTrainingData
     public $incrementing = false;
     protected $keyType = 'string';
 
+    const CSV_LIST = [
+        'event_id',
+        'user_id',
+        'date',
+        'part_code',
+        'memo',
+        'max_training_id',
+        'created_at',
+        'updated_at',
+    ];
+
+    public static function getCsvList(){
+        return self::CSV_LIST;
+    }
+
     //todo Modelsってディレクトリ作ってその中に入れたい
     public function getPartName()
     {

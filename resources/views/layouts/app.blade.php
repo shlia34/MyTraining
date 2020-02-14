@@ -70,7 +70,7 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">設定</a>
+                <a class="nav-link" href="/setting">設定</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">検索</a>

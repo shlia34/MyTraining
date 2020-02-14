@@ -79,7 +79,6 @@ function deleteMaxTraining()
 
 }
 
-// todo 透過と同じ条件でボタンの機能を殺す
 function frontValidation()
 {
     $(".form-weight,.form-rep").on('keyup', function(){

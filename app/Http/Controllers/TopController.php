@@ -16,8 +16,6 @@ class TopController extends Controller
 
     //todo viewのトレ部分はテンプレートにしたい
     //todo topControllerという名前も検討
-    //todo 追加ボタンを上にする。日付はモーダルから。プラスだけにする。
-    //todo　上の隙間も解消
     //todo いいねと削除はmodel,後いろんなことの編集もできるように
     public function show($eventId){
 
@@ -37,7 +35,10 @@ class TopController extends Controller
         return view('top.show')->with(['thisEvent' => $thisEvent, 'thisTrainings'=>$thisTrainings,
                                             'lastEvent' => $lastEvent, 'lastTrainings' => $lastTrainings ]);
     }
-    //todo chart.jsかなんかでグラフを使用
-    //todo タイマーとかもあったら良い
+    //todo タイマーとかもあったら良い。vibrationAPIたるものがある。chromeで使用可能かどうか調べる
     //todo 筋トレ種目の説明とかのページもあったら良い。コンパウンド、トレーニングのいつやるべき種目なのか
+
+    public function setting(){
+        return view('top.setting');
+    }
 }
