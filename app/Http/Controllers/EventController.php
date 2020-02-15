@@ -6,7 +6,6 @@ use App\Event;
 use App\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Csv\Csv;
 
 class EventController extends Controller
 {

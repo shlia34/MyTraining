@@ -19,6 +19,7 @@ class CreateStagesTable extends Migration
             $table->char('part_code', 2);
             $table->char('pof_code', 2);
             $table->string('memo', 200)->nullable();
+            $table->timestamps();
         });
     }
 
