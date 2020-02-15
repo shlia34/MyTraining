@@ -12,24 +12,31 @@
 */
 
 Auth::routes();
-
+//イベント一覧と詳細
 Route::get('/', 'TopController@index');
 Route::get('/event/{event_id}', 'TopController@show');
-
-Route::get('/setting', 'TopController@setting');
-Route::get('/csv/event/download', 'CsvController@eventDownload');
-Route::get('/csv/training/download', 'CsvController@trainingDownload');
-Route::post('/csv/event/import', 'CsvController@import');
-
-
+//イベントのいろいろ
 Route::get('/setEvents', 'EventController@setEvents');
 Route::get('/event/delete/{event_id}', 'EventController@delete');
 Route::post('/ajax/addEvent', 'EventController@addEvent');
 Route::post('/ajax/editEventDate', 'EventController@editEventDate');
 Route::post('/ajax/showEventsByDate', 'EventController@showEventsByDate');
-
+//トレーニング関連
 Route::post('/ajax/storeTraining', 'TrainingController@storeTraining');
 Route::post('/ajax/deleteTraining', 'TrainingController@deleteTraining');
 Route::post('/ajax/recordMaxTraining', 'TrainingController@recordMaxTraining');
 Route::post('/ajax/checkMaxTraining', 'TrainingController@checkMaxTraining');
 Route::post('/ajax/deleteMaxTraining', 'TrainingController@deleteMaxTraining');
+//各種設定へのリンク集
+Route::get('/setting', 'TopController@setting');
+//csv関連
+Route::get('/csv/event/download', 'CsvController@eventDownload');
+Route::get('/csv/training/download', 'CsvController@trainingDownload');
+Route::post('/csv/event/import', 'CsvController@import');
+//種目関連
+Route::get('/stage/index', 'StageController@index');
+Route::get('/stage/create', 'StageController@create');
+Route::get('/stage/{stage_id}', 'StageController@show');
+Route::post('/stage/store', 'StageController@store');
+Route::get('/stage/edit/{stage_id}', 'StageController@edit');
+Route::post('/stage/update', 'StageController@update');

@@ -9,7 +9,6 @@ namespace App\Defs;
  */
 interface DefPartInterface
 {
-    //todo カラーチャートで色彩決める
 
     /**
      * 胸に関する定数
