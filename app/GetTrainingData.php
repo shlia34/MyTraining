@@ -19,6 +19,7 @@ class GetTrainingData extends Model
 
     public function getWeightAndRep(){
         return $this->getWeight(). " * " .$this->getRep();
+        //三項演算子
     }
 
     public function getWeight(){
@@ -28,6 +29,5 @@ class GetTrainingData extends Model
     public function getRep(){
         return $this->rep ? $this->rep."rep" : "";
     }
-
 
 }
