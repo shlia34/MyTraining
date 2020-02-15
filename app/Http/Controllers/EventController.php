@@ -104,28 +104,4 @@ class EventController extends Controller
         }
     }
 
-    public function importCsv(Request $request){
-
-        $records = (new Csv)->import($request);
-        $modelName = (new Csv)->getModelName($request);
-        $modelClass = "App\\".$modelName;
-
-        $columns = $modelClass::getCsvList();
-
-        foreach ($records as $record){
-            $model = new $modelClass();
-            foreach ($columns as $column ){
-                if($column === 'stage_name'){
-                    //なんもしない
-                }else{
-                    $model->$column = $record[$column];
-
-                }
-            }
-            \Log::debug($model);
-            $model->save();
-        }
-
-    }
-
 }
