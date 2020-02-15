@@ -16,7 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->string('event_id', 34)->primary();
             $table->string('user_id',34);
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->string('max_training_id',34)->nullable();
             $table->date('date');
             $table->char('part_code', 2);
             $table->string('memo', 100)->nullable();
