@@ -6,6 +6,7 @@ use App\Event;
 use App\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Csv\Csv;
 
 class EventController extends Controller
 {
@@ -101,6 +102,30 @@ class EventController extends Controller
         }else{
             return $date;
         }
+    }
+
+    public function importCsv(Request $request){
+
+        $records = (new Csv)->import($request);
+        $modelName = (new Csv)->getModelName($request);
+        $modelClass = "App\\".$modelName;
+
+        $columns = $modelClass::getCsvList();
+
+        foreach ($records as $record){
+            $model = new $modelClass();
+            foreach ($columns as $column ){
+                if($column === 'stage_name'){
+                    //なんもしない
+                }else{
+                    $model->$column = $record[$column];
+
+                }
+            }
+            \Log::debug($model);
+            $model->save();
+        }
+
     }
 
 }

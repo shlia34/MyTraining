@@ -19,7 +19,7 @@ Route::get('/event/{event_id}', 'TopController@show');
 Route::get('/setting', 'TopController@setting');
 Route::get('/csv/event/download', 'CsvController@eventDownload');
 Route::get('/csv/training/download', 'CsvController@trainingDownload');
-Route::post('/csv/event/import', 'CsvController@importEvent');
+Route::post('/csv/event/import', 'EventController@importCsv');
 
 
 Route::get('/setEvents', 'EventController@setEvents');
