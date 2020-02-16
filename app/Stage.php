@@ -19,6 +19,8 @@ class Stage extends Model
         'pof_code',
         'sort_num',
         'memo',
+        'created_at',
+        'updated_at',
     ];
 
     public static function getCsvList(){

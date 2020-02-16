@@ -4,7 +4,6 @@ namespace App;
 
 use App\Defs\DefPart;
 use Illuminate\Support\Facades\Auth;
-use Jenssegers\Agent\Facades\Agent;
 
 class Event extends GetTrainingData
 {
@@ -50,16 +49,9 @@ class Event extends GetTrainingData
         $newItem["backgroundColor"] = $this->getPartColor();
         $newItem["borderColor"] = $this->getPartColor();
         $newItem["start"] = $this->date;
-
-        if(Agent::isMobile()){
-            $newItem["title"] = $this->getPartName();
-        }else{
-            $newItem["url"] = "/event/".$this->event_id;
-            $newItem["title"] = $this->getPartName()." ".$this->getStageInitialName()." ".$this->getWeightAndRep();
-        }
+        $newItem["title"] = $this->getPartName();
         $newItem["stage_name"] = $this->getStageName();
-        $newItem["weight"] = $this->getWeight();
-        $newItem["rep"] = $this->getRep();
+        $newItem["weight_and_rep"] = $this->getWeightAndRep();
 
         return $newItem;
     }
