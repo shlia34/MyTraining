@@ -12,14 +12,14 @@ class StageController extends Controller
 
     public function index(){
         //種目の一覧画面
-        $stages = Stage::all();
-
+        $stages = Stage::orderBy('sort_num')->get()->groupBy('part_code');
         return view("stage.index")->with([ 'stages' => $stages]);
     }
 
-    public function show(){
+    public function show($stageId){
+        $stage = Stage::find($stageId);
         //種目の追加画面
-        return view("stage.show");
+        return view("stage.show")->with([ 'stage' => $stage]);
     }
 
     public function create(){
@@ -38,10 +38,11 @@ class StageController extends Controller
         $stage->name = $data["name"];
         $stage->part_code = $data["part_code"];
         $stage->pof_code = $data["pof_code"];
+        $stage->sort_num = $this->generateSortNum($data["part_code"]);
         $stage->memo = $data["memo"];
         $stage->save();
 
-        return redirect("/stage/index");
+        return redirect("/stage/create");
     }
 
     public function edit(){
@@ -52,6 +53,15 @@ class StageController extends Controller
     public function update(){
         //種目の編集処理
 //        return redirect("/stage/show");
+    }
+
+    public function generateSortNum($partCode){
+        if($lastStage = Stage::where('part_code', $partCode)->orderBy('sort_num','desc')->first()){
+            $lastSortId = $lastStage->sort_num;
+            return $lastSortId + 1;
+        }else{
+            return 1;
+        }
     }
 
 

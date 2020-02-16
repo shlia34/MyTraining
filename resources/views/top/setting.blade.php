@@ -7,6 +7,8 @@
 
     <p><a class="btn" href="{{url('/csv/training/download')}}" target="_blank"> Training Download</a></p>
 
+    <p><a class="btn" href="{{url('/csv/stage/download')}}" target="_blank"> stage Download</a></p>
+
 
     <form action="/csv/event/import" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}

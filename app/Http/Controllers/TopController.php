@@ -36,7 +36,6 @@ class TopController extends Controller
                                             'lastEvent' => $lastEvent, 'lastTrainings' => $lastTrainings ]);
     }
     //todo タイマーとかもあったら良い。vibrationAPIたるものがある。chromeで使用可能かどうか調べる
-    //todo 筋トレ種目の説明とかのページもあったら良い。コンパウンド、トレーニングのいつやるべき種目なのか
 
     public function setting(){
         return view('top.setting');
