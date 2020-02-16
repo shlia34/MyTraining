@@ -51,6 +51,6 @@ function appendEventHtml(result) {
 
 //todo ここでhtmlを変える
 function buildEvenShowHtml(value) {
-    var html ="<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+ value["stage_name"] + "</li>";
+    var html ="<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+ value["stage_name"] + value["weight_and_rep"] +"</li>";
     return html;
 }

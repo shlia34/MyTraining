@@ -11,12 +11,11 @@ class Training extends GetTrainingData
     const CSV_LIST = [
         'training_id',
         'event_id',
-        'stage_code',
+        'stage_id',
         'weight',
         'rep',
         'created_at',
         'updated_at',
-        'stage_name',
     ];
 
     public static function getCsvList(){

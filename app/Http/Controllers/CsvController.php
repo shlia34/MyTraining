@@ -31,11 +31,7 @@ class CsvController extends Controller
         foreach ($items as $items) {
             $output = array();
             foreach ($columnList as $column) {
-                if($column === 'stage_name'){
-                    $output[] = str_replace(array("\r\n", "\r", "\n"), '', $items->getStageName() );
-                }else{
-                    $output[] = str_replace(array("\r\n", "\r", "\n"), '', $items->$column);
-                }
+                $output[] = str_replace(array("\r\n", "\r", "\n"), '', $items->$column);
             }
             // CSVファイルを出力
             fputcsv($stream, $output);
@@ -82,16 +78,8 @@ class CsvController extends Controller
         foreach ($records as $record){
             $model = new $modelClass();
             foreach ($columns as $column ){
-                if($column === 'stage_code'){
-                    //stage__codeだったらなんもしない
-                }elseif ($column === 'user_id'){
+                if ($column === 'user_id'){
                     $model->$column = Auth::user()->user_id;
-                }elseif ($column === 'stage_name'){
-                    $stage = \App\Stage::where('name', $record['stage_name'])->first();
-                    \Log::debug($stage->name);
-
-                    $stageId = $stage->stage_id;
-                    $model->stage_id = $stageId;
                 }else{
                     $model->$column = $record[$column];
                 }
