@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SplFileObject;
 
 class CsvController extends Controller
@@ -81,8 +82,16 @@ class CsvController extends Controller
         foreach ($records as $record){
             $model = new $modelClass();
             foreach ($columns as $column ){
-                if($column === 'stage_name'){
-                    //この場合はなんもしない
+                if($column === 'stage_code'){
+                    //stage__codeだったらなんもしない
+                }elseif ($column === 'user_id'){
+                    $model->$column = Auth::user()->user_id;
+                }elseif ($column === 'stage_name'){
+                    $stage = \App\Stage::where('name', $record['stage_name'])->first();
+                    \Log::debug($stage->name);
+
+                    $stageId = $stage->stage_id;
+                    $model->stage_id = $stageId;
                 }else{
                     $model->$column = $record[$column];
                 }

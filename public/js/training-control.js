@@ -90,8 +90,6 @@ function frontValidation()
         // ①空か②0から始まらないか③整数部分は3桁以内か④小数値が2個以上続かないか
         var rep_val= $(".form-rep").val();
 
-        console.log(rep_val);
-
         var rep_validation_error = rep_val == "" || /^0/.test(rep_val)　|| rep_val > 100 || /[/.]/.test(rep_val);
         //  少数を許さない整数2桁以内
         //todo val()ではピリオドが取得できない。「11.」を「11」として取得してしまうので困ってる。
@@ -109,12 +107,12 @@ function deleteTraining()
     $(document).on("click", ".delete-training-btn", function () {
         var training_box = $(this).parent().parent();
         var training_id = training_box.data('training_id');
-        var stage_code = training_box.parent().data('stage_code');
+        var stage_id = training_box.parent().data('stage_id');
         var data = {"training_id":training_id};
 
         ajaxDeleteTraining(data,function(){
             training_box.remove();
-            var stage_ol = $(`.this-trainings .card ol[data-stage_code=${stage_code}]`);
+            var stage_ol = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
             if(!stage_ol.find('li').is(':visible')){
                 stage_ol.parent().remove();
             }
@@ -135,26 +133,26 @@ function createTraining()
 function transportTrainingDataToPhp()
 {
     var event_id = $(".this-event-show").data('event_id');
-    var stage_code_val = $(".form-stage_code").val();
+    var stage_id_val = $(".form-stage_id").val();
     var weight_val = $(".form-weight").val();
     var rep_val = $(".form-rep").val();
 
     var data = {
             "event_id":event_id,
-            "stage_code":stage_code_val,
+            "stage_id":stage_id_val,
             "weight":weight_val,
             "rep":rep_val
     };
 
     ajaxStoreTraining(data,function(result){
-        var stage_code = result['stage_code'];
-        var ol_stage_code = $(`.this-trainings .card ol[data-stage_code=${stage_code}]`)
+        var stage_id = result['stage_id'];
+        var ol_stage_id = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`)
 
-        if(!ol_stage_code.is(':visible')){
+        if(!ol_stage_id.is(':visible')){
             $(".this-trainings").append(buildStageCardHtml(result));
         }
 
-        var stage_card = $(`.this-trainings .card ol[data-stage_code=${stage_code}]`);
+        var stage_card = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
         stage_card.append(buildTrainingHtml(result,weight_val,rep_val));
 
     });
@@ -168,7 +166,7 @@ function buildTrainingHtml(result,weight,rep)
 }
 
 function buildStageCardHtml(result) {
-    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2"><span class="card-title mb-0">${result["stage_name"]}</span><ol data-stage_code=${result["stage_code"]} class="ol-training mb-0"></div>`;
+    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2"><span class="card-title mb-0">${result["stage_name"]}</span><ol data-stage_id=${result["stage_id"]} class="ol-training mb-0"></div>`;
     return html;
 
 }

@@ -7,9 +7,6 @@ use App\Stage;
 
 class StageController extends Controller
 {
-    //todo シンプルなcrudでいいかな
-    //deleteはいらんかな
-
     public function index(){
         //種目の一覧画面
         $stages = Stage::orderBy('sort_num')->get()->groupBy('part_code');
