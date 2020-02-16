@@ -65,6 +65,10 @@ class CsvController extends Controller
         return $this->downloadTable("Event");
     }
 
+    public function StageDownload(){
+        return $this->downloadTable("Stage");
+    }
+
     //todo ファイル名の頭でバリデーションする
     //todo 名前がしっこりきてない
     public function import(Request $request){
