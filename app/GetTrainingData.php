@@ -9,12 +9,8 @@ class GetTrainingData extends Model
 {
     public function getStageName()
     {
-        return array_column(DefStage::STAGE_NAME_LIST,$this->stage_code)[0];
-    }
-
-    public function getStageInitialName()
-    {
-        return DefStage::STAGE_INITIAL_NAME_LIST[$this->stage_code] ?? "";
+        return Stage::where("stage_id",$this->stage_id)->first()->name ?? "";
+        //maxが登録されてない場合は空文字を返す
     }
 
     public function getWeightAndRep(){

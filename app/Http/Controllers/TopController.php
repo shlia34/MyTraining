@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Training;
+use App\Stage;
+
 
 class TopController extends Controller
 {
@@ -32,8 +34,15 @@ class TopController extends Controller
         //todo 三項演算子を検討
         //todo bladeでisset書いたからここもっと楽にできるはず
 
+        $stages = Stage::where('part_code',$thisEvent->part_code)->orderBy('sort_num')->get();
+        $stageFormArr =  [];
+        foreach ($stages as $stage){
+            $stageFormArr[$stage->stage_id] = $stage->name;
+        }
+
         return view('top.show')->with(['thisEvent' => $thisEvent, 'thisTrainings'=>$thisTrainings,
-                                            'lastEvent' => $lastEvent, 'lastTrainings' => $lastTrainings ]);
+                                            'lastEvent' => $lastEvent, 'lastTrainings' => $lastTrainings,
+                                            'stageFormArr' => $stageFormArr ]);
     }
     //todo タイマーとかもあったら良い。vibrationAPIたるものがある。chromeで使用可能かどうか調べる
 

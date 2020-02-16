@@ -17,13 +17,13 @@ class TrainingController extends Controller
         $training = new Training();
         $training->training_id = $this->generateId('TR');
         $training->event_id = $data['event_id'];
-        $training->stage_code = $data['stage_code'];
+        $training->stage_id = $data['stage_id'];
         $training->weight = $data['weight'];
         $training->rep = $data['rep'];
         $training->save();
 
         $returnData =  ['training_id'=>$training->training_id,
-                        'stage_code'=>$training->stage_code,
+                        'stage_id'=>$training->stage_id,
                         'stage_name'=>$training->getStageName() ];
 
         return response()->json($returnData);

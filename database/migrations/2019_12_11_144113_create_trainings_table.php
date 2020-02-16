@@ -17,8 +17,8 @@ class CreateTrainingsTable extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->string('training_id', 34)->primary();
             $table->string('event_id',34);
-            $table->char('stage_code', 5);
-//            $table->string('stage_id', 34)->primary();
+//            $table->char('stage_code', 5);
+            $table->string('stage_id', 34);
             $table->float('weight', 4, 1);
             $table->char('rep',2);
             $table->timestamps();

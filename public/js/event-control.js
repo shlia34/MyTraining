@@ -27,7 +27,6 @@ function editEventDate(info)
         "id":info.event.id,
         "newDate":info.event.start.toISOString(),
     };
-    console.log(info.event);
     ajaxEditEventDate(data);
 }
 

@@ -87,7 +87,7 @@ class Event extends GetTrainingData
             'events.event_id',
             'events.part_code',
             'events.date',
-            'trainings.stage_code',
+            'trainings.stage_id',
             'trainings.weight',
             'trainings.rep',
         ])->leftJoin('trainings', 'events.max_training_id', '=', 'training_id');

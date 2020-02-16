@@ -4,8 +4,9 @@
 <div class = "wrapper">
 
     <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
-        {{ Form::select('stage_code', App\Defs\DefStage::STAGE_NAME_LIST[$thisEvent->part_code],null ,['class' => 'form-stage_code browser-default custom-select mb-2']) }}
-{{--        //todo キーパッド入力じゃなくて一桁ずつselectRangeでやるのが、validation楽だし入力しやすいと思った--}}
+        {{ Form::select('stage_id', $stageFormArr,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
+
+        {{--        //todo キーパッド入力じゃなくて一桁ずつselectRangeでやるのが、validation楽だし入力しやすいと思った--}}
         <div class="forms">
             <div class="md-form m-0 ml-3 w-25">
                 <input type="number" id="form-weight" class="form-weight form-control">
@@ -32,7 +33,7 @@
                     @foreach($thisTrainings as $group)
                         <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
                             <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
-                            <ol data-stage_code = {{ $group[0]->stage_code }} class = "ol-training mb-0">
+                            <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                             @foreach($group as $training)
                                     @if($training->training_id == $thisEvent->max_training_id)
                                         <li data-training_id = {{$training->training_id}} class = "this-training _add-underline ">{{$training->getWeightAndRep() }}</li>
@@ -62,7 +63,7 @@
                         @foreach($lastTrainings as $group)
                             <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
                                 <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
-                                <ol data-stage_code = {{ $group[0]->stage_code }} class = "ol-training mb-0">
+                                <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                                 @foreach($group as $training)
                                     @if($training->training_id == $lastEvent->max_training_id)
                                         <li data-training_id = {{$training->training_id}} class = "last-training _add-underline ">{{$training->getWeightAndRep() }}</li>
