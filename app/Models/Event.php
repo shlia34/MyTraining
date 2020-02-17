@@ -1,12 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Defs\DefPart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\GetCsvList;
+use App\Models\Traits\GetTrainingData;
+use App\Models\Traits\GetPartData;
 
-class Event extends GetTrainingData
+class Event extends Model
 {
+    use GetCsvList,GetTrainingData,GetPartData;
+
     protected $primaryKey = 'event_id';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -21,21 +26,6 @@ class Event extends GetTrainingData
         'created_at',
         'updated_at',
     ];
-
-    public static function getCsvList(){
-        return self::CSV_LIST;
-    }
-
-    //todo Modelsってディレクトリ作ってその中に入れたい
-    public function getPartName()
-    {
-        return DefPart::PART_NAME_LIST[$this->part_code];
-    }
-
-    public function getPartColor()
-    {
-        return DefPart::PART_COLOR[$this->part_code];
-    }
 
     public function getMemo()
     {

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Event;
-use App\Training;
-use App\Stage;
+use App\Models\Event;
+use App\Models\Training;
+use App\Models\Stage;
 
 
 class TopController extends Controller

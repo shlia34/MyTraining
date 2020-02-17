@@ -9,9 +9,11 @@ use SplFileObject;
 class CsvController extends Controller
 {
 
+    const MODEL_PREFIX = "App\\Models\\";
+
     public function downloadTable($modelName){
 
-        $modelClass = "App\\".$modelName;
+        $modelClass = self::MODEL_PREFIX.$modelName;
 
         $filename = $modelName."_".date('Ymd').".csv";
 
@@ -53,7 +55,7 @@ class CsvController extends Controller
 
     }
 
-    //todo この二つの名前は変更する
+    //todo ここの記述減らせると思う。
     public function TrainingDownload(){
         return $this->downloadTable("Training");
     }
@@ -72,7 +74,7 @@ class CsvController extends Controller
 
         $records = $this->read($request);
         $modelName = $this->getModelName($request);
-        $modelClass = "App\\".$modelName;
+        $modelClass = self::MODEL_PREFIX.$modelName;
         $columns = $modelClass::getCsvList();
 
         foreach ($records as $record){

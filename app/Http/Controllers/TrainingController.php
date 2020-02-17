@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Event;
-use App\Training;
+use App\Models\Event;
+use App\Models\Training;
 
 class TrainingController extends Controller
 {
