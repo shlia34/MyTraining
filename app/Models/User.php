@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Traits\GetCsvList;
+
 
 /**
  * userのmodel
@@ -16,11 +18,23 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,GetCsvList;
 
     protected $primaryKey = 'user_id';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    const CSV_LIST = [
+        'user_id',
+        'name',
+        'weight',
+        'email',
+        'email_verified_at',
+        'password',
+        'remember_token',
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * The attributes that are mass assignable.

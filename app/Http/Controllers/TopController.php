@@ -48,4 +48,8 @@ class TopController extends Controller
     public function setting(){
         return view('top.setting');
     }
+
+    public function admin(){
+        return view('top.admin');
+    }
 }

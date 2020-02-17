@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use SplFileObject;
 
 class CsvController extends Controller
 {
 
     const MODEL_PREFIX = "App\\Models\\";
+    const CSV_ENCODING = 'SJIS';
+    const APP_ENCODING = 'UTF-8';
 
-    public function downloadTable($modelName){
+    public function download($modelName){
 
         $modelClass = self::MODEL_PREFIX.$modelName;
 
@@ -19,23 +20,25 @@ class CsvController extends Controller
 
         $stream = fopen('php://temp', 'r+b');
 
-        $output = array();
+        $output = [];
         $columnList = $modelClass::getCsvList();
+
 
         foreach($columnList as $column){
             $output[] = $column;
         }
-        // CSVファイルを出力
+
+        // CSVファイルに出力
         fputcsv($stream, $output);
 
         $items = $modelClass::all();
 
         foreach ($items as $items) {
-            $output = array();
+            $output = [];
             foreach ($columnList as $column) {
                 $output[] = str_replace(array("\r\n", "\r", "\n"), '', $items->$column);
             }
-            // CSVファイルを出力
+            // CSVファイルに出力
             fputcsv($stream, $output);
         }
 
@@ -44,7 +47,8 @@ class CsvController extends Controller
         // 改行変換
         $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
         // 文字コード変換
-        $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
+        $csv = mb_convert_encoding($csv, self::CSV_ENCODING, self::APP_ENCODING);
+
         // header
         $headers = array(
             'Content-Type' => 'text/csv',
@@ -55,19 +59,6 @@ class CsvController extends Controller
 
     }
 
-    //todo ここの記述減らせると思う。
-    public function TrainingDownload(){
-        return $this->downloadTable("Training");
-    }
-
-    public function EventDownload(){
-        return $this->downloadTable("Event");
-    }
-
-    public function StageDownload(){
-        return $this->downloadTable("Stage");
-    }
-
     //todo ファイル名の頭でバリデーションする
     //todo 名前がしっこりきてない
     public function import(Request $request){
@@ -75,20 +66,16 @@ class CsvController extends Controller
         $records = $this->read($request);
         $modelName = $this->getModelName($request);
         $modelClass = self::MODEL_PREFIX.$modelName;
-        $columns = $modelClass::getCsvList();
+        $columnList = $modelClass::getCsvList();
 
         foreach ($records as $record){
             $model = new $modelClass();
-            foreach ($columns as $column ){
-                if ($column === 'user_id'){
-                    $model->$column = Auth::user()->user_id;
-                }else{
-                    $model->$column = $record[$column];
-                }
+            foreach ($columnList as $column ){
+                $model->$column = $record[$column];
             }
             $model->save();
         }
-        return redirect("/setting");
+        return redirect("/admin");
     }
 
     public function getModelName($request){
@@ -106,7 +93,7 @@ class CsvController extends Controller
         $tmppath = public_path()."/csv/tmp/".$tmpname;
 
         setlocale(LC_ALL, 'ja_JP.UTF-8');
-        file_put_contents($tmppath, mb_convert_encoding(file_get_contents($tmppath), 'UTF-8', 'SJIS'));
+        file_put_contents($tmppath, mb_convert_encoding(file_get_contents($tmppath), self::APP_ENCODING, self::CSV_ENCODING));
 
         $file = new SplFileObject($tmppath);
         $file->setFlags(SplFileObject::READ_CSV);

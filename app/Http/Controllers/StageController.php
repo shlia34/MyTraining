@@ -14,6 +14,7 @@ class StageController extends Controller
     }
 
     public function show($stageId){
+        //todo 404処理
         $stage = Stage::find($stageId);
         //種目の追加画面
         return view("stage.show")->with([ 'stage' => $stage]);
