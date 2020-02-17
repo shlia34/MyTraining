@@ -1,13 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Defs\DefPart;
 use App\Defs\DefPof;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\GetCsvList;
+use App\Models\Traits\GetPartData;
 
 class Stage extends Model
 {
+    use GetCsvList,GetPartData;
+
     public $incrementing = false;
     protected $primaryKey = 'stage_id';
     protected $keyType = 'string';
@@ -22,16 +25,6 @@ class Stage extends Model
         'created_at',
         'updated_at',
     ];
-
-    public static function getCsvList(){
-        return self::CSV_LIST;
-    }
-
-    //todo ここeventとかぶってる
-    public function getPartName()
-    {
-        return DefPart::PART_NAME_LIST[$this->part_code];
-    }
 
     public function getPofName()
     {

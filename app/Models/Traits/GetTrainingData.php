@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models\Traits;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Stage;
 
-class GetTrainingData extends Model
+trait GetTrainingData
 {
     public function getStageName()
     {
@@ -19,5 +19,4 @@ class GetTrainingData extends Model
             return "";
         }
     }
-
 }

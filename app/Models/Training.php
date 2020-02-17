@@ -1,9 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-class Training extends GetTrainingData
+use App\Models\Traits\GetCsvList;
+use App\Models\Traits\GetTrainingData;
+use Illuminate\Database\Eloquent\Model;
+
+class Training extends Model
 {
+    use GetCsvList,GetTrainingData;
+
     protected $primaryKey = 'training_id';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -17,10 +23,6 @@ class Training extends GetTrainingData
         'created_at',
         'updated_at',
     ];
-
-    public static function getCsvList(){
-        return self::CSV_LIST;
-    }
 
     public function scopeGetTrainingsFromEventId($query, string $eventId)
     {
