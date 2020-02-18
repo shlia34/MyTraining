@@ -31,8 +31,8 @@ Route::post('/ajax/deleteMaxTraining', 'TrainingController@deleteMaxTraining');
 Route::get('/setting', 'TopController@setting');
 Route::get('/admin', 'TopController@admin');
 //csv関連
-Route::get('/csv/download/{modelName}', 'CsvController@download');
-Route::post('/csv/event/import', 'CsvController@import');
+Route::get('/csv/export/{modelName}', 'Csv\ExportController');
+Route::post('/csv/import', 'Csv\ImportController');
 //種目関連
 Route::get('/stage/index', 'StageController@index');
 Route::get('/stage/create', 'StageController@create');

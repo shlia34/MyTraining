@@ -2,13 +2,13 @@
 @section('content')
 
 
-    <p><a class="btn" href="{{url('/csv/download/Event')}}" target="_blank"> Event Download</a></p>
-    <p><a class="btn" href="{{url('/csv/download/Training')}}" target="_blank"> Training Download</a></p>
-    <p><a class="btn" href="{{url('/csv/download/Stage')}}" target="_blank"> stage Download</a></p>
-    <p><a class="btn" href="{{url('/csv/download/User')}}" target="_blank"> user Download</a></p>
+    <p><a class="btn" href="{{url('/csv/export/Event')}}" target="_blank"> Event Export</a></p>
+    <p><a class="btn" href="{{url('/csv/export/Training')}}" target="_blank"> Training Export</a></p>
+    <p><a class="btn" href="{{url('/csv/export/Stage')}}" target="_blank"> stage Export</a></p>
+    <p><a class="btn" href="{{url('/csv/export/User')}}" target="_blank"> user Export</a></p>
 
 
-    <form action="/csv/event/import" method="post" enctype="multipart/form-data">
+    <form action="/csv/import" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
             <label class="col-1 text-right" for="form-file-1">File:</label>
