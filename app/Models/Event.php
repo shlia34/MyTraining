@@ -4,28 +4,16 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\GetCsvList;
 use App\Models\Traits\GetTrainingData;
 use App\Models\Traits\GetPartData;
 
 class Event extends Model
 {
-    use GetCsvList,GetTrainingData,GetPartData;
+    use GetTrainingData,GetPartData;
 
     protected $primaryKey = 'event_id';
     public $incrementing = false;
     protected $keyType = 'string';
-
-    const CSV_LIST = [
-        'event_id',
-        'user_id',
-        'date',
-        'part_code',
-        'memo',
-        'max_training_id',
-        'created_at',
-        'updated_at',
-    ];
 
     public function getMemo()
     {
