@@ -22,22 +22,22 @@ function switchLink()
 
         ajaxCheckMaxTraining(data,function(result){
             if ($('.this-event-show .non-max-training-btn').is(':visible') || $('.this-event-show .max-training-btn').is(':visible') ) {
-                    $(".non-max-training-btn").hide();
-                    $(".max-training-btn").hide();
-                    $(".delete-training-btn").hide();
-                } else {
-                    var target =  $(`li[data-training_id=${data.training_id}`);
-                    target.append(buildSubBtnHtml(result));
-                }
+                $(".non-max-training-btn").hide();
+                $(".max-training-btn").hide();
+                $(".delete-training-btn").hide();
+            } else {
+                var target =  $(`li[data-training_id=${data.training_id}`);
+                target.append(buildSubBtnHtml(result));
+            }
         });
     });
 }
 
 function buildSubBtnHtml(result)
 {
-    if(result === "nomal"){
+    if(result === false){
         var html = `<span class = ""><i class="far fa-star non-max-training-btn"></i><i class="fas fa-times delete-training-btn"></i></span>`;
-    }else if(result === "max"){
+    }else if(result === true){
         html = `<span class = ""><i class="fas fa-star max-training-btn"></i></span>`;
     }
     return html;
@@ -68,7 +68,7 @@ function deleteMaxTraining()
 
         var training_box = $(this).parent().parent();
         var data = {
-            "event_id":$(".this-event-show").data('event_id'),
+            // "event_id":$(".this-event-show").data('event_id'),
             "training_id":training_box.data('training_id'),
         };
 
@@ -130,6 +130,7 @@ function createTraining()
     })
 }
 
+//todo これ名前おかしい
 function transportTrainingDataToPhp()
 {
     var event_id = $(".this-event-show").data('event_id');

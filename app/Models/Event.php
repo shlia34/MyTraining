@@ -60,7 +60,9 @@ class Event extends Model
             'trainings.stage_id',
             'trainings.weight',
             'trainings.rep',
-        ])->leftJoin('trainings', 'events.max_training_id', '=', 'training_id');
+        ])->leftJoin('trainings', function($join){
+                $join->on('events.event_id', '=', 'trainings.event_id')->where("is_max",true);
+        });
     }
 
 }

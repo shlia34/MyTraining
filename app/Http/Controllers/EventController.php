@@ -20,7 +20,7 @@ class EventController extends Controller
     {
         $start = $this->formatIsoDate($request->all()['start']);
         $end = $this->formatIsoDate($request->all()['end']);
-        $eventsJson = Event::joinMaxTraining()->whereBetween('date', [$start, $end])->whereUserId()->convertToArrForJson();
+        $eventsJson = Event::whereBetween('date', [$start, $end])->whereUserId()->convertToArrForJson();
         return response()->json($eventsJson);
     }
 
