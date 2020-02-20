@@ -41,5 +41,7 @@ Route::post('/stage/store', 'StageController@store');
 Route::get('/stage/edit/{stage_id}', 'StageController@edit');
 Route::post('/stage/update', 'StageController@update');
 //ユーザーの種目リスト
-Route::post('/user/stage/store', 'UserStageController@store');
+Route::post('/ajax/stage_user/store', 'UserStageController@store');
+Route::post('/ajax/stage_user/delete', 'UserStageController@delete');
+
 

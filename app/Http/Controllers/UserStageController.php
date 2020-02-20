@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use App\Models\Training;
 use App\Models\Stage;
 use App\Models\UserStage;
 
@@ -15,37 +13,41 @@ class UserStageController extends Controller
 {
     public function store(Request $request)
     {
+        $stageId = $request->all()["stage_id"];
+        $stage = Stage::find($stageId);
 
 
+        $userStage = new UserStage();
+        $userStage->user_id = Auth::user()->user_id;
+        $userStage->stage_id = $stageId;
+        $userStage->sort_no =  $this->generateSortNo($stage->part_code);
+        $userStage->save();
 
-        //今度変更して、一個ずつにする。んでajaｘでやる。
-       //あるやつ全削除
+        $returnData =  [
+            'stage_id' => $stageId,
+            'stage_name'=>$stage->name,
+            'part_code'=>$stage->part_code,
+            'sort_no'=>$userStage->sort_no,
+            ];
 
-        $stageIds = $request->all()["stageIds"];
+        return response()->json($returnData);
 
-        foreach ($stageIds as $stageId){
-            $userStage = new UserStage();
-            $userStage->user_id = Auth::user()->user_id;
-            $userStage->stage_id = $stageId;
-//        $partCode =
-//        stagecodeからpartcodeを取得してくる
-            $userStage->sort_no =  $this->generateSortNum("test");
-            $userStage->save();
-        }
-
-
-        return redirect("/stage/index");
     }
 
     public function delete(){
 //        return view('top.admin');
     }
 
-    public function generateSortNum($partCode){
-//        if($lastStage = Stage::where('part_code', $partCode)->orderBy('sort_no','desc')->first()){
-//            $lastSortId = $lastStage->sort_num;
-//            return $lastSortId + 1;
-//        }else{
+    public function generateSortNo($partCode)
+    {
+        $lastStage = Auth::user()->stages()->where("part_code",$partCode)->orderBy('sort_no','desc')->first();
+
+
+        if ($lastStage) {
+            $lastSortId = $lastStage->pivot->sort_no;
+            return $lastSortId + 1;
+        } else {
             return 1;
         }
+    }
 }

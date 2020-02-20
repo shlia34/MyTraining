@@ -81,5 +81,15 @@ function ajaxDeleteTraining(data,callback) {
         callback(result);
     });
 }
+//以下stage_user
+// function ajaxStoreStageUser(data,callback) {
+//     $.ajax({
+//             url: '/ajax/stage_user/store',
+//             type: 'POST',
+//             data: data,
+//         }).done(function(result) {
+//         callback(result);
+//     });
+// }
 
 

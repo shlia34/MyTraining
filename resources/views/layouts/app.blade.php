@@ -26,6 +26,7 @@
     <script src="/js/ajax-function.js"></script>
     <script src="/js/event-control.js"></script>
     <script src="/js/training-control.js"></script>
+    <script src="/js/stage_user-control.js"></script>
     <script src="/js/boostrap.js"></script>
 
     <!-- Fonts -->

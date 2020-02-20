@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $keyType = 'string';
 
     public function Stages(){
-        return $this->belongsToMany('App\Models\Stage', 'stage_user','user_id','stage_id');
+        return $this->belongsToMany('App\Models\Stage', 'stage_user','user_id','stage_id')->withPivot('sort_no');
     }
 
     /**
