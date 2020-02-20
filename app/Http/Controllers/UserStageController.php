@@ -15,7 +15,7 @@ class UserStageController extends Controller
     {
         $stageId = $request->all()["stage_id"];
         $stage = Stage::find($stageId);
-
+        //todo もし、もうあった場合、エラー出す
 
         $userStage = new UserStage();
         $userStage->user_id = Auth::user()->user_id;
@@ -28,13 +28,14 @@ class UserStageController extends Controller
             'stage_name'=>$stage->name,
             'part_code'=>$stage->part_code,
             'sort_no'=>$userStage->sort_no,
-            ];
+        ];
 
         return response()->json($returnData);
 
     }
 
     public function delete(){
+        //todo もし、なかった場合、エラー出す
 //        return view('top.admin');
     }
 
