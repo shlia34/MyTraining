@@ -11,17 +11,14 @@ class StageController extends Controller
 {
     public function index(){
         //種目の一覧画面
-
-        $userStageList = Auth::user()->stages->groupBy('part_code');
-        $allStages = Stage::all()->groupBy('part_code');
+        $userStageList = Auth::user()->stages->groupBy('part_code')->sortKeys();
+        $allStages = Stage::all()->groupBy('part_code')->sortKeys();
 
         return view("stage.index")->with([  'userStages' => $userStageList, 'allStages' => $allStages]);
     }
 
     public function show($stageId){
-        //todo findOrFailでいける？
         $stage = Stage::findOrFail($stageId);
-        //種目の追加画面
         return view("stage.show")->with([ 'stage' => $stage]);
     }
 
@@ -54,18 +51,5 @@ class StageController extends Controller
         //種目の編集処理
 //        return redirect("/stage/show");
     }
-
-//    public function generateSortNum($partCode){
-//        if($lastStage = Stage::where('part_code', $partCode)->orderBy('sort_num','desc')->first()){
-//            $lastSortId = $lastStage->sort_num;
-//            return $lastSortId + 1;
-//        }else{
-//            return 1;
-//        }
-//    }
-
-
-
-
 
 }

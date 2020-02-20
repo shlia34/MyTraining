@@ -6,35 +6,41 @@
     <p><a class="btn" href="{{url('/stage/create')}}"> ない場合は種目を追加</a></p>
 
     <div class = "user-stage">
+        <h5>やる種目リスト</h5>
         @isset($userStages)
             @foreach($userStages as $group)
-                {{ $group[0]->getPartName() }}
-                @foreach($group as $stage)
-                    <div><a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a></div>
-                @endforeach
+                <div class = "" data-part_code={{$group[0]->part_code}}>
+                    <h6>{{ $group[0]->getPartName() }}</h6>
+                    @foreach($group as $stage)
+                        <div><a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a></div>
+                    @endforeach
+                </div>
+
             @endforeach
         @endisset
     </div>
 
     <div class = "all-stage">
-        {{Form::open(["action" => "UserStageController@store"])}}
-        @isset($allStages)
+        <h5>追加してないの種目リスト</h5>
+    @isset($allStages)
             @foreach($allStages as $group)
-                 <div><h5>{{ $group[0]->getPartName() }}</h5></div>
-                @foreach($group as $stage)
-                <div>
-                    <span>{{ $stage->name }}</span>
-                    {{Form::checkbox( "stageIds[]",$stage->stage_id )}}
+                <div class ="" data-part_code={{$group[0]->part_code}}>
+                    <div><h5>{{ $group[0]->getPartName() }}</h5></div>
+                    @foreach($group as $stage)
+                        <div class ="" data-stage_id= {{$stage->stage_id}}>
+                            <a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a>
+                            <p class="btn stage-user-store-btn">追加</p>
+                        </div>
+                    @endforeach
                 </div>
-                @endforeach
+
             @endforeach
         @endisset
     </div>
 
     <div>
-        {{Form::submit('保存')}}
+
     </div>
-    {{Form::close()}}
 
 
 
