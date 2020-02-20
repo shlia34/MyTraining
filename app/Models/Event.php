@@ -15,6 +15,11 @@ class Event extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+//    public function trainings()
+//    {
+//        return $this->hasMany('App\Models\Training');
+//    }
+
     public function getMemo()
     {
         return $this->memo ? "※".$this->memo : "";
@@ -44,7 +49,7 @@ class Event extends Model
         return $arr;
     }
 
-    public function scopeWhereUserId($query){
+    public function scopeOwn($query){
         return $query->where('user_id',Auth::user()->user_id);
     }
 
