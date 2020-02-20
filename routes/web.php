@@ -40,3 +40,6 @@ Route::get('/stage/{stage_id}', 'StageController@show');
 Route::post('/stage/store', 'StageController@store');
 Route::get('/stage/edit/{stage_id}', 'StageController@edit');
 Route::post('/stage/update', 'StageController@update');
+//ユーザーの種目リスト
+Route::post('/user/stage/store', 'UserStageController@store');
+

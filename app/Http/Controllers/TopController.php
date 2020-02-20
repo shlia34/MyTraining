@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Training;
 use App\Models\Stage;
+use Illuminate\Support\Facades\Auth;
 
 
 class TopController extends Controller
@@ -20,22 +21,21 @@ class TopController extends Controller
     //todo いいねと削除はmodel,後いろんなことの編集もできるように
     public function show($eventId){
 
-        if(($thisEvent = Event::find($eventId)) == null) {
-            abort('404');
-        }
-        $thisTrainings = Training::getTrainingsFromEventId($eventId);
-
-        if($lastEvent = Event::where('part_code',$thisEvent->part_code)->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first()){
-            $lastTrainings = Training::getTrainingsFromEventId($lastEvent->event_id);
+        $thisEvent = Event::findOrFail($eventId);
+        $thisTrainings = $thisEvent->trainings();
+        if($lastEvent = Event::where('part_code',$thisEvent->part_code)->Own()->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first()){
+            $lastTrainings = $lastEvent->trainings();
         }else{
             $lastTrainings = [];
         }
         //todo 三項演算子を検討
         //todo bladeでisset書いたからここもっと楽にできるはず
 
-        $stages = Stage::where('part_code',$thisEvent->part_code)->orderBy('sort_num')->get();
+        $stageList = Auth::user()->stages->where('part_code',$thisEvent->part_code);
+        //後でsort_noでなんとかする
+
         $stageFormArr =  [];
-        foreach ($stages as $stage){
+        foreach ($stageList as $stage){
             $stageFormArr[$stage->stage_id] = $stage->name;
         }
 

@@ -48,7 +48,6 @@ class TrainingController extends Controller
         return null;
     }
 
-    //todo trueかfalseにしたい
     public function checkMaxTraining(Request $request){
         $training = Training::find($request->all()["training_id"]);
 
