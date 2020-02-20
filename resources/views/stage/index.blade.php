@@ -22,8 +22,8 @@
 
     <div class = "all-stage">
         <h5>追加してないの種目リスト</h5>
-    @isset($allStages)
-            @foreach($allStages as $group)
+    @isset($leftStages)
+            @foreach($leftStages as $group)
                 <div class ="" data-part_code={{$group[0]->part_code}}>
                     <div><h5>{{ $group[0]->getPartName() }}</h5></div>
                     @foreach($group as $stage)

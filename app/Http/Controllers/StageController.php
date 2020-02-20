@@ -12,9 +12,8 @@ class StageController extends Controller
     public function index(){
         //種目の一覧画面
         $userStageList = Auth::user()->stages->groupBy('part_code')->sortKeys();
-        $allStages = Stage::all()->groupBy('part_code')->sortKeys();
-
-        return view("stage.index")->with([  'userStages' => $userStageList, 'allStages' => $allStages]);
+        $leftStages = Stage::all()->diff(Auth::user()->stages)->groupBy('part_code')->sortKeys();
+        return view("stage.index")->with([  'userStages' => $userStageList, 'leftStages' => $leftStages]);
     }
 
     public function show($stageId){
