@@ -18,7 +18,7 @@ class CreateStagesTable extends Migration
             $table->string('name', 20);
             $table->char('part_code', 2);
             $table->char('pof_code', 2);
-            $table->integer('sort_num')->unsigned();
+//            $table->integer('sort_num')->unsigned();
             $table->string('memo', 200)->nullable();
             $table->timestamps();
         });

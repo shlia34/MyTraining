@@ -22,6 +22,10 @@ class User extends Authenticatable
     public $incrementing = false;
     protected $keyType = 'string';
 
+    public function Stages(){
+        return $this->belongsToMany('App\Models\Stage', 'stage_user','user_id','stage_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

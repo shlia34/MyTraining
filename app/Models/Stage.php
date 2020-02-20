@@ -14,6 +14,10 @@ class Stage extends Model
     protected $primaryKey = 'stage_id';
     protected $keyType = 'string';
 
+    public function Users(){
+        return $this->belongsToMany('App\Models\User', 'stage_user','stage_id','user_id');
+    }
+
     public function getPofName()
     {
         return DefPof::POF_LIST[$this->pof_code];

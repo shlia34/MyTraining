@@ -15,10 +15,10 @@ class Event extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-//    public function trainings()
-//    {
-//        return $this->hasMany('App\Models\Training');
-//    }
+    public function trainings()
+    {
+        return $this->hasMany('App\Models\Training');
+    }
 
     public function getMemo()
     {

@@ -4,26 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Stage;
+use Illuminate\Support\Facades\Auth;
+
 
 class StageController extends Controller
 {
     public function index(){
         //種目の一覧画面
-        $stages = Stage::orderBy('sort_num')->get()->groupBy('part_code');
-        return view("stage.index")->with([ 'stages' => $stages]);
+
+        $userStageList = Auth::user()->stages->groupBy('part_code');
+        $allStages = Stage::all()->groupBy('part_code');
+
+        return view("stage.index")->with([  'userStages' => $userStageList, 'allStages' => $allStages]);
     }
 
     public function show($stageId){
-        //todo 404処理
-        $stage = Stage::find($stageId);
+        //todo findOrFailでいける？
+        $stage = Stage::findOrFail($stageId);
         //種目の追加画面
         return view("stage.show")->with([ 'stage' => $stage]);
     }
 
     public function create(){
         //種目の追加画面
-
-
         return view("stage.create");
     }
 
@@ -36,7 +39,6 @@ class StageController extends Controller
         $stage->name = $data["name"];
         $stage->part_code = $data["part_code"];
         $stage->pof_code = $data["pof_code"];
-        $stage->sort_num = $this->generateSortNum($data["part_code"]);
         $stage->memo = $data["memo"];
         $stage->save();
 
@@ -53,14 +55,14 @@ class StageController extends Controller
 //        return redirect("/stage/show");
     }
 
-    public function generateSortNum($partCode){
-        if($lastStage = Stage::where('part_code', $partCode)->orderBy('sort_num','desc')->first()){
-            $lastSortId = $lastStage->sort_num;
-            return $lastSortId + 1;
-        }else{
-            return 1;
-        }
-    }
+//    public function generateSortNum($partCode){
+//        if($lastStage = Stage::where('part_code', $partCode)->orderBy('sort_num','desc')->first()){
+//            $lastSortId = $lastStage->sort_num;
+//            return $lastSortId + 1;
+//        }else{
+//            return 1;
+//        }
+//    }
 
 
 
