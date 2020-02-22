@@ -90,8 +90,6 @@ class EventController extends Controller
         $event = Event::find($eventId);
         $trainings = Training::where('event_id', $eventId)->orderBY("created_at");
 
-        $event->max_training_id = null;
-        $event->save();
         $trainings->delete();
         $event->delete();
 

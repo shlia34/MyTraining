@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Csv;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use SplFileObject;
 
@@ -35,19 +36,18 @@ class ImportController extends CsvBaseController
             if($file->key() > 0 && !$file->eof()){
                 $model = new $modelClass();
                 for($i=0; $i < count($line); $i++){
-//                    if($columns[$i] === "max_training_id"){
-//                    }elseif($columns[$i] === "sort_num"){
-//                    }else{
+                    if($columns[$i] === "user_id"){
+                        $model->user_id = Auth::user()->user_id;
+                    }else{
                         $column = $columns[$i];
                         $model->$column = $line[$i];
-//                    }
+                    }
 
                 }
-                $model->is_max = 0;
                 $model->save();
             }
         }
-        return redirect("/admin");
+        return redirect("/csv/index");
     }
 
 }
