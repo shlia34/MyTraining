@@ -17,7 +17,7 @@ class Event extends Model
 
     public function trainings()
     {
-        return $this->hasMany('App\Models\Training');
+        return $this->hasMany('App\Models\Training','event_id', 'event_id');
     }
 
     public function getMemo()

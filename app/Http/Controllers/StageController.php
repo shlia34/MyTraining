@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class StageController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index(){
         //種目の一覧画面
         $userStageList = Auth::user()->stages->groupBy('part_code')->sortKeys();

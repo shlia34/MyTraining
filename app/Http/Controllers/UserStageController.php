@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserStageController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function store(Request $request)
     {
         $stageId = $request->all()["stage_id"];

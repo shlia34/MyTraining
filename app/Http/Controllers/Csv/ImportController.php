@@ -17,7 +17,6 @@ class ImportController extends CsvBaseController
         $tmpPath = public_path()."/csv/tmp/".$tmpFileName;
         $modelName = strstr($originalFileName, '_', true);
         $modelClass = $this->getModelClass($modelName);
-        $columns = $this->getColumns($modelName);
 
         setlocale(LC_ALL, 'ja_JP.UTF-8');
         file_put_contents($tmpPath, mb_convert_encoding(file_get_contents($tmpPath), self::APP_ENCODING, self::CSV_ENCODING));
@@ -25,13 +24,26 @@ class ImportController extends CsvBaseController
         $file = new SplFileObject($tmpPath);
         $file->setFlags(SplFileObject::READ_CSV);
 
+        $columns = [];
         foreach ($file as $line) {
+            if($file->key() === 0){
+                for($i=0; $i < count($line); $i++){
+                    $columns[] = $line[$i];
+                }
+            }
+
             if($file->key() > 0 && !$file->eof()){
                 $model = new $modelClass();
                 for($i=0; $i < count($line); $i++){
-                    $column = $columns[$i];
-                    $model->$column = $line[$i];
+//                    if($columns[$i] === "max_training_id"){
+//                    }elseif($columns[$i] === "sort_num"){
+//                    }else{
+                        $column = $columns[$i];
+                        $model->$column = $line[$i];
+//                    }
+
                 }
+                $model->is_max = 0;
                 $model->save();
             }
         }

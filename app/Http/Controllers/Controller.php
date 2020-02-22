@@ -11,9 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct(){
-        $this->middleware('auth');
-    }
 
     //todo uuid生成をみ直す。衝突の可能性が高い？
     protected function generateId($prefix){
