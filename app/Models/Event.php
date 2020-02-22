@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\GetTrainingData;
 use App\Models\Traits\GetPartData;
+use App\Models\Traits\ScopeOwn;
 
 class Event extends Model
 {
-    use GetTrainingData,GetPartData;
+    use GetTrainingData,GetPartData,ScopeOwn;
 
     protected $primaryKey = 'event_id';
     public $incrementing = false;
@@ -47,10 +48,6 @@ class Event extends Model
             $arr[] = $event->getDataForJson();
         }
         return $arr;
-    }
-
-    public function scopeOwn($query){
-        return $query->where('user_id',Auth::user()->user_id);
     }
 
     public function scopeOrderByPartCode($query){

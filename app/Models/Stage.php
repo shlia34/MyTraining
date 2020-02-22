@@ -6,11 +6,12 @@ use App\Defs\DefPart;
 use App\Defs\DefPof;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\GetPartData;
+use App\Models\Traits\ScopeOwn;
 use Illuminate\Support\Facades\Auth;
 
 class Stage extends Model
 {
-    use GetPartData;
+    use GetPartData,ScopeOwn;
 
     public $incrementing = false;
     protected $primaryKey = 'stage_id';
@@ -18,6 +19,11 @@ class Stage extends Model
 
     public function Users(){
         return $this->belongsToMany('App\Models\User', 'stage_user','stage_id','user_id');
+    }
+
+    public function trainings()
+    {
+        return $this->hasMany('App\Models\Training','stage_id', 'stage_id');
     }
 
     public function getPofName()
@@ -35,6 +41,7 @@ class Stage extends Model
         return $this->getFormattedArr($collection);
     }
 
+    //todo うーん
     public function getFormattedArr($collection)
     {
         $collection = $collection->groupBy('part_code');

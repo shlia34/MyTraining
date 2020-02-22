@@ -24,7 +24,7 @@
     <div class = "trainings-index  pb-4">
 
         <div class = "today-trainings">
-            <a href="/event/{{$thisEvent->event_id}}">
+            <a  href="/event/{{$thisEvent->event_id}}">
                 <div class = "event-title">{{$thisEvent->date}}の{{App\Defs\DefPart::PART_NAME_LIST[$thisEvent->part_code]}}トレ</div>
             </a>
             <div class="this-event-show" data-event_id= {{$thisEvent->event_id}}>
@@ -32,7 +32,9 @@
                 <div class = "this-trainings">
                     @foreach($thisTrainings as $group)
                         <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
-                            <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
+                            <a href="/stage/{{$group[0]->stage_id}}">
+                                <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
+                            </a>
                             <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                             @foreach($group as $training)
                                 @if($training->is_max === 1)
@@ -62,7 +64,9 @@
                     <div class = "last-trainings">
                         @foreach($lastTrainings as $group)
                             <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
-                                <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
+                                <a href="/stage/{{$group[0]->stage_id}}">
+                                    <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
+                                </a>
                                 <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                                 @foreach($group as $training)
                                     @if($training->is_max === 1)
