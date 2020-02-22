@@ -9,6 +9,10 @@ use App\Models\Training;
 class TrainingController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     //todo アクション側でバリデーションをかける
 
     public function storeTraining(Request $request){

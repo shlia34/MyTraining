@@ -13,7 +13,7 @@ trait GetTrainingData
     }
 
     public function getWeightAndRep(){
-        if($this->weight && $this->rep){
+        if( ($this->weight !== null) && ($this->rep !== null) ){
             return $this->weight."kg". " * " .$this->rep."rep";
         }else{
             return "";

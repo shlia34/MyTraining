@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     //todo N+1問題の確認
     //todo アクション側でバリデーションをかける
     /**
@@ -20,7 +24,12 @@ class EventController extends Controller
     {
         $start = $this->formatIsoDate($request->all()['start']);
         $end = $this->formatIsoDate($request->all()['end']);
-        $eventsJson = Event::whereBetween('date', [$start, $end])->Own()->convertToArrForJson();
+
+        $newStart = date("Y-m-d",strtotime($start . "-35 day"));
+        $newEnd = date("Y-m-d",strtotime($end . "+35 day"));
+        //広めに取得しておく
+
+        $eventsJson = Event::whereBetween('date', [$newStart, $newEnd])->Own()->convertToArrForJson();
         return response()->json($eventsJson);
     }
 

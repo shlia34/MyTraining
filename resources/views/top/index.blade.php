@@ -37,7 +37,7 @@
                 selectLongPressDelay:0,
                 eventOrder:"part_code",
                 events: "/setEvents",
-                timeZone: 'UTC',
+                timeZone: 'ja',
                 customButtons: {
                     addEvent: {
                         text: 'トレ',
