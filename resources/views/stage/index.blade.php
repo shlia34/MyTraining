@@ -9,10 +9,13 @@
         <h5>やる種目リスト</h5>
         @isset($userStages)
             @foreach($userStages as $group)
-                <div class = "" data-part_code={{$group[0]->part_code}}>
+                <div class = "user-part-group" data-part_code={{$group[0]->part_code}}>
                     <h6>{{ $group[0]->getPartName() }}</h6>
                     @foreach($group as $stage)
-                        <div><a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a></div>
+                        <div class ="" data-stage_id= {{$stage->stage_id}}>
+                            <a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a>
+                            <a class="stage-user-delete-btn">削除</a>
+                        </div>
                     @endforeach
                 </div>
 
@@ -20,16 +23,16 @@
         @endisset
     </div>
 
-    <div class = "all-stage">
+    <div class = "left-stage">
         <h5>追加してないの種目リスト</h5>
     @isset($leftStages)
             @foreach($leftStages as $group)
-                <div class ="" data-part_code={{$group[0]->part_code}}>
+                <div class ="left-part-group" data-part_code={{$group[0]->part_code}}>
                     <div><h5>{{ $group[0]->getPartName() }}</h5></div>
                     @foreach($group as $stage)
                         <div class ="" data-stage_id= {{$stage->stage_id}}>
                             <a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a>
-                            <p class="btn stage-user-store-btn">追加</p>
+                            <a class="stage-user-store-btn">追加</a>
                         </div>
                     @endforeach
                 </div>
