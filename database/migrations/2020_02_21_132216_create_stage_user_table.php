@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStagesTable extends Migration
+class CreateStageUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateStagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('stages', function (Blueprint $table) {
-            $table->string('stage_id', 34)->primary();
-            $table->string('name', 20);
-            $table->char('part_code', 2);
-            $table->char('pof_code', 2);
-            $table->string('memo', 200)->nullable();
+        Schema::create('stage_user', function (Blueprint $table) {
+            $table->bigIncrements('seq');
+            $table->string('user_id', 34);
+            $table->string('stage_id', 34);
+            $table->integer('sort_no')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateStagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stages');
+        Schema::dropIfExists('stage_user');
     }
 }
