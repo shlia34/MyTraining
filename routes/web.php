@@ -27,10 +27,8 @@ Route::post('/ajax/deleteTraining', 'TrainingController@deleteTraining');
 Route::post('/ajax/recordMaxTraining', 'TrainingController@recordMaxTraining');
 Route::post('/ajax/checkMaxTraining', 'TrainingController@checkMaxTraining');
 Route::post('/ajax/deleteMaxTraining', 'TrainingController@deleteMaxTraining');
-//各種設定へのリンク集
-Route::get('/setting', 'AdminController@setting');
-Route::get('/admin', 'AdminController@admin');
 //csv関連
+Route::get('/csv/index', 'AdminController@csv');
 Route::get('/csv/export/{modelName}', 'Csv\ExportController');
 Route::post('/csv/import', 'Csv\ImportController');
 //種目関連

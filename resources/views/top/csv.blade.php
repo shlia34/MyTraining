@@ -4,8 +4,9 @@
 
     <p><a class="btn" href="{{url('/csv/export/Event')}}" target="_blank"> Event Export</a></p>
     <p><a class="btn" href="{{url('/csv/export/Training')}}" target="_blank"> Training Export</a></p>
-    <p><a class="btn" href="{{url('/csv/export/Stage')}}" target="_blank"> stage Export</a></p>
-    <p><a class="btn" href="{{url('/csv/export/User')}}" target="_blank"> user Export</a></p>
+    <p><a class="btn" href="{{url('/csv/export/Stage')}}" target="_blank"> Stage Export</a></p>
+    <p><a class="btn" href="{{url('/csv/export/User')}}" target="_blank"> User Export</a></p>
+    <p><a class="btn" href="{{url('/csv/export/UserStage')}}" target="_blank"> UserStage Export</a></p>
 
 
     <form action="/csv/import" method="post" enctype="multipart/form-data">

@@ -71,10 +71,10 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/setting">設定</a>
+                <a class="nav-link" href="/stage/index">種目</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">検索</a>
+                <a class="nav-link" href="/csv/index">CSV</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}"
