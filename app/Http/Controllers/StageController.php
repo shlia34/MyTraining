@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Stage;
-use Illuminate\Support\Facades\Auth;
-
 
 class StageController extends Controller
 {
@@ -13,11 +11,12 @@ class StageController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
+
     public function index(){
-        //種目の一覧画面
-        $userStageList = Auth::user()->stages->groupBy('part_code')->sortKeys();
-        $leftStages = Stage::all()->diff(Auth::user()->stages)->groupBy('part_code')->sortKeys();
-        return view("stage.index")->with([  'userStages' => $userStageList, 'leftStages' => $leftStages]);
+        //todo これ考えものだな
+        $userStages = (new Stage)->getUserStage();
+        $leftStages = (new Stage)->getLeftStage();
+        return view("stage.index")->with([ 'userStages' => $userStages, 'leftStages' => $leftStages]);
     }
 
     public function show($stageId){
@@ -26,12 +25,10 @@ class StageController extends Controller
     }
 
     public function create(){
-        //種目の追加画面
         return view("stage.create");
     }
 
     public function store(Request $request){
-        //種目の追加処理
         $data = $request->all();
 
         $stage = new Stage;
@@ -46,12 +43,12 @@ class StageController extends Controller
     }
 
     public function edit(){
-        //種目の編集画面
         return view("stage.edit");
     }
 
     public function update(){
         //種目の編集処理
+        //adminしかできないようにする？？
 //        return redirect("/stage/show");
     }
 

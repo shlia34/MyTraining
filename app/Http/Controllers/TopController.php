@@ -29,7 +29,11 @@ class TopController extends Controller
         $thisEvent = Event::findOrFail($eventId);
         $thisTrainings = $thisEvent->trainings()->orderBy('created_at')->get()->groupBy('stage_id');
         $lastEvent = Event::where('part_code',$thisEvent->part_code)->Own()->whereDate("date", "<", $thisEvent->date)->orderBY("date","desc")->first();
-        $lastTrainings = $lastEvent->trainings()->orderBy('created_at')->get()->groupBy('stage_id');
+
+        $lastTrainings = [];
+        if(!empty($lastEvent)){
+            $lastTrainings = $lastEvent->trainings()->orderBy('created_at')->get()->groupBy('stage_id');
+        }
 
         $stageList = Auth::user()->stages()->where('part_code',$thisEvent->part_code)->orderBy('sort_no')->get();
         $stageFormArr =  [];
