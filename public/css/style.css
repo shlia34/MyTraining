@@ -88,12 +88,22 @@ body {
     color: white;
 }
 
+.card-title{
+    color: white;
+}
+
 .this-training {
     width: 45%;
     float: left;
     margin: 2px 2px 2px 6px;
 }
 .last-training {
+    width: 45%;
+    float: left;
+    margin: 2px 2px 2px 6px;
+}
+
+.stage-training {
     width: 45%;
     float: left;
     margin: 2px 2px 2px 6px;
@@ -139,6 +149,24 @@ body {
 }
 
 .last-training:before  {
+    content: counter(my-counter);
+    counter-increment: my-counter;
+    font-size: 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    width: 22px;
+    color: #ffffff;
+    font-size: 70%;
+    line-height: 1;
+    position: absolute;
+    top: 3.5px;
+    left: 0px;
+}
+
+.stage-training:before {
     content: counter(my-counter);
     counter-increment: my-counter;
     font-size: 16px;
