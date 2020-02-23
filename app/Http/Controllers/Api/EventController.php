@@ -4,18 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use App\Models\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-
-    //todo これはrouteで処理すればいい
-    public function __construct(){
-        $this->middleware('auth');
-    }
-
     //todo N+1問題の確認
     //todo formRequestでバリデーション、整形をする
     /**

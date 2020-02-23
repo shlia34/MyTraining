@@ -41,14 +41,11 @@ function appendLinksEvent(result) {
     $('.show-event ul').empty();
     $('.show-event p').empty();
     $('.show-event p').append(result["date"]);
-    //todo 横並び、トレ名追加
     $.each(result["events"], function(index, value) {
         $('.show-event ul').append( buildHtmlLinksEvent(value) );
     });
 }
 
-
-//todo ここでhtmlを変える
 function buildHtmlLinksEvent(value) {
     var html ="<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+ value["stage_name"] + value["weight_and_rep"] +"</li>";
     return html;
