@@ -1,7 +1,7 @@
 //以下event
-function ajaxAddEvent(data,callback){
+function apiStoreEvent(data,callback){
     $.ajax({
-        url: '/ajax/addEvent',
+        url: '/api/events/store',
         type: 'POST',
         dataTape: 'json',
         data: data,
@@ -10,17 +10,17 @@ function ajaxAddEvent(data,callback){
     });
 }
 
-function ajaxEditEventDate(data){
+function apiUpdateDateEvent(data){
     $.ajax({
-        url: '/ajax/editEventDate',
+        url: '/api/events/updateDate',
         type: 'POST',
         data:data,
     }).done(function(result) {});
 }
 
-function ajaxShowEventsByDate(data,callback){
+function apiShowLinksEvent(data, callback){
     $.ajax({
-        url: '/ajax/showEventsByDate',
+        url: '/api/events/showLinks',
         type: 'POST',
         dataTape:'json',
         data:data,

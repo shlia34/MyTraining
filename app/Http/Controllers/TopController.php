@@ -47,4 +47,21 @@ class TopController extends Controller
     }
 
 
+    //todo ソフトデリートもやってみたい
+    /**
+     * イベントと、それに紐づくトレーニングを削除
+     * @param $eventId
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function delete(string $eventId)
+    {
+        $event = Event::find($eventId);
+        $trainings = Training::where('event_id', $eventId)->orderBY("created_at");
+
+        $trainings->delete();
+        $event->delete();
+
+        return redirect("/");
+    }
+
 }

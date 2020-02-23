@@ -36,16 +36,16 @@
                 eventTextColor:"white",
                 selectLongPressDelay:0,
                 eventOrder:"part_code",
-                events: "/setEvents",
+                events: "/api/events/set",
                 timeZone: 'ja',
                 customButtons: {
-                    addEvent: {
+                    storeEvent: {
                         text: 'トレ',
                         click: function() {
                             var remodal = $(".remodal").remodal();
                             remodal.open();
                             $(document).off('confirmation').on('confirmation', '.remodal', function () {
-                                addEvent(calendar)
+                                storeEvent(calendar)
                             });
                         }
                     }
@@ -53,18 +53,18 @@
                 header: {
                     left: 'title',
                     center: '',
-                    right: 'prev,next,addEvent',
+                    right: 'prev,next,storeEvent',
                 },
                 prev:"fa-plus",
 
                 eventDrop: function(info){
-                    editEventDate(info);
+                    updateDateEvent(info);
                 },
                 eventClick: function(info){
-                    showEventsByDate(info.event.start.toISOString());
+                    showLinksEvent(info.event.start.toISOString());
                 },
                 dateClick: function(info) {
-                    showEventsByDate(info.dateStr);
+                    showLinksEvent(info.dateStr);
                 },
             });
             calendar.render();
