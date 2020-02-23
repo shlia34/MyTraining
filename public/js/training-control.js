@@ -1,7 +1,7 @@
 $(function()
 {
-    createTraining();
     frontValidation();
+    storeTraining();
     deleteTraining();
     recordMaxTraining();
     deleteMaxTraining();
@@ -109,7 +109,7 @@ function deleteTraining()
         var stage_id = training_box.parent().data('stage_id');
         var data = {"training_id":training_id};
 
-        ajaxDeleteTraining(data,function(){
+        apiDestroyTraining(data,function(){
             training_box.remove();
             var stage_ol = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
             if(!stage_ol.find('li').is(':visible')){
@@ -120,42 +120,34 @@ function deleteTraining()
     })
 }
 
-function createTraining()
+function storeTraining()
 {
-    $(".add-training-btn").on("click",function(){
-        if( ($(".form-weight").val().match(/\S/g) )){
-            transportTrainingDataToPhp();
-        }
-    })
-}
+    $(document).on("click", ".add-training-btn", function () {
+        var event_id = $(".this-event-show").data('event_id');
+        var stage_id_val = $(".form-stage_id").val();
+        var weight_val = $(".form-weight").val();
+        var rep_val = $(".form-rep").val();
 
-//todo これ名前おかしい
-function transportTrainingDataToPhp()
-{
-    var event_id = $(".this-event-show").data('event_id');
-    var stage_id_val = $(".form-stage_id").val();
-    var weight_val = $(".form-weight").val();
-    var rep_val = $(".form-rep").val();
-
-    var data = {
+        var data = {
             "event_id":event_id,
             "stage_id":stage_id_val,
             "weight":weight_val,
             "rep":rep_val
-    };
+        };
 
-    ajaxStoreTraining(data,function(result){
-        var stage_id = result['stage_id'];
-        var ol_stage_id = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`)
+        apiStoreTraining(data,function(result){
+            var stage_id = result['stage_id'];
+            var ol_stage_id = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`)
 
-        if(!ol_stage_id.is(':visible')){
-            $(".this-trainings").append(buildStageCardHtml(result));
-        }
+            if(!ol_stage_id.is(':visible')){
+                $(".this-trainings").append(buildStageCardHtml(result));
+            }
 
-        var stage_card = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
-        stage_card.append(buildTrainingHtml(result,weight_val,rep_val));
+            var stage_card = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
+            stage_card.append(buildTrainingHtml(result,weight_val,rep_val));
 
-    });
+        });
+    })
 
 }
 

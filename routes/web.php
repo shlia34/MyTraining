@@ -11,28 +11,29 @@
 |
 */
 
-//use Illuminate\Support\Facades\Route;
-
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     //event
     Route::get('/', 'EventController@index');
     Route::get('/event/{event_id}', 'EventController@show');
-    Route::get('/event/{event_id}/destroy', 'EventController@delete');
-    //event api
+    Route::get('/event/{event_id}/destroy', 'EventController@destroy');
+    //api
     Route::group(['namespace' => 'Api','prefix' => 'api'], function () {
+        //event api
         Route::group(['prefix' => 'events'], function () {
             Route::get('/set', 'EventController@set');
             Route::post('/showLinks', 'EventController@showLinks');
             Route::post('/store', 'EventController@store');
             Route::post('/updateDate', 'EventController@updateDate');
         });
+        //training api
+        Route::group(['prefix' => 'trainings'], function () {
+            Route::post('store', 'TrainingController@store');
+            Route::post('destroy', 'TrainingController@destroy');
+        });
     });
-
-    //トレーニング関連
-    Route::post('/ajax/storeTraining', 'TrainingController@storeTraining');
-    Route::post('/ajax/deleteTraining', 'TrainingController@deleteTraining');
+    //is_max
     Route::post('/ajax/recordMaxTraining', 'TrainingController@recordMaxTraining');
     Route::post('/ajax/checkMaxTraining', 'TrainingController@checkMaxTraining');
     Route::post('/ajax/deleteMaxTraining', 'TrainingController@deleteMaxTraining');

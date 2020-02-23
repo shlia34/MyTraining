@@ -9,27 +9,6 @@ use App\Models\Training;
 class TrainingController extends Controller
 {
 
-    //todo アクション側でバリデーションをかける
-
-    public function storeTraining(Request $request){
-
-        $data = $request->all();
-        $training = new Training();
-        $training->training_id = $this->generateId('TR');
-        $training->event_id = $data['event_id'];
-        $training->stage_id = $data['stage_id'];
-        $training->weight = $data['weight'];
-        $training->rep = $data['rep'];
-        $training->is_max = false;
-        $training->save();
-
-        $returnData =  ['training_id'=>$training->training_id,
-                        'stage_id'=>$training->stage_id,
-                        'stage_name'=>$training->getStageName() ];
-
-        return response()->json($returnData);
-    }
-
     public function recordMaxTraining(Request $request){
 
         $eventId = $request->all()["event_id"];
@@ -48,6 +27,8 @@ class TrainingController extends Controller
         return null;
     }
 
+
+    //todo 動いてるけど、training削除したあとエラー起きてる
     public function checkMaxTraining(Request $request){
         $training = Training::find($request->all()["training_id"]);
 
@@ -66,15 +47,6 @@ class TrainingController extends Controller
         $training->save();
 
         return response()->json("ok");
-    }
-
-    public function deleteTraining(Request $request){
-
-        $training_id = $request->all()["training_id"];
-        $training = Training::find($training_id);
-        $training->delete();
-
-        return null;
     }
 
 }
