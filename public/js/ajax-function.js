@@ -30,6 +30,28 @@ function apiShowLinksEvent(data, callback){
 }
 
 //以下training
+function apiStoreTraining(data, callback){
+    $.ajax({
+        url: '/api/trainings/store',
+        type: 'POST',
+        dataTape: 'json',
+        data:data,
+    }).done(function(result) {
+        callback(result);
+    });
+}
+
+function apiDestroyTraining(data, callback) {
+    $.ajax({
+        url: '/api/trainings/destroy',
+        type: 'POST',
+        data: data,
+    }).done(function(result) {
+        callback(result);
+    });
+}
+
+//以下is_max
 function ajaxCheckMaxTraining(data,callback){
     $.ajax({
         url: '/ajax/checkMaxTraining',
@@ -61,26 +83,7 @@ function ajaxDeleteMaxTraining(data,callback) {
     });
 }
 
-function ajaxStoreTraining(data,callback){
-    $.ajax({
-        url: '/ajax/storeTraining',
-        type: 'POST',
-        dataTape: 'json',
-        data:data,
-    }).done(function(result) {
-        callback(result);
-    });
-}
 
-function ajaxDeleteTraining(data,callback) {
-    $.ajax({
-            url: '/ajax/deleteTraining',
-            type: 'POST',
-            data: data,
-        }).done(function(result) {
-        callback(result);
-    });
-}
 //以下stage_user
 // function ajaxStoreStageUser(data,callback) {
 //     $.ajax({
