@@ -49,7 +49,7 @@
 
                 </div>
             </div>
-            <a href="/event/delete/{{$thisEvent->event_id}}"><i class="fas fa-trash ml-2"></i></a>
+            <a href="/event/{{$thisEvent->event_id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
         </div>
 
 

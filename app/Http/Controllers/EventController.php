@@ -4,16 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Training;
-use App\Models\Stage;
 use Illuminate\Support\Facades\Auth;
 
-
-class TopController extends Controller
+class EventController extends Controller
 {
-
-    public function __construct(){
-        $this->middleware('auth');
-    }
 
     public function index()
     {
@@ -21,7 +15,6 @@ class TopController extends Controller
     }
 
     //todo viewのトレ部分はテンプレートにしたい
-    //todo topControllerという名前も検討
     //todo いいねと削除はmodel,後いろんなことの編集もできるように
     //todo タイマーとかもあったら良い。vibrationAPIたるものがある。chromeで使用可能かどうか調べる
     public function show($eventId){
@@ -46,14 +39,13 @@ class TopController extends Controller
                                             'stageFormArr' => $stageFormArr ]);
     }
 
-
     //todo ソフトデリートもやってみたい
     /**
      * イベントと、それに紐づくトレーニングを削除
      * @param $eventId
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function delete(string $eventId)
+    public function destroy(string $eventId)
     {
         $event = Event::find($eventId);
         $trainings = Training::where('event_id', $eventId)->orderBY("created_at");
