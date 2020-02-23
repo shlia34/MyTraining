@@ -11,16 +11,25 @@
 |
 */
 
+//use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 //イベント一覧と詳細
 Route::get('/', 'TopController@index');
 Route::get('/event/{event_id}', 'TopController@show');
+Route::get('/event/delete/{event_id}', 'TopController@delete');
+
 //イベントのいろいろ
-Route::get('/setEvents', 'EventController@setEvents');
-Route::get('/event/delete/{event_id}', 'EventController@delete');
-Route::post('/ajax/addEvent', 'EventController@addEvent');
-Route::post('/ajax/editEventDate', 'EventController@editEventDate');
-Route::post('/ajax/showEventsByDate', 'EventController@showEventsByDate');
+Route::group(['namespace' => 'Api','prefix' => 'api'], function () {
+    Route::group(['prefix' => 'events'], function () {
+        Route::get('/set', 'EventController@set');
+        Route::post('/showLinks', 'EventController@showLinks');
+        Route::post('/store', 'EventController@store');
+        Route::post('/updateDate', 'EventController@updateDate');
+    });
+});
+
+
 //トレーニング関連
 Route::post('/ajax/storeTraining', 'TrainingController@storeTraining');
 Route::post('/ajax/deleteTraining', 'TrainingController@deleteTraining');

@@ -21,7 +21,7 @@ class StageController extends Controller
 
     public function show($stageId){
         $stage = Stage::findOrFail($stageId);
-        $trainings = $stage->trainings()->joinEvent()->own()->get()->groupBy('date')->sortKeysDesc();
+        $trainings = $stage->trainings()->joinEvent()->orderBy('created_at')->own()->get()->groupBy('date')->sortKeysDesc();
 
         return view("stage.show")->with([ 'stage' => $stage, 'trainings'=>$trainings ]);
     }

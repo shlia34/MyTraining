@@ -1,12 +1,11 @@
-$(function(){
-
+$(function()
+{
     createTraining();
     frontValidation();
     deleteTraining();
     recordMaxTraining();
     deleteMaxTraining();
     switchLink();
-
 });
 
 

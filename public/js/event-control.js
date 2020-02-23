@@ -1,4 +1,4 @@
-function addEvent(calendar)
+function storeEvent(calendar)
 {
     var data = {
         "part_code":$(".remodal-part_code").val(),
@@ -6,7 +6,7 @@ function addEvent(calendar)
         "date":$(".remodal-date").val(),
     };
 
-    ajaxAddEvent(data, function(result){
+    apiStoreEvent(data, function(result){
         calendar.addEvent({
             id:result['id'],
             title:result['title'],
@@ -16,41 +16,40 @@ function addEvent(calendar)
             borderColor:result['borderColor'],
             start: result['start'],
         });
-        showEventsByDate(result['start']);
+        showLinksEvent(result['start']);
     })
 }
 
-//todo update
-function editEventDate(info)
+function updateDateEvent(info)
 {
     var data = {
         "id":info.event.id,
         "newDate":info.event.start.toISOString(),
     };
-    ajaxEditEventDate(data);
+    apiUpdateDateEvent(data);
 }
 
-function showEventsByDate(date)
+function showLinksEvent(date)
 {
     var data = {date:date};
-    ajaxShowEventsByDate(data,function(result){
-        appendEventHtml(result);
+    apiShowLinksEvent(data,function(result){
+        appendLinksEvent(result);
     });
 }
 
-function appendEventHtml(result) {
+function appendLinksEvent(result) {
     $('.show-event ul').empty();
     $('.show-event p').empty();
     $('.show-event p').append(result["date"]);
     //todo 横並び、トレ名追加
     $.each(result["events"], function(index, value) {
-        $('.show-event ul').append( buildEvenShowHtml(value) );
+        $('.show-event ul').append( buildHtmlLinksEvent(value) );
     });
 }
 
 
 //todo ここでhtmlを変える
-function buildEvenShowHtml(value) {
+function buildHtmlLinksEvent(value) {
     var html ="<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+ value["stage_name"] + value["weight_and_rep"] +"</li>";
     return html;
 }
