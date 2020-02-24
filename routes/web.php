@@ -18,6 +18,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'EventController@index');
     Route::get('/event/{event_id}', 'EventController@show');
     Route::get('/event/{event_id}/destroy', 'EventController@destroy');
+    //stage
+    Route::group(['prefix' => 'stages'],function (){
+        Route::get('/index', 'StageController@index');
+        Route::get('/{stage_id}', 'StageController@show');
+        Route::get('/create', 'StageController@create');
+        Route::post('/store', 'StageController@store');
+        //Route::get('/stage/{stage_id}/edit', 'StageController@edit');
+        //Route::post('/stage/update', 'StageController@update');
+    });
+    //csv
+    Route::group(['prefix' => 'csv'],function (){
+        Route::get('/index', 'CsvController@index');
+        Route::get('/export/{modelName}', 'CsvController@export');
+        Route::post('/import', 'CsvController@import');
+    });
     //api
     Route::group(['namespace' => 'Api','prefix' => 'api'], function () {
         //event api
@@ -46,22 +61,6 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
     });
-
-//csv関連
-    Route::group(['prefix' => 'csv'],function (){
-        Route::get('/index', 'AdminController@csv');
-        Route::get('/export/{modelName}', 'Csv\ExportController');
-        Route::post('/import', 'Csv\ImportController');
-    });
-
-//種目関連
-    Route::get('/stage/index', 'StageController@index');
-    Route::get('/stage/create', 'StageController@create');
-    Route::get('/stage/{stage_id}', 'StageController@show');
-    Route::post('/stage/store', 'StageController@store');
-    Route::get('/stage/edit/{stage_id}', 'StageController@edit');
-    Route::post('/stage/update', 'StageController@update');
-
 
 });
 

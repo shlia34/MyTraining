@@ -3,7 +3,7 @@
 
     一覧ページの予定
 
-    <p><a class="btn" href="{{url('/stage/create')}}"> ない場合は種目を追加</a></p>
+    <p><a class="btn" href="{{url('/stages/create')}}"> ない場合は種目を追加</a></p>
 
     <div class = "user-stage">
         <h5>やる種目リスト</h5>
@@ -14,7 +14,7 @@
                     <h6>{{ \App\Defs\DefPart::PART_NAME_LIST[$partCode] }}</h6>
                     @foreach($group as $stage)
                         <div class ="" data-stage_id= {{$stage->stage_id}}>
-                            <a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a>
+                            <a href= "/stages/{{$stage->stage_id }}">{{$stage->name }}</a>
                             <a class="stage-user-delete-btn">削除</a>
                         </div>
                     @endforeach
@@ -33,7 +33,7 @@
                     <h6>{{ \App\Defs\DefPart::PART_NAME_LIST[$partCode] }}</h6>
                     @foreach($group as $stage)
                         <div class ="" data-stage_id= {{$stage->stage_id}}>
-                            <a href= "/stage/{{$stage->stage_id }}">{{$stage->name }}</a>
+                            <a href= "/stages/{{$stage->stage_id }}">{{$stage->name }}</a>
                             <a class="stage-user-store-btn">追加</a>
                         </div>
                     @endforeach
@@ -41,11 +41,6 @@
             @endforeach
         @endisset
     </div>
-
-    <div>
-
-    </div>
-
 
 
 @endsection
