@@ -1,6 +1,6 @@
-@extends('layouts.app')
-@section('content')
+{{--@extends('layouts.app')--}}
+{{--@section('content')--}}
 
-    編集画面の予定
+{{--    編集画面の予定--}}
 
-@endsection
+{{--@endsection--}}

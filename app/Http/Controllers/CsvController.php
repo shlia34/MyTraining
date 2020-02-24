@@ -10,7 +10,7 @@ class CsvController extends Controller
 
     public function index()
     {
-        return view('top.csv');
+        return view('csv.index');
     }
 
     public function export($modelName)
