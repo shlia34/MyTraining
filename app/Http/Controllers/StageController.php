@@ -40,14 +40,14 @@ class StageController extends Controller
         return redirect("/stage/create");
     }
 
-    public function edit(){
-        return view("stage.edit");
-    }
+//    public function edit(){
+//        return view("stage.edit");
+//    }
 
-    public function update(){
-        //種目の編集処理
-        //adminしかできないようにする？？
+//    public function update(){
+//        種目の編集処理
+//        adminしかできないようにする？？
 //        return redirect("/stage/show");
-    }
+//    }
 
 }

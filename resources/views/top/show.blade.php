@@ -32,7 +32,7 @@
                 <div class = "this-trainings">
                     @foreach($thisTrainings as $group)
                         <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
-                            <a href="/stage/{{$group[0]->stage_id}}">
+                            <a href="/stages/{{$group[0]->stage_id}}">
                                 <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
                             </a>
                             <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
@@ -64,7 +64,7 @@
                     <div class = "last-trainings">
                         @foreach($lastTrainings as $group)
                             <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
-                                <a href="/stage/{{$group[0]->stage_id}}">
+                                <a href="/stages/{{$group[0]->stage_id}}">
                                     <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
                                 </a>
                                 <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">

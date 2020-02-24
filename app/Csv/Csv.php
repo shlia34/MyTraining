@@ -1,19 +1,59 @@
 <?php
 
-namespace App\Http\Controllers\Csv;
+namespace App\Csv;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use SplFileObject;
 
-class ImportController extends CsvBaseController
+class Csv
 {
-    public function __invoke(Request $request)
+
+    const MODEL_PREFIX = "App\\Models\\";
+    const CSV_ENCODING = 'SJIS';
+    const APP_ENCODING = 'UTF-8';
+
+    public function exportFile($modelName)
+    {
+        $modelClass = $this->getModelClass($modelName);
+        //ファイル 開く
+        $stream = fopen('php://temp', 'r+b');
+        //カラム出力
+        $columns = $this->getColumns($modelName);
+        fputcsv($stream, $columns);
+        //出力はここを変更する
+        $models = $modelClass::all();
+        //modelを一行ずつ出力
+        foreach ($models as $model) {
+            $line =  array_values($model->toArray());
+            fputcsv($stream, $line);
+        }
+        // ポインタの先頭へ
+        rewind($stream);
+        // 改行変換
+        $file = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
+        $file = mb_convert_encoding($csv, self::CSV_ENCODING, self::APP_ENCODING);
+
+        return $file;
+
+    }
+
+    public function getModelClass($modelName){
+        return self::MODEL_PREFIX.$modelName;
+    }
+
+    public function getColumns($modelName){
+        $modelClass = $this->getModelClass($modelName);
+        $tableName = (new $modelClass)->getTable();
+        return Schema::getColumnListing($tableName);
+    }
+
+    public function importFile($request)
     {
         //todo 変数名は要検討
         $csv = $request->file('csv');
         $originalFileName = $csv->getClientOriginalName();
-        $tmpFileName = $originalFileName."_".uniqid("_").self::FILE_EXTENSION;
+        $tmpFileName = $originalFileName."_".uniqid("_").'.csv';
         $csv->move(public_path()."/csv/tmp",$tmpFileName);
         $tmpPath = public_path()."/csv/tmp/".$tmpFileName;
         $modelName = strstr($originalFileName, '_', true);
@@ -47,7 +87,5 @@ class ImportController extends CsvBaseController
                 $model->save();
             }
         }
-        return redirect("/csv/index");
     }
-
 }
