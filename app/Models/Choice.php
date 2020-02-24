@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ScopeOwn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Choice extends Model
 {
+    use ScopeOwn;
+
     protected $primaryKey = 'seq';
     protected $table = "stage_user";
 

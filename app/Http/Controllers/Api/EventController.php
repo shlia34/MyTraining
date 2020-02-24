@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SetEventsRequest;
 
 class EventController extends Controller
 {
@@ -16,17 +17,12 @@ class EventController extends Controller
      * fullcalendar.blade.php
      * @param Request $request
      */
-    public function set(Request $request)
+    public function set(SetEventsRequest $request)
     {
-        $start = $this->formatIsoDate($request->all()['start']);
-        $end = $this->formatIsoDate($request->all()['end']);
 
-        $newStart = date("Y-m-d",strtotime($start . "-35 day"));
-        $newEnd = date("Y-m-d",strtotime($end . "+35 day"));
-        //広めに取得しておく
+        $dates = $request->getFormattedDates();
 
-
-        $eventsJson = Event::whereBetween('date', [$newStart, $newEnd])->Own()->convertToArrForJson();
+        $eventsJson = Event::whereBetween('date', [ $dates['start'], $dates['end'] ])->Own()->convertToArrForJson();
 
         return response()->json($eventsJson);
     }

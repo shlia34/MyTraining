@@ -38,7 +38,7 @@ class ChoiceController extends Controller
     public function destroy(Request $request){
         $stageId = $request->all()["stage_id"];
         $stage = Stage::find($stageId);
-        $stageUser = Choice::where('stage_id',$stageId)->where('user_id',Auth::user()->user_id)->first();
+        $stageUser = Choice::where('stage_id',$stageId)->own()->first();
         $stageUser->delete();
         //todo もし、なかった場合、エラー出す
 
