@@ -51,10 +51,10 @@ function apiDestroyTraining(data, callback) {
     });
 }
 
-//以下is_max
-function ajaxCheckMaxTraining(data,callback){
+//以下trainings.is_max
+function apiCheckMaxTraining(data, callback){
     $.ajax({
-        url: '/ajax/checkMaxTraining',
+        url: '/api/trainings/max/check',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -63,9 +63,9 @@ function ajaxCheckMaxTraining(data,callback){
 }
 
 
-function ajaxRecordMaxTraining(data,callback){
+function apiOnMaxTraining(data, callback){
     $.ajax({
-        url: '/ajax/recordMaxTraining',
+        url: '/api/trainings/max/on',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -73,9 +73,9 @@ function ajaxRecordMaxTraining(data,callback){
     });
 }
 
-function ajaxDeleteMaxTraining(data,callback) {
+function ajaxOffMaxTraining(data, callback) {
     $.ajax({
-        url: '/ajax/deleteMaxTraining',
+        url: '/api/trainings/max/off',
         type: 'POST',
         data: data,
     }).done(function(result) {
