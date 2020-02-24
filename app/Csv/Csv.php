@@ -32,7 +32,7 @@ class Csv
         rewind($stream);
         // 改行変換
         $file = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
-        $file = mb_convert_encoding($csv, self::CSV_ENCODING, self::APP_ENCODING);
+        $file = mb_convert_encoding($file, self::CSV_ENCODING, self::APP_ENCODING);
 
         return $file;
 

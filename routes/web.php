@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::post('/check', 'TrainingController@checkMax');
             });
         });
-        //ユーザーの種目リスト
+        //choice api
         Route::group(['prefix' => 'choices'],function (){
             Route::post('/store', 'ChoiceController@store');
             Route::post('/destroy', 'ChoiceController@destroy');

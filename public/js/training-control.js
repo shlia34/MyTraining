@@ -41,17 +41,6 @@ function storeTraining()
 
 }
 
-function buildTrainingHtml(result,weight,rep)
-{
-    var html = `<li data-training_id = ${result['training_id']} class = "this-training">${weight}kg * ${rep}rep`;
-    return html;
-}
-
-function buildStageCardHtml(result) {
-    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2"><span class="card-title mb-0">${result["stage_name"]}</span><ol data-stage_id=${result["stage_id"]} class="ol-training mb-0"></div>`;
-    return html;
-}
-
 function destroyTraining()
 {
     $(document).on("click", ".delete-training-btn", function () {
@@ -91,7 +80,6 @@ function onMaxTraining()
 
 function offMaxTraining()
 {
-
     $(document).on("click", ".this-event-show .max-training-btn", function () {
 
         var training_box = $(this).parent().parent();
@@ -128,16 +116,6 @@ function checkMaxTraining()
             }
         });
     });
-}
-
-function buildSubBtnHtml(result)
-{
-    if(result === false){
-        var html = `<span class = ""><i class="far fa-star non-max-training-btn"></i><i class="fas fa-times delete-training-btn"></i></span>`;
-    }else if(result === true){
-        html = `<span class = ""><i class="fas fa-star max-training-btn"></i></span>`;
-    }
-    return html;
 }
 
 function frontValidation()
