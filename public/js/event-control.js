@@ -33,16 +33,12 @@ function showLinksEvent(date)
 {
     var data = {date:date};
     apiShowLinksEvent(data,function(result){
-        appendLinksEvent(result);
-    });
-}
-
-function appendLinksEvent(result) {
-    $('.show-event ul').empty();
-    $('.show-event p').empty();
-    $('.show-event p').append(result["date"]);
-    $.each(result["events"], function(index, value) {
-        $('.show-event ul').append( buildHtmlLinksEvent(value) );
+        $('.show-event ul').empty();
+        $('.show-event p').empty();
+        $('.show-event p').append(result["date"]);
+        $.each(result["events"], function(index, value) {
+            $('.show-event ul').append( buildHtmlLinksEvent(value) );
+        });
     });
 }
 
