@@ -37,12 +37,7 @@ function showLinksEvent(date)
         $('.show-event p').empty();
         $('.show-event p').append(result["date"]);
         $.each(result["events"], function(index, value) {
-            $('.show-event ul').append( buildHtmlLinksEvent(value) );
+            $('.show-event ul').append( buildLinksEventHtml(value) );
         });
     });
-}
-
-function buildHtmlLinksEvent(value) {
-    var html ="<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+ value["stage_name"] + value["weight_and_rep"] +"</li>";
-    return html;
 }
