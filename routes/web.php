@@ -38,14 +38,22 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::post('/off', 'TrainingController@OffMax');
                 Route::post('/check', 'TrainingController@checkMax');
             });
-
         });
+        //ユーザーの種目リスト
+        Route::group(['prefix' => 'choices'],function (){
+            Route::post('/store', 'ChoiceController@store');
+            Route::post('/destroy', 'ChoiceController@destroy');
+        });
+
     });
 
 //csv関連
-    Route::get('/csv/index', 'AdminController@csv');
-    Route::get('/csv/export/{modelName}', 'Csv\ExportController');
-    Route::post('/csv/import', 'Csv\ImportController');
+    Route::group(['prefix' => 'csv'],function (){
+        Route::get('/index', 'AdminController@csv');
+        Route::get('/export/{modelName}', 'Csv\ExportController');
+        Route::post('/import', 'Csv\ImportController');
+    });
+
 //種目関連
     Route::get('/stage/index', 'StageController@index');
     Route::get('/stage/create', 'StageController@create');
@@ -53,9 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/stage/store', 'StageController@store');
     Route::get('/stage/edit/{stage_id}', 'StageController@edit');
     Route::post('/stage/update', 'StageController@update');
-//ユーザーの種目リスト
-    Route::post('/ajax/stage_user/store', 'UserStageController@store');
-    Route::post('/ajax/stage_user/delete', 'UserStageController@delete');
+
 
 });
 

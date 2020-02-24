@@ -100,7 +100,7 @@ function offMaxTraining()
             "training_id":training_box.data('training_id'),
         };
 
-        ajaxOffMaxTraining(data,function(){
+        apiOffMaxTraining(data,function(){
             $('.this-trainings ._add-underline').removeClass("_add-underline");
         });
     })

@@ -73,7 +73,7 @@ function apiOnMaxTraining(data, callback){
     });
 }
 
-function ajaxOffMaxTraining(data, callback) {
+function apiOffMaxTraining(data, callback) {
     $.ajax({
         url: '/api/trainings/max/off',
         type: 'POST',
@@ -83,16 +83,25 @@ function ajaxOffMaxTraining(data, callback) {
     });
 }
 
+//以下choice
+function apiStoreChoice(data, callback) {
+    $.ajax({
+        url: '/api/choices/store',
+        type: 'POST',
+        data: data,
+    }).done(function(result) {
+        callback(result);
+    });
+}
 
-//以下stage_user
-// function ajaxStoreStageUser(data,callback) {
-//     $.ajax({
-//             url: '/ajax/stage_user/store',
-//             type: 'POST',
-//             data: data,
-//         }).done(function(result) {
-//         callback(result);
-//     });
-// }
+function apiDestroyChoice(data, callback) {
+    $.ajax({
+        url: '/api/choices/destroy',
+        type: 'POST',
+        data: data,
+    }).done(function(result) {
+        callback(result);
+    });
+}
 
 

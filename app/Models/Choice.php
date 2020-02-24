@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class UserStage extends Model
+class Choice extends Model
 {
     protected $primaryKey = 'seq';
     protected $table = "stage_user";
