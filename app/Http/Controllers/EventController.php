@@ -11,7 +11,7 @@ class EventController extends Controller
 
     public function index()
     {
-        return view('top.index');
+        return view('event.index');
     }
 
     //todo viewのトレ部分はテンプレートにしたい
@@ -36,9 +36,9 @@ class EventController extends Controller
             $stageFormArr[$stage->stage_id] = $stage->name;
         }
 
-        return view('top.show')->with(['thisEvent' => $thisEvent, 'thisTrainings'=> $thisTrainings,
-                                            'lastEvent' => $lastEvent, 'lastTrainings' => $lastTrainings,
-                                            'stageFormArr' => $stageFormArr ]);
+        return view('event.show')->with(['thisEvent' => $thisEvent, 'thisTrainings'=> $thisTrainings,
+                                              'lastEvent' => $lastEvent, 'lastTrainings' => $lastTrainings,
+                                              'stageFormArr' => $stageFormArr ]);
     }
 
     //todo ソフトデリートもやってみたい
