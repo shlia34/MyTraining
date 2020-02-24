@@ -29,14 +29,19 @@ Route::group(['middleware' => 'auth'], function () {
         });
         //training api
         Route::group(['prefix' => 'trainings'], function () {
-            Route::post('store', 'TrainingController@store');
-            Route::post('destroy', 'TrainingController@destroy');
+            //training
+            Route::post('/store', 'TrainingController@store');
+            Route::post('/destroy', 'TrainingController@destroy');
+            //is_max
+            Route::group(['prefix' => 'max'],function () {
+                Route::post('/on', 'TrainingController@OnMax');
+                Route::post('/off', 'TrainingController@OffMax');
+                Route::post('/check', 'TrainingController@checkMax');
+            });
+
         });
     });
-    //is_max
-    Route::post('/ajax/recordMaxTraining', 'TrainingController@recordMaxTraining');
-    Route::post('/ajax/checkMaxTraining', 'TrainingController@checkMaxTraining');
-    Route::post('/ajax/deleteMaxTraining', 'TrainingController@deleteMaxTraining');
+
 //csv関連
     Route::get('/csv/index', 'AdminController@csv');
     Route::get('/csv/export/{modelName}', 'Csv\ExportController');
@@ -51,8 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
 //ユーザーの種目リスト
     Route::post('/ajax/stage_user/store', 'UserStageController@store');
     Route::post('/ajax/stage_user/delete', 'UserStageController@delete');
-
-
 
 });
 
