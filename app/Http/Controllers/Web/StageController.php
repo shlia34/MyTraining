@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Models\Stage;
+use App\Http\Controllers\Controller;
 
 class StageController extends Controller
 {

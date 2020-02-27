@@ -14,24 +14,28 @@
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    //event
-    Route::get('/', 'EventController@index');
-    Route::get('/event/{event_id}', 'EventController@show');
-    Route::get('/event/{event_id}/destroy', 'EventController@destroy');
-    //stage
-    Route::group(['prefix' => 'stages'],function (){
-        Route::get('/index', 'StageController@index');
-        Route::get('/{stage_id}', 'StageController@show');
-        Route::get('/create', 'StageController@create');
-        Route::post('/store', 'StageController@store');
-        //Route::get('/stage/{stage_id}/edit', 'StageController@edit');
-        //Route::post('/stage/update', 'StageController@update');
-    });
-    //csv
-    Route::group(['prefix' => 'csv'],function (){
-        Route::get('/index', 'CsvController@index');
-        Route::get('/export/{modelName}', 'CsvController@export');
-        Route::post('/import', 'CsvController@import');
+    //web
+    Route::group(['namespace' => 'Web'],function(){
+        //event
+        Route::get('/', 'EventController@index');
+        Route::get('/event/{event_id}', 'EventController@show');
+        Route::get('/event/{event_id}/destroy', 'EventController@destroy');
+        //stage
+        Route::group(['prefix' => 'stages'],function (){
+            Route::get('/index', 'StageController@index');
+            Route::get('/{stage_id}', 'StageController@show');
+            Route::get('/create', 'StageController@create');
+            Route::post('/store', 'StageController@store');
+            //Route::get('/stage/{stage_id}/edit', 'StageController@edit');
+            //Route::post('/stage/update', 'StageController@update');
+        });
+        //csv
+        Route::group(['prefix' => 'csv'],function (){
+            Route::get('/index', 'CsvController@index');
+            Route::get('/export/{modelName}', 'CsvController@export');
+            Route::post('/import', 'CsvController@import');
+        });
+
     });
     //api
     Route::group(['namespace' => 'Api','prefix' => 'api'], function () {

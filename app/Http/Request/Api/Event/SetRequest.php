@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Request\Api\Event;
 
-class SetEventsRequest extends FormatIsoDateRequest
+class SetRequest extends IsoDateRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,30 +12,20 @@ class SetEventsRequest extends FormatIsoDateRequest
     public function rules()
     {
         return [
-            'start' => 'date',
-            'end' => 'date',
+            'start' => 'required|date',
+            'end' => 'required|date',
         ];
     }
 
-    public function getFormattedDates(){
-        return $this->formatDate();
-    }
-
-    /**
-     * ISO形式の日付を「2020-01-01」のように整形
-     * @param $date
-     * @return mixed
-     */
-    protected function formatDate()
+    protected function formatData()
     {
         $original = $this->validationData();
-        $dates['start'] = $this->formatIsoDate($original['start']);
-        $dates['end'] = $this->formatIsoDate($original['end']);
+        $data['start'] = $this->formatIsoDate($original['start']);
+        $data['end'] = $this->formatIsoDate($original['end']);
 
-        $dates =  $this->extendRange($dates);
+        $data =  $this->extendRange($data);
 
-        return $dates;
-
+        return $data;
     }
 
     /**
@@ -49,6 +39,5 @@ class SetEventsRequest extends FormatIsoDateRequest
         $dates['end'] = date("Y-m-d",strtotime($dates['end'] . "+35 day"));
         return $dates;
     }
-
 
 }

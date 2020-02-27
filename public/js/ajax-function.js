@@ -7,7 +7,14 @@ function apiStoreEvent(data,callback){
         data: data,
     }).done(function(result) {
         callback(result);
-    });
+    }).fail(function(result){
+        var errors = result['responseJSON'].errors;
+
+        $.each(errors, function(index, value) {
+            alert(value);
+        });
+
+    })
 }
 
 function apiUpdateDateEvent(data){
