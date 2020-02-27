@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Csv\Csv;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CsvController extends Controller
 {
+
+    protected $csvClass;
+
+    public function __construct()
+    {
+        $this->csvClass = new Csv();
+    }
 
     public function index()
     {
@@ -15,7 +23,7 @@ class CsvController extends Controller
 
     public function export($modelName)
     {
-        $file = (new Csv)->exportFile($modelName);
+        $file = $this->csvClass->exportFile($modelName);
         $fileName = $modelName."_".date('Ymd').'.csv';
         $headers = [
             'Content-Type' => 'text/csv',
@@ -23,12 +31,11 @@ class CsvController extends Controller
         ];
 
         return \Response::make($file, 200, $headers);
-
     }
 
     public function import(Request $request)
     {
-        (new Csv)->importFile($request);
+        $this->csvClass->importFile($request);
         return redirect("/csv/index");
     }
 
