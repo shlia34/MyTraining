@@ -32,9 +32,9 @@
                 <div class = "this-trainings">
                     @foreach($thisTrainings as $group)
                         <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
-                            <a href="/stages/{{$group[0]->stage_id}}">
-                                <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
-                            </a>
+                            <span class = "mb-0">
+                                <a class = "card-title" href="/stages/{{$group[0]->stage_id}}">{{ $group[0]->getStageName() }}</a>
+                            </span>
                             <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                             @foreach($group as $training)
                                 @if($training->is_max === 1)
@@ -64,9 +64,9 @@
                     <div class = "last-trainings">
                         @foreach($lastTrainings as $group)
                             <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
-                                <a href="/stages/{{$group[0]->stage_id}}">
-                                    <span class = "card-title mb-0">{{ $group[0]->getStageName() }}</span>
-                                </a>
+                                <span class = "mb-0">
+                                    <a class = "card-title" href="/stages/{{$group[0]->stage_id}}">{{ $group[0]->getStageName() }}</a>
+                                </span>
                                 <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                                 @foreach($group as $training)
                                     @if($training->is_max === 1)

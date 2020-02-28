@@ -9,7 +9,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class StageController extends Controller
 {
-
     public function index(){
         //todo これ考えものだな
         $userStages = (new Stage)->getUserStage();
