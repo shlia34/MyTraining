@@ -21,6 +21,7 @@
                         </ol>
                     </div>
                 @endforeach
+                    {{ $trainings->links() }}
             </div>
         </div>
     </div>

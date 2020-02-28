@@ -208,6 +208,9 @@ body {
     display: flex;
 }
 
+.active .page-link {
+    background-color: #454545!important;
+}
 /*-- iPhone Vertical View--*/
 
 @media screen and (max-width: 480px) {

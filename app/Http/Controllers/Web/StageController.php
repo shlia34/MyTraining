@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Models\Stage;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class StageController extends Controller
 {
@@ -16,11 +17,19 @@ class StageController extends Controller
         return view("stage.index")->with([ 'userStages' => $userStages, 'leftStages' => $leftStages]);
     }
 
-    public function show($stageId){
+    public function show(Request $request,$stageId){
         $stage = Stage::findOrFail($stageId);
         $trainings = $stage->trainings()->joinEvent()->orderBy('created_at')->own()->get()->groupBy('date')->sortKeysDesc();
 
-        return view("stage.show")->with([ 'stage' => $stage, 'trainings'=>$trainings ]);
+        $perPage = 8;
+        $paginatorTrainings = new LengthAwarePaginator(
+            $trainings->forPage($request->page, $perPage),
+            count($trainings),
+            $perPage);
+
+        $paginatorTrainings->withPath("/stages/{$stageId}");
+
+        return view("stage.show")->with([ 'stage' => $stage, 'trainings'=>$paginatorTrainings ]);
     }
 
     public function create(){
