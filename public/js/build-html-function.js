@@ -18,9 +18,9 @@ function buildStageCardHtml(result) {
 function buildTrainingModalHtml(result)
 {
     if(result === false){
-        var html = `<button class="delete-training-btn">削除</button><button class="on-max-training-btn">マックスに登録</button>`;
+        var html = `<button class="remodal-btn on-max-training-btn">マックスに登録</button><button class="remodal-btn delete-training-btn">削除</button>`;
     }else if(result === true){
-        html = `<button class="off-max-training-btn">マックスをオフ</button>`;
+        html = `<button class="remodal-btn off-max-training-btn">マックスをオフ</button>`;
     }
     return html;
 }

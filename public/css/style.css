@@ -211,10 +211,30 @@ body {
 .active .page-link {
     background-color: #454545!important;
 }
+
+.remodal-btn{
+    width: 250px;
+    height: 60px;
+    color: white!important;
+    margin: 5px;
+}
+
+.store-event-btn{
+    background-color: #F43E43;
+}
+.on-max-training-btn{
+    background-color: #F43E43;
+}
+.off-max-training-btn{
+    background-color: #454545;
+}
+.delete-training-btn{
+    background-color: #c8c8c8;
+}
+
 /*-- iPhone Vertical View--*/
 
 @media screen and (max-width: 480px) {
-
 
     .fc-event {
         font-size: 10px !important;/*--event title font size--*/

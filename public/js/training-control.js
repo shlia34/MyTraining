@@ -1,7 +1,7 @@
 $(function()
 {
     storeTraining();
-    showModalTraining()
+    showModalTraining();
     frontValidation();
 });
 
@@ -116,10 +116,9 @@ function frontValidation()
         // 整数部分は3桁以内、少数部分は1桁以内の数字を許可する
         // ①空か②0から始まらないか③整数部分は3桁以内か④小数値が2個以上続かないか
         var rep_val= $(".form-rep").val();
-
         var rep_validation_error = rep_val == "" || /^0/.test(rep_val)　|| rep_val > 100 || /[/.]/.test(rep_val);
         //  少数を許さない整数2桁以内
-        //todo val()ではピリオドが取得できない。「11.」を「11」として取得してしまうので困ってる。
+        //todo val()ではピリオドが取得できない。「11.」を「11」として取得してしまうので困ってる。(スマホではなんか大丈夫)
 
         if( weight_validation_error == true || rep_validation_error == true ){
             add_btn.prop("disabled", true);
