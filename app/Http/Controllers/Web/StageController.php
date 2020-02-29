@@ -2,18 +2,37 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Defs\DefPart;
 use Illuminate\Http\Request;
 use App\Models\Stage;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class StageController extends Controller
 {
     public function index(){
-        //todo これ考えものだな
-        $userStages = (new Stage)->getUserStage();
-        $leftStages = (new Stage)->getLeftStage();
-        return view("stage.index")->with([ 'userStages' => $userStages, 'leftStages' => $leftStages]);
+        $userStage = Auth::user()->stages->groupBy('part_code');
+        $leftStage = Stage::all()->diff(Auth::user()->stages)->groupBy('part_code');;
+
+        $partCodes =  array_keys( DefPart::PART_NAME_LIST );
+
+        $arr = [];
+        foreach ($partCodes as $partCode){
+            if(isset($userStage[$partCode])){
+                $arr[$partCode]["userStage"] = $userStage[$partCode];
+            }else{
+                $arr[$partCode]["userStage"] = [];
+            }
+
+            if(isset($leftStage[$partCode])){
+                $arr[$partCode]["leftStage"] = $leftStage[$partCode];
+            }else{
+                $arr[$partCode]["leftStage"] = [];
+            }
+        }
+
+        return view("stage.index")->with([ 'arr' => $arr]);
     }
 
     public function show(Request $request,$stageId){
