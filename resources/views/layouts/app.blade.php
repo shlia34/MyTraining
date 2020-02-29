@@ -52,44 +52,43 @@
 </head>
 
 <body>
-{{--//todo if文でログインしてるかどうかでリンクの表示を分ける。--}}
 
 <!--Navbar-->
 <nav class="navbar fixed-top">
-
     <!-- Navbar brand -->
     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'MyTraining') }}</a>
 
-    <!-- Collapse button -->
-    <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent23"
-            aria-controls="navbarSupportedContent23" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="animated-icon2"><span></span><span></span><span></span><span></span></div>
-    </button>
+    @auth
+        <!-- Collapse button -->
+        <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent23"
+                aria-controls="navbarSupportedContent23" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="animated-icon2"><span></span><span></span><span></span><span></span></div>
+        </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent23">
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent23">
 
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/stages/index">種目</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/csv/index">CSV</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                   document.getElementById('logout-form').submit();">ログアウト</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </li>
-        </ul>
-        <!-- Links -->
-
-    </div>
-    <!-- Collapsible content -->
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/stages/index">種目</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/csv/index">CSV</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">ログアウト</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+            <!-- Links -->
+        </div>
+        <!-- Collapsible content -->
+    @endauth
 
 </nav>
 <!--/.Navbar-->

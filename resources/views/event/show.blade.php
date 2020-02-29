@@ -17,7 +17,7 @@
                 <input type="number"  id="form-rep" class="form-rep form-control">
                 <label for="form-rep">rep</label>
             </div>
-            <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>追加</button>
+            <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
         </div>
     </div>
 
