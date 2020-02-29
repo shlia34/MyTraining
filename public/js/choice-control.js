@@ -16,8 +16,8 @@ function storeChoice() {
         apiStoreChoice(data,function(result){
             stage_box.remove();
 
-            var part_div = $(`.user-stage .user-part-group[data-part_code=${result['part_code']}]`);
-            part_div.append( buildStoreChoiceHtml(result) );
+            var target = $(`.part-group[data-part_code=${result['part_code']}] .user-stage`);
+            target.append( buildStoreChoiceHtml(result) );
         });
     })
 }
@@ -33,8 +33,8 @@ function destroyChoice() {
         apiDestroyChoice(data,function(result){
             stage_box.remove();
 
-            var part_div = $(`.left-stage .left-part-group[data-part_code=${result['part_code']}]`);
-            part_div.append( buildDestroyChoiceHtml(result) );
+            var target = $(`.part-group[data-part_code=${result['part_code']}] .left-stage`);
+            target.append( buildDestroyChoiceHtml(result) );
         });
     })
 }

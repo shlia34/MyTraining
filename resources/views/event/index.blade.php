@@ -39,7 +39,7 @@
                 timeZone: 'ja',
                 customButtons: {
                     storeEvent: {
-                        text: 'トレ',
+                        text: '記録',
                         click: function() {
                             var remodal = $(".event-remodal").remodal();
                             remodal.open();
