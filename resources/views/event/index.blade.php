@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
+    <div class="event-remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
         <button data-remodal-action="close" class="remodal-close"></button>
         {{Form::date('date', \Carbon\Carbon::now(), ['class'=>'remodal-date'])}}
         {{Form::select('part_code', App\Defs\DefPart::PART_NAME_LIST,null,['class' => 'remodal-part_code'])}}
@@ -42,9 +42,9 @@
                     storeEvent: {
                         text: 'トレ',
                         click: function() {
-                            var remodal = $(".remodal").remodal();
+                            var remodal = $(".event-remodal").remodal();
                             remodal.open();
-                            $(document).off('confirmation').on('confirmation', '.remodal', function () {
+                            $(document).off('confirmation').on('confirmation', '.event-remodal', function () {
                                 storeEvent(calendar)
                             });
                         }

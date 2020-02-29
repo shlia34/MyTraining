@@ -1,18 +1,13 @@
 $(function()
 {
     storeTraining();
-    destroyTraining();
-
-    onMaxTraining();
-    offMaxTraining();
-    checkMaxTraining();
-
+    showModalTraining()
     frontValidation();
 });
 
 function storeTraining()
 {
-    $(document).on("click", ".add-training-btn", function () {
+    $(".add-training-btn").on("click",function () {
         var event_id = $(".this-event-show").data('event_id');
         var stage_id_val = $(".form-stage_id").val();
         var weight_val = $(".form-weight").val();
@@ -41,81 +36,74 @@ function storeTraining()
 
 }
 
-function destroyTraining()
+function showModalTraining()
 {
-    $(document).on("click", ".delete-training-btn", function () {
-        var training_box = $(this).parent().parent();
-        var training_id = training_box.data('training_id');
-        var stage_id = training_box.parent().data('stage_id');
-        var data = {"training_id":training_id};
+    var data = {};
+    var remodal = $(".training-remodal").remodal();
 
-        apiDestroyTraining(data,function(){
-            training_box.remove();
-            var stage_ol = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
-            if(!stage_ol.find('li').is(':visible')){
-                stage_ol.parent().remove();
-            }
-
-        });
-    })
-}
-
-function onMaxTraining()
-{
-    $(document).on("click", ".non-max-training-btn", function () {
-
-        var training_box = $(this).parent().parent();
-        var data = {
-            "event_id":$(".this-event-show").data('event_id'),
-            "training_id":training_box.data('training_id'),
-        };
-
-        apiOnMaxTraining(data,function(){
-            $('.this-trainings ._add-underline').removeClass("_add-underline");
-            training_box.addClass("_add-underline");
-        });
-    })
-
-}
-
-function offMaxTraining()
-{
-    $(document).on("click", ".this-event-show .max-training-btn", function () {
-
-        var training_box = $(this).parent().parent();
-        var data = {
-            // "event_id":$(".this-event-show").data('event_id'),
-            "training_id":training_box.data('training_id'),
-        };
-
-        apiOffMaxTraining(data,function(){
-            $('.this-trainings ._add-underline').removeClass("_add-underline");
-        });
-    })
-
-}
-
-//todo ボタンじゃなくて、remodalで削除orお気に入りする
-function checkMaxTraining()
-{
     $(document).on("click", ".this-training", function () {
 
-        var data = {
+        data = {
             "event_id"   : $(".this-event-show").data('event_id'),
             "training_id": $(this).data('training_id'),
+            "stage_id": $(this).parent().data('stage_id'),
         };
 
         apiCheckMaxTraining(data,function(result){
-            if ($('.this-event-show .non-max-training-btn').is(':visible') || $('.this-event-show .max-training-btn').is(':visible') ) {
-                $(".non-max-training-btn").hide();
-                $(".max-training-btn").hide();
-                $(".delete-training-btn").hide();
-            } else {
-                var target =  $(`li[data-training_id=${data.training_id}`);
-                target.append(buildSubBtnHtml(result));
-            }
+            var box = $(".training-remodal-box");
+            box.empty();
+            box.append(buildTrainingModalHtml(result));
         });
+
+        remodal.open();
     });
+
+    $(document).on("click", ".delete-training-btn", function () {
+        destroyTraining(data);
+        remodal.close();
+    });
+
+    $(document).on("click", ".on-max-training-btn", function () {
+        onMaxTraining(data);
+        remodal.close();
+    });
+
+    $(document).on("click", ".off-max-training-btn", function () {
+        offMaxTraining(data);
+        remodal.close();
+    });
+}
+
+function destroyTraining(data)
+{
+    var training_box = $(`.this-training[data-training_id=${data.training_id}]`);
+    var stage_id = training_box.parent().data('stage_id');
+
+    apiDestroyTraining(data,function(){
+        training_box.remove();
+        var stage_ol = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
+        if(!stage_ol.find('li').is(':visible')){
+            stage_ol.parent().remove();
+        }
+    });
+}
+
+function onMaxTraining(data)
+{
+    var training_box = $(`.this-training[data-training_id=${data.training_id}]`);
+
+    apiOnMaxTraining(data,function(){
+        $('.this-trainings ._add-underline').removeClass("_add-underline");
+        training_box.addClass("_add-underline");
+    });
+}
+
+function offMaxTraining(data)
+{
+    apiOffMaxTraining(data,function(){
+        $('.this-trainings ._add-underline').removeClass("_add-underline");
+    });
+
 }
 
 function frontValidation()

@@ -88,5 +88,15 @@
     </div>
 </div>
 
+<div class="training-remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <div class = "training-remodal-box"></div>
+</div>
+
+<script>
+
+
+</script>
+
 
 @endsection
