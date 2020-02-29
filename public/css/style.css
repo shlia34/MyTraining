@@ -42,8 +42,6 @@ body {
     background-color: #454545;
 }
 
-
-
 .fc-right {
     padding: 10px;
 }
@@ -230,6 +228,23 @@ body {
 }
 .delete-training-btn{
     background-color: #c8c8c8;
+}
+.register-btn{
+    background-color: #454545!important;
+    color: white!important;
+}
+.register-btn a{
+    color: white!important;
+}
+.login-btn{
+    background-color: #F43E43!important;
+    color: white!important;
+}
+
+.auth-title{
+    font-size: 25px;
+    text-align:center;
+    margin-bottom: 10px;
 }
 
 /*-- iPhone Vertical View--*/
