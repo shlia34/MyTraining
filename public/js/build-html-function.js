@@ -15,12 +15,12 @@ function buildStageCardHtml(result) {
     return html;
 }
 //以下trainings.is_max
-function buildSubBtnHtml(result)
+function buildTrainingModalHtml(result)
 {
     if(result === false){
-        var html = `<span class = ""><i class="far fa-star non-max-training-btn"></i><i class="fas fa-times delete-training-btn"></i></span>`;
+        var html = `<button class="delete-training-btn">削除</button><button class="on-max-training-btn">マックスに登録</button>`;
     }else if(result === true){
-        html = `<span class = ""><i class="fas fa-star max-training-btn"></i></span>`;
+        html = `<button class="off-max-training-btn">マックスをオフ</button>`;
     }
     return html;
 }
