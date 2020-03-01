@@ -11,7 +11,12 @@ function buildTrainingHtml(result,weight,rep)
 }
 
 function buildStageCardHtml(result) {
-    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2"><span class="card-title mb-0">${result["stage_name"]}</span><ol data-stage_id=${result["stage_id"]} class="ol-training mb-0"></div>`;
+    var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2">
+                    <span class="mb-0">
+                        <a class = "card-title" href ="/stages/${result["stage_id"]}">${result["stage_name"]}</a>
+                    </span>
+                    <ol data-stage_id=${result["stage_id"]} class="ol-training mb-0"></ol>
+                </div>`;
     return html;
 }
 //以下trainings.is_max

@@ -65,7 +65,7 @@ class StageController extends Controller
         $stage->memo = $data["memo"];
         $stage->save();
 
-        return redirect("/stage/create");
+        return redirect("/stages/create");
     }
 
 //    public function edit(){

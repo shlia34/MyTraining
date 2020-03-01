@@ -16,10 +16,7 @@ class EventController extends Controller
     }
 
     //todo viewのトレ部分はテンプレートにしたい
-    //todo いいねと削除はmodel,後いろんなことの編集もできるように
     //todo タイマーとかもあったら良い。vibrationAPIたるものがある。chromeで使用可能かどうか調べる
-
-    //todo ここの処理もっとmodelに移動したい
     public function show($eventId){
 
         $thisEvent = Event::findOrFail($eventId);

@@ -6,7 +6,7 @@
     <div class = "wrapper">
 
         <div class = "input-form">
-            {{Form::open(["action" => "StageController@store"])}}
+            {{Form::open(["action" => "Web\StageController@store"])}}
 
             <div>
                 {{Form::label('name', '種目名')}}
