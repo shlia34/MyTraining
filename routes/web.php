@@ -23,9 +23,9 @@ Route::group(['middleware' => 'auth'], function () {
         //stage
         Route::group(['prefix' => 'stages'],function (){
             Route::get('/index', 'StageController@index');
-            Route::get('/{stage_id}', 'StageController@show');
             Route::get('/create', 'StageController@create');
             Route::post('/store', 'StageController@store');
+            Route::get('/{stage_id}', 'StageController@show');
             //Route::get('/stage/{stage_id}/edit', 'StageController@edit');
             //Route::post('/stage/update', 'StageController@update');
         });
