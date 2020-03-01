@@ -59,6 +59,7 @@
     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'MyTraining') }}</a>
 
     @auth
+
         <!-- Collapse button -->
         <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent23"
                 aria-controls="navbarSupportedContent23" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,15 +72,15 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/stages/index">種目</a>
+                    <a class="nav-link" href="/stages/index?partCode=01"><i class="fas fa-cog"></i> 種目</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/csv/index">CSV</a>
+                    <a class="nav-link" href="/csv/index"><i class="fas fa-file-csv"></i> CSV</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">ログアウト</a>
+                       document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i> ログアウト</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
