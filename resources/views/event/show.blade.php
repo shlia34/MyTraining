@@ -6,7 +6,7 @@
     <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
         {{ Form::select('stage_id', $stageFormArr,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
 
-        {{--        //todo キーパッド入力じゃなくて一桁ずつselectRangeでやるのが、validation楽だし入力しやすいと思った--}}
+        {{--//todo キーパッド入力じゃなくて一桁ずつselectRangeでやるのが、validation楽だし入力しやすいと思った--}}
         <div class="forms">
             <div class="md-form m-0 ml-3 w-25">
                 <input type="number" id="form-weight" class="form-weight form-control">
@@ -17,7 +17,11 @@
                 <input type="number"  id="form-rep" class="form-rep form-control">
                 <label for="form-rep">rep</label>
             </div>
-            <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
+            @if($stageFormArr === [])
+                <a href ="/stages/index?partCode={{$thisEvent->part_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
+            @else
+                <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
+            @endif
         </div>
     </div>
 
@@ -49,7 +53,12 @@
 
                 </div>
             </div>
-            <a href="/event/{{$thisEvent->event_id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
+            <div>
+                <a href="/event/{{$thisEvent->event_id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
+                <div class="float-right"><a  href={{url()->previous()}}><button>戻る</button></a></div>
+            </div>
+
+
         </div>
 
 
@@ -92,11 +101,5 @@
     <button data-remodal-action="close" class="remodal-close"></button>
     <div class = "training-remodal-box"></div>
 </div>
-
-<script>
-
-
-</script>
-
 
 @endsection
