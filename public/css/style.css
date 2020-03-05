@@ -247,6 +247,12 @@ body {
     margin-bottom: 10px;
 }
 
+.user-stage{
+    min-height: 24px;
+}
+.left-stage{
+    min-height: 24px;
+}
 /*-- iPhone Vertical View--*/
 
 @media screen and (max-width: 480px) {
