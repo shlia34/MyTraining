@@ -34,22 +34,22 @@
                 @if($stageGroup === "userStage")
                     <h5>やる種目リスト</h5>
                     <div class = "user-stage">
-                        @foreach($stages as $stage)
+                    @foreach($stages as $stage)
                             <div class ="" data-stage_id= {{$stage->stage_id}}>
                                 <a href= "/stages/{{$stage->stage_id }}">{{$stage->name }}</a>
-                                <a class="stage-user-delete-btn">削除</a>
+{{--                                <a class="stage-user-delete-btn">削除</a>--}}
                             </div>
                         @endforeach
                     </div>
                 @endif
 
                 @if($stageGroup === "leftStage")
-                    <h5>追加してないの種目リスト</h5>
-                    <div class = "left-stage">
+                        <h5>追加してないの種目リスト</h5>
+                        <div class = "left-stage">
                         @foreach($stages as $stage)
                             <div class ="" data-stage_id= {{$stage->stage_id}}>
                                 <a href= "/stages/{{$stage->stage_id }}">{{$stage->name }}</a>
-                                <a class="stage-user-store-btn">追加</a>
+{{--                                <a class="stage-user-store-btn">追加</a>--}}
                             </div>
                         @endforeach
                     </div>
