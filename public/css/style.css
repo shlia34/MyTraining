@@ -248,10 +248,32 @@ body {
 }
 
 .user-stage{
-    min-height: 24px;
+    min-height: 44px;
 }
 .left-stage{
-    min-height: 24px;
+    min-height: 44px;
+}
+
+.ui-sortable-handle{
+    margin: 5px;
+    padding: 5px;
+    background-color: #454545;
+}
+
+.ui-sortable-handle span{
+    color:white;
+}
+.ui-sortable-handle a{
+    color:white;
+    float: right;
+    /*margin-right: 20px;*/
+    width: 30px;
+}
+
+.placeholder {
+    background-color: #c8c8c8;
+    height: 34px;
+    margin: 5px;
 }
 /*-- iPhone Vertical View--*/
 

@@ -11,36 +11,33 @@ use Illuminate\Support\Facades\Auth;
 
 class ChoiceController extends Controller
 {
-
     public function store(Request $request)
     {
         $stageId = $request->all()["stage_id"];
         $stage = Stage::find($stageId);
-        //todo もし、もうあった場合、エラー出す
 
-        $stageList = new Choice();
-        $stageList->user_id = Auth::user()->user_id;
-        $stageList->stage_id = $stageId;
-        $stageList->sort_no =  $stageList->generateSortNo($stage->part_code);
-        $stageList->save();
+        $choice = new Choice();
+        $choice->user_id = Auth::user()->user_id;
+        $choice->stage_id = $stageId;
+        $choice->sort_no =  000;
+        //一旦入れとく
+        $choice->save();
 
         $returnData =  [
             'stage_id' => $stageId,
             'stage_name'=>$stage->name,
             'part_code'=>$stage->part_code,
-            'sort_no'=>$stageList->sort_no,
         ];
 
         return response()->json($returnData);
-
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $stageId = $request->all()["stage_id"];
         $stage = Stage::find($stageId);
-        $stageUser = Choice::where('stage_id',$stageId)->own()->first();
-        $stageUser->delete();
-        //todo もし、なかった場合、エラー出す
+        $choice = Choice::where('stage_id',$stageId)->own()->first();
+        $choice->delete();
 
         $returnData =  [
             'stage_id' => $stageId,
@@ -51,4 +48,14 @@ class ChoiceController extends Controller
         return response()->json($returnData);
     }
 
+    public function sort(Request $request)
+    {
+        $stageIds =  $request["stage_ids"] ?? [];
+        foreach ($stageIds as $i => $stageId){
+            $choice = Choice::where('stage_id',$stageId)->own()->first();
+            $choice->sort_no = $i;
+            $choice->save();
+        }
+        return null;
+    }
 }

@@ -111,4 +111,13 @@ function apiDestroyChoice(data, callback) {
     });
 }
 
+function apiSortChoice(data, callback) {
+    $.ajax({
+        url: '/api/choices/sort',
+        type: 'POST',
+        data: data,
+    }).done(function(result) {
+        callback(result);
+    });
+}
 

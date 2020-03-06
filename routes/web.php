@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'choices'],function (){
             Route::post('/store', 'ChoiceController@store');
             Route::post('/destroy', 'ChoiceController@destroy');
+            Route::post('/sort', 'ChoiceController@sort');
         });
 
     });
