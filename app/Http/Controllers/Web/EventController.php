@@ -15,7 +15,7 @@ class EventController extends Controller
         return view('event.index');
     }
 
-    //todo viewのトレ部分はテンプレートにしたい
+    //todo viewのトレ部分はテンプレートにしたいけどクラス名とか変えなきゃなあ。
     //todo タイマーとかもあったら良い。vibrationAPIたるものがある。chromeで使用可能かどうか調べる
     public function show($eventId){
 
