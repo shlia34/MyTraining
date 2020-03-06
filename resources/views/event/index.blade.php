@@ -27,7 +27,8 @@
                 plugins: [ 'interaction', 'dayGrid' ],
                 defaultView: 'dayGridMonth',
                 locales:"ja",
-                themeSystem: 'boostrap',
+                timeZone: 'ja',
+                themeSystem: 'bootstrap',
                 fixedWeekCount: false,
                 editable: true,
                 firstDay : 1,
@@ -36,7 +37,6 @@
                 selectLongPressDelay:0,
                 eventOrder:"part_code",
                 events: "/api/events/set",
-                timeZone: 'ja',
                 customButtons: {
                     storeEvent: {
                         text: '記録',

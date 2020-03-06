@@ -1,6 +1,6 @@
 //以下event
 function buildLinksEventHtml(value) {
-    var html ="<li>" + "<a href='/event/" + value["id"] + "'>"+ value["title"] +"</a>"+ value["stage_name"] + value["weight_and_rep"] +"</li>";
+    var html =`<li><a href='/events/${value["id"]}'>${value["title"]}</a>${value["stage_name"]} ${value["weight_and_rep"]}</li>`;
     return html;
 }
 //以下training
@@ -27,17 +27,5 @@ function buildTrainingModalHtml(result)
     }else if(result === true){
         html = `<button class="remodal-btn off-max-training-btn">マックスをオフ</button>`;
     }
-    return html;
-}
-//以下choice
-function buildStoreChoiceHtml(result) {
-    var html = `<div class ="" data-stage_id= ${result['stage_id']} ><a href= "/stage/${result['stage_id']}">${result['stage_name']}</a>`;
-    html += "<a class=\"stage-user-delete-btn\">削除</a></div>";
-    return html;
-}
-
-function buildDestroyChoiceHtml(result) {
-    var html = `<div class ="" data-stage_id= ${result['stage_id']}><a href= "/stage/${result['stage_id']}">${result['stage_name']}</a>`;
-    html += "<a class=\"stage-user-store-btn\">追加</a></div>";
     return html;
 }

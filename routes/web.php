@@ -18,8 +18,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Web'],function(){
         //event
         Route::get('/', 'EventController@index');
-        Route::get('/event/{event_id}', 'EventController@show');
-        Route::get('/event/{event_id}/destroy', 'EventController@destroy');
+        Route::get('/events/{event_id}', 'EventController@show');
+        Route::get('/events/{event_id}/destroy', 'EventController@destroy');
         //stage
         Route::group(['prefix' => 'stages'],function (){
             Route::get('/index', 'StageController@index');
@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/store', 'EventController@store');
             Route::post('/updateDate', 'EventController@updateDate');
         });
-        //training api
+        //training ap
         Route::group(['prefix' => 'trainings'], function () {
             //training
             Route::post('/store', 'TrainingController@store');
