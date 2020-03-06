@@ -8,7 +8,7 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         @foreach(\App\Defs\DefPart::PART_NAME_LIST as $partCode=>$partName )
             <li class="nav-item">
-            @if (\Request::all()["partCode"] === $partCode)
+            @if ($firstPartCode === $partCode)
                 <a class="nav-link active"
             @else
                 <a class="nav-link"
@@ -21,11 +21,12 @@
 
 <div class="tab-content" id="myTabContent">
     @foreach($arr as $partCode=>$stageGroups)
-        @if (\Request::all()["partCode"] === $partCode)
+        @if ($firstPartCode === $partCode)
             <div class="tab-pane fade show active"
         @else
             <div class="tab-pane fade"
         @endif
+
             id={{ \App\Defs\DefPart::PART_NAME_LIST[$partCode] }} role="tabpanel" aria-labelledby="{{ \App\Defs\DefPart::PART_NAME_LIST[$partCode] }}-tab">
         <div class ="part-group" data-part_code={{$partCode}}>
             <h4>{{ \App\Defs\DefPart::PART_NAME_LIST[$partCode] }}</h4>
@@ -34,22 +35,20 @@
                 @if($stageGroup === "userStage")
                     <h5>やる種目リスト</h5>
                     <div class = "user-stage">
-                    @foreach($stages as $stage)
+                        @foreach($stages as $stage)
                             <div class ="" data-stage_id= {{$stage->stage_id}}>
-                                <a href= "/stages/{{$stage->stage_id }}">{{$stage->name }}</a>
-{{--                                <a class="stage-user-delete-btn">削除</a>--}}
+                                <span>{{$stage->name }}</span><a href= "/stages/{{$stage->stage_id }}"><i class="fas fa-angle-right"></i></a>
                             </div>
                         @endforeach
                     </div>
                 @endif
 
                 @if($stageGroup === "leftStage")
-                        <h5>追加してないの種目リスト</h5>
-                        <div class = "left-stage">
+                    <h5>追加してないの種目リスト</h5>
+                    <div class = "left-stage">
                         @foreach($stages as $stage)
                             <div class ="" data-stage_id= {{$stage->stage_id}}>
-                                <a href= "/stages/{{$stage->stage_id }}">{{$stage->name }}</a>
-{{--                                <a class="stage-user-store-btn">追加</a>--}}
+                                <span>{{$stage->name }}</span><a href= "/stages/{{$stage->stage_id }}"><i class="fas fa-angle-right"></i></a>
                             </div>
                         @endforeach
                     </div>

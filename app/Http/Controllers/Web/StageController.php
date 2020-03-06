@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class StageController extends Controller
 {
-    public function index(){
-        $userStage = Auth::user()->stages->groupBy('part_code');
-        $leftStage = Stage::all()->diff(Auth::user()->stages)->groupBy('part_code');;
+    public function index(Request $request){
+        $userStage = Auth::user()->stages()->orderBy("sort_no")->get()->groupBy('part_code');
+        $leftStage = Stage::all()->diff(Auth::user()->stages)->groupBy('part_code');
 
         $partCodes =  array_keys( DefPart::PART_NAME_LIST );
 
@@ -25,14 +25,22 @@ class StageController extends Controller
                 $arr[$partCode]["userStage"] = [];
             }
 
-            if(isset($leftStage[$partCode])){
+            if(!empty($leftStage[$partCode])){
                 $arr[$partCode]["leftStage"] = $leftStage[$partCode];
             }else{
                 $arr[$partCode]["leftStage"] = [];
             }
         }
+        //ここの処理はmodelに写すでいいかな
 
-        return view("stage.index")->with([ 'arr' => $arr]);
+        if(isset($request->all()["partCode"])){
+            $firstPartCode =  $request->all()["partCode"];
+        }else{
+            $firstPartCode = "01";
+        }
+        //todo ここキモいな
+
+        return view("stage.index")->with(['arr' => $arr,'firstPartCode'=>$firstPartCode]);
     }
 
     public function show(Request $request,$stageId){

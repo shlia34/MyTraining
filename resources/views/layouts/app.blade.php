@@ -29,7 +29,6 @@
     <script src="/js/build-html-function.js"></script>
     <script src="/js/event-control.js"></script>
     <script src="/js/training-control.js"></script>
-    <script src="/js/stage-control.js"></script>
     <script src="/js/choice-control.js"></script>
     <script src="/js/boostrap.js"></script>
 
@@ -75,7 +74,7 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/stages/index?partCode=01"><i class="fas fa-cog"></i> 種目</a>
+                    <a class="nav-link" href="/stages/index"><i class="fas fa-cog"></i> 種目</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/csv/index"><i class="fas fa-file-csv"></i> CSV</a>
