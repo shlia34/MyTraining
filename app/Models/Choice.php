@@ -11,4 +11,9 @@ class Choice extends Model
 
     protected $primaryKey = 'seq';
     protected $table = "stage_user";
+
+    public function scopeWhereStage($query,$stageId)
+    {
+        return $query->where('stage_id',$stageId);
+    }
 }

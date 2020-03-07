@@ -19,8 +19,9 @@ $(function() {
 function storeChoice(event, ui) {
     var data = { "stage_id":ui.item.data('stage_id') };
 
-    apiStoreChoice(data,function(result){});
-    sortChoice(event);
+    apiStoreChoice(data,function(result){
+        sortChoice(event);
+    });
 }
 
 function destroyChoice(event, ui) {

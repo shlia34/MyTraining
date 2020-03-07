@@ -63,7 +63,6 @@ class TrainingController extends Controller
         return response()->json("ok");
     }
 
-    //todo 動いてるけど、training削除したあとエラー起きてる
     public function checkMax(Request $request){
         $training = Training::find($request->all()["training_id"]);
 
