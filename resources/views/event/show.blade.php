@@ -97,9 +97,15 @@
     </div>
 </div>
 
-<div class="training-remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
+<div data-remodal-id="true-training-remodal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
-    <div class = "training-remodal-box"></div>
+    <button class="remodal-btn off-max-training-btn">マックスをオフ</button>
+</div>
+
+<div data-remodal-id="false-training-remodal" data-remodal-options="hashTracking:false">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <button class="remodal-btn on-max-training-btn">マックスに登録</button>
+    <button class="remodal-btn delete-training-btn">削除</button>
 </div>
 
 @endsection
