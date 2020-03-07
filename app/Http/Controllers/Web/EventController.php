@@ -49,6 +49,7 @@ class EventController extends Controller
     {
         $event = Event::find($eventId);
         $trainings = Training::where('event_id', $eventId)->orderBY("created_at");
+        //todo ここは多対多で取得
 
         $trainings->delete();
         $event->delete();

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Stage;
 use App\Models\Choice;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,50 +10,35 @@ use Illuminate\Support\Facades\Auth;
 
 class ChoiceController extends Controller
 {
+    const DEFAULT_SORT_NO = 00;
+
     public function store(Request $request)
     {
-        $stageId = $request->all()["stage_id"];
-        $stage = Stage::find($stageId);
-
         $choice = new Choice();
         $choice->user_id = Auth::user()->user_id;
-        $choice->stage_id = $stageId;
-        $choice->sort_no =  000;
-        //一旦入れとく
+        $choice->stage_id = $request->all()["stage_id"];
+        $choice->sort_no = self::DEFAULT_SORT_NO;
         $choice->save();
 
-        $returnData =  [
-            'stage_id' => $stageId,
-            'stage_name'=>$stage->name,
-            'part_code'=>$stage->part_code,
-        ];
-
-        return response()->json($returnData);
+        return null;
     }
 
     public function destroy(Request $request)
     {
         $stageId = $request->all()["stage_id"];
-        $stage = Stage::find($stageId);
-        $choice = Choice::where('stage_id',$stageId)->own()->first();
+        $choice = Choice::whereStage($stageId)->own()->first();
         $choice->delete();
 
-        $returnData =  [
-            'stage_id' => $stageId,
-            'stage_name'=>$stage->name,
-            'part_code'=>$stage->part_code,
-        ];
-
-        return response()->json($returnData);
+        return null;
     }
 
     public function sort(Request $request)
     {
         $stageIds =  $request["stage_ids"] ?? [];
-        foreach ($stageIds as $i => $stageId){
-            $choice = Choice::where('stage_id',$stageId)->own()->first();
-            $choice->sort_no = $i;
-            $choice->save();
+        foreach ($stageIds as $index => $stageId){
+                $choice = Choice::whereStage($stageId)->own()->first();
+                $choice->sort_no = $index;
+                $choice->save();
         }
         return null;
     }
