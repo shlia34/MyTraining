@@ -39,7 +39,10 @@ function storeTraining()
 function showModalTraining()
 {
     var data = {};
-    var remodal = $(".training-remodal").remodal();
+
+    var falseRemodal = $('[data-remodal-id=false-training-remodal]').remodal();
+    var trueRemodal = $('[data-remodal-id=true-training-remodal]').remodal();
+
 
     $(document).on("click", ".this-training", function () {
 
@@ -50,27 +53,27 @@ function showModalTraining()
         };
 
         apiCheckMaxTraining(data,function(result){
-            var box = $(".training-remodal-box");
-            box.empty();
-            box.append(buildTrainingModalHtml(result));
+            if(result === false){
+                falseRemodal.open();
+            }else if(result === true){
+                trueRemodal.open();
+            }
         });
-
-        remodal.open();
     });
 
     $(document).on("click", ".delete-training-btn", function () {
         destroyTraining(data);
-        remodal.close();
+        falseRemodal.close();
     });
 
     $(document).on("click", ".on-max-training-btn", function () {
         onMaxTraining(data);
-        remodal.close();
+        falseRemodal.close();
     });
 
     $(document).on("click", ".off-max-training-btn", function () {
         offMaxTraining(data);
-        remodal.close();
+        trueRemodal.close();
     });
 }
 
