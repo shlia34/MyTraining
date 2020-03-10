@@ -44,7 +44,8 @@
     <link href='/css/remodal/remodal-default-theme.css' type="text/css" rel='stylesheet' />
     <script src='/js/remodal/remodal.js'></script>
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link href="/css/app.css" rel="stylesheet">
     <link href='/css/style.css' type="text/css" rel='stylesheet' />
     <link href='/css/boostrap.css' type="text/css" rel='stylesheet' />
     <!-- Bootstrap -->
