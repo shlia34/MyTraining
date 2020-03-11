@@ -14,7 +14,7 @@
                         </span>
                         <ol data-event_id = {{$eventId}} class = "ol-training mb-0">
                         @foreach($group as $training)
-                            @if($training->is_max === 1)
+                            @if($training->is_max == 1)
                                 <li data-training_id = {{$training->training_id}} class = "stage-training _add-underline ">{{$training->getWeightAndRep() }}</li>
                             @else
                                 <li data-training_id = {{$training->training_id}} class = "stage-training">{{$training->getWeightAndRep() }}</li>

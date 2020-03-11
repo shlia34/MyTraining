@@ -41,7 +41,7 @@
                             </span>
                             <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                             @foreach($group as $training)
-                                @if($training->is_max === 1)
+                                @if($training->is_max == 1)
                                     <li data-training_id = {{$training->training_id}} class = "this-training _add-underline ">{{$training->getWeightAndRep() }}</li>
                                 @else
                                     <li data-training_id = {{$training->training_id}} class = "this-training ">{{$training->getWeightAndRep() }}</li>
@@ -78,7 +78,7 @@
                                 </span>
                                 <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
                                 @foreach($group as $training)
-                                    @if($training->is_max === 1)
+                                    @if($training->is_max == 1)
                                         <li data-training_id = {{$training->training_id}} class = "last-training _add-underline ">{{$training->getWeightAndRep() }}</li>
                                     @else
                                         <li data-training_id = {{$training->training_id}} class = "last-training ">{{$training->getWeightAndRep() }}</li>
