@@ -10,8 +10,8 @@ class TrainingController extends Controller
 {
 
     //todo formRequest作る
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         $data = $request->all();
         $training = new Training();
         $training->training_id = $this->generateId('TR');
@@ -19,7 +19,7 @@ class TrainingController extends Controller
         $training->stage_id = $data['stage_id'];
         $training->weight = $data['weight'];
         $training->rep = $data['rep'];
-        $training->is_max = false;
+        $training->is_max = 0;
         $training->save();
 
         $returnData =  ['training_id'=>$training->training_id,
@@ -29,8 +29,8 @@ class TrainingController extends Controller
         return response()->json($returnData);
     }
 
-    public function destroy(Request $request){
-
+    public function destroy(Request $request)
+    {
         $training_id = $request->all()["training_id"];
         $training = Training::find($training_id);
         $training->delete();
@@ -38,8 +38,8 @@ class TrainingController extends Controller
         return null;
     }
 
-    public function OnMax(Request $request){
-
+    public function OnMax(Request $request)
+    {
         $eventId = $request->all()["event_id"];
         $trainings = Training::where("event_id", $eventId)->where("is_max", 1)->get();
         foreach ($trainings as $training){
@@ -49,28 +49,25 @@ class TrainingController extends Controller
         //一旦消す。二個以上ないはずだけど一応foreach。
         $trainingId = $request->all()["training_id"];
         $training = Training::find($trainingId);
-        $training->is_max = true;
+        $training->is_max = 1;
         $training->save();
 
         return null;
     }
 
-    public function OffMax(Request $request){
+    public function OffMax(Request $request)
+    {
         $training = Training::find($request->all()["training_id"]);
         $training->is_max = 0;
         $training->save();
 
-        return response()->json("ok");
+        return null;
     }
 
-    public function checkMax(Request $request){
+    public function checkMax(Request $request)
+    {
         $training = Training::find($request->all()["training_id"]);
-
-        if( $training->is_max == 0){
-            $message = false;
-        } else{
-            $message = true;
-        }
+        $training->is_max == 0 ? $message = false : $message = true;
 
         return response()->json($message);
     }

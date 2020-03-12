@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\GetTrainingData;
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Training extends Model
 {
@@ -14,9 +15,10 @@ class Training extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    public function scopeGetTrainingsFromEventId($query, string $eventId)
-    {
-        return $query->where('event_id', $eventId)->orderBY("created_at")->get()->groupBy('stage_id');
+    protected $perPage = 8;
+
+    public function scopeGroupByStage($query){
+        return $query->oldest()->get()->groupBy('stage_id');
     }
 
     public function scopeJoinEvent($query){
@@ -34,6 +36,18 @@ class Training extends Model
             'events.user_id',
             'events.memo',
         ])->leftJoin('events','trainings.event_id', '=', 'events.event_id');
+    }
+
+    public function scopePaginator($query,$request,$stageId){
+        $trainings = $query->joinEvent()->oldest()->own()->get()->groupBy('date')->sortKeysDesc();
+
+        $paginatorTrainings = new LengthAwarePaginator(
+            $trainings->forPage($request->page, $this->perPage),
+            count($trainings),
+            $this->perPage);
+        $paginatorTrainings->withPath("/stages/{$stageId}");
+
+        return $paginatorTrainings;
     }
 
 }
