@@ -14,6 +14,7 @@ class CsvController extends Controller
     public function __construct()
     {
         $this->csvClass = new Csv();
+        //todo controllerの中でnewしない
     }
 
     public function index()

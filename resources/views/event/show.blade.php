@@ -4,7 +4,7 @@
 <div class = "wrapper">
 
     <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
-        {{ Form::select('stage_id', $stageFormArr,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
+        {{ Form::select('stage_id', $stageArray,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
 
         {{--//todo キーパッド入力じゃなくて一桁ずつselectRangeでやるのが、validation楽だし入力しやすいと思った--}}
         <div class="forms">
@@ -17,7 +17,7 @@
                 <input type="number"  id="form-rep" class="form-rep form-control">
                 <label for="form-rep">rep</label>
             </div>
-            @if($stageFormArr === [])
+            @if($stageArray === [])
                 <a href ="/stages/index?partCode={{$thisEvent->part_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
             @else
                 <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>

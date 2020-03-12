@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ChoiceController extends Controller
 {
+    /**
+     * storeする時の臨時の値
+     */
     const DEFAULT_SORT_NO = 00;
+
 
     public function store(Request $request)
     {

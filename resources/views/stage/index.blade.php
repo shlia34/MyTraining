@@ -20,7 +20,7 @@
     </ul>
 
 <div class="tab-content" id="myTabContent">
-    @foreach($arr as $partCode=>$stageGroups)
+    @foreach($stagesByPart as $partCode=>$stageGroups)
         @if ($firstPartCode === $partCode)
             <div class="tab-pane fade show active"
         @else
