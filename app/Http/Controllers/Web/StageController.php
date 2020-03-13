@@ -13,7 +13,6 @@ class StageController extends Controller
     {
         $stagesByPart  = Auth::user()->stages()->byPart();
         $firstPartCode =  $request->all()["partCode"] ?? "01";
-        //formRequestでここの処理やってもいいかも
 
         return view("stage.index")->with(['stagesByPart' => $stagesByPart,'firstPartCode'=>$firstPartCode]);
     }
@@ -33,15 +32,10 @@ class StageController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $insertData = $request->only('name','part_code','pof_code','memo')
+                    + ['stage_id' => $this->generateId('ST') ];
 
-        $stage = new Stage;
-        $stage->stage_id = $this->generateId('ST');
-        $stage->name = $data["name"];
-        $stage->part_code = $data["part_code"];
-        $stage->pof_code = $data["pof_code"];
-        $stage->memo = $data["memo"];
-        $stage->save();
+        Stage::create($insertData);
 
         return redirect("/stages/create");
     }
