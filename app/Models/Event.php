@@ -15,6 +15,8 @@ class Event extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    protected $fillable = [ 'event_id', 'user_id', 'date', 'part_code', 'memo' ];
+
     public function trainings()
     {
         return $this->hasMany('App\Models\Training','event_id', 'event_id');

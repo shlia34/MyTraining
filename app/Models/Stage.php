@@ -17,6 +17,8 @@ class Stage extends Model
     protected $primaryKey = 'stage_id';
     protected $keyType = 'string';
 
+    protected $fillable = [ 'stage_id','name','part_code','pof_code','memo' ];
+
     public function Users(){
         return $this->belongsToMany('App\Models\User', 'stage_user','stage_id','user_id');
     }
@@ -47,22 +49,22 @@ class Stage extends Model
 
         $partCodes =  array_keys( DefPart::PART_NAME_LIST );
 
-        $arr = [];
+        $array = [];
         foreach ($partCodes as $partCode){
             if(isset($userStage[$partCode])){
-                $arr[$partCode]["userStage"] = $userStage[$partCode];
+                $array[$partCode]["userStage"] = $userStage[$partCode];
             }else{
-                $arr[$partCode]["userStage"] = [];
+                $array[$partCode]["userStage"] = [];
             }
 
             if(!empty($leftStage[$partCode])){
-                $arr[$partCode]["leftStage"] = $leftStage[$partCode];
+                $array[$partCode]["leftStage"] = $leftStage[$partCode];
             }else{
-                $arr[$partCode]["leftStage"] = [];
+                $array[$partCode]["leftStage"] = [];
             }
         }
 
-        return $arr;
+        return $array;
     }
 
 }

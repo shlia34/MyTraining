@@ -43,14 +43,11 @@ class EventController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $data = $request->all();
-        $event = new Event();
-        $event->event_id = $this->generateId('EV');
-        $event->date = $data['date'];
-        $event->part_code = $data['part_code'];
-        $event->memo = $data['memo'];
-        $event->user_id = Auth::user()->user_id;
-        $event->save();
+        $insertData = $request->only('date', 'part_code', 'memo')
+                    + ['event_id' => $this->generateId('EV')]
+                    + ['user_id' => Auth::user()->user_id];
+
+        $event =  Event::create($insertData);
         $eventJson = $event->getDataForJson();
         return response()->json($eventJson);
     }

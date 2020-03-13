@@ -18,18 +18,18 @@ class ChoiceController extends Controller
 
     public function store(Request $request)
     {
-        $choice = new Choice();
-        $choice->user_id = Auth::user()->user_id;
-        $choice->stage_id = $request->all()["stage_id"];
-        $choice->sort_no = self::DEFAULT_SORT_NO;
-        $choice->save();
+        $insertData = $request->only('stage_id')
+                    + ['user_id' => Auth::user()->user_id]
+                    + ['sort_no' => self::DEFAULT_SORT_NO];
+
+        Choice::create($insertData);
 
         return null;
     }
 
     public function destroy(Request $request)
     {
-        $stageId = $request->all()["stage_id"];
+        $stageId = $request->only("stage_id");
         $choice = Choice::whereStage($stageId)->own()->first();
         $choice->delete();
 

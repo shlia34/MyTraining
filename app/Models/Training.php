@@ -15,6 +15,8 @@ class Training extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    protected $fillable = [ 'training_id','event_id','stage_id','weight','rep','is_max' ];
+
     protected $perPage = 8;
 
     public function scopeGroupByStage($query){
