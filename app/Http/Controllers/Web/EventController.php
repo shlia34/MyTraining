@@ -31,7 +31,7 @@ class EventController extends Controller
         $previousEvent !== null ? $previousTrainings = $previousEvent->trainings()->groupByStage() : $previousTrainings = [];
 
         return view('event.show')->with(['thisEvent' => $thisEvent, 'thisTrainings'=> $thisTrainings,
-                                              'lastEvent' => $previousEvent, 'lastTrainings' => $previousTrainings,
+                                              'previousEvent' => $previousEvent, 'previousTrainings' => $previousTrainings,
                                               'stageArray' => Auth::user()->stages()->arrayForSelectBox($thisEvent->part_code) ]);
     }
 

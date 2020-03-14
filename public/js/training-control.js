@@ -93,7 +93,7 @@ function destroyTraining(data)
 
 function onMaxTraining(data)
 {
-    var training_box = $(`.this-training[data-training_id=${data.training_id}]`);
+    var training_box = $(`this-trainings .training[data-training_id=${data.training_id}]`);
 
     apiOnMaxTraining(data,function(){
         $('.this-trainings ._add-underline').removeClass("_add-underline");

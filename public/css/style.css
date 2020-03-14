@@ -95,7 +95,7 @@ body {
     float: left;
     margin: 2px 2px 2px 6px;
 }
-.last-training {
+.previous-training {
     width: 45%;
     float: left;
     margin: 2px 2px 2px 6px;
@@ -146,7 +146,7 @@ body {
     left: 0px;
 }
 
-.last-training:before  {
+.previous-training:before  {
     content: counter(my-counter);
     counter-increment: my-counter;
     font-size: 16px;
