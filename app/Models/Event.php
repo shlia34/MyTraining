@@ -7,6 +7,16 @@ use App\Models\Traits\GetTrainingData;
 use App\Models\Traits\GetPartData;
 use App\Models\Traits\ScopeOwn;
 
+/**
+ * イベントのモデルクラス
+ *
+ * @property string event_id  イベントID
+ * @property string user_id   ユーザーID
+ * @property string part_code 部位コード
+ * @property date   date      日付
+ * @property string memo      メモ
+ */
+
 class Event extends Model
 {
     use GetTrainingData,GetPartData,ScopeOwn;

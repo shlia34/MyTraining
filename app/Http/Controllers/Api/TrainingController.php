@@ -59,6 +59,11 @@ class TrainingController extends Controller
         return null;
     }
 
+    /**
+     * trainingがmax登録されているか判別する
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function checkMax(Request $request)
     {
         $training = Training::find($request->all()["training_id"]);

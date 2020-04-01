@@ -7,11 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * userのmodel
+ * ユーザーのモデルクラス
  *
- * @property bigint user_id   userId
- * @property string name      名前
- *
+ * @property bigint user_id ユーザーId
+ * @property string name    名前
+ * @property float  weight  体重
  */
 
 class User extends Authenticatable

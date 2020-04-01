@@ -5,6 +5,15 @@ namespace App\Models;
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 種目選択(stageとuserの中間テーブル)のモデルクラス
+ *
+ * @property string seq       シークエンス
+ * @property string stage_id  種目ID
+ * @property string user_id   ユーザーID
+ * @property string sort_no   日付
+ */
+
 class Choice extends Model
 {
     use ScopeOwn;
