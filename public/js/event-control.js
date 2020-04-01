@@ -1,3 +1,8 @@
+/**
+ * イベント追加
+ * event/index.blade.phpで使用
+ * @param calendar
+ */
 function storeEvent(calendar)
 {
     var data = {
@@ -20,6 +25,11 @@ function storeEvent(calendar)
     })
 }
 
+/**
+ * イベントの日付を変更
+ * event/index.blade.phpで使用
+ * @param info
+ */
 function updateDateEvent(info)
 {
     var data = {
@@ -29,6 +39,11 @@ function updateDateEvent(info)
     apiUpdateDateEvent(data);
 }
 
+/**
+ * イベント詳細ページへのリンクを表示
+ * event/index.blade.phpで使用
+ * @param date
+ */
 function showLinksEvent(date)
 {
     var data = {date:date};

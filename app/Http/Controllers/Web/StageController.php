@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class StageController extends Controller
 {
+    /**
+     * 一覧画面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $stagesByPart  = Auth::user()->stages()->byPart();
@@ -17,6 +22,12 @@ class StageController extends Controller
         return view("stage.index")->with(['stagesByPart' => $stagesByPart,'firstPartCode'=>$firstPartCode]);
     }
 
+    /**
+     * 種目の詳細画面、種目に紐づいたトレーニングも表示する
+     * @param Request $request
+     * @param $stageId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request,$stageId)
     {
         $stage = Stage::findOrFail($stageId);
@@ -25,11 +36,20 @@ class StageController extends Controller
         return view("stage.show")->with([ 'stage' => $stage, 'trainings'=>$paginatorTrainings ]);
     }
 
+    /**
+     * 追加画面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view("stage.create");
     }
 
+    /**
+     * 追加処理
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Request $request)
     {
         $insertData = $request->only('name','part_code','pof_code','memo')
