@@ -16,6 +16,11 @@ class ChoiceController extends Controller
     const DEFAULT_SORT_NO = 00;
 
 
+    /**
+     * 保存
+     * @param Request $request
+     * @return |null
+     */
     public function store(Request $request)
     {
         $insertData = $request->only('stage_id')
@@ -27,6 +32,11 @@ class ChoiceController extends Controller
         return null;
     }
 
+    /**
+     * 削除
+     * @param Request $request
+     * @return |null
+     */
     public function destroy(Request $request)
     {
         $stageId = $request->only("stage_id");
@@ -36,6 +46,11 @@ class ChoiceController extends Controller
         return null;
     }
 
+    /**
+     * 並び替え
+     * @param Request $request
+     * @return |null
+     */
     public function sort(Request $request)
     {
         $stageIds =  $request["stage_ids"] ?? [];

@@ -10,7 +10,9 @@
                     <a class = "card-title" href="/stages/{{$group[0]->stage_id}}">{{ $group[0]->getStageName() }}</a>
                 </span>
                 <ol data-stage_id = {{ $group[0]->stage_id }} class = "ol-training mb-0">
-                    @include('partials.training', [ 'group' => $group, 'type' => $type ])
+                    @foreach($group as $training)
+                        @include('partials.training', [ 'group' => $group, 'type' => $type ])
+                    @endforeach
                 </ol>
             </div>
         @endforeach

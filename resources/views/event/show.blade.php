@@ -6,7 +6,6 @@
     <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
         {{ Form::select('stage_id', $stageArray,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
 
-        {{--//todo キーパッド入力じゃなくて一桁ずつselectRangeでやるのが、validation楽だし入力しやすいと思った--}}
         <div class="forms">
             <div class="md-form m-0 ml-3 w-25">
                 <input type="number" id="form-weight" class="form-weight form-control">

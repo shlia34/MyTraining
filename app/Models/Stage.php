@@ -9,6 +9,16 @@ use App\Models\Traits\GetPartData;
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * 種目のモデルクラス
+ *
+ * @property string stage_id  種目ID
+ * @property string name      種目名
+ * @property string part_code 部位コード
+ * @property string pof_code  POFコード(POF=Position of Flexion,負荷がかかるタイミングのこと)
+ * @property string memo      メモ
+ */
+
 class Stage extends Model
 {
     use GetPartData,ScopeOwn;

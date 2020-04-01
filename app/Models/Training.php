@@ -7,6 +7,17 @@ use App\Models\Traits\ScopeOwn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * トレーニングのモデルクラス
+ *
+ * @property string training_id トレーニングID
+ * @property string event_id    イベントID
+ * @property string stage_id    種目ID
+ * @property string weight      重量
+ * @property float  rep         レップ数
+ * @property boolean is_max     最大強度かどうか
+ */
+
 class Training extends Model
 {
     use GetTrainingData,ScopeOwn;
