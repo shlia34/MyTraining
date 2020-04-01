@@ -9,6 +9,11 @@ use App\Models\Training;
 class TrainingController extends Controller
 {
     //todo formRequest作る
+    /**
+     * 保存
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $insertData = $request->only('event_id','stage_id','weight','rep')
@@ -24,6 +29,11 @@ class TrainingController extends Controller
         return response()->json($returnData);
     }
 
+    /**
+     * 削除
+     * @param Request $request
+     * @return |null
+     */
     public function destroy(Request $request)
     {
         $training_id = $request->all()["training_id"];
@@ -33,6 +43,11 @@ class TrainingController extends Controller
         return null;
     }
 
+    /**
+     * 最大強度に登録する
+     * @param Request $request
+     * @return |null
+     */
     public function OnMax(Request $request)
     {
         $eventId = $request->all()["event_id"];
@@ -50,6 +65,11 @@ class TrainingController extends Controller
         return null;
     }
 
+    /**
+     * 最大強度の登録を外す
+     * @param Request $request
+     * @return |null
+     */
     public function OffMax(Request $request)
     {
         $training = Training::find($request->all()["training_id"]);
@@ -60,9 +80,10 @@ class TrainingController extends Controller
     }
 
     /**
-     * trainingがmax登録されているか判別する
+     * trainingが最大強度の登録されているか判別する
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * falseかtrueを返す
      */
     public function checkMax(Request $request)
     {

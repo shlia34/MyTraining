@@ -30,6 +30,7 @@
     <script src="/js/event-control.js"></script>
     <script src="/js/training-control.js"></script>
     <script src="/js/choice-control.js"></script>
+    <script src="/js/validation.js"></script>
     <script src="/js/boostrap.js"></script>
 
     <!-- Fonts -->

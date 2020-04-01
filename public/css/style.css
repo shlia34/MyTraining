@@ -100,7 +100,6 @@ body {
     float: left;
     margin: 2px 2px 2px 6px;
 }
-
 .stage-training {
     width: 45%;
     float: left;
@@ -114,7 +113,6 @@ body {
 .fa-trash{
     color: #454545;
 }
-
 
 .ol-training {
     counter-reset: my-counter;
@@ -219,6 +217,9 @@ body {
 
 .store-event-btn{
     background-color: #F43E43;
+}
+.store-event-btn[disabled] {
+    opacity: 0.5!important;
 }
 .on-max-training-btn{
     background-color: #F43E43;
