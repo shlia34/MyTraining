@@ -26,13 +26,13 @@
     <!-- js-file -->
     <script src="/js/ajax-setup.js"></script>
     <script src="/js/ajax-function.js"></script>
+    <script src="/js/fullcalendar.js"></script>
     <script src="/js/build-html-function.js"></script>
     <script src="/js/event-control.js"></script>
     <script src="/js/training-control.js"></script>
     <script src="/js/choice-control.js"></script>
     <script src="/js/validation.js"></script>
     <script src="/js/boostrap.js"></script>
-
     <!-- Fonts -->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

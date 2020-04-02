@@ -1,13 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-
     <p><a class="btn" href="{{url('/csv/export/Event')}}" target="_blank"> Event Export</a></p>
     <p><a class="btn" href="{{url('/csv/export/Training')}}" target="_blank"> Training Export</a></p>
     <p><a class="btn" href="{{url('/csv/export/Stage')}}" target="_blank"> Stage Export</a></p>
     <p><a class="btn" href="{{url('/csv/export/User')}}" target="_blank"> User Export</a></p>
     <p><a class="btn" href="{{url('/csv/export/Choice')}}" target="_blank"> choice Export</a></p>
-
 
     <form action="/csv/import" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -22,7 +20,6 @@
         </div>
         <button type="submit" class="btn btn-block">Event Import</button>
     </form>
-
 
     <script>
         // ファイルを選択すると、コントロール部分にファイル名を表示
