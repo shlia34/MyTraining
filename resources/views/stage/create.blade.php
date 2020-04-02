@@ -5,6 +5,16 @@
 
     <div class = "wrapper">
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class = "input-form">
             {{Form::open(["action" => "Web\StageController@store"])}}
 
@@ -14,18 +24,28 @@
             </div>
 
             <div>
-                {{Form::label('part_code', '部位')}}
-                {{Form::select('part_code', App\Defs\DefPart::PART_NAME_LIST)}}
+                <p>部位</p>
+                @foreach(App\Defs\DefPart::PART_NAME_LIST as $code => $name )
+                    <span class = 'radio-part'>
+                        {{Form::label('part_code', $name ) }}
+                        {{Form::radio('part_code', $code,false)}}
+                    </span>
+                @endforeach
             </div>
 
             <div>
-                {{Form::label('pof_code', 'pof種目')}}
-                {{Form::select('pof_code', App\Defs\DefPof::POF_LIST)}}
+                <p>POF</p>
+                @foreach(App\Defs\DefPof::POF_LIST as $code => $name )
+                    <div>
+                        {{Form::label('pof_code', $name ) }}
+                        {{Form::radio('pof_code', $code,false)}}
+                    </div>
+                @endforeach
             </div>
 
             <div>
-                {{Form::label('memo', 'メモ')}}
-                {{Form::textarea('memo')}}
+                <p>メモ</p>
+                {{Form::textarea('memo', null, ['size' => '40x4'])}}
             </div>
             <div>
                 {{Form::submit('送信')}}

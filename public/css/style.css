@@ -276,6 +276,10 @@ body {
     height: 34px;
     margin: 5px;
 }
+
+.radio-part {
+    margin-left: 20px;
+}
 /*-- iPhone Vertical View--*/
 
 @media screen and (max-width: 480px) {

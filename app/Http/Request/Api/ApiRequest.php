@@ -10,9 +10,6 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 abstract class ApiRequest extends FormRequest
 {
     abstract public function rules();
-//    abstract public function attributes();
-//    abstract public function messages();
-//    めんどいからコメントアウト
 
     /**
      * Determine if the user is authorized to make this request.

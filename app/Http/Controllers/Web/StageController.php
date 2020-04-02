@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
+use App\Http\Request\Web\Stage\StoreRequest;
 use App\Models\Stage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,7 @@ class StageController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $insertData = $request->only('name','part_code','pof_code','memo')
                     + ['stage_id' => $this->generateId('ST') ];
