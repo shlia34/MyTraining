@@ -1,6 +1,6 @@
 /**
  * イベント追加
- * event/index.blade.phpで使用
+ * js/fullcalendar.jsで使用
  * @param calendar
  */
 function storeEvent(calendar)
@@ -27,7 +27,7 @@ function storeEvent(calendar)
 
 /**
  * イベントの日付を変更
- * event/index.blade.phpで使用
+ * js/fullcalendar.jsで使用
  * @param info
  */
 function updateDateEvent(info)
@@ -41,7 +41,7 @@ function updateDateEvent(info)
 
 /**
  * イベント詳細ページへのリンクを表示
- * event/index.blade.phpで使用
+ * js/fullcalendar.jsで使用
  * @param date
  */
 function showLinksEvent(date)
