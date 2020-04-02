@@ -27,7 +27,7 @@ class StoreRequest extends ApiRequest
 
     public function messages() {
         return [
-            'memo.required' => ':attributeは100文字以内でお願いします。',
+            'memo.max:100' => ':attributeは100文字以内でお願いします。',
         ];
     }
 

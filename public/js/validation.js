@@ -1,7 +1,7 @@
 $(function()
 {
     weightAndRepValidation();
-    memoValidation();
+    eventMemoValidation();
 });
 
 
@@ -27,7 +27,7 @@ function weightAndRepValidation()
     });
 }
 
-function memoValidation(){
+function eventMemoValidation(){
 
     $('.remodal-memo').on('keyup', function(){
         var add_btn = $(".store-event-btn");
