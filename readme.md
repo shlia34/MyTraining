@@ -18,7 +18,6 @@ stage_userは各ユーザーの筋トレ種目リストみたいなので、mode
 - jqueryui-touch-punch(jqueryuiのタッチイベントをスマホでも動かす)
 - fullcalendar(トップページのカレンダー表示)
 - remodal(イベント作成とトレーニングを押したときのモーダル)
-- jqueryui-touch-punch(jqueryuiのタッチイベントをスマホでも動かす)
 - Bootstrap(見た目を整えた)
 
 ## その他備考とか
