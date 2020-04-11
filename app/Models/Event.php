@@ -32,21 +32,21 @@ class Event extends Model
         return $this->hasMany('App\Models\Training','event_id', 'event_id');
     }
 
-    public function getMemo()
+    public function getMemoAttribute($value)
     {
-        return $this->memo ? "※".$this->memo : "";
+        return $value ? "※".$value : "";
     }
 
     public function getDataForJson()
     {
         $data["id"] = $this->event_id;
         $data["part_code"] = $this->part_code;
-        $data["backgroundColor"] = $this->getPartColor();
-        $data["borderColor"] = $this->getPartColor();
+        $data["backgroundColor"] = $this->part_color;
+        $data["borderColor"] = $this->part_color;
         $data["start"] = $this->date;
-        $data["title"] = $this->getPartName();
-        $data["stage_name"] = $this->getStageName();
-        $data["weight_and_rep"] = $this->getWeightAndRep();
+        $data["title"] = $this->part_name;
+        $data["stage_name"] = $this->stage_name;
+        $data["weight_and_rep"] = $this->weight_and_rep;
 
         return $data;
     }

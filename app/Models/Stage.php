@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use App\Defs\DefPart;
-use App\Defs\DefPof;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\GetPartData;
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Stage extends Model
 {
-    use GetPartData,ScopeOwn;
+    use ScopeOwn;
 
     public $incrementing = false;
     protected $primaryKey = 'stage_id';
@@ -36,11 +34,6 @@ class Stage extends Model
     public function trainings()
     {
         return $this->hasMany('App\Models\Training','stage_id', 'stage_id');
-    }
-
-    public function getPofName()
-    {
-        return DefPof::POF_LIST[$this->pof_code];
     }
 
     public function scopeArrayForSelectBox($query,$partCode){
