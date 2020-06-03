@@ -24,7 +24,7 @@ class TrainingController extends Controller
 
         $returnData =  ['training_id'=>$training->training_id,
                         'stage_id'=>$training->stage_id,
-                        'stage_name'=>$training->getStageName() ];
+                        'stage_name'=>$training->stage_name ];
 
         return response()->json($returnData);
     }

@@ -3,5 +3,4 @@
 @else
     <li data-training_id = {{$training->training_id}} class = "{{$type}}-training">{{$training->weight_and_rep }}</li>
 @endif
-
 {{-- event.showとstage.showで使ってる --}}

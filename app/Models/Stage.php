@@ -36,6 +36,7 @@ class Stage extends Model
         return $this->hasMany('App\Models\Training','stage_id', 'stage_id');
     }
 
+    //todo ここも変えたい
     public function scopeArrayForSelectBox($query,$partCode){
         $stageList = $query->where('part_code',$partCode)->orderBy('sort_no')->get();
 
@@ -46,6 +47,7 @@ class Stage extends Model
         return $array;
     }
 
+    //todo ここが変わる。絶対直した方がいい
     public function scopeByPart($query){
         $userStage = $query->orderBy("sort_no")->get()->groupBy('part_code');
         $leftStage = Stage::all()->diff(Auth::user()->stages)->groupBy('part_code');

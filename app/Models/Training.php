@@ -30,6 +30,8 @@ class Training extends Model
 
     protected $perPage = 8;
 
+
+    //todo ここが変わる
     public function scopeGroupByStage($query){
         return $query->oldest()->get()->groupBy('stage_id');
     }
@@ -51,6 +53,7 @@ class Training extends Model
         ])->leftJoin('events','trainings.event_id', '=', 'events.event_id');
     }
 
+    // todo ここ変わる。groupBy('date')のとこ
     public function scopePaginator($query,$request,$stageId){
         $trainings = $query->joinEvent()->oldest()->own()->get()->groupBy('date')->sortKeysDesc();
 
