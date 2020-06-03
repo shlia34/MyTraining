@@ -51,6 +51,7 @@ class Event extends Model
         return $data;
     }
 
+    //todo ここが変わる
     public function scopeArrayForJson($query)
     {
         $events = $query->get();
