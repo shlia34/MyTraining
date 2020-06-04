@@ -1,62 +1,59 @@
 @startuml
 entity "users" {
-    + user_id [PK]
+    + id [PK]
     ==
     name
     weight
 }
 
 
-
-entity "events" {
-    + event_id [PK]
+entity "programs" {
+    + id [PK]
     ==
     #user_id
-    partcode
+    muscle_code
     date
     memo
 }
 
-
-
-entity "event_stage" {
-    + seq [PK]
+entity "menus" {
+    + id [PK]
     ==
-    #event_id
-    #stage_id
+    #program_id
+    #exercise_id
 }
 
-entity "trainings" {
-    + training_id [PK]
+entity "routines" {
+    + id [PK]
     ==
-    weight
-    rep
-    is_max
-}
-
-entity "stage_user" {
-    + seq [PK]
-    ==
-    #stage_id
+    #exercise_id
     #user_id
     sort_no
 }
 
-
-entity "stages" {
-    + stage_id [PK]
+entity "exercises" {
+    + id [PK]
     ==
     name
-    part_code
-    pof_code
-    memo
+    muscle_code
 }
 
+entity "workouts" {
+    + id [PK]
+    ==
+    #menu_id
+    weight
+    rep
+    is_best
+}
 
-users --o{ events
-events --o{ event_stage
-event_stage --o{ trainings
-users --o{ stage_user
-stage_user --o{ stages
-stages --o{ event_stage
+users --o{ programs
+programs --o{ menus
+menus --o{ workouts
+users --o{ routines
+exercises --o{ routines
+exercises --o{ menus
+
+
+
 @enduml

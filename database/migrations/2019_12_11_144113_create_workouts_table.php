@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrainingsTable extends Migration
+class CreateWorkoutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateTrainingsTable extends Migration
      */
     public function up()
     {
-        //todo weightとrepを数字に変えた方がよかったのではないか
-        Schema::create('trainings', function (Blueprint $table) {
-            $table->string('training_id', 34)->primary();
-            $table->string('event_id',34);
-            $table->string('stage_id', 34);
+        Schema::create('workouts', function (Blueprint $table) {
+            $table->string('id', 34)->primary();
+            $table->string('menu_id',34);
+            $table->foreign('menu_id')->references('id')->on('menus');
             $table->float('weight', 4, 1);
             $table->char('rep',2);
             $table->boolean('is_max');
@@ -32,6 +31,6 @@ class CreateTrainingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trainings');
+        Schema::dropIfExists('workouts');
     }
 }
