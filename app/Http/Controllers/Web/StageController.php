@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Http\Request\Web\Stage\StoreRequest;
-use App\Models\Stage;
+use App\Models\Exercise;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +17,10 @@ class StageController extends Controller
      */
     public function index(Request $request)
     {
-        $stagesByPart  = Auth::user()->stages()->byPart();
+        $stagesByPart  = Auth::user()->exercises()->byPart();
         $firstPartCode =  $request->all()["partCode"] ?? "01";
 
-        return view("stage.index")->with(['stagesByPart' => $stagesByPart,'firstPartCode'=>$firstPartCode]);
+        return view("exercise.index")->with(['stagesByPart' => $stagesByPart,'firstPartCode'=>$firstPartCode]);
     }
 
     /**
@@ -31,10 +31,10 @@ class StageController extends Controller
      */
     public function show(Request $request,$stageId)
     {
-        $stage = Stage::findOrFail($stageId);
+        $stage = Exercise::findOrFail($stageId);
         $paginatorTrainings = $stage->trainings()->paginator($request,$stageId);
 
-        return view("stage.show")->with([ 'stage' => $stage, 'trainings'=>$paginatorTrainings ]);
+        return view("exercise.show")->with([ 'stage' => $stage, 'trainings'=>$paginatorTrainings ]);
     }
 
     /**
@@ -43,7 +43,7 @@ class StageController extends Controller
      */
     public function create()
     {
-        return view("stage.create");
+        return view("exercise.create");
     }
 
     /**
@@ -53,10 +53,10 @@ class StageController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $insertData = $request->only('name','part_code','pof_code','memo')
-                    + ['stage_id' => $this->generateId('ST') ];
+        $insertData = $request->only('name','muscle_code')
+                    + ['id' => $this->generateId('EX') ];
 
-        Stage::create($insertData);
+        Exercise::create($insertData);
 
         return redirect("/stages/create");
     }

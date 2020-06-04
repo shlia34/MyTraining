@@ -22,9 +22,13 @@ class User extends Authenticatable
     public $incrementing = false;
     protected $keyType = 'string';
 
-//    public function Stages(){
-//        return $this->belongsToMany('App\Models\Stage', 'stage_user','user_id','stage_id')->withPivot('sort_no');
-//    }
+    public function Exercises(){
+        return $this->belongsToMany('App\Models\Exercise', 'routines','user_id','exercise_id')->withPivot('sort_no');
+    }
+
+    public function programs(){
+        return $this->hasMany('App\Models\User','id', 'user_id');
+    }
 
     /**
      * The attributes that are mass assignable.

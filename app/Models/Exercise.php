@@ -10,25 +10,22 @@ use Illuminate\Support\Facades\Auth;
 /**
  * 種目のモデルクラス
  *
- * @property string stage_id  種目ID
+ * @property string id  種目ID
  * @property string name      種目名
- * @property string part_code 部位コード
- * @property string pof_code  POFコード(POF=Position of Flexion,負荷がかかるタイミングのこと)
- * @property string memo      メモ
+ * @property string muscle_code 部位コード
  */
 
-class Stage extends Model
+class Exercise extends Model
 {
     use ScopeOwn;
 
     public $incrementing = false;
-    protected $primaryKey = 'stage_id';
     protected $keyType = 'string';
 
-    protected $fillable = [ 'stage_id','name','part_code','pof_code','memo' ];
+    protected $fillable = [ 'id','name','muscle_code', ];
 
     public function Users(){
-        return $this->belongsToMany('App\Models\User', 'stage_user','stage_id','user_id');
+        return $this->belongsToMany('App\Models\User', 'routines','exercise_id','user_id');
     }
 
     public function trainings()
@@ -50,7 +47,7 @@ class Stage extends Model
     //todo ここが変わる。絶対直した方がいい
     public function scopeByPart($query){
         $userStage = $query->orderBy("sort_no")->get()->groupBy('part_code');
-        $leftStage = Stage::all()->diff(Auth::user()->stages)->groupBy('part_code');
+        $leftStage = Exercise::all()->diff(Auth::user()->stages)->groupBy('part_code');
 
         $partCodes =  array_keys( DefPart::PART_NAME_LIST );
 
