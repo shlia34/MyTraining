@@ -13,7 +13,6 @@ function storeEvent(calendar)
 
     apiStoreEvent(data, function(result){
 
-        console.log(result);
         calendar.addEvent({
             id:result['id'],
             title:result['title'],

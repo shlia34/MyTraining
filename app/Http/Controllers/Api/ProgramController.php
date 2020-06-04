@@ -33,8 +33,9 @@ class ProgramController extends Controller
     public function showLinks(ShowLinksRequest $request)
     {
         $date = $request->getFormattedData()['date'];
-        $eventsJson = Program::joinMaxTraining()->where('date', $date)->Own()->oldest('muscle_code')->arrayForJson();
-        return response()->json([ "date" => $date, "events" => $eventsJson ]);
+        $programs = Program::joinMaxTraining()->where('date', $date)->Own()->oldest('muscle_code')->get();
+
+        return response()->json([ "date" => $date, "events" => ProgramResource::collection($programs) ]);
     }
 
     /**
@@ -60,9 +61,9 @@ class ProgramController extends Controller
     public function updateDate(UpdateDateRequest $request)
     {
         $data = $request->getFormattedData();
-        $event = Program::find($data['id']);
-        $event->date = $data['newDate'];
-        $event->save();
+        $program = Program::find($data['id']);
+        $program->date = $data['newDate'];
+        $program->save();
         return null;
     }
 

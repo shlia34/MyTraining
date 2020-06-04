@@ -27,26 +27,12 @@
                 <p>部位</p>
                 @foreach(App\Defs\DefPart::PART_NAME_LIST as $code => $name )
                     <span class = 'radio-part'>
-                        {{Form::label('part_code', $name ) }}
-                        {{Form::radio('part_code', $code,false)}}
+                        {{Form::label('muscle_code', $name ) }}
+                        {{Form::radio('muscle_code', $code,false)}}
                     </span>
                 @endforeach
             </div>
 
-            <div>
-                <p>POF</p>
-                @foreach(App\Defs\DefPof::POF_LIST as $code => $name )
-                    <div>
-                        {{Form::label('pof_code', $name ) }}
-                        {{Form::radio('pof_code', $code,false)}}
-                    </div>
-                @endforeach
-            </div>
-
-            <div>
-                <p>メモ</p>
-                {{Form::textarea('memo', null, ['size' => '40x4'])}}
-            </div>
             <div>
                 {{Form::submit('送信')}}
             </div>
