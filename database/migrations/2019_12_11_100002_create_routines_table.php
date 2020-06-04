@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStageUserTable extends Migration
+class CreateRoutinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateStageUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('stage_user', function (Blueprint $table) {
-            $table->bigIncrements('seq');
+        Schema::create('routines', function (Blueprint $table) {
+            $table->string('id', 34)->primary();
             $table->string('user_id', 34);
-            $table->string('stage_id', 34);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('exercise_id', 34);
+            $table->foreign('exercise_id')->references('id')->on('exercises');
             $table->integer('sort_no')->unsigned();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ class CreateStageUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stage_user');
+        Schema::dropIfExists('routines');
     }
 }
