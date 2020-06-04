@@ -6,12 +6,14 @@
 function storeEvent(calendar)
 {
     var data = {
-        "part_code":$(".remodal-part_code").val(),
+        "muscle_code":$(".remodal-part_code").val(),
         "memo":$(".remodal-memo").val(),
         "date":$(".remodal-date").val(),
     };
 
     apiStoreEvent(data, function(result){
+
+        console.log(result);
         calendar.addEvent({
             id:result['id'],
             title:result['title'],

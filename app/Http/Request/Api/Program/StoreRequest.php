@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Request\Api\Event;
+namespace App\Http\Request\Api\Program;
 
 use App\Http\Request\Api\ApiRequest;
 
@@ -9,7 +9,7 @@ class StoreRequest extends ApiRequest
     public function rules()
     {
         return [
-            'part_code' => 'required',
+            'muscle_code' => 'required',
             //2文字以内で数字のバリデーションもつける
             'memo' => 'max:100',
             'date' => 'required|date',
@@ -19,7 +19,7 @@ class StoreRequest extends ApiRequest
     public function attributes()
     {
         return [
-            'part_code' => 'part_code',
+            'muscle_code' => 'muscle_code',
             'memo' => 'メモ',
             'date' => 'date'
         ];
