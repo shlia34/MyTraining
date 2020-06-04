@@ -18,13 +18,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
 
-    public function Stages(){
-        return $this->belongsToMany('App\Models\Stage', 'stage_user','user_id','stage_id')->withPivot('sort_no');
-    }
+//    public function Stages(){
+//        return $this->belongsToMany('App\Models\Stage', 'stage_user','user_id','stage_id')->withPivot('sort_no');
+//    }
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_id','name', 'email', 'password',
+        'id','name', 'email', 'password',
     ];
 
     /**
