@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Request\Api\Event;
+namespace App\Http\Request\Api\Program;
 
 class SetRequest extends IsoDateRequest
 {

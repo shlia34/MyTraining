@@ -17,9 +17,9 @@ Route::group(['middleware' => 'auth'], function () {
     //web
     Route::group(['namespace' => 'Web'],function(){
         //event
-        Route::get('/', 'EventController@index');
-        Route::get('/events/{event_id}', 'EventController@show');
-        Route::get('/events/{event_id}/destroy', 'EventController@destroy');
+        Route::get('/', 'ProgramController@index');
+        Route::get('/events/{event_id}', 'ProgramController@show');
+        Route::get('/events/{event_id}/destroy', 'ProgramController@destroy');
         //stage
         Route::group(['prefix' => 'stages'],function (){
             Route::get('/index', 'StageController@index');
@@ -41,10 +41,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['namespace' => 'Api','prefix' => 'api'], function () {
         //event api
         Route::group(['prefix' => 'events'], function () {
-            Route::get('/set', 'EventController@set');
-            Route::post('/showLinks', 'EventController@showLinks');
-            Route::post('/store', 'EventController@store');
-            Route::post('/updateDate', 'EventController@updateDate');
+            Route::get('/set', 'ProgramController@set');
+            Route::post('/showLinks', 'ProgramController@showLinks');
+            Route::post('/store', 'ProgramController@store');
+            Route::post('/updateDate', 'ProgramController@updateDate');
         });
         //training ap
         Route::group(['prefix' => 'trainings'], function () {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Request\Api\Event;
+namespace App\Http\Request\Api\Program;
 
-class UpdateDateRequest extends IsoDateRequest
+class ShowLinksRequest extends IsoDateRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,16 +12,14 @@ class UpdateDateRequest extends IsoDateRequest
     public function rules()
     {
         return [
-            'id' => 'required',
-            'newDate' => 'required|date',
+            'date' => 'required|date',
         ];
     }
 
     protected function formatData()
     {
         $original = $this->validationData();
-        $data['id'] = $original['id'];
-        $data['newDate'] = $this->formatIsoDate( $original['newDate'] );
+        $data['date'] = $this->formatIsoDate($original['date']);
         return $data;
     }
 
