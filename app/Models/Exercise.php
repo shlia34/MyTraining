@@ -25,7 +25,7 @@ class Exercise extends Model
     protected $fillable = [ 'id','name','muscle_code', ];
 
     public function Users(){
-        return $this->belongsToMany('App\Models\User', 'routines','exercise_id','user_id');
+        return $this->belongsToMany('App\Models\User', 'routines');
     }
 
     public function trainings()
@@ -46,9 +46,9 @@ class Exercise extends Model
 
     //todo ここが変わる。絶対直した方がいい
     public function scopeByPart($query){
-        $userStage = $query->orderBy("sort_no")->get()->groupBy('part_code');
-        $leftStage = Exercise::all()->diff(Auth::user()->stages)->groupBy('part_code');
+        $userStage = $query->orderBy("sort_no")->get()->groupBy('muscle_code');
 
+        $leftStage = Exercise::all()->diff(Auth::user()->exercises)->groupBy('muscle_code');
         $partCodes =  array_keys( DefPart::PART_NAME_LIST );
 
         $array = [];

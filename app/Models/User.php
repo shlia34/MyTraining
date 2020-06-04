@@ -22,8 +22,8 @@ class User extends Authenticatable
     public $incrementing = false;
     protected $keyType = 'string';
 
-    public function Exercises(){
-        return $this->belongsToMany('App\Models\Exercise', 'routines','user_id','exercise_id')->withPivot('sort_no');
+    public function exercises(){
+        return $this->belongsToMany('App\Models\Exercise','routines');
     }
 
     public function programs(){
