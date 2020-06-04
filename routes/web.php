@@ -22,12 +22,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/events/{event_id}/destroy', 'ProgramController@destroy');
         //stage
         Route::group(['prefix' => 'stages'],function (){
-            Route::get('/index', 'StageController@index');
-            Route::get('/create', 'StageController@create');
-            Route::post('/store', 'StageController@store');
-            Route::get('/{stage_id}', 'StageController@show');
-            //Route::get('/stage/{stage_id}/edit', 'StageController@edit');
-            //Route::post('/stage/update', 'StageController@update');
+            Route::get('/index', 'ExerciseController@index');
+            Route::get('/create', 'ExerciseController@create');
+            Route::post('/store', 'ExerciseController@store');
+            Route::get('/{stage_id}', 'ExeciserController@show');
+            //Route::get('/stage/{stage_id}/edit', 'ExerciseController@edit');
+            //Route::post('/stage/update', 'ExerciseController@update');
         });
         //csv
         Route::group(['prefix' => 'csv'],function (){
@@ -58,11 +58,11 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::post('/check', 'TrainingController@checkMax');
             });
         });
-        //choice api
+        //Routine api
         Route::group(['prefix' => 'choices'],function (){
-            Route::post('/store', 'ChoiceController@store');
-            Route::post('/destroy', 'ChoiceController@destroy');
-            Route::post('/sort', 'ChoiceController@sort');
+            Route::post('/store', 'RoutineController@store');
+            Route::post('/destroy', 'RoutineController@destroy');
+            Route::post('/sort', 'RoutineController@sort');
         });
 
     });

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Choice;
+use App\Models\Routine;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class ChoiceController extends Controller
+class RoutineController extends Controller
 {
     /**
      * storeする時の臨時の値
@@ -23,11 +23,13 @@ class ChoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $insertData = $request->only('stage_id')
-                    + ['user_id' => Auth::user()->user_id]
+
+        $insertData = $request->only('exercise_id')
+                    + ['id' => $this->generateId('RO')]
+                    + ['user_id' => Auth::user()->id]
                     + ['sort_no' => self::DEFAULT_SORT_NO];
 
-        Choice::create($insertData);
+        Routine::create($insertData);
 
         return null;
     }
@@ -39,9 +41,10 @@ class ChoiceController extends Controller
      */
     public function destroy(Request $request)
     {
-        $stageId = $request->only("stage_id");
-        $choice = Choice::whereStage($stageId)->own()->first();
-        $choice->delete();
+        $exerciseId = $request->only("exercise_id");
+        $routine = Routine::whereExercise($exerciseId)->own()->first();
+
+        $routine->delete();
 
         return null;
     }
@@ -53,11 +56,11 @@ class ChoiceController extends Controller
      */
     public function sort(Request $request)
     {
-        $stageIds =  $request["stage_ids"] ?? [];
-        foreach ($stageIds as $index => $stageId){
-                $choice = Choice::whereStage($stageId)->own()->first();
-                $choice->sort_no = $index;
-                $choice->save();
+        $stageIds =  $request["exercise_ids"] ?? [];
+        foreach ($stageIds as $index => $exerciseId){
+                $routine = Routine::whereExercise($exerciseId)->own()->first();
+                $routine->sort_no = $index;
+                $routine->save();
         }
         return null;
     }

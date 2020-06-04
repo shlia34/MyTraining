@@ -16,7 +16,7 @@
         @endif
 
         <div class = "input-form">
-            {{Form::open(["action" => "Web\StageController@store"])}}
+            {{Form::open(["action" => "Web\ExerciseController@store"])}}
 
             <div>
                 {{Form::label('name', '種目名')}}

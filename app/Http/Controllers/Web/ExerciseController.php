@@ -8,7 +8,7 @@ use App\Models\Exercise;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class StageController extends Controller
+class ExerciseController extends Controller
 {
     /**
      * 一覧画面
@@ -17,6 +17,7 @@ class StageController extends Controller
      */
     public function index(Request $request)
     {
+        //todo vueで書くときにbyPart()をなんとかする
         $stagesByPart  = Auth::user()->exercises()->byPart();
         $firstPartCode =  $request->all()["partCode"] ?? "01";
 

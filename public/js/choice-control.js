@@ -32,7 +32,7 @@ $(function() {
  * @param ui
  */
 function storeChoice(event, ui) {
-    var data = { "stage_id":ui.item.data('stage_id') };
+    var data = { "exercise_id":ui.item.data('exercise_id') };
 
     apiStoreChoice(data,function(result){
         sortChoice(event);
@@ -45,7 +45,7 @@ function storeChoice(event, ui) {
  * @param ui
  */
 function destroyChoice(event, ui) {
-    var data = { "stage_id":ui.item.data('stage_id') };
+    var data = { "exercise_id":ui.item.data('exercise_id') };
 
     apiDestroyChoice(data,function(result){});
 }
@@ -60,10 +60,10 @@ function sortChoice(event){
 
     var stageIds = [];
     htmlArr.forEach(function(item) {
-        stageIds.push(item.getAttribute("data-stage_id"));
+        stageIds.push(item.getAttribute("data-exercise_id"));
     });
 
-    var data = { stage_ids:stageIds };
+    var data = { exercise_ids:stageIds };
 
     apiSortChoice(data,function(result){});
 }
