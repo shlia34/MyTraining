@@ -31,6 +31,10 @@ class Menu extends Model
         return $this->belongsTo('App\Models\Program');
     }
 
+    public function exercise(){
+        return $this->belongsTo('App\Models\Exercise');
+    }
+
     public function scopeJoinExercise($query){
         return $query->addSelect([
             'menus.*',
