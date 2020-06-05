@@ -24,13 +24,12 @@ class Exercise extends Model
 
     protected $fillable = [ 'id','name','muscle_code', ];
 
-    public function Users(){
-        return $this->belongsToMany('App\Models\User', 'routines');
+    public function menus(){
+        return $this->hasMany('App\Models\Menu')->joinProgram();
     }
 
-    public function trainings()
-    {
-        return $this->hasMany('App\Models\Workout','stage_id', 'stage_id');
+    public function workouts(){
+        return $this->hasManyThrough('App\Models\Workout','App\Models\Menu');
     }
 
     public function scopeArrayForSelectBox($query,$partCode){

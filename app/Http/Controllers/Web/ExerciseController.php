@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Http\Request\Web\Stage\StoreRequest;
 use App\Models\Exercise;
+use App\Models\Menu;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
+
     /**
      * 一覧画面
      * @param Request $request
@@ -30,12 +32,12 @@ class ExerciseController extends Controller
      * @param $stageId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Request $request,$stageId)
+    public function show($exerciseId)
     {
-        $stage = Exercise::findOrFail($stageId);
-        $paginatorTrainings = $stage->trainings()->paginator($request,$stageId);
+        $exercise = Exercise::findOrFail($exerciseId);
+        $menus = $exercise->menus()->own()->with(['workouts'])->paginate();
 
-        return view("exercise.show")->with([ 'stage' => $stage, 'trainings'=>$paginatorTrainings ]);
+        return view("exercise.show")->with([ 'exercise' => $exercise, 'menus' => $menus]);
     }
 
     /**
