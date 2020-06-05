@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Program;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Program extends JsonResource
+class Set extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,9 +20,6 @@ class Program extends JsonResource
         $data["borderColor"] = $this->part_color;
         $data["start"] = $this->date;
         $data["title"] = $this->part_name;
-        //todo いったんかわす
-//        $data["stage_name"] = $this->stage_name;
-//        $data["weight_and_rep"] = $this->weight_and_rep;
         return $data;
     }
 }

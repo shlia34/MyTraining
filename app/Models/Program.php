@@ -18,7 +18,7 @@ use App\Models\Traits\ScopeOwn;
 
 class Program extends Model
 {
-    use GetTrainingData,GetPartData,ScopeOwn;
+    use GetPartData,ScopeOwn;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -37,25 +37,13 @@ class Program extends Model
         return $this->hasManyThrough('App\Models\Workout','App\Models\Menu');
     }
 
+    public function maxWorkout(){
+        return $this->workouts()->where("is_max", 1);
+    }
+
     public function getMemoAttribute($value)
     {
         return $value ? "※".$value : "";
-    }
-
-    public function scopeJoinMaxTraining($query){
-//        return $query->addSelect([
-//            'programs.program_id',
-//            'programs.part_code',
-//            'programs.date',
-//            'trainings.stage_id',
-//            'trainings.weight',
-//            'trainings.rep',
-//        ])->leftJoin('trainings', function($join){
-//                $join->on('programs.program_id', '=', 'trainings.program_id')->where("is_max", 1);
-//        });
-
-        //todo 一旦エラー回避
-        return $query;
     }
 
 }

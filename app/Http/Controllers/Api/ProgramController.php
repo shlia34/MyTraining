@@ -9,7 +9,9 @@ use App\Http\Request\Api\Program\UpdateDateRequest;
 use App\Http\Request\Api\Program\StoreRequest;
 use App\Models\Program;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\Program as ProgramResource;
+use App\Http\Resources\Program\Set as SetProgramResource;
+use App\Http\Resources\Program\ShowLinks as ShowLinksProgramResource;
+
 
 class ProgramController extends Controller
 {
@@ -20,9 +22,9 @@ class ProgramController extends Controller
     public function set(SetRequest $request)
     {
         $dates = $request->getFormattedData();
-        $programs = Program::whereBetween('date', [ $dates['start'], $dates['end'] ])->Own()->get();
+        $programs = Program::whereBetween('date', [ $dates['start'], $dates['end'] ])->own()->get();
 
-        return ProgramResource::collection($programs);
+        return SetProgramResource::collection($programs);
     }
 
     /**
@@ -33,9 +35,9 @@ class ProgramController extends Controller
     public function showLinks(ShowLinksRequest $request)
     {
         $date = $request->getFormattedData()['date'];
-        $programs = Program::joinMaxTraining()->where('date', $date)->Own()->oldest('muscle_code')->get();
+        $programs = Program::where('date', $date)->Own()->oldest('muscle_code')->with(['maxWorkout'])->get();
 
-        return response()->json([ "date" => $date, "events" => ProgramResource::collection($programs) ]);
+        return response()->json([ "date" => $date, "events" => ShowLinksProgramResource::collection($programs) ]);
     }
 
     /**
@@ -50,7 +52,7 @@ class ProgramController extends Controller
 
         $program =  Program::create($insertData);
 
-        return new ProgramResource($program);
+        return new SetProgramResource($program);
     }
 
     /**

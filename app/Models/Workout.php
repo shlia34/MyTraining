@@ -28,4 +28,24 @@ class Workout extends Model
 
     protected $perPage = 8;
 
+    public function menu(){
+        return $this->belongsTo('App\Models\Menu');
+    }
+
+    public function getExerciseNameAttribute()
+    {
+        return $this->menu->exercise->name;
+    }
+
+    public function getWeightAndRepAttribute(){
+        if( ($this->weight !== null) && ($this->rep !== null) ){
+            return $this->weight."kg". " * " .$this->rep."rep";
+        }else{
+            return "";
+        }
+    }
+
+
+
+
 }

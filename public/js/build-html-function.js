@@ -5,7 +5,11 @@
  * @returns {string}
  */
 function buildLinksEventHtml(value) {
-    var html =`<li><a href='/events/${value["id"]}'>${value["title"]}</a>${value["stage_name"]} ${value["weight_and_rep"]}</li>`;
+    var html =`<li><a href='/events/${value["id"]}'>${value["title"]}</a>`;
+    if(value["maxWorkout"] !== null){
+        html += `${value["maxWorkout"]["exerciseName"]} ${value["maxWorkout"]["weightAndRep"]}</li>`;
+    }
+
     return html;
 }
 //以下training
