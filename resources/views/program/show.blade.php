@@ -17,7 +17,7 @@
                 <label for="form-rep">rep</label>
             </div>
             @if($stageArray === [])
-                <a href ="/stages/index?partCode={{$thisEvent->part_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
+                <a href ="/stages/index?partCode={{$thisProgram->muscle_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
             @else
                 <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
             @endif
@@ -25,14 +25,14 @@
     </div>
 
     <div class = "trainings-index  pb-4">
-        @include('partials.event', ['event' => $thisEvent, 'trainings' => $thisTrainings, 'type' => 'this' ])
+        @include('partials.program', ['program' => $thisProgram, 'type' => 'this' ])
         <div>
-            <a href="/events/{{$thisEvent->event_id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
+            <a href="/events/{{$thisProgram->id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
             <div class="float-right"><a  href={{url()->previous()}}><button>戻る</button></a></div>
         </div>
 
-        @isset($previousEvent)
-            @include('partials.event',['event'=>$previousEvent,'trainings'=>$previousTrainings,'type'=>'previous'])
+        @isset($previousProgram)
+            @include('partials.program',['program'=>$previousProgram,'type'=>'previous'])
         @endisset
     </div>
 </div>

@@ -30,16 +30,15 @@ class Exercise extends Model
 
     public function trainings()
     {
-        return $this->hasMany('App\Models\Training','stage_id', 'stage_id');
+        return $this->hasMany('App\Models\Workout','stage_id', 'stage_id');
     }
 
-    //todo ここも変えたい
     public function scopeArrayForSelectBox($query,$partCode){
-        $stageList = $query->where('part_code',$partCode)->orderBy('sort_no')->get();
+        $routineList = $query->where('muscle_code',$partCode)->orderBy('sort_no')->get();
 
         $array =  [];
-        foreach ($stageList as $stage){
-            $array[$stage->stage_id] = $stage->name;
+        foreach ($routineList as $exercise){
+            $array[$exercise->exercise_id] = $exercise->name;
         }
         return $array;
     }

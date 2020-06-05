@@ -24,15 +24,12 @@ class ProgramController extends Controller
      */
     public function show(string $programId)
     {
-        $thisProgram = Program::findOrFail($programId);
-        $thisTrainings = $thisProgram->trainings()->groupByStage();
+        $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first();
+        $previousProgram = Program::where('muscle_code',$thisProgram->muscle_code)->Own()->whereDate("date", "<", $thisProgram->date)->latest("date")->with(['menus.workouts'])->first();
 
-        $previousProgram = Program::where('part_code',$thisProgram->part_code)->Own()->whereDate("date", "<", $thisProgram->date)->latest("date")->first();
-        $previousProgram !== null ? $previousTrainings = $previousProgram->trainings()->groupByStage() : $previousTrainings = [];
+        $exerciseArray = Auth::user()->exercises()->arrayForSelectBox($thisProgram->muscle_code);
 
-        return view('program.show')->with(['thisProgram' => $thisProgram, 'thisTrainings'=> $thisTrainings,
-                                              'previousProgram' => $previousProgram, 'previousTrainings' => $previousTrainings,
-                                              'stageArray' => Auth::user()->stages()->arrayForSelectBox($thisProgram->part_code) ]);
+        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'stageArray' =>$exerciseArray ]);
     }
 
     /**
