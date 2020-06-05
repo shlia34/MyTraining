@@ -7,7 +7,7 @@
 function buildLinksEventHtml(value) {
     var html =`<li><a href='/events/${value["id"]}'>${value["title"]}</a>`;
     if(value["maxWorkout"] !== null){
-        html += `${value["maxWorkout"]["exerciseName"]} ${value["maxWorkout"]["weightAndRep"]}</li>`;
+        html += `${value["maxWorkout"]["exercise_name"]} ${value["maxWorkout"]["weightAndRep"]}</li>`;
     }
 
     return html;

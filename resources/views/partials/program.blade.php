@@ -1,7 +1,7 @@
 <a href="/events/{{$program->id}}">
     <div class = "event-title">{{$program->date}}の{{$program->part_name}}トレ</div>
 </a>
-<div class="{{$type}}-event-show" data-event_id= {{$program->id}}>
+<div class="{{$type}}-event-show" data-program_id= {{$program->id}}>
     <span class = "event-memo">{{$program->memo}}</span>
     <div class = "{{$type}}-trainings">
         @foreach($program->menus as $menu)
