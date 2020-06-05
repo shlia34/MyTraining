@@ -47,7 +47,7 @@ class ProgramController extends Controller
     public function store(StoreRequest $request)
     {
         $insertData = $request->only('date', 'muscle_code', 'memo')
-                    + ['id' => $this->generateId('EV')]
+                    + ['id' => $this->generateId('PR')]
                     + ['user_id' => Auth::user()->id];
 
         $program =  Program::create($insertData);
