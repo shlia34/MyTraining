@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Workout as WorkoutResource;
 use Illuminate\Http\Request;
 use App\Models\Workout;
+use App\Models\Program;
+use App\Models\Menu;
 
 class TrainingController extends Controller
 {
@@ -12,21 +15,30 @@ class TrainingController extends Controller
     /**
      * 保存
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        $insertData = $request->only('event_id','stage_id','weight','rep')
-                    + ['training_id' => $this->generateId('TR')]
-                    + ['is_max' => 0];
+        $program = Program::find($request['program_id']);
+        $menu = $program->menus()->where('exercise_id',$request['exercise_id'])->first();
 
-        $training = Workout::create($insertData);
+        //todo トランザクション機能を使ってみる
+        if($menu === null){
+            $menuInsertData = $request->only('exercise_id','program_id')
+                            + ['id' => $this->generateId('ME')];
 
-        $returnData =  ['training_id'=>$training->training_id,
-                        'stage_id'=>$training->stage_id,
-                        'stage_name'=>$training->stage_name ];
+            $menu = Menu::create($menuInsertData);
+            //menuで作成作成
+        }
 
-        return response()->json($returnData);
+        $workoutInsertData = $request->only('weight','rep')
+                            + ['id' => $this->generateId('WO')]
+                            + ['menu_id' => $menu->id]
+                            + ['is_max' => 0];
+
+        $workout = Workout::create($workoutInsertData);
+        //todo ここまで
+
+        return new WorkoutResource($workout);
     }
 
     /**

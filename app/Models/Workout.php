@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Traits\GetTrainingData;
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Workout extends Model
 {
-    use GetTrainingData,ScopeOwn;
+    use ScopeOwn;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -35,6 +34,11 @@ class Workout extends Model
     public function getExerciseNameAttribute()
     {
         return $this->menu->exercise->name;
+    }
+
+    public function getExerciseIdAttribute()
+    {
+        return $this->menu->exercise->id;
     }
 
     public function getWeightAndRepAttribute(){

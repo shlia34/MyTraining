@@ -4,7 +4,7 @@
 <div class = "wrapper">
 
     <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
-        {{ Form::select('stage_id', $stageArray,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
+        {{ Form::select('exercise_id', $exerciseArr,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
 
         <div class="forms">
             <div class="md-form m-0 ml-3 w-25">
@@ -16,7 +16,7 @@
                 <input type="number"  id="form-rep" class="form-rep form-control">
                 <label for="form-rep">rep</label>
             </div>
-            @if($stageArray === [])
+            @if($exerciseArr === [])
                 <a href ="/stages/index?partCode={{$thisProgram->muscle_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
             @else
                 <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>

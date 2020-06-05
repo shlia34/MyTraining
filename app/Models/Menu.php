@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 
 /**
  * 実施した種目(exercisesとprogramsの中間テーブル)のモデルクラス
