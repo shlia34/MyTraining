@@ -12,6 +12,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
+    //todo これmodelのコンストラクタに書いてみる
     //todo uuid生成をみ直す。衝突の可能性が高い？
     protected function generateId($prefix){
         $uuid = md5(uniqid());

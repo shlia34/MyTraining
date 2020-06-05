@@ -1,4 +1,4 @@
-<a href="/events/{{$program->event_id}}">
+<a href="/events/{{$program->id}}">
     <div class = "event-title">{{$program->date}}の{{$program->part_name}}トレ</div>
 </a>
 <div class="{{$type}}-event-show" data-event_id= {{$program->id}}>
@@ -9,7 +9,7 @@
                 <span class = "mb-0">
                     <a class = "card-title" href="/stages/{{$menu->exercise_id}}">{{ $menu->name }}</a>
                 </span>
-                <ol data-stage_id = {{ $menu->exercise_id }} class = "ol-training mb-0">
+                <ol data-menu_id = {{ $menu->id }} class = "ol-training mb-0">
                     @foreach($menu->workouts as $workout)
                         @include('partials.workout', [ 'group' => $menu->workouts, 'type' => $type ])
                     @endforeach

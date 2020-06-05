@@ -25,13 +25,15 @@ class ProgramController extends Controller
     public function show(string $programId)
     {
         //todo findorfailsにしなきゃ
+
+        //todo これどうやってmenuをsortすんねん
         $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first();
         $previousProgram = Program::where('muscle_code',$thisProgram->muscle_code)->Own()->whereDate("date", "<", $thisProgram->date)->latest("date")->with(['menus.workouts'])->first();
 
         //todo arrayForSelectBoxなんとかしたい
         $exerciseArray = Auth::user()->exercises()->arrayForSelectBox($thisProgram->muscle_code);
 
-        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'stageArray' =>$exerciseArray ]);
+        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'exerciseArr' =>$exerciseArray ]);
     }
 
     /**
@@ -41,6 +43,7 @@ class ProgramController extends Controller
      */
     public function destroy(string $programId)
     {
+        //todo 紐づいてるmenusとworkoutも消す。
         $program = Program::find($programId);
         $trainings = $program->trainings();
         $trainings->delete();

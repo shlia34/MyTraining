@@ -1,37 +1,38 @@
 $(function()
 {
-    storeTraining();
+    storeWorkout();
     showModalTraining();
 });
 
 /**
  * トレーニングを追加
  */
-function storeTraining()
+function storeWorkout()
 {
     $(".add-training-btn").on("click",function () {
-        var event_id = $(".this-event-show").data('event_id');
-        var stage_id_val = $(".form-stage_id").val();
+        var program_id = $(".this-event-show").data('event_id');
+        var exercise_id_val = $(".form-stage_id").val();
         var weight_val = $(".form-weight").val();
         var rep_val = $(".form-rep").val();
 
         var data = {
-            "event_id":event_id,
-            "stage_id":stage_id_val,
+            "program_id":program_id,
+            "exercise_id":exercise_id_val,
             "weight":weight_val,
             "rep":rep_val
         };
 
         apiStoreTraining(data,function(result){
-            var stage_id = result['stage_id'];
-            var ol_stage_id = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`)
+            var menu_id = result['menu_id'];
 
-            if(!ol_stage_id.is(':visible')){
-                $(".this-trainings").append(buildStageCardHtml(result));
+            var ol_menu = $(`.this-trainings .card ol[data-menu_id=${menu_id}]`);
+
+            if(!ol_menu.is(':visible')){
+                $(".this-trainings").append(buildMenuCardHtml(result));
             }
 
-            var stage_card = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
-            stage_card.append(buildTrainingHtml(result,weight_val,rep_val));
+            var menu_card = $(`.this-trainings .card ol[data-menu_id=${menu_id}]`);
+            menu_card.append(buildWorkoutHtml(result));
 
         });
     })
