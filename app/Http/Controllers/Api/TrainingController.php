@@ -27,7 +27,6 @@ class TrainingController extends Controller
                             + ['id' => $this->generateId('ME')];
 
             $menu = Menu::create($menuInsertData);
-            //menuで作成作成
         }
 
         $workoutInsertData = $request->only('weight','rep')
@@ -99,7 +98,7 @@ class TrainingController extends Controller
      */
     public function checkMax(Request $request)
     {
-        $training = Workout::find($request->all()["training_id"]);
+        $training = Workout::find($request->all()["workout_id"]);
         $training->is_max == 0 ? $message = false : $message = true;
 
         return response()->json($message);

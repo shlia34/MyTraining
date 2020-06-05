@@ -53,9 +53,9 @@ function showModalTraining()
     $(document).on("click", ".this-training", function () {
 
         data = {
-            "event_id"   : $(".this-event-show").data('event_id'),
-            "training_id": $(this).data('training_id'),
-            "stage_id": $(this).parent().data('stage_id'),
+            "program_id"   : $(".this-event-show").data('event_id'),
+            "workout_id": $(this).data('workout_id'),
+            "menu_id": $(this).parent().data('menu_id'),
         };
 
         apiCheckMaxTraining(data,function(result){
