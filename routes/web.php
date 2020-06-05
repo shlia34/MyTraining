@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/index', 'ExerciseController@index');
             Route::get('/create', 'ExerciseController@create');
             Route::post('/store', 'ExerciseController@store');
-            Route::get('/{stage_id}', 'ExeciserController@show');
+            Route::get('/{stage_id}', 'ExerciseController@show');
             //Route::get('/stage/{stage_id}/edit', 'ExerciseController@edit');
             //Route::post('/stage/update', 'ExerciseController@update');
         });

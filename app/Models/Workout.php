@@ -18,23 +18,16 @@ use Illuminate\Pagination\LengthAwarePaginator;
  * @property boolean is_max     最大強度かどうか
  */
 
-class Training extends Model
+class Workout extends Model
 {
     use GetTrainingData,ScopeOwn;
 
-    protected $primaryKey = 'training_id';
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = [ 'training_id','event_id','stage_id','weight','rep','is_max' ];
+    protected $fillable = [ 'id','menu_id','weight','rep','is_max' ];
 
     protected $perPage = 8;
-
-
-    //todo ここが変わる
-    public function scopeGroupByStage($query){
-        return $query->oldest()->get()->groupBy('stage_id');
-    }
 
     public function scopeJoinEvent($query){
         return $query->addSelect([

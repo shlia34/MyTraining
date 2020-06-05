@@ -26,7 +26,15 @@ class Program extends Model
     protected $fillable = [ 'id', 'user_id', 'date', 'muscle_code', 'memo' ];
 
     public function menus(){
-        return $this->hasMany('App\Models\Menu','id', 'menu_id');
+        return $this->hasMany('App\Models\Menu')->joinExercise();
+    }
+
+    public function exercises(){
+        return $this->belongsToMany('App\Models\Exercise','menus');
+    }
+
+    public function workouts(){
+        return $this->hasManyThrough('App\Models\Workout','App\Models\Menu');
     }
 
     public function getMemoAttribute($value)

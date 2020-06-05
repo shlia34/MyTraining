@@ -13,7 +13,7 @@
                     </span>
                     <ol data-event_id = {{$eventId}} class = "ol-training mb-0">
                         @foreach($group as $training)
-                            @include('partials.training', [ 'group' => $group, 'type' => 'stage' ])
+                            @include('partials.workout', [ 'group' => $group, 'type' => 'stage' ])
                         @endforeach
                     </ol>
                 </div>
