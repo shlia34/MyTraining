@@ -10,7 +10,7 @@ $(function()
 function storeWorkout()
 {
     $(".add-training-btn").on("click",function () {
-        var program_id = $(".this-event-show").data('event_id');
+        var program_id = $(".this-event-show").data('program_id');
         var exercise_id_val = $(".form-stage_id").val();
         var weight_val = $(".form-weight").val();
         var rep_val = $(".form-rep").val();
@@ -53,7 +53,7 @@ function showModalTraining()
     $(document).on("click", ".this-training", function () {
 
         data = {
-            "program_id"   : $(".this-event-show").data('event_id'),
+            "program_id"   : $(".this-event-show").data('program_id'),
             "workout_id": $(this).data('workout_id'),
             "menu_id": $(this).parent().data('menu_id'),
         };
@@ -89,14 +89,14 @@ function showModalTraining()
  */
 function destroyTraining(data)
 {
-    var training_box = $(`.this-training[data-training_id=${data.training_id}]`);
-    var stage_id = training_box.parent().data('stage_id');
+    var workout_box = $(`.this-training[data-workout_id=${data.workout_id}]`);
+    var menu_id = data.menu_id;
 
     apiDestroyTraining(data,function(){
-        training_box.remove();
-        var stage_ol = $(`.this-trainings .card ol[data-stage_id=${stage_id}]`);
-        if(!stage_ol.find('li').is(':visible')){
-            stage_ol.parent().remove();
+        workout_box.remove();
+        var menu_card = $(`.this-trainings .card ol[data-menu_id=${menu_id}]`);
+        if(!menu_card.find('li').is(':visible')){
+            menu_card.parent().remove();
         }
     });
 }
@@ -107,11 +107,11 @@ function destroyTraining(data)
  */
 function onMaxTraining(data)
 {
-    var training_box = $(`.this-trainings .this-training[data-training_id=${data.training_id}]`);
+    var workout_box = $(`.this-trainings .this-training[data-workout_id=${data.workout_id}]`);
 
     apiOnMaxTraining(data,function(){
         $('.this-trainings ._add-underline').removeClass("_add-underline");
-        training_box.addClass("_add-underline");
+        workout_box.addClass("_add-underline");
     });
 }
 

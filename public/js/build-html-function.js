@@ -22,7 +22,7 @@ function buildLinksEventHtml(value) {
  */
 function buildWorkoutHtml(result)
 {
-    var html = `<li data-workout_id = ${result['workout_id']} class = "this-training">${result['weightAndRep']}`;
+    var html = `<li data-workout_id = ${result['id']} class = "this-training">${result['weightAndRep']}`;
     return html;
 }
 

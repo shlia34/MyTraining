@@ -39,23 +39,23 @@ Route::group(['middleware' => 'auth'], function () {
     });
     //api
     Route::group(['namespace' => 'Api','prefix' => 'api'], function () {
-        //event api
+        //program api
         Route::group(['prefix' => 'events'], function () {
             Route::get('/set', 'ProgramController@set');
             Route::post('/showLinks', 'ProgramController@showLinks');
             Route::post('/store', 'ProgramController@store');
             Route::post('/updateDate', 'ProgramController@updateDate');
         });
-        //training ap
+        //workout api
         Route::group(['prefix' => 'trainings'], function () {
-            //training
-            Route::post('/store', 'TrainingController@store');
-            Route::post('/destroy', 'TrainingController@destroy');
+            //workout
+            Route::post('/store', 'WorkoutController@store');
+            Route::post('/destroy', 'WorkoutController@destroy');
             //is_max
             Route::group(['prefix' => 'max'],function () {
-                Route::post('/on', 'TrainingController@OnMax');
-                Route::post('/off', 'TrainingController@OffMax');
-                Route::post('/check', 'TrainingController@checkMax');
+                Route::post('/on', 'WorkoutController@OnMax');
+                Route::post('/off', 'WorkoutController@OffMax');
+                Route::post('/check', 'WorkoutController@checkMax');
             });
         });
         //Routine api

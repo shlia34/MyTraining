@@ -9,7 +9,7 @@ use App\Models\Workout;
 use App\Models\Program;
 use App\Models\Menu;
 
-class TrainingController extends Controller
+class WorkoutController extends Controller
 {
     //todo formRequest作る
     /**
@@ -47,9 +47,15 @@ class TrainingController extends Controller
      */
     public function destroy(Request $request)
     {
-        $training_id = $request->all()["training_id"];
-        $training = Workout::find($training_id);
-        $training->delete();
+        $id = $request->all()["workout_id"];
+        $workout = Workout::find($id);
+        $workout->delete();
+
+        //もしmenuに所属するworkoutが存在しなくなったら削除
+        $menu = $workout->menu;
+        if($menu->workouts->count() === 0){
+            $menu->delete();
+        }
 
         return null;
     }
@@ -61,17 +67,17 @@ class TrainingController extends Controller
      */
     public function OnMax(Request $request)
     {
-        $eventId = $request->all()["event_id"];
-        $trainings = Workout::where("event_id", $eventId)->where("is_max", 1)->get();
-        foreach ($trainings as $training){
-            $training->is_max = 0;
-            $training->save();
+        $program =  Program::find($request->all()["program_id"]);
+        $workouts = $program->workouts()->where("is_max", 1)->get();
+        foreach ($workouts as $workout){
+            $workout->is_max = 0;
+            $workout->save();
         }
         //一旦消す。二個以上ないはずだけど一応foreach。
-        $trainingId = $request->all()["training_id"];
-        $training = Workout::find($trainingId);
-        $training->is_max = 1;
-        $training->save();
+        $workoutId = $request->all()["workout_id"];
+        $workout = Workout::find($workoutId);
+        $workout->is_max = 1;
+        $workout->save();
 
         return null;
     }
@@ -83,9 +89,9 @@ class TrainingController extends Controller
      */
     public function OffMax(Request $request)
     {
-        $training = Workout::find($request->all()["training_id"]);
-        $training->is_max = 0;
-        $training->save();
+        $workout = Workout::find($request->all()["workout_id"]);
+        $workout->is_max = 0;
+        $workout->save();
 
         return null;
     }
