@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $keyType = 'string';
 
     public function exercises(){
-        return $this->belongsToMany('App\Models\Exercise','routines');
+        return $this->belongsToMany('App\Models\Exercise','routines')->withPivot('sort_no');
     }
 
     public function programs(){

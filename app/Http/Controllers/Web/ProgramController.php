@@ -30,8 +30,7 @@ class ProgramController extends Controller
         $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first();
         $previousProgram = Program::where('muscle_code',$thisProgram->muscle_code)->Own()->whereDate("date", "<", $thisProgram->date)->latest("date")->with(['menus.workouts'])->first();
 
-        //todo arrayForSelectBoxなんとかしたい
-        $exerciseArray = Auth::user()->exercises()->arrayForSelectBox($thisProgram->muscle_code);
+        $exerciseArray = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get()->pluck('name', 'id');
 
         return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'exerciseArr' =>$exerciseArray ]);
     }
