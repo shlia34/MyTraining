@@ -43,10 +43,7 @@ class ProgramController extends Controller
      */
     public function destroy(string $programId)
     {
-        //todo 紐づいてるmenusとworkoutも消す。
         $program = Program::find($programId);
-        $trainings = $program->trainings();
-        $trainings->delete();
         $program->delete();
 
         return redirect("/");
