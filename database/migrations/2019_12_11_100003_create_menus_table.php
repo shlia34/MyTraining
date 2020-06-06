@@ -16,7 +16,7 @@ class CreateMenusTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->string('id', 34)->primary();
             $table->string('program_id', 34);
-            $table->foreign('program_id')->references('id')->on('programs');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');;
             $table->string('exercise_id', 34);
             $table->foreign('exercise_id')->references('id')->on('exercises');
             $table->timestamps();
