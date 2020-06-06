@@ -32,16 +32,6 @@ class Exercise extends Model
         return $this->hasManyThrough('App\Models\Workout','App\Models\Menu');
     }
 
-    public function scopeArrayForSelectBox($query,$partCode){
-        $routineList = $query->where('muscle_code',$partCode)->orderBy('sort_no')->get();
-
-        $array =  [];
-        foreach ($routineList as $exercise){
-            $array[$exercise->exercise_id] = $exercise->name;
-        }
-        return $array;
-    }
-
     //todo ここが変わる。絶対直した方がいい
     public function scopeByPart($query){
         $userStage = $query->orderBy("sort_no")->get()->groupBy('muscle_code');
