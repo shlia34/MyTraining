@@ -25,7 +25,7 @@ class Menu extends Model
     protected $fillable = [ 'id','exercise_id','program_id'];
 
     public function workouts(){
-        return $this->hasMany('App\Models\Workout');
+        return $this->hasMany('App\Models\Workout')->oldest();
     }
 
     public function program(){

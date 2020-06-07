@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Http\Request\Web\Stage\StoreRequest;
 use App\Models\Exercise;
-use App\Models\Menu;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +34,7 @@ class ExerciseController extends Controller
     public function show($exerciseId)
     {
         $exercise = Exercise::findOrFail($exerciseId);
-        $menus = $exercise->menus()->own()->with(['workouts'])->paginate();
+        $menus = $exercise->menus()->latest('date')->own()->with(['workouts'])->paginate();
 
         return view("exercise.show")->with([ 'exercise' => $exercise, 'menus' => $menus]);
     }

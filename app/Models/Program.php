@@ -26,7 +26,7 @@ class Program extends Model
     protected $fillable = [ 'id', 'user_id', 'date', 'muscle_code', 'memo' ];
 
     public function menus(){
-        return $this->hasMany('App\Models\Menu')->joinExercise();
+        return $this->hasMany('App\Models\Menu')->joinExercise()->oldest();
     }
 
     public function exercises(){
@@ -44,6 +44,10 @@ class Program extends Model
     public function getMemoAttribute($value)
     {
         return $value ? "※".$value : "";
+    }
+
+    public function scopePrevious($query,$thisProgram){
+        return $query->where('muscle_code',$thisProgram->muscle_code)->Own()->whereDate("date", "<", $thisProgram->date)->latest("date");
     }
 
 }
