@@ -36,7 +36,7 @@ class CsvController extends Controller
     public function import(Request $request)
     {
         $this->csvClass->importFile($request);
-        return redirect("/csv/index");
+        return redirect( route('csv.index') );
     }
 
 }

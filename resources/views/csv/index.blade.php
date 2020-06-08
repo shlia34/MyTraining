@@ -2,10 +2,12 @@
 @section('content')
 
     @foreach($modelNames as $modelName)
-        <p><a class="btn" href="{{url("/csv/export/$modelName")}}" target="_blank"> {{$modelName}} Export</a></p>
+        <p><a class="btn" href="{{ route('csv.export', ['modelName' => $modelName]) }}" target="_blank"> {{$modelName}} Export</a></p>
     @endforeach
 
     <form action="/csv/import" method="post" enctype="multipart/form-data">
+    <form action={{ route('csv.import') }} method="post" enctype="multipart/form-data">
+
         {{ csrf_field() }}
         <div class="row">
             <label class="col-1 text-right" for="form-file-1">File:</label>

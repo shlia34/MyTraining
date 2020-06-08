@@ -9,7 +9,7 @@
             @foreach($menus as $menu)
                 <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
                     <span class = "mb-0">
-                        <a class = "card-title" href="/events/{{ $menu->program_id }}">{{ $menu->date }}</a>
+                        <a class = "card-title" href="/programs/{{ $menu->program_id }}">{{ $menu->date }}</a>
                     </span>
                     <ol data-event_id = {{$menu->program_id}} class = "ol-training mb-0">
                         @foreach($menu->workouts as $workout)

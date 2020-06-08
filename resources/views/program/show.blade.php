@@ -16,8 +16,8 @@
                 <input type="number"  id="form-rep" class="form-rep form-control">
                 <label for="form-rep">rep</label>
             </div>
-            @if($exerciseArr === [])
-                <a href ="/stages/index?partCode={{$thisProgram->muscle_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
+            @if($exerciseArr->count() === 0)
+                <a href ="/exercises/index?muscleCode={{$thisProgram->muscle_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
             @else
                 <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
             @endif
@@ -27,7 +27,7 @@
     <div class = "trainings-index  pb-4">
         @include('partials.program', ['program' => $thisProgram, 'type' => 'this' ])
         <div>
-            <a href="/events/{{$thisProgram->id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
+            <a href="/programs/{{$thisProgram->id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
             <div class="float-right"><a  href={{url()->previous()}}><button>戻る</button></a></div>
         </div>
 

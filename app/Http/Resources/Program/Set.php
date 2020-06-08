@@ -16,10 +16,10 @@ class Set extends JsonResource
     {
         $data["id"] = $this->id;
         $data["part_code"] = $this->muscle_code;
-        $data["backgroundColor"] = $this->part_color;
-        $data["borderColor"] = $this->part_color;
+        $data["backgroundColor"] = $this->muscle_color;
+        $data["borderColor"] = $this->muscle_color;
         $data["start"] = $this->date;
-        $data["title"] = $this->part_name;
+        $data["title"] = $this->muscle_name;
         return $data;
     }
 }

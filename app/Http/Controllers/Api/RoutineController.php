@@ -23,7 +23,6 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-
         $insertData = $request->only('exercise_id')
                     + ['id' => $this->generateId('RO')]
                     + ['user_id' => Auth::user()->id]

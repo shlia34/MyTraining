@@ -16,7 +16,7 @@ class ShowLinks extends JsonResource
     public function toArray($request)
     {
         $data["id"] = $this->id;
-        $data["title"] = $this->part_name;
+        $data["title"] = $this->muscle_name;
         $data["maxWorkout"] = new WorkoutResource($this->maxWorkout->first());
         return $data;
     }

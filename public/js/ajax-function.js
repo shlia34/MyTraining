@@ -1,7 +1,7 @@
-//以下event
+//以下program
 function apiStoreEvent(data,callback){
     $.ajax({
-        url: '/api/events/store',
+        url: '/api/programs/store',
         type: 'POST',
         dataTape: 'json',
         data: data,
@@ -19,7 +19,7 @@ function apiStoreEvent(data,callback){
 
 function apiUpdateDateEvent(data){
     $.ajax({
-        url: '/api/events/updateDate',
+        url: '/api/programs/updateDate',
         type: 'POST',
         data:data,
     }).done(function(result) {});
@@ -27,7 +27,7 @@ function apiUpdateDateEvent(data){
 
 function apiShowLinksEvent(data, callback){
     $.ajax({
-        url: '/api/events/showLinks',
+        url: '/api/programs/showLinks',
         type: 'POST',
         dataTape:'json',
         data:data,
@@ -36,10 +36,10 @@ function apiShowLinksEvent(data, callback){
     });
 }
 
-//以下training
+//以下workout
 function apiStoreTraining(data, callback){
     $.ajax({
-        url: '/api/trainings/store',
+        url: '/api/workouts/store',
         type: 'POST',
         dataTape: 'json',
         data:data,
@@ -50,7 +50,7 @@ function apiStoreTraining(data, callback){
 
 function apiDestroyTraining(data, callback) {
     $.ajax({
-        url: '/api/trainings/destroy',
+        url: '/api/workouts/destroy',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -58,10 +58,10 @@ function apiDestroyTraining(data, callback) {
     });
 }
 
-//以下trainings.is_max
+//以下workouts.is_max
 function apiCheckMaxTraining(data, callback){
     $.ajax({
-        url: '/api/trainings/max/check',
+        url: '/api/workouts/max/check',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -72,7 +72,7 @@ function apiCheckMaxTraining(data, callback){
 
 function apiOnMaxTraining(data, callback){
     $.ajax({
-        url: '/api/trainings/max/on',
+        url: '/api/workouts/max/on',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -82,7 +82,7 @@ function apiOnMaxTraining(data, callback){
 
 function apiOffMaxTraining(data, callback) {
     $.ajax({
-        url: '/api/trainings/max/off',
+        url: '/api/workouts/max/off',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -90,10 +90,10 @@ function apiOffMaxTraining(data, callback) {
     });
 }
 
-//以下choice
+//以下routine
 function apiStoreChoice(data, callback) {
     $.ajax({
-        url: '/api/choices/store',
+        url: '/api/routines/store',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -103,7 +103,7 @@ function apiStoreChoice(data, callback) {
 
 function apiDestroyChoice(data, callback) {
     $.ajax({
-        url: '/api/choices/destroy',
+        url: '/api/routines/destroy',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -113,7 +113,7 @@ function apiDestroyChoice(data, callback) {
 
 function apiSortChoice(data, callback) {
     $.ajax({
-        url: '/api/choices/sort',
+        url: '/api/routines/sort',
         type: 'POST',
         data: data,
     }).done(function(result) {

@@ -14,7 +14,7 @@
     <div class="event-remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
         <button data-remodal-action="close" class="remodal-close"></button>
         {{Form::date('date', \Carbon\Carbon::now(), ['class'=>'remodal-date'])}}
-        {{Form::select('muscle_code', App\Defs\DefPart::PART_NAME_LIST,null,['class' => 'remodal-part_code'])}}
+        {{Form::select('muscle_code', App\Defs\DefMuscle::MUSCLE_NAME_LIST,null,['class' => 'remodal-part_code'])}}
         {{Form::input('text', 'memo',null,['class' => 'remodal-memo','placeholder'=>'メモ'])}}
         <button data-remodal-action="confirm" class="remodal-btn store-event-btn">追加</button>
     </div>
@@ -43,9 +43,9 @@
                 // スマホでタップしたとき即反応
                 eventOrder:"part_code",
                 //part_code順に並び替え
-                events: "/api/events/set",
+                events: "/api/programs/set",
                 customButtons: {
-                    storeEvent: {
+                    storeProgram: {
                         text: '記録',
                         click: function() {
                             var remodal = $(".event-remodal").remodal();
@@ -59,7 +59,7 @@
                 header: {
                     left: 'title',
                     center: '',
-                    right: 'prev,next,storeEvent',
+                    right: 'prev,next,storeProgram',
                 },
 
                 eventDrop: function(info){
