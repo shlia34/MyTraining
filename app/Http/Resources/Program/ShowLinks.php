@@ -17,7 +17,7 @@ class ShowLinks extends JsonResource
     {
         $data["id"] = $this->id;
         $data["title"] = $this->muscle_name;
-        $data["maxWorkout"] = new WorkoutResource($this->maxWorkout->first());
+        $data["max_workout"] = new WorkoutResource($this->maxWorkout->first());
         return $data;
     }
 }

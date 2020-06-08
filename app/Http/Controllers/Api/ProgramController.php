@@ -37,7 +37,7 @@ class ProgramController extends Controller
         $date = $request->getFormattedData()['date'];
         $programs = Program::where('date', $date)->Own()->oldest('muscle_code')->with(['maxWorkout'])->get();
 
-        return response()->json([ "date" => $date, "events" => ShowLinksProgramResource::collection($programs) ]);
+        return response()->json([ "date" => $date, "programs" => ShowLinksProgramResource::collection($programs) ]);
     }
 
     /**
@@ -64,7 +64,7 @@ class ProgramController extends Controller
     {
         $data = $request->getFormattedData();
         $program = Program::find($data['id']);
-        $program->date = $data['newDate'];
+        $program->date = $data['new_date'];
         $program->save();
         return null;
     }

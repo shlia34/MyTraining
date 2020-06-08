@@ -34,7 +34,7 @@ $(function() {
 function storeChoice(event, ui) {
     var data = { "exercise_id":ui.item.data('exercise_id') };
 
-    apiStoreChoice(data,function(result){
+    apiStoreRoutine(data,function(result){
         sortChoice(event);
     });
 }
@@ -47,7 +47,7 @@ function storeChoice(event, ui) {
 function destroyChoice(event, ui) {
     var data = { "exercise_id":ui.item.data('exercise_id') };
 
-    apiDestroyChoice(data,function(result){});
+    apiDestroyRoutine(data,function(result){});
 }
 
 /**
@@ -65,5 +65,5 @@ function sortChoice(event){
 
     var data = { exercise_ids:stageIds };
 
-    apiSortChoice(data,function(result){});
+    apiSortRoutine(data,function(result){});
 }

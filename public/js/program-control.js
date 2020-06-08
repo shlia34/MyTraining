@@ -3,26 +3,26 @@
  * event/index.blade.phpで使用
  * @param calendar
  */
-function storeEvent(calendar)
+function storeProgram(calendar)
 {
     var data = {
-        "muscle_code":$(".remodal-part_code").val(),
+        "muscle_code":$(".remodal-muscle_code").val(),
         "memo":$(".remodal-memo").val(),
         "date":$(".remodal-date").val(),
     };
 
-    apiStoreEvent(data, function(result){
+    apiStoreProgram(data, function(result){
 
         calendar.addEvent({
             id:result['id'],
             title:result['title'],
-            part_code:result['part_code'],
+            muscle_code:result['muscle_code'],
             url:result['url'],
             backgroundColor:result['backgroundColor'],
             borderColor:result['borderColor'],
             start: result['start'],
         });
-        showLinksEvent(result['start']);
+        showLinksProgram(result['start']);
     })
 }
 
@@ -31,13 +31,13 @@ function storeEvent(calendar)
  * event/index.blade.phpで使用
  * @param info
  */
-function updateDateEvent(info)
+function updateDateProgram(info)
 {
     var data = {
         "id":info.event.id,
-        "newDate":info.event.start.toISOString(),
+        "new_date":info.event.start.toISOString(),
     };
-    apiUpdateDateEvent(data);
+    apiUpdateDateProgram(data);
 }
 
 /**
@@ -45,15 +45,15 @@ function updateDateEvent(info)
  * event/index.blade.phpで使用
  * @param date
  */
-function showLinksEvent(date)
+function showLinksProgram(date)
 {
     var data = {date:date};
-    apiShowLinksEvent(data,function(result){
-        $('.show-event ul').empty();
-        $('.show-event p').empty();
-        $('.show-event p').append(result["date"]);
-        $.each(result["events"], function(index, value) {
-            $('.show-event ul').append( buildLinksEventHtml(value) );
+    apiShowLinksProgram(data,function(result){
+        $('.show-program ul').empty();
+        $('.show-program p').empty();
+        $('.show-program p').append(result["date"]);
+        $.each(result["programs"], function(index, value) {
+            $('.show-program ul').append( buildLinksProgramHtml(value) );
         });
     });
 }

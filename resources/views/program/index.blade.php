@@ -3,7 +3,7 @@
     <div class = "wrapper">
         <div id="calendar"></div>
 
-        <div class = "show-event">
+        <div class = "show-program">
             <div>
                 <p></p>
                 <ul></ul>
@@ -11,10 +11,10 @@
         </div>
     </div>
 
-    <div class="event-remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
+    <div class="program-remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
         <button data-remodal-action="close" class="remodal-close"></button>
         {{Form::date('date', \Carbon\Carbon::now(), ['class'=>'remodal-date'])}}
-        {{Form::select('muscle_code', App\Defs\DefMuscle::MUSCLE_NAME_LIST,null,['class' => 'remodal-part_code'])}}
+        {{Form::select('muscle_code', App\Defs\DefMuscle::MUSCLE_NAME_LIST,null,['class' => 'remodal-muscle_code'])}}
         {{Form::input('text', 'memo',null,['class' => 'remodal-memo','placeholder'=>'メモ'])}}
         <button data-remodal-action="confirm" class="remodal-btn store-event-btn">追加</button>
     </div>
@@ -41,17 +41,17 @@
                 eventTextColor:"white",
                 selectLongPressDelay:0,
                 // スマホでタップしたとき即反応
-                eventOrder:"part_code",
+                eventOrder:"muscle_code",
                 //part_code順に並び替え
                 events: "/api/programs/set",
                 customButtons: {
                     storeProgram: {
                         text: '記録',
                         click: function() {
-                            var remodal = $(".event-remodal").remodal();
+                            var remodal = $(".program-remodal").remodal();
                             remodal.open();
-                            $(document).off('confirmation').on('confirmation', '.event-remodal', function () {
-                                storeEvent(calendar)
+                            $(document).off('confirmation').on('confirmation', '.program-remodal', function () {
+                                storeProgram(calendar)
                             });
                         }
                     }
@@ -63,13 +63,13 @@
                 },
 
                 eventDrop: function(info){
-                    updateDateEvent(info);
+                    updateDateProgram(info);
                 },
                 eventClick: function(info){
-                    showLinksEvent(info.event.start.toISOString());
+                    showLinksProgram(info.event.start.toISOString());
                 },
                 dateClick: function(info) {
-                    showLinksEvent(info.dateStr);
+                    showLinksProgram(info.dateStr);
                 },
             });
             calendar.render();

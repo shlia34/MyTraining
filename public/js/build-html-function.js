@@ -4,10 +4,10 @@
  * @param value
  * @returns {string}
  */
-function buildLinksEventHtml(value) {
+function buildLinksProgramHtml(value) {
     var html =`<li><a href='/programs/${value["id"]}'>${value["title"]}</a>`;
-    if(value["maxWorkout"] !== null){
-        html += `${value["maxWorkout"]["exercise_name"]} ${value["maxWorkout"]["weightAndRep"]}</li>`;
+    if(value["max_workout"] !== null){
+        html += `${value["max_workout"]["exercise_name"]} ${value["max_workout"]["weight_and_rep"]}</li>`;
     }
 
     return html;
@@ -22,7 +22,7 @@ function buildLinksEventHtml(value) {
  */
 function buildWorkoutHtml(result)
 {
-    var html = `<li data-workout_id = ${result['id']} class = "this-training">${result['weightAndRep']}`;
+    var html = `<li data-workout_id = ${result['id']} class = "this-workout">${result['weight_and_rep']}`;
     return html;
 }
 
@@ -36,7 +36,7 @@ function buildMenuCardHtml(result) {
                     <span class="mb-0">
                         <a class = "card-title" href ="/exercises/${result["exercise_id"]}">${result["exercise_name"]}</a>
                     </span>
-                    <ol data-menu_id=${result["menu_id"]} class="ol-training mb-0"></ol>
+                    <ol data-menu_id=${result["menu_id"]} class="ol-workout mb-0"></ol>
                 </div>`;
     return html;
 }
