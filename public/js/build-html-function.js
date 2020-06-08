@@ -5,7 +5,7 @@
  * @returns {string}
  */
 function buildLinksEventHtml(value) {
-    var html =`<li><a href='/events/${value["id"]}'>${value["title"]}</a>`;
+    var html =`<li><a href='/programs/${value["id"]}'>${value["title"]}</a>`;
     if(value["maxWorkout"] !== null){
         html += `${value["maxWorkout"]["exercise_name"]} ${value["maxWorkout"]["weightAndRep"]}</li>`;
     }
@@ -34,7 +34,7 @@ function buildWorkoutHtml(result)
 function buildMenuCardHtml(result) {
     var html = `<div class="card mt-2 mb-2 mr-2 ml-2 p-2">
                     <span class="mb-0">
-                        <a class = "card-title" href ="/stages/${result["exercise_id"]}">${result["exercise_name"]}</a>
+                        <a class = "card-title" href ="/exercises/${result["exercise_id"]}">${result["exercise_name"]}</a>
                     </span>
                     <ol data-menu_id=${result["menu_id"]} class="ol-training mb-0"></ol>
                 </div>`;

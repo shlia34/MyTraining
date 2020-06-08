@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
+use App\Defs\DefMuscle;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\GetTrainingData;
-use App\Models\Traits\GetPartData;
 use App\Models\Traits\ScopeOwn;
 /**
  * プログラムのモデルクラス（何日にどこの筋肉を鍛えたか）
@@ -18,7 +17,7 @@ use App\Models\Traits\ScopeOwn;
 
 class Program extends Model
 {
-    use GetPartData,ScopeOwn;
+    use ScopeOwn;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -44,6 +43,16 @@ class Program extends Model
     public function getMemoAttribute($value)
     {
         return $value ? "※".$value : "";
+    }
+
+    public function getMuscleNameAttribute()
+    {
+        return DefMuscle::MUSCLE_NAME_LIST[$this->muscle_code];
+    }
+
+    public function getMuscleColorAttribute()
+    {
+        return DefMuscle::MUSCLE_COLOR[$this->muscle_code];
     }
 
     public function scopePrevious($query,$thisProgram){

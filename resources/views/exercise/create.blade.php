@@ -25,7 +25,7 @@
 
             <div>
                 <p>部位</p>
-                @foreach(App\Defs\DefPart::PART_NAME_LIST as $code => $name )
+                @foreach(App\Defs\DefMuscle::MUSCLE_NAME_LIST as $code => $name )
                     <span class = 'radio-part'>
                         {{Form::label('muscle_code', $name ) }}
                         {{Form::radio('muscle_code', $code,false)}}

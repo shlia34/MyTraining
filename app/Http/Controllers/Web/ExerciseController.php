@@ -19,14 +19,15 @@ class ExerciseController extends Controller
     public function index(Request $request)
     {
         //todo vueで書くときにbyPart()をなんとかする
-        $stagesByPart  = Auth::user()->exercises()->byPart();
-        $firstPartCode =  $request->all()["partCode"] ?? "01";
+        //todo routineとnotRoutineを別の変数で受け取る?
+        $exerciseByMuscle  = Auth::user()->exercises()->byMuscle();
+        $firstMuscleCode =  $request->all()["muscleCode"] ?? "01";
 
-        return view("exercise.index")->with(['stagesByPart' => $stagesByPart,'firstPartCode'=>$firstPartCode]);
+        return view("exercise.index")->with(['exerciseByMuscle' => $exerciseByMuscle,'firstMuscleCode'=>$firstMuscleCode]);
     }
 
     /**
-     * 種目の詳細画面、種目に紐づいたトレーニングも表示する
+     * 種目の詳細画面、種目に紐づいたmenu,workoutも表示する
      * @param Request $request
      * @param $stageId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -60,17 +61,7 @@ class ExerciseController extends Controller
 
         Exercise::create($insertData);
 
-        return redirect("/stages/create");
+        return redirect(route('exercise.index', ['muscleCode' => $request->all()["muscle_code"] ]));
     }
-
-//    public function edit(){
-//        return view("stage.edit");
-//    }
-
-//    public function update(){
-//        種目の編集処理
-//        adminしかできないようにする？？
-//        return redirect("/stage/show");
-//    }
 
 }

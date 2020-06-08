@@ -18,7 +18,7 @@ class ProgramController extends Controller
     }
 
     /**
-     * イベントの詳細ページ。前回のイベントも取得する
+     * 詳細ページ。前回のprogramも取得する
      * @param $programId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -27,13 +27,13 @@ class ProgramController extends Controller
         $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first() ?? abort(404);
         $previousProgram = Program::previous($thisProgram)->with(['menus.workouts'])->first();
 
-        $exerciseArray = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get()->pluck('name', 'id');
+        $exerciseArr = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get()->pluck('name', 'id');
 
-        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'exerciseArr' =>$exerciseArray ]);
+        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'exerciseArr' =>$exerciseArr ]);
     }
 
     /**
-     * イベントと、それに紐づくトレーニングを削除
+     * programと、それに紐づくmenus,workoutsを削除
      * @param $programId
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -42,7 +42,7 @@ class ProgramController extends Controller
         $program = Program::find($programId);
         $program->delete();
 
-        return redirect("/");
+        return redirect(route('program.index'));
     }
 
 }

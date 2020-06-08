@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Defs\DefPart;
+use App\Defs\DefMuscle;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Support\Facades\Auth;
@@ -32,25 +32,25 @@ class Exercise extends Model
         return $this->hasManyThrough('App\Models\Workout','App\Models\Menu');
     }
 
-    //todo ここが変わる。絶対直した方がいい
-    public function scopeByPart($query){
-        $userStage = $query->orderBy("sort_no")->get()->groupBy('muscle_code');
+    //todo ここが変わる。絶対直した方がいい。vueで書くとき直す
+    public function scopeByMuscle($query){
+        $routine = $query->orderBy("sort_no")->get()->groupBy('muscle_code');
 
-        $leftStage = Exercise::all()->diff(Auth::user()->exercises)->groupBy('muscle_code');
-        $partCodes =  array_keys( DefPart::PART_NAME_LIST );
+        $notRoutine = Exercise::all()->diff(Auth::user()->exercises)->groupBy('muscle_code');
+        $muscleCodes =  array_keys( DefMuscle::MUSCLE_NAME_LIST );
 
         $array = [];
-        foreach ($partCodes as $partCode){
-            if(isset($userStage[$partCode])){
-                $array[$partCode]["userStage"] = $userStage[$partCode];
+        foreach ($muscleCodes as $muscleCode){
+            if(isset($routine[$muscleCode])){
+                $array[$muscleCode]["routine"] = $routine[$muscleCode];
             }else{
-                $array[$partCode]["userStage"] = [];
+                $array[$muscleCode]["routine"] = [];
             }
 
-            if(!empty($leftStage[$partCode])){
-                $array[$partCode]["leftStage"] = $leftStage[$partCode];
+            if(!empty($notRoutine[$muscleCode])){
+                $array[$muscleCode]["notRoutine"] = $notRoutine[$muscleCode];
             }else{
-                $array[$partCode]["leftStage"] = [];
+                $array[$muscleCode]["notRoutine"] = [];
             }
         }
 
