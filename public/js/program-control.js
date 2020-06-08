@@ -37,7 +37,8 @@ function updateDateProgram(info)
         "id":info.event.id,
         "new_date":info.event.start.toISOString(),
     };
-    apiUpdateDateProgram(data);
+    apiUpdateDateProgram(data,function(result){
+    });
 }
 
 /**

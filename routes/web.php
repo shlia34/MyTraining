@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/set', 'ProgramController@set')->name('program.set');
             Route::post('/showLinks', 'ProgramController@showLinks')->name('program.showLinks');
             Route::post('/store', 'ProgramController@store')->name('program.store');
-            Route::post('/updateDate', 'ProgramController@updateDate')->name('programUpdateDate');
+            Route::post('/updateDate', 'ProgramController@updateDate')->name('program.updateDate');
         });
         //workout api
         Route::group(['prefix' => 'workouts'], function () {
