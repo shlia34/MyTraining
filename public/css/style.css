@@ -100,7 +100,7 @@ body {
     float: left;
     margin: 2px 2px 2px 6px;
 }
-.stage-training {
+.exercise-workout {
     width: 45%;
     float: left;
     margin: 2px 2px 2px 6px;
@@ -162,7 +162,7 @@ body {
     left: 0px;
 }
 
-.stage-training:before {
+.exercise-workout:before {
     content: counter(my-counter);
     counter-increment: my-counter;
     font-size: 16px;
@@ -215,10 +215,10 @@ body {
     margin: 5px;
 }
 
-.store-event-btn{
+.store-program-btn{
     background-color: #F43E43;
 }
-.store-event-btn[disabled] {
+.store-program-btn[disabled] {
     opacity: 0.5!important;
 }
 .on-max-workout-btn{
@@ -248,10 +248,10 @@ body {
     margin-bottom: 10px;
 }
 
-.user-stage{
+.routines{
     min-height: 44px;
 }
-.left-stage{
+.not-routines{
     min-height: 44px;
 }
 

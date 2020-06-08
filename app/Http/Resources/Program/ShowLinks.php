@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Program;
 
-use App\Http\Resources\Workout as WorkoutResource;
+use App\Http\Resources\Workout\Workout as WorkoutResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShowLinks extends JsonResource

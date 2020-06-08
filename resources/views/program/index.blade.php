@@ -16,7 +16,7 @@
         {{Form::date('date', \Carbon\Carbon::now(), ['class'=>'remodal-date'])}}
         {{Form::select('muscle_code', App\Defs\DefMuscle::MUSCLE_NAME_LIST,null,['class' => 'remodal-muscle_code'])}}
         {{Form::input('text', 'memo',null,['class' => 'remodal-memo','placeholder'=>'メモ'])}}
-        <button data-remodal-action="confirm" class="remodal-btn store-event-btn">追加</button>
+        <button data-remodal-action="confirm" class="remodal-btn store-program-btn">追加</button>
     </div>
 
     <script>
@@ -42,7 +42,7 @@
                 selectLongPressDelay:0,
                 // スマホでタップしたとき即反応
                 eventOrder:"muscle_code",
-                //part_code順に並び替え
+                //muscle_code順に並び替え
                 events: "/api/programs/set",
                 customButtons: {
                     storeProgram: {

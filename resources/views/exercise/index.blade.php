@@ -28,13 +28,13 @@
         @endif
 
             id={{ \App\Defs\DefMuscle::MUSCLE_NAME_LIST[$muscleCode] }} role="tabpanel" aria-labelledby="{{ \App\Defs\DefMuscle::MUSCLE_NAME_LIST[$muscleCode] }}-tab">
-        <div class ="part-group" data-part_code={{$muscleCode}}>
+        <div class ="muscle-group" data-muscle_code={{$muscleCode}}>
             <h4>{{ \App\Defs\DefMuscle::MUSCLE_NAME_LIST[$muscleCode] }}</h4>
             @foreach($exerciseGroups as $exerciseGroup => $exercises)
 
                 @if($exerciseGroup === "routine")
                     <h5>やる種目リスト</h5>
-                    <div class = "user-stage">
+                    <div class = "routines">
                         @foreach($exercises as $exercise)
                             <div class ="" data-exercise_id= {{$exercise->exercise_id}}>
                                 <span>{{$exercise->name }}</span><a href= "/exercises/{{$exercise->exercise_id }}"><i class="fas fa-angle-right"></i></a>
@@ -45,7 +45,7 @@
 
                 @if($exerciseGroup === "notRoutine")
                     <h5>追加してないの種目リスト</h5>
-                    <div class = "left-stage">
+                    <div class = "not-routines">
                         @foreach($exercises as $exercise)
                             <div class ="" data-exercise_id= {{$exercise->id}}>
                                 <span>{{$exercise->name }}</span><a href= "/exercises/{{$exercise->id }}"><i class="fas fa-angle-right"></i></a>

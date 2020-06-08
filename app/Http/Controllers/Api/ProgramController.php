@@ -9,7 +9,7 @@ use App\Http\Request\Api\Program\UpdateDateRequest;
 use App\Http\Request\Api\Program\StoreRequest;
 use App\Models\Program;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\Program\Set as SetProgramResource;
+use App\Http\Resources\Program\Program as ProgramResource;
 use App\Http\Resources\Program\ShowLinks as ShowLinksProgramResource;
 
 
@@ -24,7 +24,7 @@ class ProgramController extends Controller
         $dates = $request->getFormattedData();
         $programs = Program::whereBetween('date', [ $dates['start'], $dates['end'] ])->own()->get();
 
-        return SetProgramResource::collection($programs);
+        return ProgramResource::collection($programs);
     }
 
     /**
@@ -52,7 +52,7 @@ class ProgramController extends Controller
 
         $program =  Program::create($insertData);
 
-        return new SetProgramResource($program);
+        return new ProgramResource($program);
     }
 
     /**
