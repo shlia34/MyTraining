@@ -3,7 +3,7 @@
 <div class = "wrapper">
     <div class = "">
         <div style = "height: 32px;"><a class = "float-right"  href={{url()->previous()}}><button >戻る</button></a></div>
-        <div class = "event-title">{{ $exercise->name }}</div>
+        <div class = "program-title">{{ $exercise->name }}</div>
         <div class = "">
         @if($menus->total() !== 0)
             @foreach($menus as $menu)
@@ -11,9 +11,9 @@
                     <span class = "mb-0">
                         <a class = "card-title" href="/programs/{{ $menu->program_id }}">{{ $menu->date }}</a>
                     </span>
-                    <ol data-event_id = {{$menu->program_id}} class = "ol-training mb-0">
+                    <ol data-program_id = {{$menu->program_id}} class = "ol-workout mb-0">
                         @foreach($menu->workouts as $workout)
-                            @include('partials.workout', [ 'group' => $menu->workouts, 'type' => 'stage' ])
+                            @include('partials.workout', [ 'group' => $menu->workouts, 'type' => 'exercise' ])
                         @endforeach
                     </ol>
                 </div>
