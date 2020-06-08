@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateWorkoutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('workouts', function (Blueprint $table) {
             $table->string('id', 34)->primary();
-            $table->string('name');
-            $table->float('weight', 4, 1)->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('menu_id',34);
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');;
+            $table->float('weight', 4, 1);
+            $table->char('rep',2);
+            $table->boolean('is_max');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('workouts');
     }
 }

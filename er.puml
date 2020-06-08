@@ -1,0 +1,59 @@
+@startuml
+entity "users" {
+    + id [PK]
+    ==
+    name
+    weight
+}
+
+
+entity "programs" {
+    + id [PK]
+    ==
+    #user_id
+    muscle_code
+    date
+    memo
+}
+
+entity "menus" {
+    + id [PK]
+    ==
+    #program_id
+    #exercise_id
+}
+
+entity "routines" {
+    + id [PK]
+    ==
+    #exercise_id
+    #user_id
+    sort_no
+}
+
+entity "exercises" {
+    + id [PK]
+    ==
+    name
+    muscle_code
+}
+
+entity "workouts" {
+    + id [PK]
+    ==
+    #menu_id
+    weight
+    rep
+    is_best
+}
+
+users --o{ programs
+programs --o{ menus
+menus --o{ workouts
+users --o{ routines
+exercises --o{ routines
+exercises --o{ menus
+
+
+
+@enduml

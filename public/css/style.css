@@ -66,12 +66,12 @@ body {
     text-decoration: underline;
 }
 
-.trainings-index{
+.workouts-index{
     /*background-color: #c8c8c8;*/
     min-height: calc(100vh - 296.5px);
 }
 
-.event-title {
+.program-title {
     background-color: #454545;
     color: white;
     font-weight: bold;
@@ -90,23 +90,23 @@ body {
     color: white;
 }
 
-.this-training {
+.this-workout {
     width: 45%;
     float: left;
     margin: 2px 2px 2px 6px;
 }
-.previous-training {
+.previous-workout {
     width: 45%;
     float: left;
     margin: 2px 2px 2px 6px;
 }
-.stage-training {
+.exercise-workout {
     width: 45%;
     float: left;
     margin: 2px 2px 2px 6px;
 }
 
-.event-memo{
+.program-memo{
     color: #454545;
 }
 
@@ -114,19 +114,19 @@ body {
     color: #454545;
 }
 
-.ol-training {
+.ol-workout {
     counter-reset: my-counter;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.ol-training li {
+.ol-workout li {
     line-height: 1.5;
     padding-left: 30px;
     position: relative;
 }
-.this-training:before  {
+.this-workout:before  {
     content: counter(my-counter);
     counter-increment: my-counter;
     font-size: 16px;
@@ -144,7 +144,7 @@ body {
     left: 0px;
 }
 
-.previous-training:before  {
+.previous-workout:before  {
     content: counter(my-counter);
     counter-increment: my-counter;
     font-size: 16px;
@@ -162,7 +162,7 @@ body {
     left: 0px;
 }
 
-.stage-training:before {
+.exercise-workout:before {
     content: counter(my-counter);
     counter-increment: my-counter;
     font-size: 16px;
@@ -180,18 +180,18 @@ body {
     left: 0px;
 }
 
-.add-training-btn{
+.add-workout-btn{
     color: white!important;
     margin-left: 20px;
     background-color: #454545!important;
 }
 
-.add-training-btn[disabled] {
+.add-workout-btn[disabled] {
     background-color: #c8c8c8!important;
     opacity: 1!important;
 }
 
-.add-training-form-box{
+.add-workout-form-box{
     color: white;
     position: -webkit-sticky;
     position: sticky;
@@ -215,19 +215,19 @@ body {
     margin: 5px;
 }
 
-.store-event-btn{
+.store-program-btn{
     background-color: #F43E43;
 }
-.store-event-btn[disabled] {
+.store-program-btn[disabled] {
     opacity: 0.5!important;
 }
-.on-max-training-btn{
+.on-max-workout-btn{
     background-color: #F43E43;
 }
-.off-max-training-btn{
+.off-max-workout-btn{
     background-color: #454545;
 }
-.delete-training-btn{
+.delete-workout-btn{
     background-color: #c8c8c8;
 }
 .register-btn{
@@ -248,10 +248,10 @@ body {
     margin-bottom: 10px;
 }
 
-.user-stage{
+.routines{
     min-height: 44px;
 }
-.left-stage{
+.not-routines{
     min-height: 44px;
 }
 
@@ -277,7 +277,7 @@ body {
     margin: 5px;
 }
 
-.radio-part {
+.radio-muscle {
     margin-left: 20px;
 }
 /*-- iPhone Vertical View--*/

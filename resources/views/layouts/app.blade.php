@@ -27,9 +27,9 @@
     <script src="/js/ajax-setup.js"></script>
     <script src="/js/ajax-function.js"></script>
     <script src="/js/build-html-function.js"></script>
-    <script src="/js/event-control.js"></script>
-    <script src="/js/training-control.js"></script>
-    <script src="/js/choice-control.js"></script>
+    <script src="/js/program-control.js"></script>
+    <script src="/js/workout-control.js"></script>
+    <script src="/js/routine-control.js"></script>
     <script src="/js/validation.js"></script>
     <script src="/js/boostrap.js"></script>
     <!-- Fonts -->
@@ -78,10 +78,10 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/stages/index"><i class="fas fa-cog"></i> 種目</a>
+                    <a class="nav-link" href="{{ route('exercise.index') }}"><i class="fas fa-cog"></i> 種目</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/csv/index"><i class="fas fa-file-csv"></i> CSV</a>
+                    <a class="nav-link" href="{{ route('csv.index') }}"><i class="fas fa-file-csv"></i> CSV</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"

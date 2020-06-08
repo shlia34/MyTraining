@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
 
-    <p><a class="btn" href="{{url('/csv/export/Event')}}" target="_blank"> Event Export</a></p>
-    <p><a class="btn" href="{{url('/csv/export/Training')}}" target="_blank"> Training Export</a></p>
-    <p><a class="btn" href="{{url('/csv/export/Stage')}}" target="_blank"> Stage Export</a></p>
-    <p><a class="btn" href="{{url('/csv/export/User')}}" target="_blank"> User Export</a></p>
-    <p><a class="btn" href="{{url('/csv/export/Choice')}}" target="_blank"> choice Export</a></p>
+    @foreach($modelNames as $modelName)
+        <p><a class="btn" href="{{ route('csv.export', ['modelName' => $modelName]) }}" target="_blank"> {{$modelName}} Export</a></p>
+    @endforeach
 
     <form action="/csv/import" method="post" enctype="multipart/form-data">
+    <form action={{ route('csv.import') }} method="post" enctype="multipart/form-data">
+
         {{ csrf_field() }}
         <div class="row">
             <label class="col-1 text-right" for="form-file-1">File:</label>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-block">Event Import</button>
+        <button type="submit" class="btn btn-block">Import</button>
     </form>
 
     <script>

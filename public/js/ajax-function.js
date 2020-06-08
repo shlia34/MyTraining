@@ -1,45 +1,45 @@
-//以下event
-function apiStoreEvent(data,callback){
+//以下program
+function apiStoreProgram(data, callback){
     $.ajax({
-        url: '/api/events/store',
+        url: '/api/programs/store',
         type: 'POST',
         dataTape: 'json',
         data: data,
     }).done(function(result) {
         callback(result);
     }).fail(function(result){
-        var errors = result['responseJSON'].errors;
-
-        $.each(errors, function(index, value) {
-            alert(value);
-        });
+        alertError(result);
 
     })
 }
 
-function apiUpdateDateEvent(data){
+function apiUpdateDateProgram(data){
     $.ajax({
-        url: '/api/events/updateDate',
+        url: '/api/programs/updateDate',
         type: 'POST',
         data:data,
-    }).done(function(result) {});
+    }).fail(function(result){
+        alertError(result);
+    })
 }
 
-function apiShowLinksEvent(data, callback){
+function apiShowLinksProgram(data, callback){
     $.ajax({
-        url: '/api/events/showLinks',
+        url: '/api/programs/showLinks',
         type: 'POST',
         dataTape:'json',
         data:data,
     }).done(function(result) {
         callback(result);
+    }).fail(function(result){
+        alertError(result);
     });
 }
 
-//以下training
-function apiStoreTraining(data, callback){
+//以下workout
+function apiStoreWorkout(data, callback){
     $.ajax({
-        url: '/api/trainings/store',
+        url: '/api/workouts/store',
         type: 'POST',
         dataTape: 'json',
         data:data,
@@ -48,9 +48,9 @@ function apiStoreTraining(data, callback){
     });
 }
 
-function apiDestroyTraining(data, callback) {
+function apiDestroyWorkout(data, callback) {
     $.ajax({
-        url: '/api/trainings/destroy',
+        url: '/api/workouts/destroy',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -58,10 +58,10 @@ function apiDestroyTraining(data, callback) {
     });
 }
 
-//以下trainings.is_max
-function apiCheckMaxTraining(data, callback){
+//以下workouts.is_max
+function apiCheckMaxWorkout(data, callback){
     $.ajax({
-        url: '/api/trainings/max/check',
+        url: '/api/workouts/max/check',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -70,9 +70,9 @@ function apiCheckMaxTraining(data, callback){
 }
 
 
-function apiOnMaxTraining(data, callback){
+function apiOnMaxWorkout(data, callback){
     $.ajax({
-        url: '/api/trainings/max/on',
+        url: '/api/workouts/max/on',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -80,9 +80,9 @@ function apiOnMaxTraining(data, callback){
     });
 }
 
-function apiOffMaxTraining(data, callback) {
+function apiOffMaxWorkout(data, callback) {
     $.ajax({
-        url: '/api/trainings/max/off',
+        url: '/api/workouts/max/off',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -90,10 +90,10 @@ function apiOffMaxTraining(data, callback) {
     });
 }
 
-//以下choice
-function apiStoreChoice(data, callback) {
+//以下routine
+function apiStoreRoutine(data, callback) {
     $.ajax({
-        url: '/api/choices/store',
+        url: '/api/routines/store',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -101,9 +101,9 @@ function apiStoreChoice(data, callback) {
     });
 }
 
-function apiDestroyChoice(data, callback) {
+function apiDestroyRoutine(data, callback) {
     $.ajax({
-        url: '/api/choices/destroy',
+        url: '/api/routines/destroy',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -111,9 +111,9 @@ function apiDestroyChoice(data, callback) {
     });
 }
 
-function apiSortChoice(data, callback) {
+function apiSortRoutine(data, callback) {
     $.ajax({
-        url: '/api/choices/sort',
+        url: '/api/routines/sort',
         type: 'POST',
         data: data,
     }).done(function(result) {
@@ -121,3 +121,11 @@ function apiSortChoice(data, callback) {
     });
 }
 
+//ajax失敗したとき、errorをalertで出す
+function alertError(result) {
+    var errors = result['responseJSON'].errors;
+
+    $.each(errors, function(index, value) {
+        alert(value);
+    });
+}
