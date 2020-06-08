@@ -2,7 +2,6 @@
 
 namespace App\Csv;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use SplFileObject;
 
@@ -12,6 +11,10 @@ class Csv
     const MODEL_PREFIX = "App\\Models\\";
     const CSV_ENCODING = 'SJIS';
     const APP_ENCODING = 'UTF-8';
+
+    public $modelNames = [
+        'User','Program','Exercise','Routine','Menu','Workout'
+    ];
 
     public function exportFile($modelName)
     {
@@ -25,7 +28,10 @@ class Csv
         $models = $modelClass::all();
         //modelを一行ずつ出力
         foreach ($models as $model) {
-            $line =  array_values($model->toArray());
+            $line = [];
+            foreach ($columns as $column){
+                $line[] =  $model->$column;
+            }
             fputcsv($stream, $line);
         }
         // ポインタの先頭へ
@@ -76,13 +82,12 @@ class Csv
             if($file->key() > 0 && !$file->eof()){
                 $model = new $modelClass();
                 for($i=0; $i < count($line); $i++){
-                    if($columns[$i] === "user_id"){
-                        $model->user_id = Auth::user()->user_id;
-                    }else{
+//                    if($columns[$i] === "user_id"){
+//                        $model->user_id = Auth::user()->user_id;
+//                    }else{
                         $column = $columns[$i];
                         $model->$column = $line[$i];
-                    }
-
+//                    }
                 }
                 $model->save();
             }

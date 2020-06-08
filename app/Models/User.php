@@ -18,12 +18,16 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
 
-    public function Stages(){
-        return $this->belongsToMany('App\Models\Stage', 'stage_user','user_id','stage_id')->withPivot('sort_no');
+    public function exercises(){
+        return $this->belongsToMany('App\Models\Exercise','routines')->withPivot('sort_no');
+    }
+
+    public function programs(){
+        return $this->hasMany('App\Models\User','id', 'user_id');
     }
 
     /**
@@ -32,7 +36,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_id','name', 'email', 'password',
+        'id','name', 'email', 'password',
     ];
 
     /**

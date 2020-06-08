@@ -16,53 +16,51 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     //web
     Route::group(['namespace' => 'Web'],function(){
-        //event
-        Route::get('/', 'EventController@index');
-        Route::get('/events/{event_id}', 'EventController@show');
-        Route::get('/events/{event_id}/destroy', 'EventController@destroy');
-        //stage
-        Route::group(['prefix' => 'stages'],function (){
-            Route::get('/index', 'StageController@index');
-            Route::get('/create', 'StageController@create');
-            Route::post('/store', 'StageController@store');
-            Route::get('/{stage_id}', 'StageController@show');
-            //Route::get('/stage/{stage_id}/edit', 'StageController@edit');
-            //Route::post('/stage/update', 'StageController@update');
+        //program
+        Route::get('/', 'ProgramController@index')->name('program.index');
+        Route::get('/programs/{program_id}', 'ProgramController@show')->name('program.show');
+        Route::get('/programs/{program_id}/destroy', 'ProgramController@destroy')->name('program.destroy');
+        //exrcise
+        Route::group(['prefix' => 'exercises'],function (){
+            Route::get('/index', 'ExerciseController@index')->name('exercise.index');
+            Route::get('/create', 'ExerciseController@create')->name('exercise.create');
+            Route::post('/store', 'ExerciseController@store')->name('exercise.store');
+            Route::get('/{exercise_id}', 'ExerciseController@show')->name('exercise.show');
         });
         //csv
         Route::group(['prefix' => 'csv'],function (){
-            Route::get('/index', 'CsvController@index');
-            Route::get('/export/{modelName}', 'CsvController@export');
-            Route::post('/import', 'CsvController@import');
+            Route::get('/index', 'CsvController@index')->name('csv.index');
+            Route::get('/export/{modelName}', 'CsvController@export')->name('csv.export');
+            Route::post('/import', 'CsvController@import')->name('csv.import');
         });
 
     });
     //api
     Route::group(['namespace' => 'Api','prefix' => 'api'], function () {
-        //event api
-        Route::group(['prefix' => 'events'], function () {
-            Route::get('/set', 'EventController@set');
-            Route::post('/showLinks', 'EventController@showLinks');
-            Route::post('/store', 'EventController@store');
-            Route::post('/updateDate', 'EventController@updateDate');
+        //program api
+        Route::group(['prefix' => 'programs'], function () {
+            Route::get('/set', 'ProgramController@set')->name('program.set');
+            Route::post('/showLinks', 'ProgramController@showLinks')->name('program.showLinks');
+            Route::post('/store', 'ProgramController@store')->name('program.store');
+            Route::post('/updateDate', 'ProgramController@updateDate')->name('program.updateDate');
         });
-        //training ap
-        Route::group(['prefix' => 'trainings'], function () {
-            //training
-            Route::post('/store', 'TrainingController@store');
-            Route::post('/destroy', 'TrainingController@destroy');
+        //workout api
+        Route::group(['prefix' => 'workouts'], function () {
+            //workout
+            Route::post('/store', 'WorkoutController@store')->name('workout.store');
+            Route::post('/destroy', 'WorkoutController@destroy')->name('workout.destroy');
             //is_max
             Route::group(['prefix' => 'max'],function () {
-                Route::post('/on', 'TrainingController@OnMax');
-                Route::post('/off', 'TrainingController@OffMax');
-                Route::post('/check', 'TrainingController@checkMax');
+                Route::post('/on', 'WorkoutController@OnMax')->name('workout.onMax');
+                Route::post('/off', 'WorkoutController@OffMax')->name('workout.offMax');
+                Route::post('/check', 'WorkoutController@checkMax')->name('workout.checkMax');
             });
         });
-        //choice api
-        Route::group(['prefix' => 'choices'],function (){
-            Route::post('/store', 'ChoiceController@store');
-            Route::post('/destroy', 'ChoiceController@destroy');
-            Route::post('/sort', 'ChoiceController@sort');
+        //Routine api
+        Route::group(['prefix' => 'routines'],function (){
+            Route::post('/store', 'RoutineController@store')->name('routine.store');
+            Route::post('/destroy', 'RoutineController@destroy')->name('routine.destroy');
+            Route::post('/sort', 'RoutineController@sort')->name('routine.sort');
         });
 
     });
