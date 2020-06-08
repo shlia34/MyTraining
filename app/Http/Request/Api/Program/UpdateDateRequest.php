@@ -13,7 +13,7 @@ class UpdateDateRequest extends IsoDateRequest
     {
         return [
             'id' => 'required',
-            'newDate' => 'required|date',
+            'new_date' => 'required|date',
         ];
     }
 
@@ -21,7 +21,7 @@ class UpdateDateRequest extends IsoDateRequest
     {
         $original = $this->validationData();
         $data['id'] = $original['id'];
-        $data['newDate'] = $this->formatIsoDate( $original['newDate'] );
+        $data['new_date'] = $this->formatIsoDate( $original['new_date'] );
         return $data;
     }
 

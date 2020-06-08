@@ -8,11 +8,7 @@ function apiStoreProgram(data, callback){
     }).done(function(result) {
         callback(result);
     }).fail(function(result){
-        var errors = result['responseJSON'].errors;
-
-        $.each(errors, function(index, value) {
-            alert(value);
-        });
+        alertError(result);
 
     })
 }
@@ -22,7 +18,9 @@ function apiUpdateDateProgram(data){
         url: '/api/programs/updateDate',
         type: 'POST',
         data:data,
-    }).done(function(result) {});
+    }).fail(function(result){
+        alertError(result);
+    })
 }
 
 function apiShowLinksProgram(data, callback){
@@ -33,6 +31,8 @@ function apiShowLinksProgram(data, callback){
         data:data,
     }).done(function(result) {
         callback(result);
+    }).fail(function(result){
+        alertError(result);
     });
 }
 
@@ -121,3 +121,11 @@ function apiSortRoutine(data, callback) {
     });
 }
 
+//ajax失敗したとき、errorをalertで出す
+function alertError(result) {
+    var errors = result['responseJSON'].errors;
+
+    $.each(errors, function(index, value) {
+        alert(value);
+    });
+}
