@@ -3,8 +3,8 @@
 
 <div class = "wrapper">
 
-    <div class = "add-training-form-box form-inline pt-3 pl-3 pr-3">
-        {{ Form::select('exercise_id', $exerciseArr,null ,['class' => 'form-stage_id browser-default custom-select mb-2']) }}
+    <div class = "add-exercise-form-box form-inline pt-3 pl-3 pr-3">
+        {{ Form::select('exercise_id', $exerciseArr,null ,['class' => 'form-exercise_id browser-default custom-select mb-2']) }}
 
         <div class="forms">
             <div class="md-form m-0 ml-3 w-25">
@@ -19,12 +19,12 @@
             @if($exerciseArr->count() === 0)
                 <a href ="/exercises/index?muscleCode={{$thisProgram->muscle_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
             @else
-                <button class = "add-training-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
+                <button class = "add-workout-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
             @endif
         </div>
     </div>
 
-    <div class = "trainings-index  pb-4">
+    <div class = "workouts-index  pb-4">
         @include('partials.program', ['program' => $thisProgram, 'type' => 'this' ])
         <div>
             <a href="/programs/{{$thisProgram->id}}/destroy"><i class="fas fa-trash ml-2"></i></a>
@@ -37,15 +37,15 @@
     </div>
 </div>
 
-<div data-remodal-id="true-training-remodal" data-remodal-options="hashTracking:false">
+<div data-remodal-id="true-workout-remodal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
-    <button class="remodal-btn off-max-training-btn">マックスをオフ</button>
+    <button class="remodal-btn off-max-workout-btn">マックスをオフ</button>
 </div>
 
-<div data-remodal-id="false-training-remodal" data-remodal-options="hashTracking:false">
+<div data-remodal-id="false-workout-remodal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
-    <button class="remodal-btn on-max-training-btn">マックスに登録</button>
-    <button class="remodal-btn delete-training-btn">削除</button>
+    <button class="remodal-btn on-max-workout-btn">マックスに登録</button>
+    <button class="remodal-btn delete-workout-btn">削除</button>
 </div>
 
 @endsection

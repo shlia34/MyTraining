@@ -1,5 +1,5 @@
 //以下program
-function apiStoreEvent(data,callback){
+function apiStoreProgram(data, callback){
     $.ajax({
         url: '/api/programs/store',
         type: 'POST',
@@ -17,7 +17,7 @@ function apiStoreEvent(data,callback){
     })
 }
 
-function apiUpdateDateEvent(data){
+function apiUpdateDateProgram(data){
     $.ajax({
         url: '/api/programs/updateDate',
         type: 'POST',
@@ -25,7 +25,7 @@ function apiUpdateDateEvent(data){
     }).done(function(result) {});
 }
 
-function apiShowLinksEvent(data, callback){
+function apiShowLinksProgram(data, callback){
     $.ajax({
         url: '/api/programs/showLinks',
         type: 'POST',
@@ -37,7 +37,7 @@ function apiShowLinksEvent(data, callback){
 }
 
 //以下workout
-function apiStoreTraining(data, callback){
+function apiStoreWorkout(data, callback){
     $.ajax({
         url: '/api/workouts/store',
         type: 'POST',
@@ -48,7 +48,7 @@ function apiStoreTraining(data, callback){
     });
 }
 
-function apiDestroyTraining(data, callback) {
+function apiDestroyWorkout(data, callback) {
     $.ajax({
         url: '/api/workouts/destroy',
         type: 'POST',
@@ -59,7 +59,7 @@ function apiDestroyTraining(data, callback) {
 }
 
 //以下workouts.is_max
-function apiCheckMaxTraining(data, callback){
+function apiCheckMaxWorkout(data, callback){
     $.ajax({
         url: '/api/workouts/max/check',
         type: 'POST',
@@ -70,7 +70,7 @@ function apiCheckMaxTraining(data, callback){
 }
 
 
-function apiOnMaxTraining(data, callback){
+function apiOnMaxWorkout(data, callback){
     $.ajax({
         url: '/api/workouts/max/on',
         type: 'POST',
@@ -80,7 +80,7 @@ function apiOnMaxTraining(data, callback){
     });
 }
 
-function apiOffMaxTraining(data, callback) {
+function apiOffMaxWorkout(data, callback) {
     $.ajax({
         url: '/api/workouts/max/off',
         type: 'POST',
@@ -91,7 +91,7 @@ function apiOffMaxTraining(data, callback) {
 }
 
 //以下routine
-function apiStoreChoice(data, callback) {
+function apiStoreRoutine(data, callback) {
     $.ajax({
         url: '/api/routines/store',
         type: 'POST',
@@ -101,7 +101,7 @@ function apiStoreChoice(data, callback) {
     });
 }
 
-function apiDestroyChoice(data, callback) {
+function apiDestroyRoutine(data, callback) {
     $.ajax({
         url: '/api/routines/destroy',
         type: 'POST',
@@ -111,7 +111,7 @@ function apiDestroyChoice(data, callback) {
     });
 }
 
-function apiSortChoice(data, callback) {
+function apiSortRoutine(data, callback) {
     $.ajax({
         url: '/api/routines/sort',
         type: 'POST',

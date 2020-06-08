@@ -15,7 +15,7 @@ class Set extends JsonResource
     public function toArray($request)
     {
         $data["id"] = $this->id;
-        $data["part_code"] = $this->muscle_code;
+        $data["muscle_code"] = $this->muscle_code;
         $data["backgroundColor"] = $this->muscle_color;
         $data["borderColor"] = $this->muscle_color;
         $data["start"] = $this->date;
