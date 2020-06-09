@@ -2,6 +2,7 @@
 
 namespace App\Http\Request\Api;
 
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Foundation\Http\FormRequest;
 
 use Illuminate\Contracts\Validation\Validator;
@@ -23,13 +24,23 @@ abstract class ApiRequest extends FormRequest
 
     /**
      * 親クラスではhtmlを返すのでAPI用に上書きする
-     * バリデーションエラーが起きた場合、422エラーを投げる。
+     * バリデーションエラーが起きた場合、throwError()を実行
      * @param Validator $validator
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
+        $this->throwError($validator->errors());
+    }
+
+    /**
+     * 実際にエラーを投げる
+     * @param $errorMessages
+     */
+    protected function throwError($errorMessages)
+    {
         $res = response()->json([
             "status" => 422,
-            "errors" => $validator->errors(),
+            "errors" => $errorMessages,
         ], 422);
         throw new HttpResponseException($res);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Request\Api\Program;
 
 use App\Http\Request\Api\ApiRequest;
+use App\Models\Program;
 
 class StoreRequest extends ApiRequest
 {
@@ -31,4 +32,27 @@ class StoreRequest extends ApiRequest
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        $messages = $this->checkDuplicatedMuscle( $this->getValidatorInstance());
+
+        if($messages !== null) {
+            $this->throwError($messages);
+        }
+    }
+
+    /**
+     * 同じ日に同じ筋肉の部位が重複してないかチェック
+     * muscle_codeとdateの2つのデータに関わるためのrulesでは無理だと思った。
+     * @return array
+     */
+    public function checkDuplicatedMuscle()
+    {
+        $original = $this->validationData();
+        $program = Program::where('muscle_code',$original['muscle_code'])->where('date',$original['date'])->first();
+
+        if(!empty($program)){
+            return ['checkDuplicatedMuscle'=>'同じ日に同じ筋肉の部位が重複してます'];
+        }
+    }
 }
