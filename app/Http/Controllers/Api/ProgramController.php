@@ -21,7 +21,7 @@ class ProgramController extends Controller
      */
     public function set(SetRequest $request)
     {
-        $dates = $request->getFormattedData();
+        $dates = $request->all();
         $programs = Program::whereBetween('date', [ $dates['start'], $dates['end'] ])->own()->get();
 
         return ProgramResource::collection($programs);
@@ -34,7 +34,7 @@ class ProgramController extends Controller
      */
     public function showLinks(ShowLinksRequest $request)
     {
-        $date = $request->getFormattedData()['date'];
+        $date = $request->all()['date'];
         $programs = Program::where('date', $date)->Own()->oldest('muscle_code')->with(['maxWorkout'])->get();
 
         return response()->json([ "date" => $date, "programs" => ShowLinksProgramResource::collection($programs) ]);
@@ -62,7 +62,7 @@ class ProgramController extends Controller
      */
     public function updateDate(UpdateDateRequest $request)
     {
-        $data = $request->getFormattedData();
+        $data = $request->all();
         $program = Program::find($data['id']);
         $program->date = $data['new_date'];
         $program->save();

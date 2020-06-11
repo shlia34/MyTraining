@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
-use App\Http\Request\Web\Stage\StoreRequest;
+use App\Http\Request\Web\Exercise\StoreRequest;
 use App\Models\Exercise;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

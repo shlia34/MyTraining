@@ -3,15 +3,15 @@
 namespace App\Http\Request\Api\Program;
 
 use App\Http\Request\Api\ApiRequest;
-use App\Models\Program;
+use App\Rules\DuplicatedMuscle;
+
 
 class StoreRequest extends ApiRequest
 {
     public function rules()
     {
         return [
-            'muscle_code' => 'required',
-            //2文字以内で数字のバリデーションもつける
+            'muscle_code' => ['required',new DuplicatedMuscle($this->validationData())],
             'memo' => 'max:100',
             'date' => 'required|date',
         ];
@@ -20,9 +20,9 @@ class StoreRequest extends ApiRequest
     public function attributes()
     {
         return [
-            'muscle_code' => 'muscle_code',
+            'muscle_code' => '筋肉の部位',
             'memo' => 'メモ',
-            'date' => 'date'
+            'date' => '日付'
         ];
     }
 
@@ -30,29 +30,5 @@ class StoreRequest extends ApiRequest
         return [
             'memo.max:100' => ':attributeは100文字以内でお願いします。',
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $messages = $this->checkDuplicatedMuscle( $this->getValidatorInstance());
-
-        if($messages !== null) {
-            $this->throwError($messages);
-        }
-    }
-
-    /**
-     * 同じ日に同じ筋肉の部位が重複してないかチェック
-     * muscle_codeとdateの2つのデータに関わるためのrulesでは無理だと思った。
-     * @return array
-     */
-    public function checkDuplicatedMuscle()
-    {
-        $original = $this->validationData();
-        $program = Program::where('muscle_code',$original['muscle_code'])->where('date',$original['date'])->first();
-
-        if(!empty($program)){
-            return ['checkDuplicatedMuscle'=>'同じ日に同じ筋肉の部位が重複してます'];
-        }
     }
 }

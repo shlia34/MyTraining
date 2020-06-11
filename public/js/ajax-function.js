@@ -45,6 +45,8 @@ function apiStoreWorkout(data, callback){
         data:data,
     }).done(function(result) {
         callback(result);
+    }).fail(function(result){
+        alertError(result);
     });
 }
 
