@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Request\Web\Stage;
+namespace App\Http\Request\Web\Exercise;
 
 use App\Http\Request\Web\WebRequest;
 
@@ -24,7 +24,7 @@ class StoreRequest extends WebRequest
     {
         return [
             'name' => '種目名',
-            'muscle_code' => '部位',
+            'muscle_code' => '筋肉の部位',
         ];
     }
 

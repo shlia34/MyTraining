@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Workout\Workout as WorkoutResource;
+use App\Http\Request\Api\Workout\StoreRequest;
 use Illuminate\Http\Request;
 use App\Models\Workout;
 use App\Models\Program;
@@ -11,31 +12,28 @@ use App\Models\Menu;
 
 class WorkoutController extends Controller
 {
-    //todo formRequest作る
     /**
      * 保存
      * @param Request $request
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $program = Program::find($request['program_id']);
         $menu = $program->menus()->where('exercise_id',$request['exercise_id'])->first();
 
-        //todo トランザクション機能を使ってみる
         if($menu === null){
             $menuInsertData = $request->only('exercise_id','program_id')
-                            + ['id' => $this->generateId('ME')];
+                + ['id' => $this->generateId('ME')];
 
             $menu = Menu::create($menuInsertData);
         }
 
         $workoutInsertData = $request->only('weight','rep')
-                            + ['id' => $this->generateId('WO')]
-                            + ['menu_id' => $menu->id]
-                            + ['is_max' => 0];
+            + ['id' => $this->generateId('WO')]
+            + ['menu_id' => $menu->id]
+            + ['is_max' => 0];
 
         $workout = Workout::create($workoutInsertData);
-        //todo ここまで
 
         return new WorkoutResource($workout);
     }

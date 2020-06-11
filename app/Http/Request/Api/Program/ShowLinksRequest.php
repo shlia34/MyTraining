@@ -16,12 +16,9 @@ class ShowLinksRequest extends IsoDateRequest
         ];
     }
 
-//todo passedValidation()、prepareForValidation()を使用すればいい
-    protected function formatData()
+    protected function passedValidation()
     {
         $original = $this->validationData();
-        $data['date'] = $this->formatIsoDate($original['date']);
-        return $data;
+        $this->replace(['date' => $this->formatIsoDate($original['date']) ]);
     }
-
 }
