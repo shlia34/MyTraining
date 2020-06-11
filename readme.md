@@ -18,3 +18,6 @@
 - メールアドレス => "sample@sample" パスワード=>"password" でseederにて作成したユーザーでログインできる
 - ローカルはmysqlなんですが、デプロイはherokuのpostgresで使ってます(クレジット登録しないとmysql使えない)。
 - フロントをvue.jsで書きかえてみたい
+
+## セットアップ
+- php artisan migrate:refresh --seed
