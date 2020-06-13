@@ -10,6 +10,7 @@ window.Vue = require('vue');
 
 import Vue from 'vue'
 Vue.component('fullcalendar', require('./components/Fullcalendar.vue').default);
+// Vue.component('product-modal', require('./components/ProductModal.vue').default);
 
 
 const app = new Vue({

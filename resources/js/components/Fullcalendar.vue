@@ -1,6 +1,7 @@
 <template>
     <div>
-        <FullCalendar :customButtons="calendarCustomButtons"
+        <FullCalendar
+                :customButtons="calendarCustomButtons"
                 :events="calendarEvents"
                 :firstDay=1
                 :fixedWeekCount=false
@@ -10,8 +11,8 @@
                 @dateClick="dateClick"
                 @eventClick="eventClick"
                 @eventDrop="eventDrop"
-                defaultView="dayGridMonth"
 
+                defaultView="dayGridMonth"
                 editable="true"
                 eventDurationEditable=false
                 eventOrder="muscle_code"
@@ -34,19 +35,24 @@
                 </li>
             </ul>
         </div>
+        <ProgramModal :isActive="isModalActive" v-if="isModalActive" />
     </div>
 </template>
 
 <script>
-    import FullCalendar from '@fullcalendar/vue'
-    import dayGridPlugin from '@fullcalendar/daygrid'
-    import interactionPlugin from '@fullcalendar/interaction'
+    import FullCalendar from '@fullcalendar/vue';
+    import dayGridPlugin from '@fullcalendar/daygrid';
+    import interactionPlugin from '@fullcalendar/interaction';
+    import ProgramModal from './ProgramModal.vue';
+
     export default {
         components: {
             FullCalendar,
+            ProgramModal
         },
         data: function() {
             return {
+                isModalActive:false,
                 calendarPlugins: [
                     dayGridPlugin,
                     interactionPlugin
@@ -54,13 +60,7 @@
                 calendarCustomButtons: {
                     storeProgram: {
                         text: '記録',
-                        click: function() {
-                            var remodal = $(".program-remodal").remodal();
-                            remodal.open();
-                            $(document).off('confirmation').on('confirmation', '.program-remodal', function () {
-                                storeProgram(calendar)
-                            });
-                        }
+                        click: this.showModal,
                     }
                 },
                 calendarHeader: {
@@ -84,6 +84,9 @@
             },
             dateClick(info){
                 this.showLinksProgram(info.dateStr);
+            },
+            showModal(){
+                this.isModalActive = true;
             },
 
             updateDateProgram(info){
@@ -121,7 +124,6 @@
             }
         }
     }
-
 
 
 </script>
