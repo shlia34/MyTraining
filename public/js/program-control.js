@@ -26,39 +26,6 @@ function storeProgram(calendar)
     })
 }
 
-/**
- * イベントの日付を変更
- * event/index.blade.phpで使用
- * @param info
- */
-function updateDateProgram(info)
-{
-    var data = {
-        "id":info.event.id,
-        "new_date":info.event.start.toISOString(),
-    };
-    apiUpdateDateProgram(data,function(result){
-    });
-}
-
-/**
- * イベント詳細ページへのリンクを表示
- * event/index.blade.phpで使用
- * @param date
- */
-function showLinksProgram(date)
-{
-    var data = {date:date};
-    apiShowLinksProgram(data,function(result){
-        $('.show-program ul').empty();
-        $('.show-program p').empty();
-        $('.show-program p').append(result["date"]);
-        $.each(result["programs"], function(index, value) {
-            $('.show-program ul').append( buildLinksProgramHtml(value) );
-        });
-    });
-}
-
 $(function()
 {
     alertDestroyProgram();

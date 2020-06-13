@@ -21,3 +21,4 @@
 
 ## セットアップ
 - php artisan migrate:refresh --seed
+- npm install --save @fullcalendar/vue @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction

@@ -1,17 +1,3 @@
-//以下event
-/**
- * イベント詳細のリンクのhtml作成
- * @param value
- * @returns {string}
- */
-function buildLinksProgramHtml(value) {
-    var html =`<li><a href='/programs/${value["id"]}'>${value["title"]}</a>`;
-    if(value["max_workout"] !== null){
-        html += `${value["max_workout"]["exercise_name"]} ${value["max_workout"]["weight_and_rep"]}</li>`;
-    }
-
-    return html;
-}
 //以下training
 /**
  * トレーニング追加時のhtml作成
