@@ -15111,6 +15111,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -15127,7 +15131,7 @@ __webpack_require__.r(__webpack_exports__);
       calendarCustomButtons: {
         storeProgram: {
           text: '記録',
-          click: this.showModal
+          click: this.toggelModal
         }
       },
       calendarHeader: {
@@ -15135,7 +15139,10 @@ __webpack_require__.r(__webpack_exports__);
         center: '',
         right: 'prev,next,storeProgram'
       },
-      calendarEvents: "/api/programs/set",
+      calendarEvents: {
+        url: '/api/programs/set',
+        method: 'GET'
+      },
       link: {
         date: "",
         programs: []
@@ -15152,8 +15159,18 @@ __webpack_require__.r(__webpack_exports__);
     dateClick: function dateClick(info) {
       this.showLinksProgram(info.dateStr);
     },
-    showModal: function showModal() {
+    toggelModal: function toggelModal() {
       this.isModalActive = !this.isModalActive;
+    },
+    storeProgram: function storeProgram(formData) {
+      var vm = this;
+      var response = axios.post('/api/programs/store', formData).then(function (response) {
+        var calendarApi = vm.$refs.fullCalendar.getApi();
+        calendarApi.addEvent(response.data);
+        vm.showLinksProgram(response.data.start);
+      })["catch"](function (error) {
+        vm.alertError(error.response);
+      });
     },
     updateDateProgram: function updateDateProgram(info) {
       var vm = this;
@@ -15249,11 +15266,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     close: function close() {
-      this.$emit('child-event');
+      this.$emit('closeModal');
     },
     store: function store() {
-      console.log(this.formData);
       this.close();
+      this.$emit('storeProgram', this.formData);
     },
     getToday: function getToday() {
       var date = new Date();
@@ -51536,11 +51553,11 @@ var render = function() {
           eventDurationEditable: "false",
           eventOrder: "muscle_code",
           eventTextColor: "white",
-          id: "calendar",
           locales: "ja",
           selectLongPressDelay: "0",
           themeSystem: "bootstrap",
-          timeZone: "ja"
+          timeZone: "ja",
+          id: "calendar"
         },
         on: {
           dateClick: _vm.dateClick,
@@ -51548,6 +51565,8 @@ var render = function() {
           eventDrop: _vm.eventDrop
         }
       }),
+      _vm._v(" "),
+      _c("div", { ref: "calendar" }),
       _vm._v(" "),
       _c("div", { staticClass: "show-program" }, [
         _c("p", [_vm._v(_vm._s(_vm.link.date))]),
@@ -51580,7 +51599,7 @@ var render = function() {
         ? _c("ProgramModal", {
             ref: "ProgramModal",
             attrs: { isActive: _vm.isModalActive },
-            on: { "child-event": _vm.showModal }
+            on: { closeModal: _vm.toggelModal, storeProgram: _vm.storeProgram }
           })
         : _vm._e()
     ],
@@ -64172,7 +64191,7 @@ var muscleNames = [{
   "name": '二頭筋'
 }, {
   "id": '06',
-  "name": '二頭筋'
+  "name": '頭三筋'
 }, {
   "id": '07',
   "name": '腹筋'
