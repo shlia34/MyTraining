@@ -35,7 +35,12 @@
                 </li>
             </ul>
         </div>
-        <ProgramModal :isActive="isModalActive" v-if="isModalActive" />
+        <ProgramModal
+                :isActive="isModalActive"
+                @child-event="showModal"
+                ref="ProgramModal"
+                v-if="isModalActive"
+        />
     </div>
 </template>
 
@@ -86,7 +91,7 @@
                 this.showLinksProgram(info.dateStr);
             },
             showModal(){
-                this.isModalActive = true;
+                this.isModalActive = !this.isModalActive;
             },
 
             updateDateProgram(info){

@@ -1,75 +1,82 @@
 <template>
-    <div v-show="active">
         <transition name="modal">
             <div class="modal-mask">
                 <div class="modal-wrapper">
                     <div class="modal-container">
-
+                        <span @click="close">×</span>
                         <div class="modal-header">
                             <slot name="header">
-                                default header
                             </slot>
                         </div>
 
                         <div class="modal-body">
                             <slot name="body">
-                                default body
+                                <input type="date" v-model="formData.date">
+                                <select v-model="formData.muscle_code">
+                                    <option :value="muscle.id" v-for="muscle in muscleList">{{ muscle.name }}</option>
+                                </select>
+                                <input placeholder='メモ' type="input" v-model="formData.memo">
                             </slot>
                         </div>
 
                         <div class="modal-footer">
                             <slot name="footer">
-                                default footer
-                                <button @click="close" class="modal-default-button">
-                                    OK
-                                </button>
+                                <button @click="store" class="modal-default-button remodal-btn store-program-btn">追加</button>
                             </slot>
                         </div>
+
                     </div>
                 </div>
             </div>
         </transition>
-    </div>
-
-
-
-<!--    <div class="program-remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">-->
-<!--        <button data-remodal-action="close" class="remodal-close"></button>-->
-<!--        &lt;!&ndash;        {{Form::date('date', \Carbon\Carbon::now(), ['class'=>'remodal-date'])}}&ndash;&gt;-->
-<!--        &lt;!&ndash;        {{Form::select('muscle_code', App\Defs\DefMuscle::MUSCLE_NAME_LIST,null,['class' => 'remodal-muscle_code'])}}&ndash;&gt;-->
-<!--        &lt;!&ndash;        {{Form::input('text', 'memo',null,['class' => 'remodal-memo','placeholder'=>'メモ'])}}&ndash;&gt;-->
-<!--        <button data-remodal-action="confirm" class="remodal-btn store-program-btn">追加</button>-->
-<!--    </div>-->
 </template>
 
 <script>
+    import {muscleNames} from '../const.js'
+
     export default {
         props:{
             isActive: Boolean,
         },
-        data(){
+        data: function(){
             return{
                 active: this.isActive,
+                formData: {
+                    muscle_code:"01",
+                    date:this.getToday(),
+                    memo:null,
+                },
+                muscleList:muscleNames,
             }
         },
         methods:{
             close:function () {
-                this.active = false;
-                console.log(12121);
-                console.log(this);
-                console.log(this.active);
+                this.$emit('child-event');
             },
-            storeProgram: function(){
-                $(document).off('confirmation').on('confirmation', '.program-remodal', function () {
-                    var data = {
-                        "muscle_code":$(".remodal-muscle_code").val(),
-                        "memo":$(".remodal-memo").val(),
-                        "date":$(".remodal-date").val(),
-                    };
-                    console.log(data);
-                });
+            store: function(){
+                console.log(this.formData);
+                this.close();
             },
-        }
+            getToday: function () {
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+
+                var toTwoDigits = function (num, digit) {
+                    num += '';
+                    if (num.length < digit) {
+                        num = '0' + num
+                    }
+                    return num
+                };
+
+                var yyyy = toTwoDigits(year, 4);
+                var mm = toTwoDigits(month, 2);
+                var dd = toTwoDigits(day, 2);
+                return yyyy + "-" + mm + "-" + dd;
+            }
+        },
     }
 </script>
 
@@ -115,15 +122,6 @@
     .modal-default-button {
         float: right;
     }
-
-    /*
-     * The following styles are auto-applied to elements with
-     * transition="modal" when their visibility is toggled
-     * by Vue.js.
-     *
-     * You can easily play with the modal transition by editing
-     * these styles.
-     */
 
     .modal-enter {
         opacity: 0;
