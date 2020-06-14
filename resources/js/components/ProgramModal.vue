@@ -51,11 +51,11 @@
         },
         methods:{
             close:function () {
-                this.$emit('child-event');
+                this.$emit('closeModal');
             },
             store: function(){
-                console.log(this.formData);
                 this.close();
+                this.$emit('storeProgram', this.formData);
             },
             getToday: function () {
                 var date = new Date();

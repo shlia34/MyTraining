@@ -1,6 +1,9 @@
 <template>
     <div>
         <FullCalendar
+                @dateClick="dateClick"
+                @eventClick="eventClick"
+
                 :customButtons="calendarCustomButtons"
                 :events="calendarEvents"
                 :firstDay=1
@@ -8,22 +11,22 @@
                 :header="calendarHeader"
                 :height=450
                 :plugins="calendarPlugins"
-                @dateClick="dateClick"
-                @eventClick="eventClick"
-                @eventDrop="eventDrop"
 
                 defaultView="dayGridMonth"
                 editable="true"
                 eventDurationEditable=false
                 eventOrder="muscle_code"
                 eventTextColor="white"
-                id = "calendar"
                 locales="ja"
-                ref="fullCalendar"
                 selectLongPressDelay=0
                 themeSystem="bootstrap"
                 timeZone="ja"
+
+                @eventDrop="eventDrop"
+                id = "calendar"
+                ref="fullCalendar"
                       ></FullCalendar>
+        <div ref="calendar"></div>
         <div class = "show-program">
             <p>{{link.date}}</p>
             <ul>
@@ -37,7 +40,8 @@
         </div>
         <ProgramModal
                 :isActive="isModalActive"
-                @child-event="showModal"
+                @closeModal="toggelModal"
+                @storeProgram="storeProgram"
                 ref="ProgramModal"
                 v-if="isModalActive"
         />
@@ -65,7 +69,7 @@
                 calendarCustomButtons: {
                     storeProgram: {
                         text: '記録',
-                        click: this.showModal,
+                        click: this.toggelModal,
                     }
                 },
                 calendarHeader: {
@@ -73,7 +77,10 @@
                     center: '',
                     right: 'prev,next,storeProgram',
                 },
-                calendarEvents: "/api/programs/set",
+                calendarEvents:{
+                    url: '/api/programs/set',
+                    method: 'GET',
+                },
                 link: {
                     date:"",
                     programs:[],
@@ -90,10 +97,24 @@
             dateClick(info){
                 this.showLinksProgram(info.dateStr);
             },
-            showModal(){
+            toggelModal(){
                 this.isModalActive = !this.isModalActive;
             },
+            storeProgram(formData){
+                var vm =  this;
 
+                const response = axios.post('/api/programs/store', formData)
+                    .then(function (response) {
+                        let calendarApi = vm.$refs.fullCalendar.getApi();
+                        calendarApi.addEvent(response.data);
+
+                        vm.showLinksProgram(response.data.start);
+
+                    })
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+            },
             updateDateProgram(info){
                 var vm =  this;
                 var data = {
@@ -126,7 +147,7 @@
                 $.each(errors, function(index, value) {
                     alert(value);
                 });
-            }
+            },
         }
     }
 
