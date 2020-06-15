@@ -27,9 +27,9 @@ class ProgramController extends Controller
         $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first() ?? abort(404);
         $previousProgram = Program::previous($thisProgram)->with(['menus.workouts'])->first();
 
-        $exerciseArr = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get()->pluck('name', 'id');
+        $exercises = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get();
 
-        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'exerciseArr' =>$exerciseArr ]);
+        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'exercises' =>$exercises ]);
     }
 
     /**

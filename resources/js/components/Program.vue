@@ -1,17 +1,17 @@
 <template>
     <div>
-        <a :href="'/programs/' + item.id" >
-            <div class = "program-title">{{item.date}}の{{item.muscle_name}}トレ</div>
+        <a :href="'/programs/' + program.id" >
+            <div class = "program-title">{{program.date}}の{{program.muscle_name}}トレ</div>
         </a>
 
-        <div :data-program_id =item.id class="program-show">
-                <span class = "program-memo">{{item.memo}}</span>
+        <div :data-program_id =program.id class="program-show">
+                <span class = "program-memo">{{program.memo}}</span>
                 <div class = "workouts">
                     <Menu
                         :clickable="clickable"
                         :key="menu.id"
                         :menu="menu"
-                        v-for="menu in item.menus"
+                        v-for="menu in program.menus"
                     ></Menu>
                 </div>
             </div>
@@ -23,7 +23,16 @@
     import Menu from './Menu.vue';
 
     export default {
-        props:['item','text','clickable'],
+        props:{
+            program: {
+                type: Object,
+                required: true
+            },
+            clickable: {
+                type: Boolean,
+                required: true
+            },
+        },
         components:{
             Menu,
         },

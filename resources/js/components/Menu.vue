@@ -24,10 +24,6 @@
                 type: Object,
                 required: true
             },
-            text: {
-                type: String,
-                required: true
-            },
             clickable: {
                 type: Boolean,
                 required: true
@@ -45,8 +41,6 @@
                 }
 
                 console.log("モーダル表示の処理");
-
-
             },
         },
     }
