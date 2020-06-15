@@ -4,32 +4,14 @@
 
     <div class = "wrapper">
 
-        <div class = "add-exercise-form-box form-inline pt-3 pl-3 pr-3">
-            {{ Form::select('exercise_id', $exerciseArr,null ,['class' => 'form-exercise_id browser-default custom-select mb-2']) }}
-
-            <div class="forms">
-                <div class="md-form m-0 ml-3 w-25">
-                    <input type="number" id="form-weight" class="form-weight form-control">
-                    <label for="form-weight">weight</label>
-                </div>
-
-                <div class="md-form m-0 ml-3 w-25">
-                    <input type="number"  id="form-rep" class="form-rep form-control">
-                    <label for="form-rep">rep</label>
-                </div>
-                @if($exerciseArr->count() === 0)
-                    <a href ="/exercises/index?muscleCode={{$thisProgram->muscle_code}}"><button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button></a>
-                @else
-                    <button class = "add-workout-btn btn waves-effect w-30 ml-4" type="button" disabled>記録</button>
-                @endif
-            </div>
-        </div>
-
-
+        <workout-form
+                :exercises="{{$exercises}}"
+                :program="{{$thisProgram}}"
+        ></workout-form>
 
         <div class = "workouts-index  pb-4">
             <program
-                    :item="{{$thisProgram}}"
+                    :program="{{$thisProgram}}"
                     :clickable="true"
             ></program>
             <div>
@@ -39,9 +21,8 @@
 
             @isset($previousProgram)
                 <program
-                        :item="{{$previousProgram}}"
+                        :program="{{$previousProgram}}"
                         :clickable="false"
-                        :text="'previous'"
                 ></program>
             @endisset
         </div>
