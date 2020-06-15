@@ -42,9 +42,6 @@ body {
 ._make-yellow {
     color:yellow;
 }
-._add-underline {
-    text-decoration: underline;
-}
 
 .workouts-index{
     /*background-color: #c8c8c8;*/
@@ -70,21 +67,7 @@ body {
     color: white;
 }
 
-.this-workout {
-    width: 45%;
-    float: left;
-    margin: 2px 2px 2px 6px;
-}
-.previous-workout {
-    width: 45%;
-    float: left;
-    margin: 2px 2px 2px 6px;
-}
-.exercise-workout {
-    width: 45%;
-    float: left;
-    margin: 2px 2px 2px 6px;
-}
+
 
 .program-memo{
     color: #454545;
@@ -92,72 +75,6 @@ body {
 
 .fa-trash{
     color: #454545;
-}
-
-.ol-workout {
-    counter-reset: my-counter;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.ol-workout li {
-    line-height: 1.5;
-    padding-left: 30px;
-    position: relative;
-}
-.this-workout:before  {
-    content: counter(my-counter);
-    counter-increment: my-counter;
-    font-size: 16px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 22px;
-    width: 22px;
-    color: white;
-    font-size: 70%;
-    line-height: 1;
-    position: absolute;
-    top: 3.5px;
-    left: 0px;
-}
-
-.previous-workout:before  {
-    content: counter(my-counter);
-    counter-increment: my-counter;
-    font-size: 16px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 22px;
-    width: 22px;
-    color: #ffffff;
-    font-size: 70%;
-    line-height: 1;
-    position: absolute;
-    top: 3.5px;
-    left: 0px;
-}
-
-.exercise-workout:before {
-    content: counter(my-counter);
-    counter-increment: my-counter;
-    font-size: 16px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 22px;
-    width: 22px;
-    color: #ffffff;
-    font-size: 70%;
-    line-height: 1;
-    position: absolute;
-    top: 3.5px;
-    left: 0px;
 }
 
 .add-workout-btn{
