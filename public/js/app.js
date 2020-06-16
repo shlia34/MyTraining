@@ -15296,22 +15296,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exercises', 'pid', 'muscle_code'],
   data: function data() {
     return {
-      form: {
-        program_id: this.pid,
-        exercise_id: null,
-        weight: null,
-        rep: null
-      }
+      program_id: this.pid,
+      weight: null,
+      rep: null
     };
+  },
+  computed: {
+    exercise_id: function exercise_id() {
+      var first = this.exercises[0];
+
+      if (first !== undefined) {
+        return first.id;
+      }
+    }
   },
   methods: {
     storeWorkout: function storeWorkout() {
       var vm = this;
-      var response = axios.post('/api/workouts/store', vm.form).then(function (response) {
+      var data = {
+        'program_id': vm.program_id,
+        'exercise_id': vm.exercise_id,
+        'weight': vm.weight,
+        'rep': vm.rep
+      };
+      var response = axios.post('/api/workouts/store', data).then(function (response) {
         vm.$emit('clickBtn', response.data);
       })["catch"](function (error) {
         vm.alertError(error.response);
@@ -15488,6 +15502,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Program_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Program.vue */ "./resources/js/components/Program.vue");
 /* harmony import */ var _components_WorkoutForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/WorkoutForm.vue */ "./resources/js/components/WorkoutForm.vue");
+//
 //
 //
 //
@@ -52135,8 +52150,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.form.exercise_id,
-              expression: "form.exercise_id"
+              value: _vm.exercise_id,
+              expression: "exercise_id"
             }
           ],
           staticClass: "form-exercise_id browser-default custom-select mb-2",
@@ -52150,11 +52165,9 @@ var render = function() {
                   var val = "_value" in o ? o._value : o.value
                   return val
                 })
-              _vm.$set(
-                _vm.form,
-                "exercise_id",
-                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-              )
+              _vm.exercise_id = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
             }
           }
         },
@@ -52175,19 +52188,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.form.weight,
-                expression: "form.weight"
+                value: _vm.weight,
+                expression: "weight"
               }
             ],
             staticClass: "form-weight form-control",
             attrs: { id: "form-weight", type: "number" },
-            domProps: { value: _vm.form.weight },
+            domProps: { value: _vm.weight },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.form, "weight", $event.target.value)
+                _vm.weight = $event.target.value
               }
             }
           }),
@@ -52201,19 +52214,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.form.rep,
-                expression: "form.rep"
+                value: _vm.rep,
+                expression: "rep"
               }
             ],
             staticClass: "form-rep form-control",
             attrs: { id: "form-rep", type: "number" },
-            domProps: { value: _vm.form.rep },
+            domProps: { value: _vm.rep },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.form, "rep", $event.target.value)
+                _vm.rep = $event.target.value
               }
             }
           }),
@@ -52391,6 +52404,10 @@ var render = function() {
           _c("div", [
             _c("a", { attrs: { href: "/programs/" + _vm.pid + "/destroy" } }, [
               _c("i", { staticClass: "fas fa-trash ml-2" })
+            ]),
+            _vm._v(" "),
+            _c("button", { attrs: { onclick: "history.back()" } }, [
+              _vm._v("戻る")
             ])
           ]),
           _vm._v(" "),
