@@ -9,10 +9,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vue from 'vue'
-Vue.component('fullcalendar', require('./components/Fullcalendar.vue').default);
-
-Vue.component('program', require('./components/Program.vue').default);
-Vue.component('workout-form', require('./components/WorkoutForm.vue').default);
+Vue.component('fullcalendar', require('./pages/Fullcalendar.vue').default);
+Vue.component('program-show', require('./pages/ProgramShow.vue').default);
 
 
 const app = new Vue({

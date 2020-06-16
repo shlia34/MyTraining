@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 //program
 Route::group(['prefix' => 'programs'], function () {
     Route::get('/set', 'ProgramController@set')->name('program.set');
+    Route::post('/show', 'ProgramController@show')->name('program.show');
     Route::post('/showLinks', 'ProgramController@showLinks')->name('program.showLinks');
     Route::post('/store', 'ProgramController@store')->name('program.store');
     Route::post('/updateDate', 'ProgramController@updateDate')->name('program.updateDate');

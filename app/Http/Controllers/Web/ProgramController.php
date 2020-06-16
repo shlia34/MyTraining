@@ -18,18 +18,13 @@ class ProgramController extends Controller
     }
 
     /**
-     * 詳細ページ。前回のprogramも取得する
+     * 詳細ページ。
      * @param $programId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(string $programId)
     {
-        $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first() ?? abort(404);
-        $previousProgram = Program::previous($thisProgram)->with(['menus.workouts'])->first();
-
-        $exercises = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get();
-
-        return view('program.show')->with(['thisProgram' => $thisProgram, 'previousProgram' => $previousProgram, 'exercises' =>$exercises ]);
+        return view('program.show')->with(['programId' => $programId]);
     }
 
     /**

@@ -26,7 +26,7 @@
                 id = "calendar"
                 ref="fullCalendar"
                       ></FullCalendar>
-        <div ref="calendar"></div>
+<!--        <div ref="calendar"></div>-->
         <div class = "show-program">
             <p>{{link.date}}</p>
             <ul>
@@ -50,9 +50,9 @@
 
 <script>
     import FullCalendar from '@fullcalendar/vue';
-    import dayGridPlugin from '@fullcalendar/daygrid';
-    import interactionPlugin from '@fullcalendar/interaction';
-    import ProgramModal from './ProgramModal.vue';
+    import dayGridPlugin from '@fullcalendar/daygrid/main';
+    import interactionPlugin from '@fullcalendar/interaction/main';
+    import ProgramModal from '../components/ProgramModal.vue';
 
     export default {
         components: {
