@@ -8,6 +8,7 @@ use App\Http\Request\Api\Program\ShowLinksRequest;
 use App\Http\Request\Api\Program\UpdateDateRequest;
 use App\Http\Request\Api\Program\StoreRequest;
 use App\Models\Program;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Program\Program as ProgramResource;
 use App\Http\Resources\Program\ShowLinks as ShowLinksProgramResource;
@@ -25,6 +26,17 @@ class ProgramController extends Controller
         $programs = Program::whereBetween('date', [ $dates['start'], $dates['end'] ])->own()->get();
 
         return ProgramResource::collection($programs);
+    }
+
+    public function show(Request $request){
+        $programId = $request->all()['programId'];
+
+        $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first() ?? abort(404);
+        $previousProgram = Program::previous($thisProgram)->with(['menus.workouts'])->first();
+
+        $exercises = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get();
+
+        return response()->json(['thisProgram'=>$thisProgram,'previousProgram'=>$previousProgram,'exercises'=>$exercises]);
     }
 
     /**

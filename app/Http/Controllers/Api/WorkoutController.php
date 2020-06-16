@@ -35,7 +35,9 @@ class WorkoutController extends Controller
 
         $workout = Workout::create($workoutInsertData);
 
-        return new WorkoutResource($workout);
+//        return new WorkoutResource($workout);
+        return $workout;
+
     }
 
     /**

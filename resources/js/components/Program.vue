@@ -25,7 +25,6 @@
     export default {
         props:{
             program: {
-                type: Object,
                 required: true
             },
             clickable: {
@@ -38,9 +37,9 @@
         },
         data: function(){
             return{
-
             }
-        }
+        },
+
     }
 
 
