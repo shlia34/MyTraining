@@ -14,6 +14,7 @@
             ></program>
             <div>
                 <a :href="'/programs/' + pid + '/destroy'"><i class="fas fa-trash ml-2"></i></a>
+                <button onclick="history.back()">戻る</button>
 <!--                <div class="float-right"><a  href={{url()->previous()}}><button>戻る</button></a></div>-->
             </div>
 
