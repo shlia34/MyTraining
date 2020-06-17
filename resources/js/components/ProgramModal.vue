@@ -137,4 +137,12 @@
         transform: scale(1.1);
     }
 
+
+    .store-program-btn{
+        background-color: #F43E43;
+    }
+    .store-program-btn[disabled] {
+        opacity: 0.5!important;
+    }
+
 </style>

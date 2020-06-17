@@ -19,7 +19,6 @@ Route::group(['middleware' => 'auth'], function () {
         //program
         Route::get('/', 'ProgramController@index')->name('program.index');
         Route::get('/programs/{program_id}', 'ProgramController@show')->name('program.show');
-        Route::get('/programs/{program_id}/destroy', 'ProgramController@destroy')->name('program.destroy');
         //exercise
         Route::group(['prefix' => 'exercises'],function (){
             Route::get('/index', 'ExerciseController@index')->name('exercise.index');

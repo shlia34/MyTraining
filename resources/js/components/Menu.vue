@@ -4,10 +4,10 @@
             <a :href="'/exercises/' + menu.exercise_id" class = "card-title">{{ menu.name }}</a>
         </span>
         <ol :data-menu_id = menu.id class = "ol-workout mb-0">
-            <li :class = "{ add_underline: workout.is_max }"
-                :data-workout_id =workout.id
+            <li
+                :class = "{ add_underline: workout.is_max }"
                 :key="workout.id"
-                @click="showModal"
+                @click="showModal(workout)"
                 class = "workout"
                 v-for="workout in menu.workouts">
                 {{workout.weight }}kg * {{workout.rep}}rep
@@ -35,12 +35,19 @@
             }
         },
         methods:{
-            showModal: function(){
+            showModal: function(workout){
                 if(!this.clickable){
                     return null;
                 }
 
-                console.log("モーダル表示の処理");
+                var data = {
+                    "program_id" :this.menu.program_id,
+                    "menu_id" :this.menu.id,
+                    "workout_id" :workout.id,
+                    "is_max" :workout.is_max,
+                };
+
+                this.$emit('showModal', data);
             },
         },
     }

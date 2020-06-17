@@ -34,9 +34,17 @@ class ProgramController extends Controller
         $thisProgram = Program::where('id', $programId)->with(['menus.workouts'])->first() ?? abort(404);
         $previousProgram = Program::previous($thisProgram)->with(['menus.workouts'])->first();
 
-        $exercises = Auth::user()->exercises()->where('muscle_code',$thisProgram->muscle_code)->orderBy('pivot_sort_no')->get();
+        return response()->json(['thisProgram'=>$thisProgram,'previousProgram'=>$previousProgram]);
+    }
 
-        return response()->json(['thisProgram'=>$thisProgram,'previousProgram'=>$previousProgram,'exercises'=>$exercises]);
+
+    public function destroy(Request $request)
+    {
+        $programId = $request->all()['program_id'];
+        $program = Program::find($programId);
+        $program->delete();
+
+//        return redirect(route('program.index'));
     }
 
     /**
