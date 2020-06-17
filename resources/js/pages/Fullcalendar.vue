@@ -26,7 +26,6 @@
                 id = "calendar"
                 ref="fullCalendar"
                       ></FullCalendar>
-<!--        <div ref="calendar"></div>-->
         <div class = "show-program">
             <p>{{link.date}}</p>
             <ul>

@@ -21,6 +21,7 @@ Route::group(['prefix' => 'programs'], function () {
     Route::post('/showLinks', 'ProgramController@showLinks')->name('program.showLinks');
     Route::post('/store', 'ProgramController@store')->name('program.store');
     Route::post('/updateDate', 'ProgramController@updateDate')->name('program.updateDate');
+    Route::post('/destroy', 'ProgramController@destroy')->name('program.destroy');
 });
 //workout
 Route::group(['prefix' => 'workouts'], function () {
@@ -39,6 +40,11 @@ Route::group(['prefix' => 'routines'],function (){
     Route::post('/store', 'RoutineController@store')->name('routine.store');
     Route::post('/destroy', 'RoutineController@destroy')->name('routine.destroy');
     Route::post('/sort', 'RoutineController@sort')->name('routine.sort');
+});
+
+//Routine
+Route::group(['prefix' => 'exercises'],function (){
+    Route::post('/index/routine', 'ExerciseController@indexRoutine')->name('exercises.indexRoutine');
 });
 
 

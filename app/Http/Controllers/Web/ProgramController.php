@@ -27,17 +27,4 @@ class ProgramController extends Controller
         return view('program.show')->with(['programId' => $programId]);
     }
 
-    /**
-     * programと、それに紐づくmenus,workoutsを削除
-     * @param $programId
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function destroy(string $programId)
-    {
-        $program = Program::find($programId);
-        $program->delete();
-
-        return redirect(route('program.index'));
-    }
-
 }

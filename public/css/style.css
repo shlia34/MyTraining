@@ -13,11 +13,6 @@ body {
     color: white!important;
 }
 
-/*モーダル*/
-.remodal {
-    font-size: 18px;
-}
-
 .fc-button-primary {
     color: black!important;
     background-color: white!important;
@@ -31,16 +26,6 @@ body {
 
 .wrapper {
     font-size: 18px;
-}
-
-
-
-.form-weight {
-    width:50px;
-}
-
-._make-yellow {
-    color:yellow;
 }
 
 .workouts-index{
@@ -67,34 +52,8 @@ body {
     color: white;
 }
 
-
-
 .program-memo{
     color: #454545;
-}
-
-.fa-trash{
-    color: #454545;
-}
-
-.add-workout-btn{
-    color: white!important;
-    margin-left: 20px;
-    background-color: #454545!important;
-}
-
-.add-workout-btn[disabled] {
-    background-color: #c8c8c8!important;
-    opacity: 1!important;
-}
-
-.add-workout-form-box{
-    color: white;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 56px;
-    z-index:11;
-    background-color: white;
 }
 
 .forms{
@@ -112,21 +71,8 @@ body {
     margin: 5px;
 }
 
-.store-program-btn{
-    background-color: #F43E43;
-}
-.store-program-btn[disabled] {
-    opacity: 0.5!important;
-}
-.on-max-workout-btn{
-    background-color: #F43E43;
-}
-.off-max-workout-btn{
-    background-color: #454545;
-}
-.delete-workout-btn{
-    background-color: #c8c8c8;
-}
+
+
 .register-btn{
     background-color: #454545!important;
     color: white!important;

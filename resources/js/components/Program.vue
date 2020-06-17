@@ -11,6 +11,7 @@
                         :clickable="clickable"
                         :key="menu.id"
                         :menu="menu"
+                        @showModal="showModal"
                         v-for="menu in program.menus"
                     ></Menu>
                 </div>
@@ -37,6 +38,11 @@
         },
         data: function(){
             return{
+            }
+        },
+        methods:{
+            showModal:function(data){
+                this.$emit('showModal', data);
             }
         },
 

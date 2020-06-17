@@ -1,11 +1,10 @@
 <template>
     <div class = "add-exercise-form-box form-inline pt-3 pl-3 pr-3">
 
-        <select class = 'form-exercise_id browser-default custom-select mb-2' v-model="exercise_id">
+        <select class = 'form-exercise_id browser-default custom-select mb-2' v-model="selected_exercise_id">
             <option
-                    :key="exercise.id"
-                    :value="exercise.id"
                     v-for="exercise in exercises"
+                    :value="exercise.id"
             >{{ exercise.name }}</option>
         </select>
 
@@ -32,22 +31,23 @@
 
 <script>
     export default {
-        props:['exercises','pid','muscle_code'],
+        props:{
+            pid: String,
+            muscle_code:String,
+        },
         data: function(){
             return{
                 program_id:this.pid,
                 weight:null,
                 rep:null,
+                exercises:[],
+                selected_exercise_id:"",
             }
         },
-        computed: {
-            exercise_id: function () {
-                var first =  this.exercises[0];
-
-                if(first !== undefined){
-                    return first.id;
-                }
-            }
+        watch:{
+            muscle_code: function(value){
+                this.fetchData();
+            },
         },
         methods: {
             storeWorkout:function(){
@@ -55,7 +55,7 @@
 
                 var data = {
                     'program_id':vm.program_id,
-                    'exercise_id':vm.exercise_id,
+                    'exercise_id':vm.selected_exercise_id,
                     'weight':vm.weight,
                     'rep':vm.rep,
                 };
@@ -68,6 +68,19 @@
                         vm.alertError(error.response);
                     });
             },
+            fetchData(){
+                var vm = this;
+                var mc = vm.muscle_code;
+                const response = axios.post('/api/exercises/index/routine', {'muscleCode':mc})
+                    .then(function (response) {
+                        vm.exercises = response.data.exercises;
+                        vm.selected_exercise_id = response.data.exercises[0].id;
+                    })
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+
+            },
         },
     }
 </script>
@@ -75,6 +88,29 @@
 
 
 <style>
+    .form-weight {
+        width:50px;
+    }
 
+
+    .add-workout-btn{
+        color: white!important;
+        margin-left: 20px;
+        background-color: #454545!important;
+    }
+
+    .add-workout-btn[disabled] {
+        background-color: #c8c8c8!important;
+        opacity: 1!important;
+    }
+
+    .add-workout-form-box{
+        color: white;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 56px;
+        z-index:11;
+        background-color: white;
+    }
 
 </style>
