@@ -31,9 +31,6 @@
     <!-- js-file -->
     <script src="/js/ajax-setup.js"></script>
     <script src="/js/ajax-function.js"></script>
-    <script src="/js/build-html-function.js"></script>
-    <script src="/js/program-control.js"></script>
-    <script src="/js/workout-control.js"></script>
     <script src="/js/routine-control.js"></script>
     <script src="/js/validation.js"></script>
     <script src="/js/boostrap.js"></script>
@@ -44,10 +41,6 @@
     <!-- Fullcalendar -->
     <link href='/css/fullcalendar/core/main.css' type="text/css" rel='stylesheet' />
     <link href='/css/fullcalendar/daygrid/main.css' type="text/css" rel='stylesheet' />
-    <!-- remodal -->
-    <link href='/css/remodal/remodal.css' type="text/css" rel='stylesheet' />
-    <link href='/css/remodal/remodal-default-theme.css' type="text/css" rel='stylesheet' />
-    <script src='/js/remodal/remodal.js'></script>
     <!-- Styles -->
     @if(app('env') == 'production')
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
