@@ -96,18 +96,4 @@ class WorkoutController extends Controller
         return null;
     }
 
-    /**
-     * trainingが最大強度の登録されているか判別する
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * falseかtrueを返す
-     */
-    public function checkMax(Request $request)
-    {
-        $training = Workout::find($request->all()["workout_id"]);
-        $training->is_max == 0 ? $message = false : $message = true;
-
-        return response()->json($message);
-    }
-
 }

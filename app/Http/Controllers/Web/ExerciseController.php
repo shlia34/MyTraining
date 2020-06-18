@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Request\Web\Exercise\StoreRequest;
 use App\Models\Exercise;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
@@ -20,10 +19,9 @@ class ExerciseController extends Controller
     {
         //todo vueで書くときにbyPart()をなんとかする
         //todo routineとnotRoutineを別の変数で受け取る?
-        $exerciseByMuscle  = Auth::user()->exercises()->byMuscle();
         $firstMuscleCode =  $request->all()["muscleCode"] ?? "01";
 
-        return view("exercise.index")->with(['exerciseByMuscle' => $exerciseByMuscle,'firstMuscleCode'=>$firstMuscleCode]);
+        return view("exercise.index")->with(['firstMuscleCode'=>$firstMuscleCode]);
     }
 
     /**
