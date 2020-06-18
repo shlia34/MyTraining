@@ -45,7 +45,7 @@
             }
         },
         watch:{
-            muscle_code: function(value){
+            muscle_code: function(){
                 this.fetchData();
             },
         },

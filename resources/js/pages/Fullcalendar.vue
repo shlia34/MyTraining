@@ -147,6 +147,7 @@
                     alert(value);
                 });
             },
+            //todo alertErrorはもっと広い範囲で使いたい
         }
     }
 
