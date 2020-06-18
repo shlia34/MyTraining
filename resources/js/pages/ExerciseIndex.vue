@@ -26,18 +26,23 @@
                 <div class ="muscle-group">
                     <h4>{{selected_muscle_name}}</h4>
                     <h5>やる種目リスト</h5>
-                    <div class = "routines">
-                        <div :key="exercise.id" class="exercise-in-list" v-for="exercise in routines">
-                            <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
-                        </div>
+                    <div class ="draggable-box">
+                        <draggable @add="storeRoutine" @end="sortRoutine"  @remove="destroyRoutine" group="exercises" v-model="routines">
+                            <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in routines" >
+                                <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
+                            </div>
+                        </draggable>
                     </div>
 
                     <h5>追加してないの種目リスト</h5>
-                    <div class = "not-routines">
-                        <div :key="exercise.id" class="exercise-in-list" v-for="exercise in notRoutines">
-                            <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
-                        </div>
+                    <div class ="draggable-box">
+                        <draggable group="exercises" v-model="notRoutines">
+                            <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in notRoutines">
+                                <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
+                            </div>
+                        </draggable>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -46,12 +51,15 @@
 </template>
 
 <script>
+    import draggable from 'vuedraggable'
+
     import {muscleNames} from '../const';
     import backBtn from '../components/BackBtn.vue';
 
     export default {
         components: {
             backBtn,
+            draggable,
         },
         props: {
             muscle_code:String,
@@ -96,18 +104,51 @@
                         vm.alertError(error.response);
                     });
             },
+            sortRoutine(){
+                var vm =  this;
+
+                var exercise_ids = [];
+                this.routines.forEach(exercise => exercise_ids.push(exercise.id));
+
+                const response = axios.post('/api/routines/sort',{'exercise_ids':exercise_ids})
+                    .then(function (response) {
+                    })
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+
+            },
+            storeRoutine(event){
+                var vm =  this;
+                var exercise_id = event.item.dataset.exercise_id;
+
+                const response = axios.post('/api/routines/store',{'exercise_id':exercise_id})
+                    .then(function (response) {
+                        vm.sortRoutine();
+                    })
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+            },
+            destroyRoutine(event) {
+                var vm =  this;
+                var exercise_id = event.item.dataset.exercise_id;
+
+                const response = axios.post('/api/routines/destroy', {'exercise_id': exercise_id})
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+            }
         },
     }
 </script>
 
 <style>
 
-    .routines{
+    .draggable-box{
         min-height: 44px;
     }
-    .not-routines{
-        min-height: 44px;
-    }
+
 
     .exercise-in-list{
         margin: 5px;
@@ -125,9 +166,8 @@
         width: 30px;
     }
 
-    .placeholder {
+    .sortable-chosen {
+        color: #fff;
         background-color: #c8c8c8;
-        height: 34px;
-        margin: 5px;
     }
 </style>

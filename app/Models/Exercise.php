@@ -32,29 +32,4 @@ class Exercise extends Model
         return $this->hasManyThrough('App\Models\Workout','App\Models\Menu');
     }
 
-    //todo ここが変わる。絶対直した方がいい。vueで書くとき直す
-    public function scopeByMuscle($query){
-        $routine = $query->orderBy("sort_no")->get()->groupBy('muscle_code');
-
-        $notRoutine = Exercise::all()->diff(Auth::user()->exercises)->groupBy('muscle_code');
-        $muscleCodes =  array_keys( DefMuscle::MUSCLE_NAME_LIST );
-
-        $array = [];
-        foreach ($muscleCodes as $muscleCode){
-            if(isset($routine[$muscleCode])){
-                $array[$muscleCode]["routine"] = $routine[$muscleCode];
-            }else{
-                $array[$muscleCode]["routine"] = [];
-            }
-
-            if(!empty($notRoutine[$muscleCode])){
-                $array[$muscleCode]["notRoutine"] = $notRoutine[$muscleCode];
-            }else{
-                $array[$muscleCode]["notRoutine"] = [];
-            }
-        }
-
-        return $array;
-    }
-
 }

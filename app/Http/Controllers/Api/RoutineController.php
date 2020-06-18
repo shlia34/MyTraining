@@ -30,6 +30,8 @@ class RoutineController extends Controller
 
         Routine::create($insertData);
 
+        //todo 重複を削除したい
+
         return null;
     }
 
@@ -55,11 +57,18 @@ class RoutineController extends Controller
      */
     public function sort(Request $request)
     {
-        $stageIds =  $request["exercise_ids"] ?? [];
-        foreach ($stageIds as $index => $exerciseId){
-                $routine = Routine::whereExercise($exerciseId)->own()->first();
-                $routine->sort_no = $index;
-                $routine->save();
+        $exerciseIds =  $request["exercise_ids"] ?? [];
+        \Log::debug("-----------------------------");
+        \Log::debug("exerciseIds");
+        \Log::debug($exerciseIds);
+        foreach ($exerciseIds as $index => $exerciseId){
+            \Log::debug($index);
+            \Log::debug($exerciseId);
+            $routine = Routine::whereExercise($exerciseId)->own()->first();
+            \Log::debug("routine");
+            \Log::debug($routine);
+            $routine->sort_no = $index;
+            $routine->save();
         }
         return null;
     }
