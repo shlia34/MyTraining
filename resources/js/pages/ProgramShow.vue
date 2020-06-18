@@ -15,7 +15,7 @@
             </program>
             <div>
                 <i @click="destroyProgram" class="fas fa-trash ml-2"></i>
-                <button class="float-right" onclick="history.back()">戻る</button>
+                <backBtn></backBtn>
             </div>
 
             <program
@@ -71,12 +71,14 @@
 <script>
     import program from '../components/Program.vue';
     import workoutForm from '../components/WorkoutForm.vue';
+    import backBtn from '../components/BackBtn.vue';
 
 
     export default {
         components: {
             program,
             workoutForm,
+            backBtn
         },
         props:{
             pid: String,
