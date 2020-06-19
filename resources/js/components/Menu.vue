@@ -1,7 +1,8 @@
 <template>
     <div class = "card mt-2 mb-2 mr-2 ml-2 p-2">
         <span class = "mb-0">
-            <a :href="'/exercises/' + menu.exercise_id" class = "card-title">{{ menu.name }}</a>
+            <a :href="'/exercises/' + menu.exercise_id" class = "card-title" >{{ menu.name }}</a>
+            <a :href="'/programs/' + menu.program_id " class = "card-title">{{ menu.date }}</a>
         </span>
         <ol :data-menu_id = menu.id class = "ol-workout mb-0">
             <li

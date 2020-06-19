@@ -17,25 +17,21 @@ class ExerciseController extends Controller
      */
     public function index(Request $request)
     {
-        //todo vueで書くときにbyPart()をなんとかする
-        //todo routineとnotRoutineを別の変数で受け取る?
         $firstMuscleCode =  $request->all()["muscleCode"] ?? "01";
 
         return view("exercise.index")->with(['firstMuscleCode'=>$firstMuscleCode]);
     }
 
     /**
-     * 種目の詳細画面、種目に紐づいたmenu,workoutも表示する
+     * 種目の詳細画面
      * @param Request $request
      * @param $stageId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($exerciseId)
+    public function show($exerciseId,Request $request)
     {
-        $exercise = Exercise::findOrFail($exerciseId);
-        $menus = $exercise->menus()->latest('date')->own()->with(['workouts'])->paginate();
-
-        return view("exercise.show")->with([ 'exercise' => $exercise, 'menus' => $menus]);
+        $page =  $request->all()['page'] ?? 1;
+        return view("exercise.show")->with(['exerciseId' => $exerciseId, 'page'=>$page]);
     }
 
     /**

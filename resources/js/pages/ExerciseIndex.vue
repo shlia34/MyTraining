@@ -5,49 +5,41 @@
             <backBtn></backBtn>
         </div>
 
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li :key="muscle.id"
-                @click="selected_muscle_code =muscle.id"
+        <ul class="nav nav-tabs" >
+            <li :key="muscle.code"
+                @click="selected_muscle_code =muscle.code"
                 class="nav-item"
                 v-for="muscle in muscles">
-                <a :aria-controls=muscle.name
-                   :class="{active: muscle_code===muscle.id}"
-                   :href="'#' + muscle.name"
-                   aria-selected="false"
+                <a :class="{active: muscle_code===muscle.code}"
                    class="nav-link"
-                   data-toggle="tab"
-                   role="tab">
+                   data-toggle="tab">
                     {{muscle.short_name}}</a>
             </li>
         </ul>
 
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pan " role="tabpanel" >
-                <div class ="muscle-group">
-                    <h4>{{selected_muscle_name}}</h4>
-                    <h5>やる種目リスト</h5>
-                    <div class ="draggable-box">
-                        <draggable @add="storeRoutine" @end="sortRoutine"  @remove="destroyRoutine" group="exercises" v-model="routines">
-                            <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in routines" >
-                                <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
-                            </div>
-                        </draggable>
+        <div class ="muscle-group">
+            <h4>{{selected_muscle_name}}</h4>
+            <h5>やる種目リスト</h5>
+            <div class ="draggable-box">
+                <draggable @add="storeRoutine" @end="sortRoutine"  @remove="destroyRoutine" group="exercises" v-model="routines">
+                    <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in routines" >
+                        <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
                     </div>
+                </draggable>
+            </div>
 
-                    <h5>追加してないの種目リスト</h5>
-                    <div class ="draggable-box">
-                        <draggable group="exercises" v-model="notRoutines">
-                            <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in notRoutines">
-                                <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
-                            </div>
-                        </draggable>
+            <h5>追加してないの種目リスト</h5>
+            <div class ="draggable-box">
+                <draggable group="exercises" v-model="notRoutines">
+                    <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in notRoutines">
+                        <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
                     </div>
-
-                </div>
+                </draggable>
             </div>
         </div>
 
     </div>
+
 </template>
 
 <script>
@@ -76,7 +68,7 @@
             selected_muscle_name:function(){
                 var code = this.selected_muscle_code;
                 var selected_muscle = this.muscles.filter(function(muscle, index){
-                    if(muscle.id === code){
+                    if(muscle.code === code){
                         return muscle;
                     }
                 });
@@ -111,8 +103,6 @@
                 this.routines.forEach(exercise => exercise_ids.push(exercise.id));
 
                 const response = axios.post('/api/routines/sort',{'exercise_ids':exercise_ids})
-                    .then(function (response) {
-                    })
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
@@ -148,7 +138,6 @@
     .draggable-box{
         min-height: 44px;
     }
-
 
     .exercise-in-list{
         margin: 5px;

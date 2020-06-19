@@ -27,4 +27,11 @@ class ExerciseController extends Controller
         return response()->json(['exercises' => $exercises]);
     }
 
+    public function show($exerciseId,Request $request){
+        $exercise = Exercise::findOrFail($exerciseId);
+        $menus = $exercise->menus()->latest('date')->own()->with(['workouts'])->paginate();
+
+        return response()->json([ 'exercise' => $exercise, 'menus' => $menus]);
+    }
+
 }
