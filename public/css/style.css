@@ -60,10 +60,6 @@ body {
     display: flex;
 }
 
-.active .page-link {
-    background-color: #454545!important;
-}
-
 .remodal-btn{
     width: 250px;
     height: 60px;
