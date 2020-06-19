@@ -22,8 +22,6 @@ Route::group(['middleware' => 'auth'], function () {
         //exercise
         Route::group(['prefix' => 'exercises'],function (){
             Route::get('/index', 'ExerciseController@index')->name('exercise.index');
-            Route::get('/create', 'ExerciseController@create')->name('exercise.create');
-            Route::post('/store', 'ExerciseController@store')->name('exercise.store');
             Route::get('/{exercise_id}', 'ExerciseController@show')->name('exercise.show');
         });
         //csv

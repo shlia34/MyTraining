@@ -1,10 +1,5 @@
 <template>
     <div>
-        <div>
-            <a class="btn" href="/">ない場合は種目を追加</a>
-            <backBtn></backBtn>
-        </div>
-
         <ul class="nav nav-tabs" >
             <li :key="muscle.code"
                 @click="selected_muscle_code =muscle.code"
@@ -38,19 +33,36 @@
             </div>
         </div>
 
+        <i @click="showForm = true" class="far fa-plus-square fa-2x" v-if="!showForm"></i>
+        <i @click="showForm = false" class="far fa-minus-square fa-2x" v-if="showForm"></i>
+
+        <div class="exercise-form" v-if="showForm">
+            <span>新しい種目</span>
+            <div class="input-form">
+                <input name="text" v-model="formName" value="名前">
+            </div>
+
+            <button @click="storeExercise" class = "btn waves-effect w-30 ml-4" type="button">追加</button>
+
+        </div>
+
+
+
+
     </div>
+
+
 
 </template>
 
 <script>
     import draggable from 'vuedraggable'
-
+    import {alertError} from '../alert'
     import {muscleNames} from '../const';
-    import backBtn from '../components/BackBtn.vue';
 
     export default {
+        mixins:[alertError],
         components: {
-            backBtn,
             draggable,
         },
         props: {
@@ -62,6 +74,8 @@
                 selected_muscle_code:this.muscle_code,
                 routines:[],
                 notRoutines:[],
+                formName:"",
+                showForm:false,
             }
         },
         computed:{
@@ -128,7 +142,25 @@
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
-            }
+            },
+            storeExercise(){
+                var vm =  this;
+
+                var data = {
+                    'name':vm.formName,
+                    'muscle_code':vm.selected_muscle_code
+                };
+
+                const response = axios.post('/api/exercises/store',data)
+                    .then(function (response) {
+                        vm.fetchData();
+                        vm.formName = ""
+                    })
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+
+            },
         },
     }
 </script>
@@ -158,5 +190,10 @@
     .sortable-chosen {
         color: #fff;
         background-color: #c8c8c8;
+    }
+
+
+    .radio-muscle {
+        margin-left: 20px;
     }
 </style>
