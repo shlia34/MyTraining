@@ -52,8 +52,10 @@
     import dayGridPlugin from '@fullcalendar/daygrid/main';
     import interactionPlugin from '@fullcalendar/interaction/main';
     import ProgramModal from '../components/ProgramModal.vue';
+    import {alertError} from '../alert'
 
     export default {
+        mixin:[alertError],
         components: {
             FullCalendar,
             ProgramModal
@@ -140,14 +142,6 @@
                         vm.alertError(error.response);
                 });
             },
-            alertError(response) {
-                var errors = response.data.errors;
-
-                $.each(errors, function(index, value) {
-                    alert(value);
-                });
-            },
-            //todo alertErrorはもっと広い範囲で使いたい
         }
     }
 

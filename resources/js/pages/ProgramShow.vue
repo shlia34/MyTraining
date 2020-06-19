@@ -15,7 +15,6 @@
             </program>
             <div>
                 <i @click="destroyProgram" class="fas fa-trash ml-2"></i>
-                <backBtn></backBtn>
             </div>
 
             <program
@@ -71,14 +70,14 @@
 <script>
     import program from '../components/Program.vue';
     import workoutForm from '../components/WorkoutForm.vue';
-    import backBtn from '../components/BackBtn.vue';
+    import {alertError} from '../alert'
 
 
     export default {
+        mixin:[alertError],
         components: {
             program,
             workoutForm,
-            backBtn
         },
         props:{
             pid: String,

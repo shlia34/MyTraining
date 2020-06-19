@@ -47,6 +47,8 @@ Route::group(['prefix' => 'exercises'],function (){
     Route::post('/index', 'ExerciseController@index')->name('exercises.index');
     Route::post('/index/routine', 'ExerciseController@indexRoutine')->name('exercises.indexRoutine');
     Route::get('/{exercise_id}', 'ExerciseController@show')->name('exercises.show');
+    Route::post('/store', 'ExerciseController@store')->name('exercise.store');
+
 
 });
 

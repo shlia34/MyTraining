@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Request\Web\Exercise\StoreRequest;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,24 @@ class ExerciseController extends Controller
         $menus = $exercise->menus()->latest('date')->own()->with(['workouts'])->paginate();
 
         return response()->json([ 'exercise' => $exercise, 'menus' => $menus]);
+    }
+
+    /**
+     * 追加処理
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(StoreRequest $request)
+    {
+
+        \Log::debug($request);
+        $insertData = $request->only('name','muscle_code')
+            + ['id' => $this->generateId('EX') ];
+
+        Exercise::create($insertData);
+
+//        return redirect(route('exercise.index', ['muscleCode' => $request->all()["muscle_code"] ]));
+        return null;
     }
 
 }

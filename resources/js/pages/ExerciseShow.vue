@@ -1,6 +1,5 @@
 <template>
     <div>
-        <backBtn></backBtn>
 
         <div class = "program-title">{{ exercise.name }}</div>
 
@@ -13,6 +12,7 @@
         <span v-if="menus.total === 0">まだこの種目やってません</span>
 
         <Paginate
+            v-if="menus.total !== 0"
             :current_page="menus.current_page"
             :last_page="menus.last_page"
             @switchPage="switchPage"></Paginate>
@@ -22,12 +22,13 @@
 
 
 <script>
-    import backBtn from '../components/BackBtn.vue';
     import Menu from '../components/Menu.vue';
     import Paginate from '../components/Paginate.vue';
+    import {alertError} from '../alert'
 
     export default {
-        components:{backBtn,Menu,Paginate },
+        mixin:[alertError],
+        components:{Menu,Paginate },
         props:{
             exercise_id:String,
             default_page:Number,
