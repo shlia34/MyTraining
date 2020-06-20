@@ -34,10 +34,8 @@
 
 <style scoped>
     .btn {
-        /* デフォルトの値を宣言*/
         --color: grey;
 
-        /* CSS変数を背景と幅に割り当て */
         background-color: var(--color)!important;
         color: white!important;
     }

@@ -12,21 +12,10 @@
         window.Laravel.csrfToken = "{{csrf_token()}}";
     </script>
 
-    <!-- Bootstrap -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
-    <!-- Fullcalendar  -->
-    <script src='/js/fullcalendar/core/main.js'></script>
-    <script src='/js/fullcalendar/core/locales/ja.js'></script>
-    <script src='/js/fullcalendar/daygrid/main.js'></script>
-    <script src='/js/fullcalendar/interaction/main.js'></script>
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- js-file -->
     <script src="/js/ajax-setup.js"></script>
-    <script src="/js/boostrap.js"></script>
     <!-- Fonts -->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

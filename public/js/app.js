@@ -16009,6 +16009,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -20538,7 +20539,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.btn[data-v-e0422746] {\n    /* デフォルトの値を宣言*/\n    --color: grey;\n\n    /* CSS変数を背景と幅に割り当て */\n    background-color: var(--color)!important;\n    color: white!important;\n}\n.btn[disabled][data-v-e0422746] {\n    opacity: 0.5!important;\n}\n.modal_btn[data-v-e0422746]{\n    width: 250px;\n    height: 60px;\n    color: white!important;\n    margin: 5px;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.btn[data-v-e0422746] {\n    --color: grey;\n\n    background-color: var(--color)!important;\n    color: white!important;\n}\n.btn[disabled][data-v-e0422746] {\n    opacity: 0.5!important;\n}\n.modal_btn[data-v-e0422746]{\n    width: 250px;\n    height: 60px;\n    color: white!important;\n    margin: 5px;\n}\n\n\n", ""]);
 
 // exports
 
@@ -57381,9 +57382,11 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("program", {
-            attrs: { clickable: false, program: _vm.previous_program }
-          })
+          _vm.previous_program
+            ? _c("program", {
+                attrs: { clickable: false, program: _vm.previous_program }
+              })
+            : _vm._e()
         ],
         1
       ),
