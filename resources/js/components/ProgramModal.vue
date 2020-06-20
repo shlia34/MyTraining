@@ -4,12 +4,12 @@
         <template v-slot:body>
             <input type="date" v-model="formData.date">
                 <select v-model="formData.muscle_code">
-                    <option :value="muscle.id" v-for="muscle in muscleList">{{ muscle.name }}</option>
+                    <option :value="muscle.code" v-for="muscle in muscleList" >{{ muscle.name }}</option>
                 </select>
                 <input placeholder='メモ' type="input" v-model="formData.memo">
         </template>
         <template v-slot:footer>
-            <Btn @clickBtn="store" :isModal="true" :text="'追加'" :color="'#F43E43'"></Btn>
+            <Btn :color="'#F43E43'" :isDisabled="memoValidation" :isModal="true" :text="'追加'" @clickBtn="store"></Btn>
         </template>
     </Modal>
 
@@ -31,9 +31,14 @@
                 formData: {
                     muscle_code:"01",
                     date:this.getToday(),
-                    memo:null,
+                    memo:"",
                 },
                 muscleList:muscleNames,
+            }
+        },
+        computed: {
+            memoValidation: function(){
+                return this.formData.memo.length > 100;
             }
         },
         methods:{
