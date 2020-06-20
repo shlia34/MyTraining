@@ -15075,11 +15075,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     color: {},
     text: {},
-    isModal: false
+    isModal: false,
+    isDisabled: false
   },
   methods: {
     clickHandler: function clickHandler() {
@@ -15363,10 +15365,15 @@ __webpack_require__.r(__webpack_exports__);
       formData: {
         muscle_code: "01",
         date: this.getToday(),
-        memo: null
+        memo: ""
       },
       muscleList: _const_js__WEBPACK_IMPORTED_MODULE_0__["muscleNames"]
     };
+  },
+  computed: {
+    memoValidation: function memoValidation() {
+      return this.formData.memo.length > 100;
+    }
   },
   methods: {
     hideModal: function hideModal() {
@@ -15481,8 +15488,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       program_id: this.pid,
-      weight: null,
-      rep: null,
+      weight: "",
+      rep: "",
       exercises: [],
       selected_exercise_id: ""
     };
@@ -15490,6 +15497,16 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     muscle_code: function muscle_code() {
       this.fetchData();
+    }
+  },
+  computed: {
+    weightAndRepValidation: function weightAndRepValidation() {
+      var weightValidationError = this.weight == "" || this.weight == 0 || this.weight > 999.9 || /^[0][0-9]/.test(this.weight) || /[/.][0-9]{2,}/.test(this.weight); // 整数部分は3桁以内、少数部分は1桁以内の数字を許可する
+      // ①空か②0じゃないか③999.9より小さいか④0の後に数字がこないか⑤小数値が2個以上続かないか
+
+      var repValidationError = this.rep == "" || /^0/.test(this.repl) || this.rep > 99 || /[/.]/.test(this.rep); //  少数を許さない整数2桁以内
+
+      return weightValidationError == true || repValidationError == true;
     }
   },
   methods: {
@@ -56429,7 +56446,7 @@ var render = function() {
       staticClass: "btn waves-effect w-30 ml-4",
       class: { modal_btn: _vm.isModal },
       style: _vm.styles,
-      attrs: { type: "button" },
+      attrs: { disabled: _vm.isDisabled, type: "button" },
       on: { click: _vm.clickHandler }
     },
     [_vm._v(_vm._s(_vm.text))]
@@ -56753,7 +56770,7 @@ var render = function() {
                 }
               },
               _vm._l(_vm.muscleList, function(muscle) {
-                return _c("option", { domProps: { value: muscle.id } }, [
+                return _c("option", { domProps: { value: muscle.code } }, [
                   _vm._v(_vm._s(muscle.name))
                 ])
               }),
@@ -56789,7 +56806,12 @@ var render = function() {
         fn: function() {
           return [
             _c("Btn", {
-              attrs: { isModal: true, text: "追加", color: "#F43E43" },
+              attrs: {
+                color: "#F43E43",
+                isDisabled: _vm.memoValidation,
+                isModal: true,
+                text: "追加"
+              },
               on: { clickBtn: _vm.store }
             })
           ]
@@ -56953,7 +56975,11 @@ var render = function() {
                 1
               )
             : _c("Btn", {
-                attrs: { color: "#454545", text: "記録" },
+                attrs: {
+                  color: "#454545",
+                  isDisabled: _vm.weightAndRepValidation,
+                  text: "記録"
+                },
                 on: { clickBtn: _vm.storeWorkout }
               })
         ],

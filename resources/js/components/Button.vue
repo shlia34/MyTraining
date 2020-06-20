@@ -3,6 +3,7 @@
             :style="styles"
             class = "btn waves-effect w-30 ml-4"
             :class="{modal_btn: isModal}"
+            :disabled="isDisabled"
             type="button">{{text}}</button>
 </template>
 
@@ -12,6 +13,7 @@
             color:{},
             text:{},
             isModal:false,
+            isDisabled:false,
         },
         methods: {
             clickHandler: function () {

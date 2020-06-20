@@ -22,7 +22,7 @@
             <a :href ="'/exercises/index?muscleCode=' + muscle_code" v-if="this.exercises.length === 0">
                 <Btn :text="'種目'"></Btn>
             </a>
-            <Btn v-else @clickBtn="storeWorkout" :color="'#454545'" :text="'記録'"></Btn>
+            <Btn :color="'#454545'" :isDisabled="weightAndRepValidation" :text="'記録'" @clickBtn="storeWorkout" v-else></Btn>
         </div>
 
     </div>
@@ -47,8 +47,8 @@
         data: function(){
             return{
                 program_id:this.pid,
-                weight:null,
-                rep:null,
+                weight:"",
+                rep:"",
                 exercises:[],
                 selected_exercise_id:"",
             }
@@ -56,6 +56,17 @@
         watch:{
             muscle_code: function(){
                 this.fetchData();
+            },
+        },
+        computed:{
+            weightAndRepValidation: function(){
+                var weightValidationError = this.weight == "" || this.weight ==  0  || this.weight > 999.9 || (/^[0][0-9]/).test(this.weight)　|| /[/.][0-9]{2,}/.test(this.weight);
+                // 整数部分は3桁以内、少数部分は1桁以内の数字を許可する
+                // ①空か②0じゃないか③999.9より小さいか④0の後に数字がこないか⑤小数値が2個以上続かないか
+                var repValidationError = this.rep == "" || /^0/.test(this.repl)　|| this.rep > 99 || /[/.]/.test(this.rep);
+                //  少数を許さない整数2桁以内
+
+               return  (weightValidationError == true || repValidationError == true);
             },
         },
         methods: {
