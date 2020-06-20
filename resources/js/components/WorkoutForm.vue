@@ -1,5 +1,5 @@
 <template>
-    <div class = "add-exercise-form-box form-inline pt-3 pl-3 pr-3">
+    <div class = "add-workout-form-box form-inline pt-3 pl-3 pr-3">
 
         <select class = 'form-exercise_id browser-default custom-select mb-2' v-model="selected_exercise_id">
             <option
@@ -108,6 +108,10 @@
 
 
 <style>
+    .forms{
+        display: flex;
+    }
+
     .form-weight {
         width:50px;
     }

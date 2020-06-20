@@ -15912,7 +15912,6 @@ __webpack_require__.r(__webpack_exports__);
         calendarApi.addEvent(response.data);
         vm.showLinksProgram(response.data.start);
       })["catch"](function (error) {
-        console.log(error.response);
         vm.alertError(error.response);
       });
     },
@@ -20653,7 +20652,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.form-weight {\n    width:50px;\n}\n.add-workout-form-box{\n    color: white;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 56px;\n    z-index:11;\n    background-color: white;\n}\n\n", ""]);
+exports.push([module.i, "\n.forms{\n    display: flex;\n}\n.form-weight {\n    width:50px;\n}\n.add-workout-form-box{\n    color: white;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 56px;\n    z-index:11;\n    background-color: white;\n}\n\n", ""]);
 
 // exports
 
@@ -56870,7 +56869,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "add-exercise-form-box form-inline pt-3 pl-3 pr-3" },
+    { staticClass: "add-workout-form-box form-inline pt-3 pl-3 pr-3" },
     [
       _c(
         "select",
