@@ -17,6 +17,7 @@
             <div><i @click="destroyProgram" class="fas fa-trash ml-2"></i></div>
 
             <program
+                    v-if="previous_program"
                     :clickable="false"
                     :program="previous_program"
             ></program>
