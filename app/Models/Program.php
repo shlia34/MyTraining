@@ -24,6 +24,8 @@ class Program extends Model
 
     protected $fillable = [ 'id', 'user_id', 'date', 'muscle_code', 'memo' ];
 
+    protected $appends = [ 'muscle_name',];
+
     public function menus(){
         return $this->hasMany('App\Models\Menu')->joinExercise()->oldest();
     }

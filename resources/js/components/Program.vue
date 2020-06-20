@@ -1,7 +1,7 @@
 <template>
     <div>
         <a :href="'/programs/' + program.id" >
-            <div class = "program-title">{{program.date}}の{{program.muscle_name}}トレ</div>
+            <Title :text="program.date +'の'+ program.muscle_name + 'トレ'"></Title>
         </a>
 
         <div :data-program_id =program.id class="program-show">
@@ -22,6 +22,7 @@
 
 <script>
     import Menu from './Menu.vue';
+    import Title from './Title.vue'
 
     export default {
         props:{
@@ -34,7 +35,7 @@
             },
         },
         components:{
-            Menu,
+            Menu,Title
         },
         data: function(){
             return{
@@ -43,6 +44,9 @@
         methods:{
             showModal:function(data){
                 this.$emit('showModal', data);
+            },
+            test(){
+                console.log(this.program);
             }
         },
 
@@ -50,3 +54,9 @@
 
 
 </script>
+
+<style>
+    .program-memo{
+        color: #454545;
+    }
+</style>

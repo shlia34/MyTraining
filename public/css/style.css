@@ -33,38 +33,12 @@ body {
     min-height: calc(100vh - 296.5px);
 }
 
-.program-title {
-    background-color: #454545;
-    color: white;
-    font-weight: bold;
-    line-height: 40px;
-    height: 40px;
-    margin-top: 10px;
-    padding-left: 10px;
-}
 
-.card{
-    background-color: #454545!important;
-    color: white;
-}
 
-.card-title{
-    color: white;
-}
 
-.program-memo{
-    color: #454545;
-}
 
 .forms{
     display: flex;
-}
-
-.remodal-btn{
-    width: 250px;
-    height: 60px;
-    color: white!important;
-    margin: 5px;
 }
 
 

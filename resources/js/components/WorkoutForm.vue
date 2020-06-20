@@ -20,9 +20,9 @@
                 <label for="form-rep">rep</label>
             </div>
             <a :href ="'/exercises/index?muscleCode=' + muscle_code" v-if="this.exercises.length === 0">
-                <button class = "btn waves-effect w-30 ml-4" type="button">種目<i class="fas fa-cog"></i></button>
+                <Btn :text="'種目'"></Btn>
             </a>
-            <button @click="storeWorkout" class ="add-workout-btn btn waves-effect w-30 ml-4" type="button" v-else >記録</button>
+            <Btn v-else @clickBtn="storeWorkout" :color="'#454545'" :text="'記録'"></Btn>
         </div>
 
     </div>
@@ -32,7 +32,14 @@
 
 
 <script>
+    import Btn from './Button'
+    import {alertError} from '../alert'
+
     export default {
+        mixins:[alertError],
+        components: {
+            Btn,
+        },
         props:{
             pid: String,
             muscle_code:String,
@@ -92,18 +99,6 @@
 <style>
     .form-weight {
         width:50px;
-    }
-
-
-    .add-workout-btn{
-        color: white!important;
-        margin-left: 20px;
-        background-color: #454545!important;
-    }
-
-    .add-workout-btn[disabled] {
-        background-color: #c8c8c8!important;
-        opacity: 1!important;
     }
 
     .add-workout-form-box{

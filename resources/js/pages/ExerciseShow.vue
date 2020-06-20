@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div class = "program-title">{{ exercise.name }}</div>
+        <Title :text="exercise.name"></Title>
 
         <Menu
             :clickable="false"
@@ -23,12 +23,14 @@
 
 <script>
     import Menu from '../components/Menu.vue';
+    import Title from '../components/Title'
     import Paginate from '../components/Paginate.vue';
     import {alertError} from '../alert'
 
+
     export default {
-        mixin:[alertError],
-        components:{Menu,Paginate },
+        mixins:[alertError],
+        components:{Menu,Paginate,Title },
         props:{
             exercise_id:String,
             default_page:Number,
@@ -52,7 +54,7 @@
                         vm.exercise = response.data.exercise;
                         vm.menus = response.data.menus;
                     }).catch(function (error) {
-                            vm.alertError(error.response);
+                        vm.alertError(error.response);
                     });
 
             },
