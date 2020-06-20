@@ -112,7 +112,6 @@
                         vm.showLinksProgram(response.data.start);
 
                     }).catch(function (error) {
-                        console.log(error.response);
                         vm.alertError(error.response);
                     });
 

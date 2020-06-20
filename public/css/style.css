@@ -33,15 +33,6 @@ body {
     min-height: calc(100vh - 296.5px);
 }
 
-
-
-
-
-.forms{
-    display: flex;
-}
-
-
 .register-btn{
     background-color: #454545!important;
     color: white!important;
