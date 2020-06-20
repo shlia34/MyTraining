@@ -43,8 +43,7 @@ class ProgramController extends Controller
         $programId = $request->all()['program_id'];
         $program = Program::find($programId);
         $program->delete();
-
-//        return redirect(route('program.index'));
+        //todo 処理終わったらカレンダーのページに移動させたい
     }
 
     /**

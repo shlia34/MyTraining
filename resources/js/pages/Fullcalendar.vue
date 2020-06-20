@@ -55,7 +55,7 @@
     import {alertError} from '../alert'
 
     export default {
-        mixin:[alertError],
+        mixins:[alertError],
         components: {
             FullCalendar,
             ProgramModal
@@ -111,10 +111,11 @@
 
                         vm.showLinksProgram(response.data.start);
 
-                    })
-                    .catch(function (error) {
+                    }).catch(function (error) {
+                        console.log(error.response);
                         vm.alertError(error.response);
                     });
+
             },
             updateDateProgram(info){
                 var vm =  this;
@@ -142,6 +143,13 @@
                         vm.alertError(error.response);
                 });
             },
+            // alertError(response) {
+            //     var errors = response.data.errors;
+            //
+            //     $.each(errors, function(index, value) {
+            //         alert(value);
+            //     });
+            // },
         }
     }
 

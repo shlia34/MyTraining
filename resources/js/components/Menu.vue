@@ -56,6 +56,16 @@
 </script>
 
 <style>
+
+    .card{
+        background-color: #454545!important;
+        color: white;
+    }
+
+    .card-title{
+        color: white;
+    }
+
     .ol-workout {
         counter-reset: my-counter;
         list-style: none;

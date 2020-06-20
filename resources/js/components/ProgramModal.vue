@@ -21,7 +21,7 @@
 
                         <div class="modal-footer">
                             <slot name="footer">
-                                <button @click="store" class="modal-default-button remodal-btn store-program-btn">追加</button>
+                                <Btn @clickBtn="store" :isModal="true" :text="'追加'" :color="'#F43E43'"></Btn>
                             </slot>
                         </div>
 
@@ -33,11 +33,13 @@
 
 <script>
     import {muscleNames} from '../const.js'
+    import Btn from './Button'
 
     export default {
         props:{
             isActive: Boolean,
         },
+        components:{ Btn },
         data: function(){
             return{
                 active: this.isActive,
@@ -135,14 +137,6 @@
     .modal-leave-active .modal-container {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
-    }
-
-
-    .store-program-btn{
-        background-color: #F43E43;
-    }
-    .store-program-btn[disabled] {
-        opacity: 0.5!important;
     }
 
 </style>

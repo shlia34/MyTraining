@@ -41,22 +41,17 @@
             <div class="input-form">
                 <input name="text" v-model="formName" value="名前">
             </div>
-
-            <button @click="storeExercise" class = "btn waves-effect w-30 ml-4" type="button">追加</button>
+            <Btn @clickBtn="storeExercise" :color="'#454545'" :text="'追加'"></Btn>
 
         </div>
 
-
-
-
     </div>
-
-
 
 </template>
 
 <script>
     import draggable from 'vuedraggable'
+    import Btn from '../components/Button'
     import {alertError} from '../alert'
     import {muscleNames} from '../const';
 
@@ -64,6 +59,7 @@
         mixins:[alertError],
         components: {
             draggable,
+            Btn,
         },
         props: {
             muscle_code:String,
@@ -131,6 +127,7 @@
                         vm.sortRoutine();
                     })
                     .catch(function (error) {
+                        console.log(1);
                         vm.alertError(error.response);
                     });
             },
@@ -183,7 +180,6 @@
     .exercise-in-list a{
         color:white;
         float: right;
-        /*margin-right: 20px;*/
         width: 30px;
     }
 
@@ -191,7 +187,6 @@
         color: #fff;
         background-color: #c8c8c8;
     }
-
 
     .radio-muscle {
         margin-left: 20px;

@@ -33,7 +33,13 @@
                                     <span @click="hideModal">×</span>
                                 </slot>
                             </div>
-                            <button @click="offMaxWorkout" class="remodal-btn off-max-workout-btn">マックスをオフ</button>
+
+                            <div class="modal-footer">
+                                <slot name="footer">
+                                    <Btn @clickBtn="offMaxWorkout" :isModal="true" :text="'マックスをオフ'" :color="'#454545'"></Btn>
+                                </slot>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -52,8 +58,8 @@
                             </div>
                             <div class="modal-footer">
                                 <slot name="footer">
-                                    <button @click="onMaxWorkout" class="remodal-btn on-max-workout-btn">マックスに登録</button>
-                                    <button @click="deleteWorkout" class="remodal-btn delete-workout-btn">削除</button>
+                                    <Btn @clickBtn="onMaxWorkout" :isModal="true" :text="'マックスに登録'" :color="'#F43E43'"></Btn>
+                                    <Btn @clickBtn="deleteWorkout" :isModal="true" :text="'削除'" :color="'#c8c8c8'"></Btn>
                                 </slot>
                             </div>
                         </div>
@@ -70,14 +76,16 @@
 <script>
     import program from '../components/Program.vue';
     import workoutForm from '../components/WorkoutForm.vue';
+    import Btn from '../components/Button.vue'
     import {alertError} from '../alert'
 
 
     export default {
-        mixin:[alertError],
+        mixins:[alertError],
         components: {
             program,
             workoutForm,
+            Btn,
         },
         props:{
             pid: String,
@@ -217,22 +225,8 @@
         transform: scale(1.1);
     }
 
-
-
-
     .fa-trash{
         color: #454545;
-    }
-
-
-    .on-max-workout-btn{
-        background-color: #F43E43;
-    }
-    .off-max-workout-btn{
-        background-color: #454545;
-    }
-    .delete-workout-btn{
-        background-color: #c8c8c8;
     }
 
 
