@@ -1,7 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,44 +10,45 @@ use Illuminate\Http\Request;
 |
 */
 
-
 //program
 Route::group(['prefix' => 'programs'], function () {
     Route::get('/set', 'ProgramController@set')->name('program.set');
-    Route::post('/show', 'ProgramController@show')->name('program.show');
-    Route::post('/showLinks', 'ProgramController@showLinks')->name('program.showLinks');
-    Route::post('/store', 'ProgramController@store')->name('program.store');
-    Route::post('/updateDate', 'ProgramController@updateDate')->name('program.updateDate');
-    Route::post('/destroy', 'ProgramController@destroy')->name('program.destroy');
-});
-//workout
-Route::group(['prefix' => 'workouts'], function () {
-    //workout
-    Route::post('/store', 'WorkoutController@store')->name('workout.store');
-    Route::post('/destroy', 'WorkoutController@destroy')->name('workout.destroy');
-    //is_max
-    Route::group(['prefix' => 'max'],function () {
-        Route::post('/on', 'WorkoutController@OnMax')->name('workout.onMax');
-        Route::post('/off', 'WorkoutController@OffMax')->name('workout.offMax');
-        Route::post('/check', 'WorkoutController@checkMax')->name('workout.checkMax');
-    });
-});
-//Routine
-Route::group(['prefix' => 'routines'],function (){
-    Route::post('/store', 'RoutineController@store')->name('routine.store');
-    Route::post('/destroy', 'RoutineController@destroy')->name('routine.destroy');
-    Route::post('/sort', 'RoutineController@sort')->name('routine.sort');
+    Route::get('/{id}', 'ProgramController@show')->name('program.show');
+    Route::get('/links/{date}', 'ProgramController@links')->name('program.links');
+    Route::get('/{date}/{code}', 'ProgramController@previous')->name('program.previous');
+    Route::post('/', 'ProgramController@store')->name('program.store');
+    Route::patch('/', 'ProgramController@updateDate')->name('program.updateDate');
+    Route::delete('/{id}', 'ProgramController@delete')->name('program.delete');
 });
 
 //exercises
 Route::group(['prefix' => 'exercises'],function (){
-    Route::post('/index', 'ExerciseController@index')->name('exercises.index');
-    Route::post('/index/routine', 'ExerciseController@indexRoutine')->name('exercises.indexRoutine');
-    Route::get('/{exercise_id}', 'ExerciseController@show')->name('exercises.show');
-    Route::post('/store', 'ExerciseController@store')->name('exercise.store');
-
-
+    Route::get('/routines/{muscle_code}', 'ExerciseController@routine')->name('exercises.routines');
+    Route::get('/not_routines/{muscle_code}', 'ExerciseController@notRoutine')->name('exercises.not_routines');
+    Route::get('/{id}', 'ExerciseController@show')->name('exercises.show');
+    Route::post('/', 'ExerciseController@store')->name('exercise.store');
 });
+
+//Routine
+Route::group(['prefix' => 'routines'],function (){
+    Route::post('/', 'RoutineController@store')->name('routine.store');
+    Route::delete('/{exercise_id}', 'RoutineController@delete')->name('routine.delete');
+    Route::patch('/sort', 'RoutineController@sort')->name('routine.sort');
+});
+
+//workout
+Route::group(['prefix' => 'workouts'], function () {
+    //workout
+    Route::post('/', 'WorkoutController@store')->name('workout.store');
+    Route::delete('/{id}', 'WorkoutController@delete')->name('workout.delete');
+    //is_max
+    Route::group(['prefix' => 'max'],function () {
+        Route::patch('/on', 'WorkoutController@OnMax')->name('workout.onMax');
+        Route::patch('/off', 'WorkoutController@OffMax')->name('workout.offMax');
+    });
+});
+
+
 
 
 

@@ -55,7 +55,7 @@
         },
         watch:{
             muscle_code: function(){
-                this.fetchData();
+                this.getExercise();
             },
         },
         computed:{
@@ -80,21 +80,20 @@
                     'rep':vm.rep,
                 };
 
-                const response = axios.post('/api/workouts/store', data)
+                const response = axios.post('/api/workouts', data)
                     .then(function (response) {
-                        vm.$emit('clickBtn',response.data);
+                        vm.$emit('clickBtn');
                     })
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
             },
-            fetchData(){
+            getExercise(){
                 var vm = this;
-                var mc = vm.muscle_code;
-                const response = axios.post('/api/exercises/index/routine', {'muscleCode':mc})
+                const response = axios.get('/api/exercises/routines/' + vm.muscle_code )
                     .then(function (response) {
-                        vm.exercises = response.data.exercises;
-                        vm.selected_exercise_id = response.data.exercises[0].id;
+                        vm.exercises = response.data;
+                        vm.selected_exercise_id = response.data[0].id;
                     })
                     .catch(function (error) {
                         vm.alertError(error.response);

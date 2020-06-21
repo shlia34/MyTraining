@@ -38,13 +38,10 @@ class RoutineController extends Controller
      * @param Request $request
      * @return |null
      */
-    public function destroy(Request $request)
+    public function delete($exerciseId)
     {
-        $exerciseId = $request->only("exercise_id");
         $routine = Routine::whereExercise($exerciseId)->own()->first();
-
         $routine->delete();
-
         return null;
     }
 

@@ -11,25 +11,25 @@ use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
-
-    public function index(Request $request){
-        $muscleCode =  $request->all()['muscle_code'];
-        $routines = Auth::user()->exercises()->where('muscle_code',$muscleCode)->orderBy("sort_no")->get();
-        $notRoutines = Exercise::where('muscle_code',$muscleCode)->get()->diff(Auth::user()->exercises);
-
-        return response()->json(['routines'=>$routines,'notRoutines'=>$notRoutines]);
-    }
-
-    //todo 上のと処理一緒やん。
-    public function indexRoutine(Request $request){
-        $muscleCode = $request->all()['muscleCode'];
+    public function routine($muscleCode)
+    {
         $exercises = Auth::user()->exercises()->where('muscle_code',$muscleCode)->orderBy('pivot_sort_no')->get();
-
-        return response()->json(['exercises' => $exercises]);
+        return response()->json($exercises);
     }
 
-    public function show($exerciseId,Request $request){
-        $exercise = Exercise::findOrFail($exerciseId);
+    public function notRoutine($muscleCode)
+    {
+        $notRoutines = Exercise::where('muscle_code',$muscleCode)->get()->diff(Auth::user()->exercises);
+        return response()->json($notRoutines);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($id)
+    {
+        $exercise = Exercise::findOrFail($id);
         $menus = $exercise->menus()->latest('date')->own()->with(['workouts'])->paginate();
 
         return response()->json([ 'exercise' => $exercise, 'menus' => $menus]);
@@ -42,14 +42,11 @@ class ExerciseController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
-        \Log::debug($request);
         $insertData = $request->only('name','muscle_code')
             + ['id' => $this->generateId('EX') ];
 
         Exercise::create($insertData);
 
-//        return redirect(route('exercise.index', ['muscleCode' => $request->all()["muscle_code"] ]));
         return null;
     }
 

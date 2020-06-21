@@ -25,7 +25,7 @@ class Workout extends Model
 
     protected $fillable = [ 'id','menu_id','weight','rep','is_max' ];
 
-    protected $perPage = 8;
+    protected $appends = [ 'weight_and_rep',];
 
     public function menu(){
         return $this->belongsTo('App\Models\Menu');
