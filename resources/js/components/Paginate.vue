@@ -7,7 +7,7 @@
                 class="page-item"
                 v-for="page in last_page">
                 <span class="page-link" v-if="page === selected_page">{{page}}</span>
-                <a @click="selected_page = page" class="page-link" href="#" v-else>{{ page }}</a>
+                <a @click="selected_page = page" class="page-link" v-else>{{ page }}</a>
             </li>
         </ul>
     </div>

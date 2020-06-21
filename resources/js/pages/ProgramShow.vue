@@ -3,7 +3,7 @@
         <workoutForm
                 :muscle_code="this_program.muscle_code"
                 :pid="pid"
-                @clickBtn="fetchData"
+                @clickBtn="getThisProgram"
         ></workoutForm>
 
         <div class = "workouts-index  pb-4">
@@ -17,7 +17,7 @@
             <div><i @click="destroyProgram" class="fas fa-trash ml-2"></i></div>
 
             <program
-                    v-if="previous_program"
+                    v-if="previous_program.length !== 0"
                     :clickable="false"
                     :program="previous_program"
             ></program>
@@ -73,26 +73,36 @@
                 isNotMaxModalActive:false,
             }
         },
-        created:function(){
-            this.fetchData();
+        created: async function(){
+            await this.getThisProgram();
+            this.getPreviousProgram();
         },
         methods: {
             deleteWorkout(){
-                this.aboutWorkoutModal('/api/workouts/destroy');
-            },
-            onMaxWorkout(){
-                this.aboutWorkoutModal('/api/workouts/max/on');
-            },
-            offMaxWorkout(){
-                this.aboutWorkoutModal('/api/workouts/max/off')
-            },
-            aboutWorkoutModal(url){
-                var vm =  this;
+                var vm = this;
 
-                const response = axios.post(url, vm.modal_data)
+                const response = axios.delete('/api/workouts/' + vm.modal_data.workout_id)
                     .then(function (response) {
                         vm.hideModal();
-                        vm.fetchData();
+                        vm.getThisProgram();
+                    })
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+
+            },
+            onMaxWorkout(){
+                this.aboutMax('/api/workouts/max/on');
+            },
+            offMaxWorkout(){
+                this.aboutMax('/api/workouts/max/off')
+            },
+            aboutMax(url){
+                var vm =  this;
+                const response = axios.patch(url, vm.modal_data)
+                    .then(function (response) {
+                        vm.hideModal();
+                        vm.getThisProgram();
                     })
                     .catch(function (error) {
                         vm.alertError(error.response);
@@ -101,9 +111,8 @@
             destroyProgram(){
                 alert('本当に消しますか？？？');
                 var vm = this;
-                var data = { 'program_id':vm.pid };
 
-                const response = axios.post('/api/programs/destroy', data)
+                const response = axios.delete('/api/programs/' + vm.pid)
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
@@ -123,18 +132,25 @@
                 this.isMaxModalActive = false;
                 this.isNotMaxModalActive = false;
             },
-            fetchData(){
+            async getThisProgram(){
                 var vm = this;
-                const response = axios.post('/api/programs/show', {'programId':vm.pid})
+
+                await axios.get('/api/programs/' + vm.pid)
                     .then(function (response) {
-
-                        vm.this_program = response.data.thisProgram;
-                        vm.previous_program = response.data.previousProgram;
-
+                        vm.this_program = response.data;
                     })
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
+            },
+            getPreviousProgram(){
+                var vm = this;
+                axios.get('/api/programs/'+vm.this_program.date + '/' + vm.this_program.muscle_code)
+                    .then(function (response) {
+                        vm.previous_program = response.data;
+                    }).catch(function (error) {
+                    vm.alertError(error.response);
+                });
             },
         }
     }
@@ -143,6 +159,10 @@
 
 
 <style>
+    .workouts-index{
+        min-height: calc(100vh - 296.5px);
+    }
+
     .fa-trash{
         color: #454545;
     }

@@ -11,7 +11,7 @@
                 @click="showModal(workout)"
                 class = "workout"
                 v-for="workout in menu.workouts">
-                {{workout.weight }}kg * {{workout.rep}}rep
+                {{workout.weight_and_rep }}
             </li>
         </ol>
     </div>
@@ -32,7 +32,6 @@
         },
         data: function(){
             return{
-
             }
         },
         methods:{

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Workout\Workout as WorkoutResource;
 use App\Http\Request\Api\Workout\StoreRequest;
 use Illuminate\Http\Request;
 use App\Models\Workout;
@@ -33,11 +32,9 @@ class WorkoutController extends Controller
             + ['menu_id' => $menu->id]
             + ['is_max' => 0];
 
-        $workout = Workout::create($workoutInsertData);
+        Workout::create($workoutInsertData);
 
-//        return new WorkoutResource($workout);
-        return $workout;
-
+        return null;
     }
 
     /**
@@ -45,9 +42,8 @@ class WorkoutController extends Controller
      * @param Request $request
      * @return |null
      */
-    public function destroy(Request $request)
+    public function delete($id)
     {
-        $id = $request->all()["workout_id"];
         $workout = Workout::find($id);
         $workout->delete();
 

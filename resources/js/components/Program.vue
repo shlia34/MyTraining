@@ -4,7 +4,7 @@
             <Title :text="program.date +'の'+ program.muscle_name + 'トレ'"></Title>
         </a>
 
-        <div :data-program_id =program.id class="program-show">
+        <div class="program-show">
                 <span class = "program-memo">{{program.memo}}</span>
                 <div class = "workouts">
                     <Menu

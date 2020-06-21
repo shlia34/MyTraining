@@ -77,7 +77,7 @@
         computed:{
             selected_muscle_name:function(){
                 var code = this.selected_muscle_code;
-                var selected_muscle = this.muscles.filter(function(muscle, index){
+                var selected_muscle = this.muscles.filter(function(muscle){
                     if(muscle.code === code){
                         return muscle;
                     }
@@ -96,11 +96,24 @@
         },
         methods:{
             fetchData:function(){
+                this.getRoutine();
+                this.getNotRoutine();
+            },
+            getRoutine(){
                 var vm =  this;
-                const response = axios.post('/api/exercises/index',{'muscle_code':vm.selected_muscle_code})
+                const response = axios.get('/api/exercises/routines/' + vm.selected_muscle_code)
                     .then(function (response) {
-                        vm.routines = response.data.routines;
-                        vm.notRoutines = response.data.notRoutines;
+                        vm.routines = response.data;
+                    })
+                    .catch(function (error) {
+                        vm.alertError(error.response);
+                    });
+            },
+            getNotRoutine(){
+                var vm =  this;
+                const response = axios.get('/api/exercises/not_routines/' + vm.selected_muscle_code)
+                    .then(function (response) {
+                        vm.notRoutines = response.data;
                     })
                     .catch(function (error) {
                         vm.alertError(error.response);
@@ -112,7 +125,7 @@
                 var exercise_ids = [];
                 this.routines.forEach(exercise => exercise_ids.push(exercise.id));
 
-                const response = axios.post('/api/routines/sort',{'exercise_ids':exercise_ids})
+                const response = axios.patch('/api/routines/sort',{'exercise_ids':exercise_ids})
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
@@ -122,12 +135,11 @@
                 var vm =  this;
                 var exercise_id = event.item.dataset.exercise_id;
 
-                const response = axios.post('/api/routines/store',{'exercise_id':exercise_id})
+                const response = axios.post('/api/routines',{'exercise_id':exercise_id})
                     .then(function (response) {
                         vm.sortRoutine();
                     })
                     .catch(function (error) {
-                        console.log(1);
                         vm.alertError(error.response);
                     });
             },
@@ -135,7 +147,7 @@
                 var vm =  this;
                 var exercise_id = event.item.dataset.exercise_id;
 
-                const response = axios.post('/api/routines/destroy', {'exercise_id': exercise_id})
+                const response = axios.delete('/api/routines/' + exercise_id)
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
@@ -148,7 +160,7 @@
                     'muscle_code':vm.selected_muscle_code
                 };
 
-                const response = axios.post('/api/exercises/store',data)
+                const response = axios.post('/api/exercises',data)
                     .then(function (response) {
                         vm.fetchData();
                         vm.formName = ""
@@ -184,11 +196,16 @@
     }
 
     .sortable-chosen {
-        color: #fff;
         background-color: #c8c8c8;
     }
 
-    .radio-muscle {
-        margin-left: 20px;
+
+    .nav-tabs{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 56px;
+        z-index:11;
+        background-color: white;
     }
+
 </style>

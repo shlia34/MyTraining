@@ -93,18 +93,20 @@
                 this.updateDateProgram(info);
             },
             eventClick(info){
-                this.showLinksProgram(info.event.start.toISOString());
+
+                var date =  info.event.start.toISOString();
+                date = date.substr( 0, date.indexOf("T") );
+
+                this.showLinksProgram(date);
             },
             dateClick(info){
-                this.showLinksProgram(info.dateStr);
-            },
-            toggelModal(){
-                this.isModalActive = !this.isModalActive;
+                var date = info.dateStr;
+                this.showLinksProgram(date);
             },
             storeProgram(formData){
                 var vm =  this;
 
-                const response = axios.post('/api/programs/store', formData)
+                const response = axios.post('/api/programs', formData)
                     .then(function (response) {
                         let calendarApi = vm.$refs.fullCalendar.getApi();
                         calendarApi.addEvent(response.data);
@@ -123,7 +125,7 @@
                     "new_date":info.event.start.toISOString(),
                 };
 
-                const response = axios.post('/api/programs/updateDate', data)
+                const response = axios.patch('/api/programs', data)
                     .catch(function (error) {
                         vm.alertError(error.response);
                 })
@@ -131,9 +133,8 @@
             },
             showLinksProgram(date){
                 var vm =  this;
-                var data = {"date":date};
 
-                const response = axios.post('/api/programs/showLinks', data)
+                const response = axios.get('/api/programs/links/' + date)
                     .then(function (response) {
                         vm.link.date = response.data.date;
                         vm.link.programs = response.data.programs;
@@ -142,13 +143,9 @@
                         vm.alertError(error.response);
                 });
             },
-            // alertError(response) {
-            //     var errors = response.data.errors;
-            //
-            //     $.each(errors, function(index, value) {
-            //         alert(value);
-            //     });
-            // },
+            toggelModal(){
+                this.isModalActive = !this.isModalActive;
+            },
         }
     }
 
@@ -176,6 +173,17 @@
 
     .fc-today{
         background-color: #f5f5f5!important;
+    }
+
+    .fc-button-primary {
+        color: black!important;
+        background-color: white!important;
+        border-color: black!important;
+        width: 50px;
+    }
+
+    .fc-button{
+        padding: 2px!important;
     }
 
     @media screen and (max-width: 480px) {
