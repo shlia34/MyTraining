@@ -9,14 +9,18 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import router from './router'
+import Vuetify from 'vuetify';
+
 import App from './App.vue'
 
+Vue.use(Vuetify);
 // const createApp = async () => {
     new Vue({
         el: '#app',
         router, // ルーティングの定義を読み込む
         components: { App }, // ルートコンポーネントの使用を宣言する
-        template: '<App />' // ルートコンポーネントを描画する
+        template: '<App />', // ルートコンポーネントを描画する
+        vuetify: new Vuetify(),
     });
 // };
 
