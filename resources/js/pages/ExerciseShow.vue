@@ -33,7 +33,11 @@
         components:{Menu,Paginate,Title },
         props:{
             exercise_id:String,
-            default_page:Number,
+            default_page:{
+                type:Number,
+                default: 1,
+            },
+
         },
         data: function(){
             return{
@@ -61,6 +65,7 @@
             switchPage(page){
                 this.page = page;
                 this.fetchData();
+                this.$router.push("/exercises/" + this.exercise_id + "/?page=" + this.page)
             },
         },
     }

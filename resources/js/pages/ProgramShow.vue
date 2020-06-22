@@ -77,6 +77,12 @@
             await this.getThisProgram();
             this.getPreviousProgram();
         },
+        watch:{
+            pid: async function(){
+                await this.getThisProgram();
+                this.getPreviousProgram();
+            },
+        },
         methods: {
             deleteWorkout(){
                 var vm = this;
@@ -116,7 +122,7 @@
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
-                //todo vue routeでやる
+                this.$router.push('/')
             },
             showModal: function(data){
                 this.modal_data = data;
@@ -149,8 +155,8 @@
                     .then(function (response) {
                         vm.previous_program = response.data;
                     }).catch(function (error) {
-                    vm.alertError(error.response);
-                });
+                        vm.alertError(error.response);
+                    });
             },
         }
     }
