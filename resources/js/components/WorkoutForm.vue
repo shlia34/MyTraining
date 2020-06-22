@@ -41,12 +41,11 @@
             Btn,
         },
         props:{
-            pid: String,
+            program_id: String,
             muscle_code:String,
         },
         data: function(){
             return{
-                program_id:this.pid,
                 weight:"",
                 rep:"",
                 exercises:[],
