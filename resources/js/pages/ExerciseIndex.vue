@@ -89,6 +89,7 @@
         watch:{
             selected_muscle_code:function(){
                 this.fetchData();
+                this.$router.push("/exercises/index/" + this.selected_muscle_code)
             }
         },
         created: function () {

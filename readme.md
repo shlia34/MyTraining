@@ -20,3 +20,4 @@
 ## インストールしたもの
 - npm install --save @fullcalendar/vue @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction
 - npm i -S vuedraggable
+- npm install -D vue-router

@@ -30,7 +30,7 @@
             <p>{{link.date}}</p>
             <ul>
                 <li v-for="program in link.programs">
-                    <a v-bind:href="'/programs/' + program.id">{{program.title}}</a>
+                    <router-link :to="`/programs/${program.id}`">{{program.title}}</router-link>
                     <span v-if="program.max_workout">
                         {{program.max_workout.exercise_name}}{{program.max_workout.weight_and_rep}}
                     </span>

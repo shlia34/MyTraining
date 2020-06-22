@@ -14,24 +14,10 @@
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    //web
-    Route::group(['namespace' => 'Web'],function(){
-        //program
-        Route::get('/', 'ProgramController@index')->name('program.index');
-        Route::get('/programs/{program_id}', 'ProgramController@show')->name('program.show');
-        //exercise
-        Route::group(['prefix' => 'exercises'],function (){
-            Route::get('/index', 'ExerciseController@index')->name('exercise.index');
-            Route::get('/{exercise_id}', 'ExerciseController@show')->name('exercise.show');
-        });
-        //csv
-        Route::group(['prefix' => 'csv'],function (){
-            Route::get('/index', 'CsvController@index')->name('csv.index');
-            Route::get('/export/{modelName}', 'CsvController@export')->name('csv.export');
-            Route::post('/import', 'CsvController@import')->name('csv.import');
-        });
 
-    });
+    Route::get('/{any}', function () {
+        return view('spa');
+    })->where('any', '.*');
 
 });
 

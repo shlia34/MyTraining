@@ -6,13 +6,18 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
 
 import Vue from 'vue'
-Vue.component('fullcalendar', require('./pages/Fullcalendar.vue').default);
-Vue.component('program-show', require('./pages/ProgramShow.vue').default);
-Vue.component('exercise-index', require('./pages/ExerciseIndex.vue').default);
-Vue.component('exercise-show', require('./pages/ExerciseShow.vue').default);
+import router from './router'
+import App from './App.vue'
 
-const app = new Vue({
-}).$mount('#app');
+// const createApp = async () => {
+    new Vue({
+        el: '#app',
+        router, // ルーティングの定義を読み込む
+        components: { App }, // ルートコンポーネントの使用を宣言する
+        template: '<App />' // ルートコンポーネントを描画する
+    });
+// };
+
+// createApp();
