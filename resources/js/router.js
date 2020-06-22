@@ -19,7 +19,7 @@ const routes = [
 
     },
     {
-        path: '/programs/:pid',
+        path: '/programs/:program_id',
         component: ProgramShow,
         props: true,
     },

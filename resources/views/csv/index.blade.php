@@ -1,12 +1,12 @@
-@extends('layouts.app')
-@section('content')
+{{--@extends('layouts.app')--}}
+{{--@section('content')--}}
 
     @foreach($modelNames as $modelName)
-        <p><a class="btn" href="{{ route('csv.export', ['modelName' => $modelName]) }}" target="_blank"> {{$modelName}} Export</a></p>
+        <p><a class="btn" href="/csv/export/{{$modelName}}"  target="_blank"> {{$modelName}} Export</a></p>
     @endforeach
 
-    <form action="/csv/import" method="post" enctype="multipart/form-data">
-    <form action={{ route('csv.import') }} method="post" enctype="multipart/form-data">
+{{--    <form action="/csv/import" method="post" enctype="multipart/form-data">--}}
+    <form url= "/csv/import"  method="post" enctype="multipart/form-data">
 
         {{ csrf_field() }}
         <div class="row">
@@ -23,8 +23,8 @@
 
     <script>
         // ファイルを選択すると、コントロール部分にファイル名を表示
-        $('.custom-file-input').on('change',function(){
-            $(this).next('.custom-file-label').html($(this)[0].files[0].name);
-        })
+        // $('.custom-file-input').on('change',function(){
+        //     $(this).next('.custom-file-label').html($(this)[0].files[0].name);
+        // })
     </script>
-@endsection
+{{--@endsection--}}

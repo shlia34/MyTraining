@@ -15,9 +15,16 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::group(['prefix' => 'csv'],function (){
+        Route::get('/index', 'Web\CsvController@index')->name('csv.index');
+        Route::get('/export/{modelName}', 'Web\CsvController@export')->name('csv.export');
+        Route::post('/import', 'Web\CsvController@import')->name('csv.import');
+    });
+
     Route::get('/{any}', function () {
         return view('spa');
     })->where('any', '.*');
+
 
 });
 

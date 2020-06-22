@@ -2,7 +2,7 @@
     <div>
         <workoutForm
                 :muscle_code="this_program.muscle_code"
-                :pid="pid"
+                :program_id="program_id"
                 @clickBtn="getThisProgram"
         ></workoutForm>
 
@@ -61,7 +61,7 @@
             Modal
         },
         props:{
-            pid: String,
+            program_id: String,
             required: true
         },
         data: function(){
@@ -78,7 +78,7 @@
             this.getPreviousProgram();
         },
         watch:{
-            pid: async function(){
+            program_id: async function(){
                 await this.getThisProgram();
                 this.getPreviousProgram();
             },
@@ -118,7 +118,7 @@
                 alert('本当に消しますか？？？');
                 var vm = this;
 
-                const response = axios.delete('/api/programs/' + vm.pid)
+                const response = axios.delete('/api/programs/' + vm.program_id)
                     .catch(function (error) {
                         vm.alertError(error.response);
                     });
@@ -141,7 +141,7 @@
             async getThisProgram(){
                 var vm = this;
 
-                await axios.get('/api/programs/' + vm.pid)
+                await axios.get('/api/programs/' + vm.program_id)
                     .then(function (response) {
                         vm.this_program = response.data;
                     })

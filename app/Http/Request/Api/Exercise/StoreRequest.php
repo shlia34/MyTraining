@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Request\Web\Exercise;
+namespace App\Http\Request\Api\Exercise;
 
-use App\Http\Request\Web\WebRequest;
+use App\Http\Request\Api\ApiRequest;
 
-
-class StoreRequest extends WebRequest
+class StoreRequest extends ApiRequest
 {
     /**
      * Get the validation rules that apply to the request.
