@@ -22,3 +22,4 @@
 - npm i -S vuedraggable
 - npm install -D vue-router
 - npm install -D vuetify
+- npm install sass sass-loader fibers deepmerge -D

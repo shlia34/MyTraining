@@ -10,8 +10,15 @@ require('./bootstrap');
 import Vue from 'vue'
 import router from './router'
 import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 
 import App from './App.vue'
+
+export default new Vuetify({
+    icons: {
+        iconfont: 'mdiSvg', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    },
+})
 
 Vue.use(Vuetify);
 // const createApp = async () => {
@@ -20,7 +27,12 @@ Vue.use(Vuetify);
         router, // ルーティングの定義を読み込む
         components: { App }, // ルートコンポーネントの使用を宣言する
         template: '<App />', // ルートコンポーネントを描画する
-        vuetify: new Vuetify(),
+        vuetify: new Vuetify({
+                icons: {
+                    iconfont: 'mdiSvg', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+                },
+            }
+        ),
     });
 // };
 

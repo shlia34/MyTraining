@@ -1,8 +1,33 @@
 <template>
 
     <v-app id="inspire">
+        <div class="text-center">
+            <v-btn class="mx-2" color="primary" dark fab small>
+                <v-icon dark>mdi-minus</v-icon>
+            </v-btn>
 
+            <v-btn class="mx-2" color="pink" dark fab small>
+                <v-icon dark>mdi-heart</v-icon>
+            </v-btn>
+
+            <v-btn class="mx-2" color="indigo" dark fab>
+                <v-icon dark>mdi-plus</v-icon>
+            </v-btn>
+
+            <v-btn class="mx-2" color="teal" dark fab>
+                <v-icon dark>mdi-format-list-bulleted-square</v-icon>
+            </v-btn>
+
+            <v-btn class="mx-2" color="cyan" dark fab large>
+                <v-icon dark>mdi-pencil</v-icon>
+            </v-btn>
+
+            <v-btn class="mx-2" color="purple" dark fab large>
+                <v-icon dark>mdi-android</v-icon>
+            </v-btn>
+        </div>
     </v-app>
+
     <!--Navbar-->
 <!--    <nav class="navbar fixed-top">-->
 <!--        &lt;!&ndash; Navbar brand &ndash;&gt;-->
