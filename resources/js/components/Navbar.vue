@@ -1,62 +1,34 @@
 <template>
 
-    <v-app id="inspire">
-        <div class="text-center">
-            <v-btn class="mx-2" color="primary" dark fab small>
-                <v-icon dark>mdi-minus</v-icon>
-            </v-btn>
+    <v-card
+            width="100%"
+            class="mx-auto nav"
+    >
+        <v-app-bar
+                color="#F43E43"
+                dark
+        >
+            <router-link to="/">MyTraining</router-link>
+            <v-spacer></v-spacer>
 
-            <v-btn class="mx-2" color="pink" dark fab small>
-                <v-icon dark>mdi-heart</v-icon>
-            </v-btn>
+            <v-menu transition="slide-y-transition">
+                <template v-slot:activator="{ on, attrs }">
+                        <v-app-bar-nav-icon v-bind="attrs" v-on="on"></v-app-bar-nav-icon>
+                </template>
+                <v-list>
+                    <v-list-item v-for="item in items" :key="item.text" link>
+                        <router-link class="nav-link" :to=item.link >{{item.text}}</router-link>
+                    </v-list-item>
+                    <v-list-item>
+                        <a @click="logout" class="nav-link">ログアウト</a>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
 
-            <v-btn class="mx-2" color="indigo" dark fab>
-                <v-icon dark>mdi-plus</v-icon>
-            </v-btn>
+            <div class="mx-4 hidden-sm-and-down"></div>
 
-            <v-btn class="mx-2" color="teal" dark fab>
-                <v-icon dark>mdi-format-list-bulleted-square</v-icon>
-            </v-btn>
-
-            <v-btn class="mx-2" color="cyan" dark fab large>
-                <v-icon dark>mdi-pencil</v-icon>
-            </v-btn>
-
-            <v-btn class="mx-2" color="purple" dark fab large>
-                <v-icon dark>mdi-android</v-icon>
-            </v-btn>
-        </div>
-    </v-app>
-
-    <!--Navbar-->
-<!--    <nav class="navbar fixed-top">-->
-<!--        &lt;!&ndash; Navbar brand &ndash;&gt;-->
-<!--        <router-link class="navbar-brand" to="/" >MyTraining</router-link>-->
-<!--        &lt;!&ndash; Collapse button &ndash;&gt;-->
-<!--        <button aria-controls="navbarSupportedContent23" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler second-button"-->
-<!--                data-target="#navbarSupportedContent23" data-toggle="collapse" type="button">-->
-<!--            <div class="animated-icon2"><span></span><span></span><span></span><span></span></div>-->
-<!--        </button>-->
-
-<!--        &lt;!&ndash; Collapsible content &ndash;&gt;-->
-<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent23">-->
-<!--            &lt;!&ndash; Links &ndash;&gt;-->
-<!--            <ul class="navbar-nav mr-auto">-->
-<!--                <li class="nav-item">-->
-<!--                    <router-link class="nav-link" to="/exercises/index/01" ><i class="fas fa-cog"></i> 種目</router-link>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <router-link class="nav-link" to="/csv/index" ><i class="fas fa-file-csv"></i> CSV</router-link>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a @click="logout" class="nav-link">ログアウト</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--            &lt;!&ndash; Links &ndash;&gt;-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Collapsible content &ndash;&gt;-->
-<!--    </nav>-->
-<!--    &lt;!&ndash;/.Navbar&ndash;&gt;-->
+        </v-app-bar>
+    </v-card>
 
 </template>
 
@@ -67,6 +39,14 @@
 
     export default {
         mixins:[alertError],
+        data:function(){
+            return {
+                items: [
+                    { text: '種目', link: '/exercises/index/01' },
+                    { text: 'csv', link: '/csv/index' },
+                ],
+            }
+        },
         methods:{
             logout:function(){
                 var vm = this;
@@ -83,5 +63,13 @@
 
 
 <style>
+    .nav{
+        z-index:12;
+        position: fixed;
+        height:56px;
+    }
+    .nav a{
+        color: white!important;
+    }
 
 </style>

@@ -1,17 +1,6 @@
-body {
-    background-color:white;
-    padding-top: 56px;
-}
 
-/*ナビバー*/
-.navbar{
-    background-color: #F43E43!important;
-    color: #F43E43!important;
 
-}
-.navbar a{
-    color: white!important;
-}
+
 
 .register-btn{
     background-color: #454545!important;

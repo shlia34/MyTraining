@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <Navbar></Navbar>
+    <v-app>
+        <Navbar>
 
-        <div class = "wrapper">
+        </Navbar>
+        <div class="wrapper">
             <RouterView />
         </div>
-    </div>
-
+    </v-app>
 </template>
 
 <script>
@@ -21,7 +21,19 @@
 </script>
 
 <style>
-    .wrapper {
+    body {
+        background-color:white;
         font-size: 18px;
+        color:white;
     }
+
+    .wrapper{
+        padding-top: 56px;
+    }
+
+
+
+
+
+
 </style>
