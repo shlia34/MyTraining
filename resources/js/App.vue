@@ -30,10 +30,4 @@
     .wrapper{
         padding-top: 56px;
     }
-
-
-
-
-
-
 </style>

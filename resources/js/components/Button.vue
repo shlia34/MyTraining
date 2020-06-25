@@ -1,10 +1,12 @@
 <template>
-    <button @click="clickHandler"
-            :style="styles"
-            class = "btn waves-effect w-30 ml-4"
-            :class="{modal_btn: isModal}"
-            :disabled="isDisabled"
-            type="button">{{text}}</button>
+    <v-btn @click="clickHandler"
+           :style="styles"
+           class="btn"
+           :class="{modal_btn: isModal}"
+           :disabled="isDisabled"
+           :color="color"
+           depressed large
+    >{{text}}</v-btn>
 </template>
 
 <script>
@@ -34,17 +36,8 @@
 
 <style scoped>
     .btn {
-        --color: grey;
-
-        background-color: var(--color)!important;
         color: white!important;
     }
-
-
-    .btn[disabled] {
-        opacity: 0.5!important;
-    }
-
 
     .modal_btn{
         width: 250px;

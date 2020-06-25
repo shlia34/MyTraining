@@ -2,7 +2,7 @@
 
     <v-card
             width="100%"
-            class="mx-auto nav"
+            class="mx-auto top-nav"
     >
         <v-app-bar
                 color="#F43E43"
@@ -17,10 +17,10 @@
                 </template>
                 <v-list>
                     <v-list-item v-for="item in items" :key="item.text" link>
-                        <router-link class="nav-link" :to=item.link >{{item.text}}</router-link>
+                        <router-link class="top-navv-link" :to=item.link >{{item.text}}</router-link>
                     </v-list-item>
                     <v-list-item>
-                        <a @click="logout" class="nav-link">ログアウト</a>
+                        <a @click="logout">ログアウト</a>
                     </v-list-item>
                 </v-list>
             </v-menu>
@@ -63,12 +63,12 @@
 
 
 <style>
-    .nav{
+    .top-nav{
         z-index:12;
         position: fixed;
         height:56px;
     }
-    .nav a{
+    .top-nav a{
         color: white!important;
     }
 

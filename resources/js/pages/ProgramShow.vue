@@ -15,6 +15,7 @@
             </program>
 
             <div><i @click="destroyProgram" class="fas fa-trash ml-2"></i></div>
+            <v-icon medium>delete</v-icon>
 
             <program
                     v-if="previous_program.length !== 0"
