@@ -8,22 +8,42 @@
             >{{ exercise.name }}</option>
         </select>
 
+            <v-form v-model="valid">
+                <v-container fluid>
+                     <v-row>
+                        <v-col>
+                            <v-text-field
+                                    v-model.number="weight"
+                                    :rules="weightRules"
+                                    label="weight"
+                                    type="number"
+                                    required
+                            ></v-text-field>
+                        </v-col>
 
-        <div class="forms">
-            <div class="md-form m-0 ml-3 w-25">
-                <input class="form-weight form-control" id="form-weight" type="number" v-model="weight">
-                <label for="form-weight">weight</label>
-            </div>
+                        <v-col>
+                            <v-text-field
+                                    v-model.number="rep"
+                                    :rules="repRules"
+                                    label="rep"
+                                    type="number"
+                                    required
+                            ></v-text-field>
+                        </v-col>
 
-            <div class="md-form m-0 ml-3 w-25">
-                <input class="form-rep form-control" id="form-rep" type="number" v-model="rep">
-                <label for="form-rep">rep</label>
-            </div>
-            <a :href ="'/exercises/index?muscleCode=' + muscle_code" v-if="this.exercises.length === 0">
-                <Btn :text="'種目'"></Btn>
-            </a>
-            <Btn :color="'#454545'" :isDisabled="weightAndRepValidation" :text="'記録'" @clickBtn="storeWorkout" v-else></Btn>
-        </div>
+                        <v-col>
+                            <router-link :to ="'/exercises/index/' + muscle_code" v-if="this.exercises.length === 0">
+                                <Btn :color="'grey'" :text="'種目'"></Btn>
+                            </router-link>
+
+                            <Btn :color="'#454545'" :isDisabled="!valid" :text="'記録'" @clickBtn="storeWorkout" v-else></Btn>
+                        </v-col>
+
+                    </v-row>
+
+                </v-container>
+
+            </v-form>
 
     </div>
 
@@ -50,22 +70,26 @@
                 rep:"",
                 exercises:[],
                 selected_exercise_id:"",
+
+                valid: false,
+                weightRules: [
+                    v => !!v || 'なんかは入れろ',
+                    v => v !== 0 || '0はだめ',
+                    v => v < 999.9 || '整数部分は3桁以内',
+                    v => !(/^[0][0-9]/).test(v) || '0の後に数字くんな',
+                    v => !/[/.][0-9]{2,}/.test(v) || '小数点に2個以上続くな',
+                ],
+                repRules: [
+                    v => !!v || 'なんかは入れろ',
+                    v => !/^0/.test(v) || '先頭0はだめ',
+                    v => v < 100 || '2桁以内の整数にしろ',
+                    v => !/[/.]/.test(v) || '小数禁止',
+                ],
             }
         },
         watch:{
             muscle_code: function(){
                 this.getExercise();
-            },
-        },
-        computed:{
-            weightAndRepValidation: function(){
-                var weightValidationError = this.weight == "" || this.weight ==  0  || this.weight > 999.9 || (/^[0][0-9]/).test(this.weight)　|| /[/.][0-9]{2,}/.test(this.weight);
-                // 整数部分は3桁以内、少数部分は1桁以内の数字を許可する
-                // ①空か②0じゃないか③999.9より小さいか④0の後に数字がこないか⑤小数値が2個以上続かないか
-                var repValidationError = this.rep == "" || /^0/.test(this.repl)　|| this.rep > 99 || /[/.]/.test(this.rep);
-                //  少数を許さない整数2桁以内
-
-               return  (weightValidationError == true || repValidationError == true);
             },
         },
         methods: {
@@ -106,14 +130,6 @@
 
 
 <style>
-    .forms{
-        display: flex;
-    }
-
-    .form-weight {
-        width:50px;
-    }
-
     .add-workout-form-box{
         color: white;
         position: -webkit-sticky;
