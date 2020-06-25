@@ -1,24 +1,41 @@
 <template>
     <div>
-        <ul class="nav nav-tabs" >
-            <li :key="muscle.code"
-                @click="selected_muscle_code =muscle.code"
-                class="nav-item"
-                v-for="muscle in muscles">
-                <a :class="{active: muscle_code===muscle.code}"
-                   class="nav-link"
-                   data-toggle="tab">
-                    {{muscle.short_name}}</a>
-            </li>
-        </ul>
+        <v-card>
+            <v-tabs
+                    align-with-title
+                    background-color="black"
+                    dark
+                    fixed-tabs
+            >
+                <v-tabs-slider color="#F43E43"></v-tabs-slider>
+
+                <v-tab
+                        :key="muscle.code"
+                        @click="selected_muscle_code = muscle.code"
+                        fixed-tabs
+                        v-for="muscle in muscles">
+                    {{muscle.short_name}}
+                </v-tab>
+            </v-tabs>
+        </v-card>
+
 
         <div class ="muscle-group">
             <h4>{{selected_muscle_name}}</h4>
+
             <h5>やる種目リスト</h5>
             <div class ="draggable-box">
                 <draggable @add="storeRoutine" @end="sortRoutine"  @remove="destroyRoutine" group="exercises" v-model="routines">
                     <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in routines" >
-                        <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
+                        <span>{{ exercise.name }}</span>
+
+                        <router-link :to="'/exercises/' + exercise.id">
+                            <v-btn icon>
+                                <v-icon>mdi-redo</v-icon>
+                            </v-btn>
+
+                        </router-link>
+
                     </div>
                 </draggable>
             </div>
@@ -27,23 +44,40 @@
             <div class ="draggable-box">
                 <draggable group="exercises" v-model="notRoutines">
                     <div :data-exercise_id="exercise.id" :key="exercise.id" class="exercise-in-list" v-for="exercise in notRoutines">
-                        <span>{{ exercise.name }}</span><a :href= "'/exercises/' + exercise.id "><i class="fas fa-angle-right"></i></a>
+                        <span>{{ exercise.name }}</span>
+
+                        <router-link :to="'/exercises/' + exercise.id">
+                            <v-btn icon>
+                                <v-icon>mdi-redo</v-icon>
+                            </v-btn>
+
+                        </router-link>
+
                     </div>
                 </draggable>
             </div>
-        </div>
-
-        <i @click="showForm = true" class="far fa-plus-square fa-2x" v-if="!showForm"></i>
-        <i @click="showForm = false" class="far fa-minus-square fa-2x" v-if="showForm"></i>
-
-        <div class="exercise-form" v-if="showForm">
-            <span>新しい種目</span>
-            <div class="input-form">
-                <input name="text" v-model="formName" value="名前">
-            </div>
-            <Btn @clickBtn="storeExercise" :color="'#454545'" :text="'追加'"></Btn>
 
         </div>
+
+        <v-btn @click="showForm = true" icon v-if="!showForm">
+            <v-icon>mdi-plus-circle-outline</v-icon>
+        </v-btn>
+
+        <v-btn @click="showForm = false" icon v-if="showForm">
+            <v-icon>mdi-minus-circle-outline</v-icon>
+        </v-btn>
+
+        <v-form v-if="showForm" v-model="valid">
+            <v-text-field
+                    :rules="nameRules"
+                    label="新しい種目"
+                    required
+                    v-model="formName"
+            ></v-text-field>
+            <Btn :color="'#454545'" :isDisabled="!valid" :text="'追加'" @clickBtn="storeExercise"></Btn>
+        </v-form>
+
+
 
     </div>
 
@@ -72,6 +106,11 @@
                 notRoutines:[],
                 formName:"",
                 showForm:false,
+                valid:false,
+                nameRules: [
+                    v => !!v || 'なんかは入れろ',
+                    v => !/^\s/.test(v) || '先頭空白はだめ',
+                ],
             }
         },
         computed:{
@@ -164,7 +203,8 @@
                 const response = axios.post('/api/exercises',data)
                     .then(function (response) {
                         vm.fetchData();
-                        vm.formName = ""
+                        vm.formName = "";
+                        vm.showForm = false;
                     })
                     .catch(function (error) {
                         vm.alertError(error.response);
@@ -193,7 +233,7 @@
     .exercise-in-list a{
         color:white;
         float: right;
-        width: 30px;
+        /*width: 30px;*/
     }
 
     .sortable-chosen {
@@ -207,6 +247,11 @@
         top: 56px;
         z-index:11;
         background-color: white;
+    }
+
+    .v-tab {
+        height: 100%;
+        width:30px;
     }
 
 </style>
