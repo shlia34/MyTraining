@@ -23,6 +23,7 @@
         <link href='/css/style.css' type="text/css" rel='stylesheet' />
 {{--icon--}}
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.x/css/font-awesome.min.css" rel="stylesheet">
     </head>
 
     <body>
