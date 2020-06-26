@@ -1,6 +1,6 @@
 <template>
 
-    <Modal @hideModal="hideModal">
+    <Modal @hideModal="hideModal" :dialog="active">
         <template v-slot:body>
             <v-text-field type="date" v-model="formData.date"></v-text-field>
             <v-select

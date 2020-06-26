@@ -26,7 +26,7 @@
         </div>
 
         <div v-if="isMaxModalActive">
-            <Modal @hideModal="hideModal">
+            <Modal @hideModal="hideModal" :dialog="isMaxModalActive">
                 <template v-slot:footer>
                     <Btn @clickBtn="offMaxWorkout" :isModal="true" :text="'マックスをオフ'" :color="'#454545'"></Btn>
                 </template>
@@ -34,10 +34,12 @@
         </div>
 
         <div v-if="isNotMaxModalActive">
-            <Modal @hideModal="hideModal">
+            <Modal @hideModal="hideModal" :dialog="isNotMaxModalActive">
                 <template v-slot:footer>
-                    <Btn @clickBtn="onMaxWorkout" :isModal="true" :text="'マックスに登録'" :color="'#F43E43'"></Btn>
-                    <Btn @clickBtn="deleteWorkout" :isModal="true" :text="'削除'" :color="'#c8c8c8'"></Btn>
+                    <v-layout column justify-center>
+                        <Btn @clickBtn="onMaxWorkout" :isModal="true" :text="'マックスに登録'" :color="'#F43E43'"></Btn>
+                        <Btn @clickBtn="deleteWorkout" :isModal="true" :text="'削除'" :color="'#c8c8c8'"></Btn>
+                    </v-layout>
                 </template>
             </Modal>
         </div>
