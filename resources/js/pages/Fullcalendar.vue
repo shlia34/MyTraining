@@ -145,6 +145,7 @@
             },
             toggelModal(){
                 this.isModalActive = !this.isModalActive;
+                console.log(this.isModalActive );
             },
         }
     }

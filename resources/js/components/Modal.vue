@@ -1,34 +1,36 @@
 <template>
-
-    <transition name="modal">
-        <div class="modal-mask">
-            <div class="modal-wrapper">
-                <div class="modal-container">
-                    <div class="modal-header">
-                        <span @click="hideModal">×</span>
-                    </div>
-
-                    <div class="modal-body">
-                        <slot name="body"></slot>
-                    </div>
-
-                    <div class="modal-footer">
+        <v-row justify="center">
+            <v-dialog v-model="active" min-width="50vw" >
+                <v-card class="pa-5">
+                    <slot name="body"></slot>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
                         <slot name="footer"></slot>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </transition>
-
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
 </template>
 
 
 <script>
     export default {
-        props:{},
+        props:{
+            dialog: Boolean,
+        },
         methods:{
             hideModal:function() {
                 this.$emit('hideModal');
+            }
+        },
+        watch: {
+            active:function(){
+                this.hideModal();
+            },
+        },
+        data: function(){
+            return{
+                active:this.dialog,
             }
         },
     }
