@@ -4,8 +4,6 @@ namespace App\Models;
 
 use App\Models\Traits\ScopeOwn;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Arr;
 
 /**
  * 実施した種目(exercisesとprogramsの中間テーブル)のモデルクラス
@@ -23,6 +21,8 @@ class Menu extends Model
     protected $keyType = 'string';
 
     protected $fillable = [ 'id','exercise_id','program_id'];
+
+    protected $perPage = 8;
 
     public function workouts(){
         return $this->hasMany('App\Models\Workout')->oldest();
