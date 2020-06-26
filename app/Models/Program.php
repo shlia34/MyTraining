@@ -24,6 +24,8 @@ class Program extends Model
 
     protected $fillable = [ 'id', 'user_id', 'date', 'muscle_code', 'memo' ];
 
+    protected $appends = [ 'muscle_name',];
+
     public function menus(){
         return $this->hasMany('App\Models\Menu')->joinExercise()->oldest();
     }
@@ -55,8 +57,8 @@ class Program extends Model
         return DefMuscle::MUSCLE_COLOR[$this->muscle_code];
     }
 
-    public function scopePrevious($query,$thisProgram){
-        return $query->where('muscle_code',$thisProgram->muscle_code)->Own()->whereDate("date", "<", $thisProgram->date)->latest("date");
+    public function scopePrevious($query,$muscleCode,$date){
+        return $query->where('muscle_code',$muscleCode)->Own()->whereDate("date", "<", $date)->latest("date");
     }
 
 }
