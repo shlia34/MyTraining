@@ -1,17 +1,15 @@
 <template>
     <div class = "add-workout-form-box form-inline pt-3 pl-3 pr-3">
 
-        <select class = 'form-exercise_id browser-default custom-select mb-2' v-model="selected_exercise_id">
-            <option
-                    v-for="exercise in exercises"
-                    :value="exercise.id"
-            >{{ exercise.name }}</option>
-        </select>
+        <v-select
+                :items="exercises"
+                v-model="selected_exercise_id"
+        ></v-select>
 
             <v-form v-model="valid">
-                <v-container fluid>
-                     <v-row>
-                        <v-col>
+                <v-container class="py-0" fluid>
+                     <v-row class="py-0">
+                        <v-col class="py-0">
                             <v-text-field
                                     v-model.number="weight"
                                     :rules="weightRules"
@@ -19,9 +17,9 @@
                                     type="number"
                                     required
                             ></v-text-field>
-                        </v-col>
+                        </v-col >
 
-                        <v-col>
+                        <v-col class="py-0">
                             <v-text-field
                                     v-model.number="rep"
                                     :rules="repRules"
@@ -31,7 +29,7 @@
                             ></v-text-field>
                         </v-col>
 
-                        <v-col>
+                        <v-col class="py-0">
                             <router-link :to ="'/exercises/index/' + muscle_code" v-if="this.exercises.length === 0">
                                 <Btn :color="'grey'" :text="'種目'"></Btn>
                             </router-link>
@@ -113,10 +111,10 @@
             },
             getExercise(){
                 var vm = this;
-                const response = axios.get('/api/exercises/routines/' + vm.muscle_code )
+                const response = axios.get('/api/exercises/routines/' + vm.muscle_code + '/selectBox' )
                     .then(function (response) {
                         vm.exercises = response.data;
-                        vm.selected_exercise_id = response.data[0].id;
+                        vm.selected_exercise_id = response.data[0].value;
                     })
                     .catch(function (error) {
                         vm.alertError(error.response);

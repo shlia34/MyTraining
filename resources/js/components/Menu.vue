@@ -4,7 +4,7 @@
             <router-link :to="`/exercises/${menu.exercise_id}`" class = "card-title">{{menu.name}}</router-link>
             <router-link :to="`/programs/${menu.program_id}`" class = "card-title">{{menu.date}}</router-link>
         </span>
-        <ol :data-menu_id = menu.id class = "ol-workout mb-0">
+        <ol :data-menu_id = menu.id class = "ol-workout mb-0 pl-2">
             <li
                 :class = "{ add_underline: workout.is_max }"
                 :key="workout.id"
@@ -62,7 +62,7 @@
     }
 
     .card-title{
-        color: white;
+        color: white!important;
     }
 
     .ol-workout {
@@ -82,19 +82,19 @@
     .workout {
         width: 45%;
         float: left;
-        margin: 2px 2px 2px 6px;
+        margin: 2px 2px 2px 4px;
     }
 
     .workout:before  {
         content: counter(my-counter);
         counter-increment: my-counter;
-        font-size: 16px;
+        font-size: 14px;
         box-sizing: border-box;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 22px;
-        width: 22px;
+        width: 30px;
         color: white;
         font-size: 70%;
         line-height: 1;

@@ -22,7 +22,7 @@ class Menu extends Model
 
     protected $fillable = [ 'id','exercise_id','program_id'];
 
-    protected $perPage = 3;
+    protected $perPage = 8;
 
     public function workouts(){
         return $this->hasMany('App\Models\Workout')->oldest();

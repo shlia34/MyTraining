@@ -24,6 +24,7 @@ Route::group(['prefix' => 'programs'], function () {
 //exercises
 Route::group(['prefix' => 'exercises'],function (){
     Route::get('/routines/{muscle_code}', 'ExerciseController@routine')->name('exercises.routines');
+    Route::get('/routines/{muscle_code}/selectBox', 'ExerciseController@selectBox')->name('exercises.selectBox');
     Route::get('/not_routines/{muscle_code}', 'ExerciseController@notRoutine')->name('exercises.not_routines');
     Route::get('/{id}', 'ExerciseController@show')->name('exercises.show');
     Route::post('/', 'ExerciseController@store')->name('exercise.store');

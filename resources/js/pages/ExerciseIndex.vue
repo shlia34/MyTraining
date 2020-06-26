@@ -1,11 +1,11 @@
 <template>
     <div>
-        <v-card>
             <v-tabs
                     align-with-title
                     background-color="black"
                     dark
                     fixed-tabs
+                    class="muscle-tabs"
             >
                 <v-tabs-slider color="#F43E43"></v-tabs-slider>
 
@@ -13,11 +13,11 @@
                         :key="muscle.code"
                         @click="selected_muscle_code = muscle.code"
                         fixed-tabs
+                        class="muscle-tab"
                         v-for="muscle in muscles">
                     {{muscle.short_name}}
                 </v-tab>
             </v-tabs>
-        </v-card>
 
 
         <div class ="muscle-group">
@@ -233,7 +233,6 @@
     .exercise-in-list a{
         color:white;
         float: right;
-        /*width: 30px;*/
     }
 
     .sortable-chosen {
@@ -241,7 +240,7 @@
     }
 
 
-    .nav-tabs{
+    .muscle-tabs{
         position: -webkit-sticky;
         position: sticky;
         top: 56px;
@@ -250,8 +249,8 @@
     }
 
     .v-tab {
-        height: 100%;
-        width:30px;
+        margin: 0px!important;
+        min-width:0px!important;
     }
 
 </style>

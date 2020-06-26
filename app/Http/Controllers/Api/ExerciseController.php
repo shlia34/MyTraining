@@ -7,6 +7,7 @@ use App\Http\Request\Api\Exercise\StoreRequest;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Exercise\SelectBox as SelectBoxResource;
 
 
 class ExerciseController extends Controller
@@ -15,6 +16,11 @@ class ExerciseController extends Controller
     {
         $exercises = Auth::user()->exercises()->where('muscle_code',$muscleCode)->orderBy('pivot_sort_no')->get();
         return response()->json($exercises);
+    }
+
+    public function selectBox($muscleCode){
+        $exercises = Auth::user()->exercises()->where('muscle_code',$muscleCode)->orderBy('pivot_sort_no')->get();
+        return response()->json(SelectBoxResource::collection($exercises));
     }
 
     public function notRoutine($muscleCode)

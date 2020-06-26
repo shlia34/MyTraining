@@ -2,11 +2,14 @@
 
     <Modal @hideModal="hideModal">
         <template v-slot:body>
-            <input type="date" v-model="formData.date">
-                <select v-model="formData.muscle_code">
-                    <option :value="muscle.code" v-for="muscle in muscleList" >{{ muscle.name }}</option>
-                </select>
-                <input placeholder='メモ' type="input" v-model="formData.memo">
+            <v-text-field type="date" v-model="formData.date"></v-text-field>
+            <v-select
+                    :items="muscleOptions"
+                    outlined
+                    v-model="formData.muscle_code"
+            ></v-select>
+
+            <v-text-field label="メモ" type="input" v-model="formData.memo"></v-text-field>
         </template>
         <template v-slot:footer>
             <Btn :color="'#F43E43'" :isDisabled="memoValidation" :isModal="true" :text="'追加'" @clickBtn="store"></Btn>
@@ -16,7 +19,7 @@
 </template>
 
 <script>
-    import {muscleNames} from '../const.js'
+    import {muscleOptions} from '../const.js'
     import Btn from './Button'
     import Modal from './Modal'
 
@@ -33,7 +36,7 @@
                     date:this.getToday(),
                     memo:"",
                 },
-                muscleList:muscleNames,
+                muscleOptions:muscleOptions,
             }
         },
         computed: {
