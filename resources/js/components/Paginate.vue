@@ -43,8 +43,13 @@
 </script>
 
 <style>
+    .page-link {
+        color:#454545!important;
+    }
+
     .active .page-link {
         background-color: #454545!important;
+        color: white!important;
     }
 
 </style>

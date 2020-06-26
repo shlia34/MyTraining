@@ -8,4 +8,14 @@ export const muscleNames = [
     { "code": '07', "name": '腹筋' ,"short_name":'腹'},
 ];
 
+export const muscleOptions = [
+    { "value": '01', "text": '胸' },
+    { "value": '02', "text": '背中' },
+    { "value": '03', "text": '脚' },
+    { "value": '04', "text": '肩'},
+    { "value": '05', "text": '二頭筋'},
+    { "value": '06', "text": '三頭筋'},
+    { "value": '07', "text": '腹筋'},
+];
+
 //todo laravelのdefファイルと重複しちゃってる。
