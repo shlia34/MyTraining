@@ -16,6 +16,7 @@
             text:{},
             isModal:false,
             isDisabled:false,
+            isSubmit:false
         },
         methods: {
             clickHandler: function () {
