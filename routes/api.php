@@ -49,6 +49,10 @@ Route::group(['prefix' => 'workouts'], function () {
     });
 });
 
+Route::group(['prefix' => 'csv'],function (){
+    Route::get('/index', 'CsvController@index')->name('csv.index');
+});
+
 
 
 

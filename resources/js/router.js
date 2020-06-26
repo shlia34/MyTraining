@@ -6,6 +6,7 @@ import fullcalendar  from './pages/Fullcalendar.vue'
 import ProgramShow from './pages/ProgramShow.vue'
 import ExerciseIndex from './pages/ExerciseIndex.vue'
 import ExerciseShow from './pages/ExerciseShow.vue'
+import Csv from './pages/Csv.vue'
 
 
 
@@ -32,6 +33,10 @@ const routes = [
         path: '/exercises/:exercise_id',
         component: ExerciseShow,
         props: true,
+    },
+    {
+        path: '/csv/index',
+        component: Csv,
     },
 ];
 
