@@ -17,6 +17,8 @@ class Workout extends JsonResource
         $data["id"] = $this->id;
         $data["menu_id"] = $this->menu_id;
         $data["weight_and_rep"] = $this->weight_and_rep;
+        $data["weight"] = $this->weight;
+        $data["rep"] = $this->rep;
         $data["exercise_id"] = $this->exercise_id;
         $data["exercise_name"] = $this->exercise_name;
         return $data;

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Workout\Workout as WorkoutResource;
 use App\Http\Request\Api\Workout\StoreRequest;
 use Illuminate\Http\Request;
 use App\Models\Workout;
@@ -33,9 +32,9 @@ class WorkoutController extends Controller
             + ['menu_id' => $menu->id]
             + ['is_max' => 0];
 
-        $workout = Workout::create($workoutInsertData);
+        Workout::create($workoutInsertData);
 
-        return new WorkoutResource($workout);
+        return null;
     }
 
     /**
@@ -43,9 +42,8 @@ class WorkoutController extends Controller
      * @param Request $request
      * @return |null
      */
-    public function destroy(Request $request)
+    public function delete($id)
     {
-        $id = $request->all()["workout_id"];
         $workout = Workout::find($id);
         $workout->delete();
 
@@ -92,20 +90,6 @@ class WorkoutController extends Controller
         $workout->save();
 
         return null;
-    }
-
-    /**
-     * trainingが最大強度の登録されているか判別する
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * falseかtrueを返す
-     */
-    public function checkMax(Request $request)
-    {
-        $training = Workout::find($request->all()["workout_id"]);
-        $training->is_max == 0 ? $message = false : $message = true;
-
-        return response()->json($message);
     }
 
 }
