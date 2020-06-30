@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Defs\DefMuscle;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\ScopeOwn;
+use App\Models\Traits\SearchCondition;
 /**
  * プログラムのモデルクラス（何日にどこの筋肉を鍛えたか）
  *
@@ -17,12 +18,14 @@ use App\Models\Traits\ScopeOwn;
 
 class Program extends Model
 {
-    use ScopeOwn;
+    use ScopeOwn,SearchCondition;
 
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [ 'id', 'user_id', 'date', 'muscle_code', 'memo' ];
+
+    protected $appends = [ 'muscle_name',];
 
     public function menus(){
         return $this->hasMany('App\Models\Menu')->joinExercise()->oldest();
@@ -55,8 +58,17 @@ class Program extends Model
         return DefMuscle::MUSCLE_COLOR[$this->muscle_code];
     }
 
-    public function scopePrevious($query,$thisProgram){
-        return $query->where('muscle_code',$thisProgram->muscle_code)->Own()->whereDate("date", "<", $thisProgram->date)->latest("date");
+    public function scopePrevious($query,$muscleCode,$date){
+        return $query->where('muscle_code',$muscleCode)->Own()->whereDate("date", "<", $date)->latest("date");
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        $this->searchByMuscle($query, $value);
+        $this->searchByStart($query, $value);
+        $this->searchByEnd($query, $value);
+        $this->searchByMemo($query, $value);
+        return $query;
     }
 
 }
