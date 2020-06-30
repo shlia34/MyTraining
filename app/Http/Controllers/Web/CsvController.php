@@ -16,11 +16,6 @@ class CsvController extends Controller
         $this->csvClass = new Csv();
     }
 
-    public function index()
-    {
-        return view('csv.index')->with(['modelNames' => $this->csvClass->modelNames]);
-    }
-
     public function export($modelName)
     {
         $file = $this->csvClass->exportFile($modelName);
@@ -36,7 +31,7 @@ class CsvController extends Controller
     public function import(Request $request)
     {
         $this->csvClass->importFile($request);
-        return redirect( route('csv.index') );
+        return null;
     }
 
 }
