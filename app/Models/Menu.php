@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ParseArr;
 use App\Models\Traits\ScopeOwn;
+use App\Models\Traits\SearchCondition;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 
 /**
@@ -17,12 +18,14 @@ use Illuminate\Support\Arr;
 
 class Menu extends Model
 {
-    use ScopeOwn;
+    use ScopeOwn,SearchCondition;
 
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [ 'id','exercise_id','program_id'];
+
+    protected $perPage = 8;
 
     public function workouts(){
         return $this->hasMany('App\Models\Workout')->oldest();
@@ -51,6 +54,14 @@ class Menu extends Model
             'programs.user_id',
         ])->leftJoin('programs','menus.program_id', '=', 'programs.id');
     }
+
+    public function scopeSearch($query, $value){
+
+        $this->searchByMuscle($query, $value);
+        return $query;
+
+    }
+
 
 
 }

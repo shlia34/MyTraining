@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Defs\DefMuscle;
+use App\Models\Traits\SearchCondition;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\ScopeOwn;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * 種目のモデルクラス
@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Auth;
 
 class Exercise extends Model
 {
-    use ScopeOwn;
+    use ScopeOwn,SearchCondition;
 
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [ 'id','name','muscle_code', ];
+    protected $appends = [ 'muscle_name',];
 
     public function menus(){
         return $this->hasMany('App\Models\Menu')->joinProgram();
@@ -32,29 +33,16 @@ class Exercise extends Model
         return $this->hasManyThrough('App\Models\Workout','App\Models\Menu');
     }
 
-    //todo ここが変わる。絶対直した方がいい。vueで書くとき直す
-    public function scopeByMuscle($query){
-        $routine = $query->orderBy("sort_no")->get()->groupBy('muscle_code');
+    public function getMuscleNameAttribute()
+    {
+        return DefMuscle::MUSCLE_NAME_LIST[$this->muscle_code];
+    }
 
-        $notRoutine = Exercise::all()->diff(Auth::user()->exercises)->groupBy('muscle_code');
-        $muscleCodes =  array_keys( DefMuscle::MUSCLE_NAME_LIST );
-
-        $array = [];
-        foreach ($muscleCodes as $muscleCode){
-            if(isset($routine[$muscleCode])){
-                $array[$muscleCode]["routine"] = $routine[$muscleCode];
-            }else{
-                $array[$muscleCode]["routine"] = [];
-            }
-
-            if(!empty($notRoutine[$muscleCode])){
-                $array[$muscleCode]["notRoutine"] = $notRoutine[$muscleCode];
-            }else{
-                $array[$muscleCode]["notRoutine"] = [];
-            }
-        }
-
-        return $array;
+    public function scopeSearch($query, $value)
+    {
+        $this->searchByMuscle($query, $value);
+        $this->searchByExerciseName($query, $value);
+        return $query;
     }
 
 }
